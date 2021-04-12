@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;frankmartinem.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
+<meta name="description" content="Kalman Filter本文简单介绍了卡尔曼滤波(Kalman Filter)的基本原理以及我对卡尔曼滤波的一些理解。 首先谈一下我的一点点理解卡尔曼滤波是目前应用很广泛的一种滤波方法，最早由Kalman老先生在1960年提出，网上可以找到原文。这种方法最开始用在航天领域，作为轨道矫正的一种方法，有很好的效果。 卡尔曼滤波的方法的核心思想，就是用另一个测量空间的观测值去纠正当前空间对被测量的量的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kalman">
+<meta property="og:url" content="http://frankmartinem.github.io/2019/11/03/Kalman/index.html">
+<meta property="og:site_name" content="FrankMartinem Blog">
+<meta property="og:description" content="Kalman Filter本文简单介绍了卡尔曼滤波(Kalman Filter)的基本原理以及我对卡尔曼滤波的一些理解。 首先谈一下我的一点点理解卡尔曼滤波是目前应用很广泛的一种滤波方法，最早由Kalman老先生在1960年提出，网上可以找到原文。这种方法最开始用在航天领域，作为轨道矫正的一种方法，有很好的效果。 卡尔曼滤波的方法的核心思想，就是用另一个测量空间的观测值去纠正当前空间对被测量的量的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-03T07:46:44.000Z">
+<meta property="article:modified_time" content="2021-04-12T08:06:56.824Z">
+<meta property="article:author" content="Frank">
+<meta property="article:tag" content="Kalman">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://frankmartinem.github.io/2019/11/03/Kalman/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;frankmartinem.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;Kalman&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;11&#x2F;03&#x2F;Kalman&#x2F;&quot;,&quot;title&quot;:&quot;Kalman&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Kalman | FrankMartinem Blog</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">FrankMartinem Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Learning & Studying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kalman-Filter"><span class="nav-number">1.</span> <span class="nav-text">Kalman Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E8%B0%88%E4%B8%80%E4%B8%8B%E6%88%91%E7%9A%84%E4%B8%80%E7%82%B9%E7%82%B9%E7%90%86%E8%A7%A3"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">首先谈一下我的一点点理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">公式推导</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Code"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Frank"
+      src="/images/portrait.jpg">
+  <p class="site-author-name" itemprop="name">Frank</p>
+  <div class="site-description" itemprop="description">Stay Hungry, Stay Foolish</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button site-overview-item animated"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/FrankMartinet" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;FrankMartinet" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:frankmartinet@163.com" title="E-Mail → mailto:frankmartinet@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/Frankgoogle?spm=1010.2135.3001.5343" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;Frankgoogle?spm&#x3D;1010.2135.3001.5343" rel="noopener" target="_blank"><i class="fab fa-csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://frankmartinem.github.io/2019/11/03/Kalman/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/portrait.jpg">
+      <meta itemprop="name" content="Frank">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FrankMartinem Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kalman
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-03 15:46:44" itemprop="dateCreated datePublished" datetime="2019-11-03T15:46:44+08:00">2019-11-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-04-12 16:06:56" itemprop="dateModified" datetime="2021-04-12T16:06:56+08:00">2021-04-12</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Kalman-Filter"><a href="#Kalman-Filter" class="headerlink" title="Kalman Filter"></a>Kalman Filter</h2><p>本文简单介绍了卡尔曼滤波(Kalman Filter)的基本原理以及我对卡尔曼滤波的一些理解。</p>
+<h5 id="首先谈一下我的一点点理解"><a href="#首先谈一下我的一点点理解" class="headerlink" title="首先谈一下我的一点点理解"></a>首先谈一下我的一点点理解</h5><p>卡尔曼滤波是目前应用很广泛的一种滤波方法，最早由Kalman老先生在1960年提出，网上可以找到原文。这种方法最开始用在航天领域，作为轨道矫正的一种方法，有很好的效果。</p>
+<p>卡尔曼滤波的方法的核心思想，就是用另一个测量空间的观测值去纠正当前空间对被测量的量的估计。简单来说，就是用一种方法去测量一个量。同时建立一个模型去估计这个测量的量，最后，按权重的方式求这两种方式的和，就是滤波之后的量的值。而这个权重的大小，就是卡尔曼系数。</p>
+<h5 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h5><p>首先，我们假设要测量的量为$x$, 这个量有一个模型去描述其随时间的变化，例如计算每天的温度变化，可以大致根据之前几天的温度变化规律得到一个计算矩阵，这里也有一个计算模型去计算这个变量$x$</p>
+<p>$$x_t=Fx_{t-1} + w_t$$ </p>
+<p>$$w_{t} - N(0,Q)$$ </p>
+<p>其中$F$为转换矩阵，$w_{t-1}$表示$t-1$时刻的噪声，且该噪声服从高斯分布。在其他的卡尔曼滤波公式推导中，会有一个额外的控制量，这里不考虑这个量。</p>
+<p>对于测量矩阵，也有一个公式去转换。例如测量温度可以用温度传感器来测量，但是温度传感器的测量是因为温度改变了电阻的阻值，所以根据电压电流以及电阻随温度的变化曲线而计算出来的。在卡尔曼模型中，这一公式可以表示为如下等式</p>
+<p>$$z_t=Hx_t+v_t$$ </p>
+<p>$v_t - N(0,R)$</p>
+<p>其中，$z_t$是通过测量的量，对应到上述的例子中，就是温度传感器的电阻阻值，$x_t$就是温度。$H$是测量矩阵，用来将测量的量转换成要估计的量。$v_t$是测量过程中存在的误差。同样的，$v_t$也是服从高斯分布的白噪声。</p>
+<p>然后就是卡尔曼滤波的核心思想了，有了这两种方法得到的$x_t$，那么怎么得到一个更准确的估计值。所以需要将两种方法得到的估计值进行算一下加权平均，就得到了最优的估计值。所以卡尔曼滤波的方法如下：</p>
+<ol>
+<li><p>首先根据模型计算当前时刻的估计值<br>$$<br>x_t’=Fx_{t-1} + w_t<br>$$</p>
+</li>
+<li><p>然后根据测量矩阵计算当前的测量值的估计值</p>
+</li>
+</ol>
+<p>$$<br>z_t’=Hx_t’+v_t<br>$$</p>
+<ol start="3">
+<li>然后计算测量值和测量估计值之间的差，并以此作为对最终估计值的调整。从这里可以看出，如果$x_t’$估计的很准，就是说此时$z_t$的值和$z_t’$的值相差很小，那么$z_t$对于$x_t$的修正也就越少。但是如果估计值和测量值相差很大，那么$z_t$对$x_t$的修正也就越大。其中，$K_t$是卡尔曼增益，表示滤波器对测量值的信任程度。</li>
+</ol>
+<p>$$<br>x_t=x_t’+K_t*(z_t-z_t’)<br>$$</p>
+<p>那么如何估计卡尔曼增益，可以用贝叶斯估计的方法推导，也可以用最小二乘法的方式推导，这里用最小二乘法的方式推导</p>
+<p>我们假设真实值是$X_t$，那么卡尔曼滤波计算得到的估计值和真实值之间的协方差</p>
+<p>$$<br>P(x_t|X_t)= E[(X_t-x_t)(X_t-x_t)^T]<br>$$</p>
+<p>卡尔曼滤波的估计值和模型的估计值之间的协方差，用来评估两种估计的差别</p>
+<p>$$<br>P(x|x’)=E[(x_t-x_t’)(x_t-x_t’)^T]<br>$$</p>
+<p>根据卡尔曼的估计公式以及测量公式，可以得到</p>
+<p>$$<br>P(x_t|X_t)=E [(X_t - x_t’ - K_t * ( z_t - z_t’)) ( X_t - x_t’ - K_t * ( z_t - z_t’ ))^T]<br>$$</p>
+<p>$$<br>=E[((I-K_tH)(X_t-x_t’)-K_tv_t)((I-K_tH)(X_t-x_t’)-K_tv_t)^T]<br>$$</p>
+<p>把上述等式展开，可以得到<br>$$<br>P(x_t|X_t)=(I-K_tH)P(x_t|x_t’)(I-K_tH)+K_tE[v_tv_t^T]K_t^T<br>$$</p>
+<p>$$<br>=P(x_t|x_t’)-K_tHP(x_t|x_t’)-P(x_t|x_t’)H^TK_t^T+K_t(HP(x_t|x_t’)H^T+R)K_t^T<br>$$</p>
+<p>所以，如果我们要估计的更准确，那么就要$P(x_t|X_t)$更小，就是说真实值和卡尔曼滤波的估计值之间的协方差最小。不考虑估计值之间的相关，那么协方差矩阵的对角线元素就表示了卡尔曼估计值和真实值之间的方差。接下来就是求方差最小的情况下对应的卡尔曼增益$K_t$。可以用矩阵的迹的方法求解<br>$$<br>tr(P(x_t|X_t)) = tr(P(x_t|x_t’))-2tr(K_tHP(x_t|x_t’))+tr(K_t(HP(x_t|x_t’)H^T+R)K_t^T)<br>$$</p>
+<p>可以看出，$tr(P(x_t|X_t))$是$K_t$的二次函数，所以根据二次函数求极值的方法，对tr(P(x_t|X_t))求导，得到</p>
+<p>$$<br>\frac{d(tr(P(x_t|X_t)))}{d(K_t)}=-2(HP(x_t|x_t’))^T+2K_t(HP(x_t|x_t’)H^T+R)<br>$$</p>
+<p>令$\frac{d(tr(P(x_t|X_t)))}{d(K_t)}=0$，所以有</p>
+<p>$$<br>K_t=P(x_t|x_t’)H^T(HP(x_t|x_t’)H^T+R)^{-1}<br>$$</p>
+<p>把$K_t$的结果带入到$P(x_t|X_t)$的表达式中，有</p>
+<p>$$<br>P(x_t|X_t)=P(x_t|x_t’)-K_tHP(x_t|x_t’)-P(x_t|x_t’)H^TK_t^T+K_t(HP(x_t|x_t’)H^T+R)K_t^T<br>$$</p>
+<p>$$<br>=P(x_t|x_t’)-K_tHP(x_t|x_t’)-\frac{HP(x_t|x_t’)^TP(x_t|x_t’)H^T}{HP(x_t|x_t’)H^T+R}+\frac{HP(x_t|x_t’)^TP(x_t|x_t’)H^T}{HP(x_t|x_t’)H^T+R}<br>$$</p>
+<p>$$<br>=P(x_t|x_t’)-K_tHP(x_t|x_t’)<br>=(I-K_tH)P(x_t|x_t’)<br>$$</p>
+<p>所以根据上述的推导计算，可以得到卡尔曼滤波的计算过程：</p>
+<ol>
+<li>首先，根据已知的模型，以及上一时刻的卡尔曼估计值，计算当前时刻的模型预测值</li>
+</ol>
+<p>$$<br>x_t’=Fx_{t-1}<br>$$</p>
+<ol start="2">
+<li>根据当前的模型预测值，计算对应的协方差</li>
+</ol>
+<p>$$<br>P(x_t|x_t’)=FP(x_t|X_t)F^T<br>$$</p>
+<ol start="3">
+<li>根据当前的协方差和测量空间的转换矩阵，计算当前时刻的卡尔曼增益</li>
+</ol>
+<p>$$<br>K_t=P(x_t|x_t’)H^T(HP(x_t|x_t’)H^T+R)^{-1}<br>$$</p>
+<ol start="4">
+<li>根据卡尔曼增益和测量值，计算当前时刻的卡尔曼估计值</li>
+</ol>
+<p>$$<br>x_t=x_t’+K_t(z_t-Hx_t’)<br>$$</p>
+<ol start="5">
+<li>计算了当前时刻的卡尔曼估计值之后，还需要计算当前的估计值和真实值的协方差矩阵，方便下一次计算</li>
+</ol>
+<p>$$<br>P(x_t|X_t)=(I-HK_t)P(x_t|x_t’)<br>$$</p>
+<p>以上就是卡尔曼滤波的基本过程，以及一些简单的推导。总体上说理解卡尔曼滤波应该算一种最优估计的算法。也是应用很广泛的，然后卡尔曼滤波的推导方法也有很多，除了最小二乘法，也可以从贝叶斯估计的角度推导。两者是类似的。</p>
+<h5 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h5>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kalman/" rel="tag"># Kalman</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/21/C-Sharp-Notes/" rel="next" title="C Sharp Notes">
+                  C Sharp Notes <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.2&#x2F;es5&#x2F;tex-mml-chtml.js&quot;}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
