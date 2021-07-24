@@ -1,563 +1,969 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>FrankMartinem Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Frank&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Frank&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Stay Hungry, Stay Foolish"><meta property="og:type" content="blog"><meta property="og:title" content="FrankMartinem Blog"><meta property="og:url" content="http://frankmartinem.github.io/"><meta property="og:site_name" content="FrankMartinem Blog"><meta property="og:description" content="Stay Hungry, Stay Foolish"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://frankmartinem.github.io/img/og_image.png"><meta property="article:author" content="Frank"><meta property="article:tag" content="Neural Network, Computer Science"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://frankmartinem.github.io"},"headline":"FrankMartinem Blog","image":["http://frankmartinem.github.io/img/og_image.png"],"author":{"@type":"Person","name":"Frank"},"description":"Stay Hungry, Stay Foolish"}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>FrankWan&#39;s Blog</title>
+  <meta name="description" content="Stay Hungry, Stay Foolish">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Frank Wan&#39;s Blog">
+<meta property="og:url" content="http://frankmartinem.github.io/page/2/index.html">
+<meta property="og:site_name" content="Frank Wan&#39;s Blog">
+<meta property="og:description" content="Stay Hungry, Stay Foolish">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Frank Wan">
+<meta property="article:tag" content="Neural Network, Computer Science">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://frankmartinem.github.io/page/2/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Frank Wan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="FrankMartinem Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-icarus">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/FrankMartinem"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-03-20T07:00:48.000Z" title="2020/3/20 下午3:00:48">2020-03-20</time></span><span class="level-item">Updated&nbsp;<time dateTime="2020-03-24T02:46:16.000Z" title="2020/3/24 上午10:46:16">2020-03-24</time></span><span class="level-item"><a class="link-muted" href="/categories/coding/">coding</a></span><span class="level-item">11 minutes read (About 1659 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/03/20/python-note/">python_note</a></h1><div class="content"><h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><h4 id="Basic-Knowledge"><a href="#Basic-Knowledge" class="headerlink" title="Basic Knowledge"></a>Basic Knowledge</h4><ol>
-<li><p>python中新建一个变量并赋值，在计算机中是怎么处理的</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
 
-<p>例如上述代码，计算机首先是开辟一块内存 ，如果是C++，Java等静态语言，那么会根据变量类型指定内存大小。如果是python等动态语言，则智能开辟内存大小，在内存中写入这一数据；但是计算机到目前为止，还不能将x和该值绑定，所以计算机中还会开辟一块内存，名字为x，然后将这一内存指向刚才开辟的内存地址。</p>
-</li>
-<li><p>python中没有指针的概念，例如下面的代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">y = x</span><br><span class="line">x = <span class="number">2</span></span><br></pre></td></tr></table></figure>
 
-<p>在python中，这一过程是这样的：</p>
-<ol>
-<li>开辟内存，存入1，开辟内存，存入x，并将x指向刚才开辟的存入1的内存</li>
-<li>开辟内存，存入y，并将y也指向x指向的那块内存</li>
-<li>开辟内存，存入2，并将x指向新开的地址</li>
-</ol>
-<p>如果是在C++, Java等有指针概念的语言中，第二步应该是这样的，开辟新的内存，将x指向的地址的值复制一份存入新地址，开辟内存，存入y，并指向新地址</p>
-</li>
-<li><p>python循环</p>
-<p>python中的循环有如下2种方式：</p>
-<ol>
-<li><p>for循环</p>
-<p>python中的for循环的写法是for x in y, 也就是遍历数组y中的所有变量，提取出来的数是x，在数值计算中运用最多的是for x in range(1, 100), 这种方法是定义了一个1到100的数组，通过range函数，在内存中存储这样的数组，再遍历</p>
-</li>
-<li><p>while循环</p>
-<p>这种方法和其他语言类似，不再赘述</p>
-</li>
-</ol>
-</li>
-<li><p>python函数</p>
-<p>在python中，函数名是指向函数对象的一个引用，所以在python中，可以把函数名赋值给一个变量，这有点类似于matlab中的@func句柄的意思。</p>
-<p>也就是说在python中，函数名对应的内存中，只存储了函数的名字以及队医你个Object的地址，所以可以幅值给另外一个变量。真正的函数对象是存储在另外的内存中的</p>
-</li>
-<li><p>函数的默认参数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_end</span>(<span class="params">L=[]</span>):</span></span><br><span class="line">    L.append(<span class="string">&#x27;END&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> L</span><br></pre></td></tr></table></figure>
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/frankmartinem" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Frank Wan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">PhD Student</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
 
-<p>这样一个函数，用默认参数调用一次，结果是[‘END’]，调用两次，结果是[‘END’, ‘END’]，这是因为，函数在运行时，默认参数也是存放在一块内存中的，每次调用时，由于内存 能够写入，所以每次运行完函数后，默认参数对应的内存都会刷新。所以python中，默认参数最好写成不变的量。</p>
-</li>
-<li><p>python迭代器</p>
-<p>python中可以通过列表生成式的方式得到（类似于Matlab中的矩阵运算）。但是列表很大的时候，而且列表的数据很有规律（例如range(10000000)），但是又只需要用到列表中的少量数据，那么可以用迭代器(generator)的方法，描述列表的数字规律，当需要某个数时，根据规律计算得到，就不需要占用很大的内存了。</p>
-</li>
-<li><p>函数闭包(closure)</p>
-<p>一个函数将另外一个函数作为返回值，并且在返回的函数中存储了内部的局部变量，这种方法称为闭包。闭包能保存原有的局部变量，在调用函数时引用，应用范围较广。但是闭包的应用中，要注意不能引用循环变量。因为闭包返回的函数是等所有函数都返回了才执行，而当所有函数都返回时，循环变量已经变为最终值。</p>
-</li>
-<li><p>偏函数</p>
-<p>偏函数存在于functiontools中，主要的作用就是固定函数的某些参数，其返回值是一个函数。</p>
-</li>
-<li><p>线程锁</p>
-<p>线程与进程的一个不同之处在于，进程之间的变量是独立的，如果两个进程同时读写某一内存，那么用Queue或者Pipe来保证读写的顺序。同时，进程只是把数据读取到自己的运算域内，相当于把数据拷贝一份。但是线程不一样，线程之间的变量是共享的，所以会导致线程对变量的赋值混乱。所以我们需要用线程锁。获得线程锁的线程，会保证在运行期间，变量只能由该线程修改。从而保证变量不会混乱。但是线程锁用完了一定要释放，最好用try…finally保证一定会释放。不然其他线程永远不能修改。但是线程锁也有缺陷，在一些并发线程中并不适用。</p>
-</li>
-<li><p>GIL锁</p>
-<p>在Python的解释器中，有GIL(Global Interpreter Lock)。Python的线程在执行前，一定要获得GIL锁，然后一定时间后，解释器释放GIL锁，然后其他线程再获得GIL锁。这样会保证，同一个进程的多个线程，最多只能用到CPU的一个核。而不能跑满CPU。如果要充分利用CPU，那么可以用多进程的方式，或者用其他的语言实现，例如C，Java等。</p>
-</li>
-</ol>
-<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><ol>
-<li><p>正则表达式的基本表达方式</p>
-<table>
-<thead>
-<tr>
-<th>标签</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>\d</td>
-<td>匹配1个数字</td>
-</tr>
-<tr>
-<td>\w</td>
-<td>匹配1个字母或1个数字</td>
-</tr>
-<tr>
-<td>.</td>
-<td>可以匹配任何符号</td>
-</tr>
-<tr>
-<td>×(star)</td>
-<td>表示任意长度的字符</td>
-</tr>
-<tr>
-<td>+</td>
-<td>表示至少1个字符</td>
-</tr>
-<tr>
-<td>?</td>
-<td>表示0个或1个字符</td>
-</tr>
-<tr>
-<td>{n}</td>
-<td>表示n个字符</td>
-</tr>
-<tr>
-<td>{n,m}</td>
-<td>表示n-m个字符</td>
-</tr>
-<tr>
-<td>\s</td>
-<td>匹配一个空格</td>
-</tr>
-<tr>
-<td>[]</td>
-<td>用来表示范围</td>
-</tr>
-<tr>
-<td>|</td>
-<td>表示或</td>
-</tr>
-<tr>
-<td>^</td>
-<td>匹配一行的开头</td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配一行的结尾</td>
-</tr>
-<tr>
-<td>()</td>
-<td>表示分组</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>正则表达式一般采用贪婪匹配，也就是说，如果前面的表达式符合要求，会一直匹配到不符合要求的那个数字，有可能导致后面的表达式匹配到空字符串。如果不想用贪婪匹配，那么需要在每一段表达式后面加上?。</p>
-</li>
-</ol>
-<h4 id="难理解的点"><a href="#难理解的点" class="headerlink" title="难理解的点"></a>难理解的点</h4><ol>
-<li>元类，metaclass</li>
-<li>装饰器，decorator</li>
-</ol>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-02-23T05:32:52.000Z" title="2020/2/23 下午1:32:52">2020-02-23</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-04-13T01:01:43.998Z" title="2021/4/13 上午9:01:43">2021-04-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Mathematics/">Mathematics</a></span><span class="level-item">a few seconds read (About 56 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/02/23/Linear-Algebra/">Linear Algebra</a></h1><div class="content"><h2 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h2><p>本文主要记录学习过程中遇到的线性代数的基本概念以及公式</p>
-<h3 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h3><h4 id="行列式的计算"><a href="#行列式的计算" class="headerlink" title="行列式的计算"></a>行列式的计算</h4><p>矩阵的行列式等于矩阵中任意一行的值</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-02-06T07:25:52.000Z" title="2020/2/6 下午3:25:52">2020-02-06</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-04-13T01:01:07.245Z" title="2021/4/13 上午9:01:07">2021-04-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Deep-Learning/">Deep Learning</a></span><span class="level-item">9 minutes read (About 1366 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/02/06/Gradient-Descent-Method/">Gradient Descent Method</a></h1><div class="content"><h4 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h4><p>这篇Blog的主要内容是关于梯度下降法的一些理解，以及相关的公式推导。梯度下降法很早之前就接触过，但是因为长时间不用，所以理解上也有了一些欠缺，今天看了一些参考文献，写一下自己的一些理解。便于以后帮助自己回忆。</p>
-<h5 id="Artificial-Neural-Network"><a href="#Artificial-Neural-Network" class="headerlink" title="Artificial Neural Network"></a>Artificial Neural Network</h5><p>关于人工神经网络，这是目前使用最广泛的一类算法了。神经网络和其他的算法相比较，计算更加直接。不需要去推导公式，去计算两者的关系，直接通过网络的方式连接，然后用大量的数据训练，没有关系的连接权重逐渐变弱，有关系的权重逐渐变强。如果把输入和输出的函数关系写出来，会发现是一个很复杂的非线性公式。也正是因为这一点，神经网络的拟合程度比普通的线性，非线性算法都要好。</p>
-<h5 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h5><p>对于用梯度下降法训练神经网络，我之前一直没有弄明白的点是<strong>为什么梯度的方向就是函数增加最快的方向</strong>， 我理解梯度方向是变化最快的方向，但是一直不理解为什么是增加的。今天看了一些参考文献，理解了一点。</p>
-<p>对于神经网络，我们会有训练集的数据${x_0, y_0}$，$x$和$y$之间有函数关系$y = f(x)$，函数有自己的参数$p$，对应于神经网络的权值。所以有$y = f(p, x)$。为了能够训练神经网络，让输出和预期值越来越接近，可以定义损失函数(Loss Function)，有$l = L(x_0, y_0, y)$。其中$y = f(p, x_0)$，所以：</p>
-<p>$$l = L(p, y_0, x_0)$$</p>
-<p>计算$l$关于$p$的梯度，所以：</p>
-<p>$$\bigtriangledown{C_{xr}(p)} = &lt; \frac{\partial{C_{xr}}}{\partial{p^{(0)}}}, …, \frac{\partial{C_{xr}}}{\partial{p^{(n)}}}$$</p>
-<p><strong>沿梯度方向，损失函数$l$的值是逐渐增加的</strong></p>
-<p>对这句话的理解，在于是什么量沿着梯度方向的变化。应该是自变量$p$。例如：</p>
-<p>当$\frac{\partial{C_{xr}}}{\partial{p^{(0)}}}（p_0） &gt; 0$时，也就是说，函数$l(p^{0})$在$p_0$点时，函数曲线沿$p=p^0$的切线斜率是大于0的，也就是说，在很小的一个区间$(p_0-\delta, p_0+\delta)$，如果$p_1 &gt; p_0$， 那么有$l(p_1) &gt; l(p_0)$。所以，如果沿着梯度的负方向，损失函数的值也会降低。<strong>对于梯度大于0，会比较好理解，因为$l$是增函数</strong>。</p>
-<p>如果$\frac{\partial{C_{xr}}}{\partial{p^{(0)}}}(p_0) &lt; 0$，那么有$l(p^0)$是减函数，也就是说，函数在$p_0$点沿$p = p^0$的切线斜率是小于0的。即，在很小的一个区间$(p_0-\delta, p_0+\delta)$，如果$p_1 &gt; p_0$， 那么有$l(p_1) &lt; l(p_0)$。但是由于梯度本身小于0，所以梯度的反方向就是$p^0$递增的方向。又因为$l(p^0)$是减函数，所以沿梯度的负方向，$l(p^0)$还是会逐渐降低。</p>
-<h4 id="Neural-Network中梯度下降法的推导"><a href="#Neural-Network中梯度下降法的推导" class="headerlink" title="Neural Network中梯度下降法的推导"></a>Neural Network中梯度下降法的推导</h4><p>这里用最简单的全连接网络为例，如图所示：</p>
-<p><img src="/img/Gradient-Descent-1.png" alt="全连接网络"></p>
-<p>$x$：网络的输入值</p>
-<p>$w_1, w_2, w_3$：层与层的连接参数</p>
-<p>$h_1, h_2$：中间层的输入值</p>
-<p>$o_1,o_2$：中间层的输出值</p>
-<p>$y$：网络的输出值</p>
-<p>假设输入参数的个数为$m$，输出参数的个数为$n$，第一层的神经元个数为$a$，第二层的神经元参数为$b$，所以：</p>
-<p>$x \in R^{1*m}$</p>
-<p>$y \in R^{1*n}$</p>
-<p>$h_1, o_1 \in R^{1*a}$</p>
-<p>$h_2, o_2 \in R^{1*b}$</p>
-<p>$w_1 \in R^{m*a}$</p>
-<p>$w_2 \in R^{a*b}$</p>
-<p>$w_3 \in R^{b*n}$</p>
-<p>网络中每层的激活函数(activation function)用sigmoid函数：</p>
-<p>$f(x) = \frac{1}{1+e^{-x}}$</p>
-<p>sigmoid函数的导数有如下特点(可以自己推导)：</p>
-<p>$f’(x) = f(x)*(1-f(x))$</p>
-<p>假设用来训练的数据集为$&lt;x, r&gt;$，$x$为输入值，$r$为输出值</p>
-<p>损失函数为：</p>
-<p>$L = \frac{1}{2}*(y-r)^{2}$</p>
-<p>所以有如下公式：</p>
-<p>$$h_1=w_1*x+b_1$$</p>
-<p>$$o_1=sigmoid(h_1)$$</p>
-<p>$$h_2=w_2*o_1+b_2$$</p>
-<p>$$o_2=sigmoid(h_2)$$</p>
-<p>$$h_3=w_3*o_2+b_3$$</p>
-<p>$$y=sigmoid(h_3)$$</p>
-<p>计算$L$关于$w_3$的梯度，有：</p>
-<p>$$\frac{\partial{L}}{\partial{w_3}}=(y-r)*\frac{\partial{(y-r)}}{\partial{w_3}}$$</p>
-<p>$$=(y-r)*\frac{\partial{(y-r)}}{\partial{h_3}}*\frac{\partial{h_3}}{\partial{w_3}}$$</p>
-<p>$$= (y-r)<em>(y-r)</em>[1- (y-r)]*o_2$$</p>
-<p>$$= (y-r)^{2} * (1-y+r) * o_2$$</p>
-<p>类似的，可以得到：</p>
-<p>$$\frac{\partial{L}}{\partial{b_3}}=(y-r)^{2}*(1-y+r)$$</p>
-<p>$$\frac{\partial{L}}{\partial{w_2}}=(y-r)^{2} * (1-y+r) * w_3 * o_2 * (1-o_2) * o_1$$</p>
-<p>$$\frac{\partial{L}}{\partial{b_2}}=(y-r)^{2} * (1-y+r) * w_3 * o_2 * (1-o_2)$$</p>
-<p>$$\frac{\partial{L}}{\partial{w_1}}=(y-r)^{2} * (1-y+r) * w_3 * o_2 * (1-o_2) * o_1 * (1-o_1) * x$$</p>
-<p>$$\frac{\partial{L}}{\partial{b_1}}=(y-r)^{2} * (1-y+r) * w_3 * o_2 * (1-o_2) * o_1 * (1-o_1)$$</p>
-<p>计算损失函数$L$关于网络权重的梯度后，网络权重的变化为：</p>
-<p>$$\bigtriangleup W = - \eta * \frac{\partial{L}}{\partial{W}}$$</p>
-<p>其中， $W$是网络中的权重参数，一般只通过学习率来调节网络训练的快慢，是不够的。会加入动态变化量，以加快学习过程。所以：</p>
-<p>$$\bigtriangleup W=-\eta * \frac{\partial{L}}{\partial{W}} + \alpha * \frac{\partial{L}}{\partial{W}}$$</p>
-<p>其中，$\alpha$表示动态变化项，是一个常数。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-02-01T11:50:30.000Z" title="2020/2/1 下午7:50:30">2020-02-01</time></span><span class="level-item">Updated&nbsp;<time dateTime="2020-02-01T11:50:30.000Z" title="2020/2/1 下午7:50:30">2020-02-01</time></span><span class="level-item">a minute read (About 139 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/02/01/hello-world/">Hello World</a></h1><div class="content"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/frankmartinem" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://blog.csdn.net/Frankgoogle" target="_blank" title="Book-Shelf" data-toggle=tooltip data-placement=top><i class="icon icon-book-shelf"></i></a></li>
+        
+        <li><a href="https://twitter.com/frankmartinet" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.zhihu.com/people/frank-wan-31" target="_blank" title="Zhihu" data-toggle=tooltip data-placement=top><i class="icon icon-zhihu"></i></a></li>
+        
+        <li><a href="https://www.douban.com/people/122349831/" target="_blank" title="Douban" data-toggle=tooltip data-placement=top><i class="icon icon-douban"></i></a></li>
+        
+        <li><a href="/frankmartinem@qq.com" target="_blank" title="Email" data-toggle=tooltip data-placement=top><i class="icon icon-email"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><h3 id="将生成的文件部署到github"><a href="#将生成的文件部署到github" class="headerlink" title="将生成的文件部署到github"></a>将生成的文件部署到github</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+    </nav>
+  </div>
+</header>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-01-21T06:11:55.000Z" title="2020/1/21 下午2:11:55">2020-01-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-04-13T00:59:56.263Z" title="2021/4/13 上午8:59:56">2021-04-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Lecture/">Lecture</a></span><span class="level-item">3 minutes read (About 415 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/01/21/Brain-Structure-Conference/">Brain Structure Conference</a></h1><div class="content"><h3 id="介观脑连接研讨会"><a href="#介观脑连接研讨会" class="headerlink" title="介观脑连接研讨会"></a>介观脑连接研讨会</h3><p><img src="/img/Brain-Structure-Conference-1.jpg" alt="open scence"></p>
-<h4 id="Focused-Questions"><a href="#Focused-Questions" class="headerlink" title="Focused Questions"></a>Focused Questions</h4><ul>
-<li>大脑神经回路与功能的关系</li>
-<li>大脑神经连接的建模与计算</li>
-</ul>
-<h4 id="Muming-Poo"><a href="#Muming-Poo" class="headerlink" title="Muming Poo"></a>Muming Poo</h4><p><img src="/img/Brain-Structure-Conference-2.jpg" alt="neural types and mappings"></p>
-<ul>
-<li>mapping and understanding </li>
-<li>genetic programs and neural circuits, subtypes and substates</li>
-</ul>
-<p><img src="/img/Brain-Structure-Conference-3.jpg" alt="Float Chat of Primate Brain Research"></p>
-<ul>
-<li>Jun Yan<ul>
-<li>single neuron projectome</li>
-<li>projection subtypes, CT</li>
-<li>brain  orders and projectome classification, 观察轴突分叉点的夹角</li>
-</ul>
-</li>
-</ul>
-<h4 id="Florian-Engert"><a href="#Florian-Engert" class="headerlink" title="Florian Engert"></a>Florian Engert</h4><ul>
-<li>不同类型的神经元组成不同的神经回路，回路之间互相影响，各有各的作用。</li>
-</ul>
-<h4 id="JiuLin-Du"><a href="#JiuLin-Du" class="headerlink" title="JiuLin Du"></a>JiuLin Du</h4><ul>
-<li>神经元分类， vglut2a, vglut2b(excitory), GABA(jinhibotiry)等<ul>
-<li>神经信号的传递有兴奋和抑制之分，不同的神经递质对应了不同的神经信号的gate</li>
-</ul>
-</li>
-<li>gene expression</li>
-<li>信息传导通路</li>
-</ul>
-<h4 id="Hongkui-Zheng"><a href="#Hongkui-Zheng" class="headerlink" title="Hongkui Zheng"></a>Hongkui Zheng</h4><p><img src="/img/Brain-Structure-Conference-4.jpg" alt="Multi-level decoding of neuron"></p>
-<ul>
-<li>multi-level approach to decoding the brain</li>
-<li>cell types, connectivity, psyology and behavior, modeling and thery</li>
-<li>层层递进的网络结构设计</li>
-<li>细胞类型的定义，基于细胞类型定义的回路功能研究（<em>对网络结构设计具有一定的参考意义</em>）</li>
-<li>feedforward and feedback pathway（前向神经网络和反馈式神经网络）</li>
-<li>corticalcortical, thalamocoritcal and corticalthalamic projection matrices(Harris, Nature, 2019)</li>
-<li>sparse labeling（稀疏标签）</li>
-<li>shared types of neurons in different cortical areas</li>
-</ul>
-<p><img src="/img/Brain-Structure-Conference-5.jpg" alt="summary"></p>
-<h4 id="Chenyu-Li"><a href="#Chenyu-Li" class="headerlink" title="Chenyu Li"></a>Chenyu Li</h4><ul>
-<li>causal map, behavior,<ul>
-<li>memory in the brain</li>
-</ul>
-</li>
-<li>connectome without function is meanless</li>
-</ul>
-<h4 id="Linda-Richard"><a href="#Linda-Richard" class="headerlink" title="Linda Richard"></a>Linda Richard</h4><ul>
-<li></li>
-</ul>
-<h4 id="Dan-Yang"><a href="#Dan-Yang" class="headerlink" title="Dan Yang"></a>Dan Yang</h4><p><img src="/img/Brain-Structure-Conference-6.jpg" alt="sleep active neurons"></p>
-<ul>
-<li></li>
-</ul>
-<h4 id="David-Van-Essen"><a href="#David-Van-Essen" class="headerlink" title="David Van Essen"></a>David Van Essen</h4><ul>
-<li>resting-state networks</li>
-</ul>
-<h4 id="XiaoJing-Wang"><a href="#XiaoJing-Wang" class="headerlink" title="XiaoJing Wang"></a>XiaoJing Wang</h4><p><img src="/img/Brain-Structure-Conference-7.jpg" alt="connectome"></p>
-<ul>
-<li>Theoretical Neuroscience Rising </li>
-<li>Computational and Congnitive Neuroscience(CCN)</li>
-<li>generative and connectivity</li>
-<li>connectivity is insufficient to predict dynamics</li>
-</ul>
-<p><img src="/img/Brain-Structure-Conference-8.jpg" alt="conectivity is insufficient to predict dynamics"></p>
-<h4 id="Helen-Barbas"><a href="#Helen-Barbas" class="headerlink" title="Helen Barbas"></a>Helen Barbas</h4><ul>
-<li></li>
-</ul>
-<h4 id="Anthony-Movshon"><a href="#Anthony-Movshon" class="headerlink" title="Anthony Movshon"></a>Anthony Movshon</h4><p><img src="/img/Brain-Structure-Conference-9.jpg" alt="levels of invistigation"></p>
-<ul>
-<li>brain models and simulation</li>
-<li>mainflold</li>
-</ul>
-<p><img src="/img/Brain-Structure-Conference-10.jpg" alt="Human Brain Project"></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-01-21T06:10:25.000Z" title="2020/1/21 下午2:10:25">2020-01-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-04-13T01:02:58.696Z" title="2021/4/13 上午9:02:58">2021-04-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Algorithm/">Algorithm</a></span><span class="level-item">12 minutes read (About 1741 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/01/21/Unscented-Kalman-Filter/">Unscented Kalman Filter</a></h1><div class="content"><h4 id="Unscented-Kalman-Filter"><a href="#Unscented-Kalman-Filter" class="headerlink" title="Unscented Kalman Filter"></a>Unscented Kalman Filter</h4><p>最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考</p>
-<h5 id="我的一点点理解"><a href="#我的一点点理解" class="headerlink" title="我的一点点理解"></a>我的一点点理解</h5><p>无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合的情况。所以就有了无极卡尔曼滤波。这种方法的主要改进在于，不再用线性的模型去计算预测模型以及转换矩阵，而是通过采样和计算均值方法的方式，去估计样本的方差和均值。</p>
-<h5 id="计算过程"><a href="#计算过程" class="headerlink" title="计算过程"></a>计算过程</h5><p>无迹卡尔曼滤波的计算方式和卡尔曼滤波比较类似，只是讲线性转换模型换成了采样的方式。具体的原理推导比较复杂，所以这里只写一下无迹卡尔曼滤波的计算过程：</p>
-<p>无迹卡尔曼的计算步骤和卡尔曼滤波基本是一致的，只是对其中的一些步骤进行了修改，首先，我们看一下Kalman Filter的计算过程：</p>
-<ol>
-<li><p>建立编码模型和转换模型， 假设观测变量是$z$， 测量变量是$x$， 那么首先我们假设：</p>
-<ol>
-<li>当前时刻的测量变量是可以根据上一时刻的测量变量估计：<br>$$<br>x_{t} = Fx_{t-1} + w_t, (w_t -N(0, Q))<br>$$</li>
-</ol>
-</li>
-<li><p>当前时刻的观测变量可以根据测量变量估计：<br>   $$<br>   z_t = Hx_t + r_t, (r_t - N(0, R))<br>   $$</p>
-</li>
-<li><p>根据以上的编码模型和转换模型，Kalman Filter的计算流程如下：</p>
-<ol>
-<li>首先，根据已知的模型，以及上一时刻的卡尔曼估计值，计算当前时刻的模型预测值</li>
-</ol>
-<p>$$<br>x_t’=Fx_{t-1}<br>$$</p>
-<ol start="2">
-<li>根据当前的模型预测值，计算对应的协方差</li>
-</ol>
-<p>$$<br>P(x_t|x_t’)=FP(x_t|X_t)F^T<br>$$</p>
-<ol start="3">
-<li>根据当前的协方差和测量空间的转换矩阵，计算当前时刻的卡尔曼增益</li>
-</ol>
-<p>$$<br>K_t=P(x_t|x_t’)H^T(HP(x_t|x_t’)H^T+R)^{-1}<br>$$</p>
-<ol start="4">
-<li>根据卡尔曼增益和测量值，计算当前时刻的卡尔曼估计值</li>
-</ol>
-<p>$$<br>x_t=x_t’+K_t(z_t-Hx_t’)<br>$$</p>
-<ol start="5">
-<li>计算了当前时刻的卡尔曼估计值之后，还需要计算当前的估计值和真实值的协方差矩阵，方便下一次计算</li>
-</ol>
-<p>$$<br>P(x_t|X_t)=(I-HK_t)P(x_t|x_t’)<br>$$</p>
-<p>作为线性的解码器，Kalman Filter确实能找到观测变量和测量变量之间的关系，并用观测变量去纠正当前测量变量中的误差。但是涉及到非线性关系的时候，Kalman Filter的线性假设就不成立了。这时有两种优化的方法：</p>
-<ol>
-<li>如果已知这种非线性关系的公式，例如加速度和位置的关系等，那么可以把上述转换模型和观测模型换成已知的非线性模型，增加解码准确率。这种方法就是**扩展卡尔曼滤波(Extend Kalman Filter)**。这种方法的优点在于拟合更加准确，但是缺点也很明显。首先是计算量增加，如果非线性拟合涉及很复杂的模型，那么计算量比Kalman Filter增加很多。然后是非线性模型，并不是任何时候，这种模型都是已知的，如果不是已知的，那就需要进行非线性拟合，找到最合适的拟合模型，例如指数模型，高阶模型等，再次增加计算量。</li>
-<li>如果不知道这种非线性关系的公式，那么我们可以进行非线性拟合或者直接假设一个公式。但是我们观察Kalman Filter的计算过程，整个估计过程中，用到了当前时刻的值，以及协方差。而这两个量，我们是能通过采样的方式得到的，即，可以不需要直接计算非线性模型的协方差矩阵，直接通过采样估计，类似蒙特卡洛的方法。但是采样的计算量会更大，因为需要大样本才能得到准确的估计。目前有另外一种办法，能够用很少的采样点(几个)就得到准确的估计，这种方法是无迹变换(Unscented Transform)，结合到Kalman Filter中，就是<strong>无迹卡尔曼滤波(Unscented Kalman Filter)</strong></li>
-</ol>
-<p>所以无迹卡尔曼滤波的主要流程如下：</p>
-<ol>
-<li>计算转换模型和编码模型<ol>
-<li>建立转换模型，可以是非线性也可以是线性，这里用线性模型：<br>$$<br>x_{t} = Fx_{t-1} + w_t, (w_t -N(0, Q))<br>$$</li>
-<li>建立编码模型，也可以是线性或非线性模型：<br>$$<br>z_t = Hx_t + r_t, (r_t - N(0, R))<br>$$</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>根据上述模型和训练集数据，用最小二乘法或其他的拟合方法，得到模型参数，然后开始无迹卡尔曼的预测和更新阶段</p>
-<ol>
-<li><p>根据模型预测$x_{t}$<br>   $$<br>   x_t’=Fx_{t-1}<br>   $$</p>
-</li>
-<li><p>预测$x_{t}$的协方差<br>   $$<br>   P(x_t|x_t’)=FP(x_t|X_t)F^T + Q<br>   $$</p>
-</li>
-<li><p>用采样点估计当前协方差矩阵，先采样$2d+1$个点，并保证中心点的值为$x_t’$<br>   $$<br>   X_0 = x_t’<br>   $$</p>
-<p>$$<br>   X_i = x_t’ + (\sqrt{(d + k)P(x_t|x_t’)})_{i}, i = 1, …, d<br>$$</p>
-<p>$$<br>   X_i = x_t’ - (\sqrt{(d + k)P(x_t|x_t’)})_{i}, i = d + 1, …, 2d<br>$$</p>
-</li>
-<li><p>计算采样点的权重值<br>   $$<br>   w_0= \frac{k}{d+k}, w_i = \frac{1}{2d+k}, i = 1, … 2d<br>   $$</p>
-</li>
-<li><p>根据转换矩阵，采样点，计算观测值和测量值的关系<br>$$<br>Z_i = h(X_i), i = 0, …2d<br>$$</p>
-<p>$$<br>z_t = \sum_{i = 0, …2d}{w_{i}Z_{i}}<br>$$</p>
-</li>
-<li><p>根据采样点估计的观测值，计算观测值$z$的方差，以及观测值$z$和测量值$x$的协方差<br>$$<br>P_{zz, t} = w_{0}(Z_{0}-z_{t})(Z_{0}-z_{t})^T + (\sum_{i=1, …,2d}{w_{i}(Z_{i}-Z_{0})(Z_{i}-z_{0})^T}) + R<br>$$</p>
-<p>$$<br>P_{xz, t} = w_{0}(Z_{0}-z_{t})(Z_{0}-z_{t})^T + (\sum_{i=1, …, 2d}{w_{i}(X_{i}-X_{0})(Z_{i}-Z{0})^T})<br>$$</p>
-</li>
-<li><p>根据计算的协方差，可以计算Kalman增益<br>$$<br>K = P_{xz, t}P_{zz, t}^{-1}<br>$$</p>
-</li>
-<li><p>用Kalman增益计算最有估计值<br>$$<br>x_t = x_t’ + K_t(h(x_t’)-z_t)<br>$$</p>
-<p>$$<br>P(x_t|X_t) = P(x_t|x_t’)-P_{xz, t}(P_{zz, t}^{-1})^TP_{xz, t}^{T}<br>$$</p>
-<p>以上就是无迹卡尔曼滤波的主要步骤，后续会附上代码链接</p>
-</li>
-</ol>
-</li>
-</ol>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-01-21T06:10:10.000Z" title="2020/1/21 下午2:10:10">2020-01-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-04-13T01:02:52.787Z" title="2021/4/13 上午9:02:52">2021-04-13</time></span><span class="level-item"><a class="link-muted" href="/categories/coding/">coding</a></span><span class="level-item">a minute read (About 198 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/01/21/Unity/">Unity</a></h1><div class="content"><h3 id="Unity相关概念"><a href="#Unity相关概念" class="headerlink" title="Unity相关概念"></a>Unity相关概念</h3><ol>
-<li><p>ConfigurableJoint</p>
-</li>
-<li><p>OnEnable()函数在gameObject.setActive(true)时触发，优先于Start()，但是和Awake()函数的先后顺序不确定；OnDisable()函数在gameObject.setActive(false)时触发</p>
-</li>
-<li><p>Lerp()</p>
-<ol>
-<li><p>计算两个点之间的插值，函数如下：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lerp(Vector3 a, Vector3 b, <span class="built_in">float</span> t);</span><br></pre></td></tr></table></figure>
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Machine Learning, Neural Computation</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>计算公式如下：</p>
-<p>$$ (b - a) * t $$</p>
-</li>
-</ol>
-</li>
-<li><p>Mathf.Approximately()</p>
-<ol>
-<li><p>判断两个浮点数是否十分接近，使用方法如下：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mathf.Approximately(<span class="built_in">float</span> a, <span class="built_in">float</span> b);</span><br></pre></td></tr></table></figure>
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deep-Learning/">Deep Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lecture/">Lecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/configuration/">configuration</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/powershell/">powershell</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/usage/">usage</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
 
-<p>返回值为bool</p>
-</li>
-</ol>
-</li>
-<li><p>Quaternion类</p>
-<ol>
-<li>Quaternion属于四元数，包括x, y, z, w四个分量，和欧拉角一样，是3D图形中常用的坐标变换表示方法之一，对于插值，平滑以及数据存储，都有较大的优势（相较于传统的矩阵表示方法）</li>
-<li></li>
-</ol>
-</li>
-</ol>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-01-21T06:09:44.000Z" title="2020/1/21 下午2:09:44">2020-01-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-04-13T01:02:43.934Z" title="2021/4/13 上午9:02:43">2021-04-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Mathematics/">Mathematics</a></span><span class="level-item">5 minutes read (About 737 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/01/21/Two-Types-of-Variance/">Two Types of Variance</a></h1><div class="content"><h3 id="样本方差和统计方差"><a href="#样本方差和统计方差" class="headerlink" title="样本方差和统计方差"></a>样本方差和统计方差</h3><p>我们知道，统计学上方差的计算公式如下：</p>
-<p> $$ \sigma^2=\frac{\sum_{i=1}^{n}(x_i-\mu)}{n}$$ </p>
-<p>这是统计学中方差的定义，已知条件有总体的均值$\mu$，以及总体个数$n$，公式的另一种写法为： $$\sigma^2=E[(x-\mu)^2]=\sum{(x-\mu)^2}p(x)$$ </p>
-<p>其中$p(x)$是$x$出现的概率，所以这个公式只对于离散变量有效。 那么，如果总体量很大，不能做到全部采样，那么就需要用样本来估计总体，假设从总体为$N$的总数中抽取$n$个样本，其中$(N&gt;&gt;n)$，采样值为$x_1,x_2,…,x_n$ 样本均值为：</p>
-<p> $$\bar{x}=\frac{\sum_{i=1}^{n}{x_i}}{n}$$ </p>
-<p>样本的方差为：</p>
-<p> $$ S^2=\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}$$ </p>
-<p>但是样本的方差和总体的方差是有差别的，计算样本方差的期望值，来估计样本方差和实际方差$\sigma^2$之间差了多少：</p>
-<p> $$ E[S^2]=E[\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}]$$ </p>
-<p>$$=E[\frac{1}{n}\sum_{i=1}^{n}{((x_i-\mu)-(\bar{x}-\mu))^2}]$$</p>
-<p>$$=E[\frac{1}{n}\sum_{i=1}^{n}{((x_i-\mu)^2-2(x_i-\mu)(\bar{x}-\mu)+(\bar{x}-\mu)^2)}]$$</p>
-<p>$$=E[\frac{1}{n}\sum_{i=1}^{n}{(x_i-\mu)^2}-\frac{2}{n}(\bar{x}-\mu)\sum_{i=1}^{n}{(x_i-\mu)}+(\bar{x}-\mu)^2]$$ </p>
-<p>其中</p>
-<p> $\sum_{i=1}^{n}{(x_i-\mu)}$ $=\sum_{i=1}^{n}{x_i}-\sum_{i=1}^{n}{\mu}$ $=n(\bar{x}-\mu)$ </p>
-<p>所以</p>
-<p>$=E[\frac{1}{n}\sum_{i=1}^{n}{(x_i-\mu)^2}-\frac{2}{n}(\bar{x}-\mu)\sum_{i=1}^{n}{(x_i-\mu)}+(\bar{x}-\mu)^2]$ $=E[\frac{1}{n}\sum_{i=1}^{n}{(x_i-\mu)^2}-2(\bar{x}-\mu)^2+(\bar{x}-\mu)^2]$ $=\sigma^2-E[(\bar{x}-\mu)^2]$ </p>
-<p>（这里$\sigma^2$是因为样本方差的期望值是总体方差）</p>
-<p>$E[(\bar{x}-\mu)^2]$ $=E(\bar{x}-E[\bar{x}])^2$ $=var(\bar{x})$ $=\frac{1}{n^2}var(\sum_{i=1}^{n}{x_i})$ $=\frac{1}{n^2}\sum_{i=1}^{n}{var(x_i)}$ $=\frac{n\sigma^2}{n^2}$ $=\frac{\sigma^2}{n}$ </p>
-<p>根据上面推导的式子，有以下计算：</p>
-<p> $\sigma^2-E[(\bar{x}-\mu)^2]$ $=\sigma^2-\frac{\sigma^2}{n}$ $=\frac{n-1}{n}\sigma^2$ </p>
-<p>也就是说，样本估计的方差是总体方差的$\frac{n-1}{n}$倍，即所谓的有偏估计。要转换成无偏估计，只需要乘以倍数就可以了 </p>
-<p>$$\frac{n}{n-1}S^2=\frac{n}{n-1}\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}=\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n-1}$$</p>
-<p> 这即是所谓的无偏估计。 当然，还有一种比较直接的解释，由于是求统计样本中的方差，所以在求解统计样本均值时，已经用掉了一个自由度的值，所以求方差时，其实有用的值会少一个。例如在只有一个样本时，这时求方差是没有意义的。不过在概率论中，求此时的方差是有意义的，因为已经知道了总体的概率分布，所以即使只有一个样本，总体的分布是不变的。其中区别就在于统计样本只是用于估计。 </p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-01-21T06:09:04.000Z" title="2020/1/21 下午2:09:04">2020-01-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-04-13T01:02:17.351Z" title="2021/4/13 上午9:02:17">2021-04-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Algorithm/">Algorithm</a></span><span class="level-item">7 minutes read (About 1108 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/01/21/Population-Vector-Algorithm/">Population Vector Algorithm</a></h1><div class="content"><h3 id="PVA-Population-Vector-Algorithm"><a href="#PVA-Population-Vector-Algorithm" class="headerlink" title="PVA(Population Vector Algorithm)"></a>PVA(Population Vector Algorithm)</h3><h4 id="算法推导："><a href="#算法推导：" class="headerlink" title="算法推导："></a>算法推导：</h4><ol>
-<li><p>信号预处理 这里的算法推导主要针对神经元集群解码，因为PVA的主要应用还是在神经元解码中 首先，采集到的spike信号是以发放次数的方式存储的，这里需要先转换成发放率的形式，即： $$fr[n]=\frac{spk[n]}{\Delta t} \tag{1}$$</p>
-</li>
-<li><p>其中，$fr[n]$表示$n$时刻神经元的发放率，$\Delta t$表示一个bin的长度，通常的取值为20ms，30ms，50ms，1000ms等。$spk[n]$表示神经元在第$n$个bin中发放的次数。 然后，对发放率做一个FIR滤波，主要目的是平滑发放率曲线，计算公式如下：</p>
-<p>$$s[n]=\sum_{i=1}^{W-1}{fr[n-i]h[i]} \tag{2}$$</p>
-<p>其中，$h[i]$表示滤波器的卷积函数，可以根据需求选取，$W$表示滤波器的阶数，可以根据实际需要选择。</p>
-<p>PVA算法原理 PVA算法的提出，主要是根据实验中观察到的现象。在猴子将手臂移动向不同的方向时，不同的神经元发放的率产生了变化，我们由此假设，神经元的发放率跟运动方向是有关系的，所以我们想到，用余弦曲线的方式，去拟合神经元的发放率与运动方向之间的关系。首先，我们假设每个神经元都有一个自己的偏好方向$\theta_{PD}$，假设此时，猴子手臂的运动方向为$\theta$，那么此时神经元的发放率为： $$f=m*cos(\theta-\theta_{PD})+b_0 \tag{3}$$ </p>
-<p>其中，$m$为表征神经元活泼性的参数，即有的神经元可能表征的偏好方向一样，但是在偏好方向上的发放率变化是不一样的。$b_0$表示神经元的基础发放率，即在静息状态下的基础发放率。$f$表示的是神经元在猴子手臂朝向$\theta$方向运动时的发放率，注意这里是发放率不是spike count，虽然两者可以通过bin转换，但是公式推导的时候两者还是不一样的。 公式$(3)$表示了单个神经元的发放与运动的关系。猴子大脑M1区域的神经元是很多的，对不同的方向肯定有不同的偏好性。那么如何处理这种不一致性呢，我们的方法是用矢量求和的形式，得出一个此时最可能的运动方向。即： $$\vec{u}=\frac{1}{N}  \sum_{i=1}^{n}{m*cos{\theta_{PD}}} \tag{4}$$ </p>
-<p>这里$\vec{u}$表示神经元此时解码出来的运动方向，这里也能部分表征运动速度，但是速度的大小也与实际的运动距离有关，所以，运动速度的计算如下：</p>
-<p> $$v=k*\vec{u}+\sigma \tag{5}$$</p>
-<p>这里$k$表示实际速度与计算得出的速度的比例，$\sigma$表示实际速度与解码得到的速度之间的误差，以上就是PVA算法的主要原理 3. 参数计算 那么，现在的问题在于，如何计算PVA算法中的几个参数，这里我们用最小二乘法的方式，求最小误差情况下的参数$b_0,m,\theta_{PD}$，我们将公式$(3)$换一种写法，即： </p>
-<p>$$f = b_0 + b_1 * cos \theta + b_2 * sin \theta \tag{6}$$ </p>
-<p>再考虑$cos{\theta}$和$sin{\theta}$这两个量，对应在速度中，可以表示为归一化过后的$v_x$和$v_y$，只要在$[-1,1]$这个区间内所以，将公式$(6)$写成： </p>
-<p>$$f = b_0 + b_1 * v_x + b_2 * v_y \tag{7}$$</p>
-<p>用最小二乘法计算，误差为： </p>
-<p>$$\epsilon = \sum_{ i=1 }^{n}{(b_0 + b_1 * v_x + b_2 * v_y - f)^2} \tag{8}$$</p>
-<p>最终计算结果根据要推导一下，这里先暂时不写，回去再补充 所以，极值在偏导数为$0$的地方取得，即： $$\frac{\partial{\epsilon}}{\partial{b_0}}=0 \tag{9}$$ $$\frac{\partial{\epsilon}}{\partial{b_1}}=0 \tag{10}$$ $$\frac{\partial{\epsilon}}{\partial{b_2}}=0 \tag{11}$$ </p>
-<p>解上述方程，可以得到$b_0,b_1,b_2$的值，即：</p>
-<p> $$\beta=(A^T*A)^{-1}A^TB \tag{12}$$ </p>
-<p>其中，$\beta=(b_0,b_1,b_2)$，$A$为运动信息矩阵，$B$为神经信号矩阵。  </p>
-</li>
-</ol>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-01-21T06:08:45.000Z" title="2020/1/21 下午2:08:45">2020-01-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-05-28T08:52:07.883Z" title="2021/5/28 下午4:52:07">2021-05-28</time></span><span class="level-item"><a class="link-muted" href="/categories/Algorithm/">Algorithm</a></span><span class="level-item">20 minutes read (About 3032 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/01/21/Hidden-Markov-Model/">Hidden Markov Model</a></h1><div class="content"><h1 id="Hidden-Markov-Model"><a href="#Hidden-Markov-Model" class="headerlink" title="Hidden Markov Model"></a>Hidden Markov Model</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>隐马尔可夫模型(Hidden Markov Model)是一种常用的统计模型。应用也比较广泛，在时序问题，以及语音识别等问题上有广泛的应用。下面简单介绍一下隐马尔可夫模型。</p>
-<p>隐马尔可夫模型是在马尔可夫过程的基础上，加入了隐含状态后的一种结构。这里首先介绍一下什么是马尔可夫过程(Markov Process)</p>
-<p>在一个随机过程中，有一个状态变量$I$，其下一时刻的状态之和之前的状态有关。例如布朗运动，粒子的下一时刻状态之和之前时刻的状态有关。而$I$变化的过程，也就是马尔科夫链。这个约束，也就是马尔可夫假设。</p>
-<p><img src="E:\GitHub-Blog\source\img\HiddenMarkovModel-1.jpg"></p>
-<p>在马尔可夫过程中，模型还是很复杂，我们还可以加约束来让模型变得简单一点。我们可以假设，状态变量$I$的下一时刻状态只和上一时刻的状态有关。这样就得到了齐次马尔可夫模型。即：</p>
-<p>$$p(I_t|I_{t-1}, I_{t-2}, …, I_{0}) = p(I_t|I_{t-1}), t=1, 2, …, T$$</p>
-<p>我们可以看出，马尔可夫模型的描述，只针对某一个变量而言。但是实际生活中，很多变量之间都是相关的。例如你的运动是由肌肉的收缩和舒张来完成的。但是在观察者看来，你只是完成了一个简单的运动。其中，你的运动状态就是观测到的变化量，而肌肉的状态就是隐藏的状态。所以HMM模型的结构如下图所示：</p>
-<p><img src="E:\GitHub-Blog\source\img\HiddenMarkovModel-2.jpg"></p>
-<p>和马尔可夫过程一样，HMM也有一些约束条件。首先，HMM要满足马尔可夫假设且满足齐次马尔可夫模型，即：</p>
-<p>$$p(I_t|I_{t-1}, o_{t-1}, …, I_{0}, o_{0}) = p(I_t|I_{t-1}), t=1, 2, …, T$$</p>
-<p>然后是观测独立性假设，也就是说任意时刻的观测值只依赖于当前时刻的马尔可夫链的状态$i_t$， 即：</p>
-<p>$$p(o_t|I_t, I_{t-1}, o_{t-1}, …, I_{0}, o_{0}) = p(o_t|I_t), t=1, 2, …, T$$</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>HMM的结构如上图所示，其中$I$是状态变量，$O$是观测变量。假设$Q$是所有可能的状态的集合，$V$是所有可能的观测的集合。</p>
-<p>$$Q = { q_1,q_2,…,q_N }$$ </p>
-<p>$$V = {v_1,v_2,…,v_M }$$</p>
-<p>即可能的状态有N种， 可能的观测值有M种，两者不一定会相等。那么在一次试验中，观测到的值为$O$，每个观测值会唯一对应一个状态值，因为试验已经结束了，假设状态序列为$I$，那么$O$和$I$的长度一样，假设为T，那么： $$O = { O_1,O_2,…,O_T }$$ </p>
-<p>$$I = { I_1,I_2,…,I_T }$$</p>
-<p> 在$t$时刻会有一个状态值，那么下一个时刻的状态值会与上一时刻相关，当然也可以是不相关的，由此给出状态矩阵$A$的定义：</p>
-<p>$$A=[a_{ij}]$$ </p>
-<p>$a_{ij}$表示当前时刻$t$状态为$q_i$的情况下，下一时刻的状态为$q_j$的概率，这里$i,j=1,2,…N$，用数学形式表示，即： $$a_{ij}=P(I_{t+1}=q_j | I_t=q_i)$$ </p>
-<p>有了状态转移矩阵后，我们并不能直接估计下一时刻的状态，因为状态在整个试验过程中是隐藏的，试验中只能得到观测值的相关信息，所以还要有观测值和状态值之间的转换矩阵，即当观测到某个值时，其对应于各个状态的概率分别是多少。假设观测概率矩阵是$B$，给出$B$的定义：</p>
-<p> $$B=[b_{jk}]$$ </p>
-<p>$b_{jk}$表示当前时刻$t$状态值为$q_j$的情况下，观测值为$v_k$的概率。所以有$k=1,2,…M$，$j=1,2,…,N$，用数学形式表示，即：</p>
-<p>$$b_{jk}=P(o_t=v_k | i_t=q_j)$$ </p>
-<p>确定了观测值和状态值之间的转换概率，当前时刻和下一时刻之间的状态转换概率，那么我们还需要确定可能的观测值在试验刚开始时被选中的概率，假设为$\pi$，给出$\pi$的定义：</p>
-<p>$$\pi=[\pi_{i}]$$ </p>
-<p>其中$\pi_{i}$表示观测值$q_i$在刚开始被选中的概率，那么，$i=1,2,…,N$，用数学的形式表示，即：</p>
-<p>$$\pi_i=P(I_1=q_i)$$ </p>
-<p>到这里，整个HMM模型中的主要参数已经全部介绍了，由介绍可知，根据$\pi,A,B$可以让一个HMM模型顺利工作。可以求出在任意状态序列对应的概率$P(O|\lambda)$。所以，我们也用这些参数来表示一个HMM模型，即： $$\lambda={ A,B,\pi }$$ 。</p>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p>以上介绍了HMM的基本概念，在实际应用中，主要有以下几个基本问题：</p>
-<ol>
-<li>已知模型$\lambda$以及观测序列$O$，计算在这种模型下出现这种观测序列的概率$P(O|\lambda)$</li>
-<li>已知观测序列$O$，但是不知道模型$\lambda$，计算模型$\lambda$，使得当前观测序列产生的概率$P(O|\lambda)$最大</li>
-<li>给定模型$\lambda$和观测序列$O$，计算最有可能产生这一观测序列的状态序列$I$，即使得$P(I|O,\lambda)最大的$$I$</li>
-</ol>
-<p>以上就是最常见的HMM问题，主要涉及到模型中各个参数计算的问题。</p>
-<p>在问题１中，我们需要计算观测序列出现的概率，主要可以用来判断出现的这一观测序列是否常见，如果计算得到的概率很低，但是在实际观测中却经常出现，那么就需要检查系统中是否出现了外部干扰。</p>
-<p>在问题2中，我们需要计算模型的参数。主要是用于模型的学习和自适应参数调整的问题。模型是不确定的，但是根据给定的观测序列，我们需要找到一个最合适的模型，来保证出现这一观测序列的概率最大。有点类似回归求最优解或者神经网络拟合的思想。</p>
-<p>在问题3中，我们需要通过观测序列和模型，来估计隐藏状态。这个主要适用于一些解码问题。通过观测值求解隐藏值。</p>
-<p>针对以上的问题，分别有对应的解决办法。下面会介绍最常见的一些解法。当然，由于ＨＭＭ中，观测变量和隐藏状态可能的取值是有限的。所以其实用穷举法也可以算，只是计算量会很大。</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p>已知模型和观测序列，要计算出现这种观测序列的概率$P(O|\lambda)$</p>
-<p>这个问题有两种解法，前向和后向算法。两种方法比较类似。</p>
-<ol>
-<li>前向算法</li>
-</ol>
-<p>首先，我们定义一个概率：</p>
-<p>$$p_t(i) = P(o_1, o_2, …, o_t, I_t=q_i)$$</p>
-<p>$p_t(i)$表示观测序列为${o_0, o_1, …,o_t}$，同时$I_t=q_i$的概率。所以我们有以下递推公式：</p>
-<p>$$p_{t}(i) = (\sum_{j=1}^{N}p_{t-1}(j)a_{ji})b_{ik}$$</p>
-<p>同时，有$o_{t}=v_{k}$。在上面的公式中，$\sum_{j=0}^{N}p_{t-1}(j)a_{ji}$表示前$t-1$个输出为${o_1, o_2, …, o_{t-1}}$，且第$t$个隐藏状态为$q_i$的概率。因为$t-1$时刻的状态是任何值都可以，只需要乘以对应的转移概率，就可以计算出$t$时刻状态为$q_i$的概率了。</p>
-<p>然后在初始状态时，有：</p>
-<p>$$p_1(i) = \pi_ib_{ik}, o_1=v_k$$</p>
-<p>所以最终得到的概率为：</p>
-<p>$$P(O|\lambda) = \sum_{i=1}^{N}p_T(i)$$</p>
-<p>也就是说，在$T$时刻，观测序列为${o_1, o_2, …, o_T}$，且模型为$\lambda$的概率为观测序列为${o_1, o_2, …, o_T}$且$T$时刻状态值为${q_1, q_2, …, q_N}$的所有值的和。</p>
-<ol start="2">
-<li>后向算法</li>
-</ol>
-<p>后向算法和前向算法比较类似，都是通过递推的方式逐步计算观测序列的概率。不同的地方是，后向算法是从后往前算，前向算法是从前往后算。</p>
-<p>假设观测序列的长度为$T$，并定义从$t+1$时刻到$T$时刻的序列为${o_{t+1}, o_{t+2}, …, o_T}$，且$t$时刻的隐藏状态为$q_i$的概率为：</p>
-<p>$$p_t(i) = P(o_{t+1}, o_{t+2}, …, o_T, I_t=q_i|\lambda)$$</p>
-<p>对于后向算法，初始状态应该是$p_T(i)$，表示的是观测序列为${o_{T+1}}$时，且隐藏状态为$q_i$的概率，但是因为已经知道了$o_T$的状态了，且$o_{T+1}$并没有发生，所以这里其实给任意值都可以。这个值其实主要表示的是$T+1$时刻和$T$时刻的关系，但是这个关系并不知道，所以给任意值都是可以的。表示这个关系可以是任意的。</p>
-<p>然后和前向算法类似，我们可以计算后向的递推公式：</p>
-<p>$$p_t(i) = \sum_{j=1}^{N}a_{ij}b_{jk}p_{t+1}(j)$$</p>
-<p>其中有，$o_{t+1} = v_k$</p>
-<p> $\sum_{j=1}^{N}a_{ij}p_{t+1}(j)$表示$t+2$时刻状态为$q_j$且$t$时刻的状态为$q_i$的所有可能的$t+2$时刻的值的和，所以$a_{ij}b_{jk}p_{t+1}(j)$表示的是，$t+1$时刻的观测值为$o_{t+1}$，也就是$v_k$，同时$t+1$时刻的状态值为$q_j$的概率。求和之后就是，$t+1$到$T$时刻的观测值为${o_{t+1}, o_{t+2}, …, o_{T}}$，且$</p>
-<p>t$时刻的隐藏状态为$$q_i$的概率。也就是$p_t(i)$。</p>
-<p>所以可以得到，最终计算的概率为：</p>
-<p>$$P(O|\lambda) = \sum_{i=1}^{N}\pi_{i}b_i(o_1)p_1(i)$$</p>
-<p>其中，$p_1(i)$表示的是观测序列为${o_2, o_3, …, o_T}$，$ b_i(o_1)p_1(i)$表示观测序列为${o_1, o_2, …, o_T}$。所以$\pi_ib_i(o_i)p_1(i)$表示观测序列为$o_1, o_2, …, o_T$, 且$I_1=q_i$的概率，对所有的$I_1={q_1, q_2, …, q_N}$求和，就是观测序列为${o_1, o_2, …, o_N}$的概率</p>
-<p>以上就是两种计算观测序列概率的算法。主要的思想都是通过递推计算。</p>
-<h3 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h3><p>已知观测序列$O$， 计算使得$P(O|\lambda)$最大的模型参数$\lambda$</p>
-<p>这个问题有点类似于回归问题中的拉格朗日极值问题，但是由于涉及到隐藏变量的极大似然估计，所以这里并不能用求导的方法来计算。广泛使用的一种计算方法是EM(Expectation Maximum)算法。关于EM算法，会在后续的文章中介绍，这里暂且不写。</p>
-<h3 id="问题3"><a href="#问题3" class="headerlink" title="问题3"></a>问题3</h3><p>已知观测序列$O$和模型参数$\lambda$，求可能产生这一观测序列的隐藏状态$I$, 使得$P(I|\lambda)$最大</p>
-<p>这个问题类似于常见的解码问题。对于HMM模型下的解码问题，一般是用动态规划的方法来求解的。因为这样计算量会降低。常用的HMM解码问题的解决办法是维特比算法(Viterbi Algorithm)。这个也会在后续的文章中介绍。这里暂且不写。</p>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/">Previous</a></div><div class="pagination-next"><a href="/page/3/">Next</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link is-current" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/portrait.jpg" alt="Frank Wan"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Frank Wan</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hangzhou, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">24</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">9</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">21</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/FrankMartinem" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/FrankMartinem"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:frankmartinet@163.com"><i class="fa fa-envelope"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://www.zju.edu.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">ZJU</span></span><span class="level-right"><span class="level-item tag">www.zju.edu.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.hust.edu.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">HUST</span></span><span class="level-right"><span class="level-item tag">www.hust.edu.cn</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Algorithm/"><span class="level-start"><span class="level-item">Algorithm</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/Deep-Learning/"><span class="level-start"><span class="level-item">Deep Learning</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Lecture/"><span class="level-start"><span class="level-item">Lecture</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Mathematics/"><span class="level-start"><span class="level-item">Mathematics</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/coding/"><span class="level-start"><span class="level-item">coding</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/configuration/"><span class="level-start"><span class="level-item">configuration</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/powershell/"><span class="level-start"><span class="level-item">powershell</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/software/"><span class="level-start"><span class="level-item">software</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/usage/"><span class="level-start"><span class="level-item">usage</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-07-06T03:48:57.000Z">2021-07-06</time></p><p class="title"><a href="/2021/07/06/Qt-Deploy/">Qt Deploy</a></p><p class="categories"><a href="/categories/coding/">coding</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-07-06T02:43:13.000Z">2021-07-06</time></p><p class="title"><a href="/2021/07/06/Difference-in-Debug-and-Release/">Difference in Debug and Release</a></p><p class="categories"><a href="/categories/coding/">coding</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-10T15:16:00.000Z">2021-06-10</time></p><p class="title"><a href="/2021/06/10/powershell-commands-tree/">powershell commands-tree</a></p><p class="categories"><a href="/categories/powershell/">powershell</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-01T03:02:23.000Z">2021-06-01</time></p><p class="title"><a href="/2021/06/01/Linux-Environment-Variable/">Linux Environment Variable</a></p><p class="categories"><a href="/categories/usage/">usage</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-05-31T12:52:53.000Z">2021-05-31</time></p><p class="title"><a href="/2021/05/31/visual-studio-code-cpp-configure/">visual studio code cpp configure</a></p><p class="categories"><a href="/categories/configuration/">configuration</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/07/"><span class="level-start"><span class="level-item">July 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">June 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">May 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">May 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/04/"><span class="level-start"><span class="level-item">April 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">March 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/02/"><span class="level-start"><span class="level-item">February 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/01/"><span class="level-start"><span class="level-item">January 2020</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/11/"><span class="level-start"><span class="level-item">November 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C#</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Computer-Science/"><span class="tag">Computer Science</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Gradient-Descent/"><span class="tag">Gradient Descent</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hidden-Markov-Model/"><span class="tag">Hidden Markov Model</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Kalman/"><span class="tag">Kalman</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Lecture/"><span class="tag">Lecture</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linear-Algebra/"><span class="tag">Linear Algebra</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linear-Regression/"><span class="tag">Linear Regression</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Optimal-Linear-Estimation/"><span class="tag">Optimal Linear Estimation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCA/"><span class="tag">PCA</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PVA/"><span class="tag">PVA</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RNN/"><span class="tag">RNN</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Statistics/"><span class="tag">Statistics</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Unity/"><span class="tag">Unity</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Unscented-Kalman-Filter/"><span class="tag">Unscented Kalman Filter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Wiener-Filter/"><span class="tag">Wiener Filter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/software/"><span class="tag">software</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/software-usage/"><span class="tag">software usage</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="FrankMartinem Blog" height="28"></a><p class="is-size-7"><span>&copy; 2021 Frank</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "This website uses cookies to improve your experience.",
-          dismiss: "Got it!",
-          allow: "Allow cookies",
-          deny: "Decline",
-          link: "Learn more",
-          policy: "Cookie Policy",
-          href: "https://www.cookiesandyou.com/",
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Science/" rel="tag">Computer Science</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradient-Descent/" rel="tag">Gradient Descent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hidden-Markov-Model/" rel="tag">Hidden Markov Model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalman/" rel="tag">Kalman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lecture/" rel="tag">Lecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Regression/" rel="tag">Linear Regression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Optimal-Linear-Estimation/" rel="tag">Optimal Linear Estimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/" rel="tag">PCA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVA/" rel="tag">PVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/" rel="tag">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Statistics/" rel="tag">Statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unscented-Kalman-Filter/" rel="tag">Unscented Kalman Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wiener-Filter/" rel="tag">Wiener Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/" rel="tag">software</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software-usage/" rel="tag">software usage</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/C/" style="font-size: 13px;">C#</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/Computer-Science/" style="font-size: 13px;">Computer Science</a> <a href="/tags/Gradient-Descent/" style="font-size: 13px;">Gradient Descent</a> <a href="/tags/Hidden-Markov-Model/" style="font-size: 13px;">Hidden Markov Model</a> <a href="/tags/Kalman/" style="font-size: 13px;">Kalman</a> <a href="/tags/Lecture/" style="font-size: 13px;">Lecture</a> <a href="/tags/Linear-Algebra/" style="font-size: 13px;">Linear Algebra</a> <a href="/tags/Linear-Regression/" style="font-size: 13px;">Linear Regression</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Optimal-Linear-Estimation/" style="font-size: 13px;">Optimal Linear Estimation</a> <a href="/tags/PCA/" style="font-size: 13px;">PCA</a> <a href="/tags/PVA/" style="font-size: 13px;">PVA</a> <a href="/tags/RNN/" style="font-size: 13px;">RNN</a> <a href="/tags/Statistics/" style="font-size: 13px;">Statistics</a> <a href="/tags/Unity/" style="font-size: 13.5px;">Unity</a> <a href="/tags/Unscented-Kalman-Filter/" style="font-size: 13px;">Unscented Kalman Filter</a> <a href="/tags/Wiener-Filter/" style="font-size: 13px;">Wiener Filter</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/software/" style="font-size: 14px;">software</a> <a href="/tags/software-usage/" style="font-size: 13px;">software usage</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/07/06/Qt-Deploy/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/coding/">coding</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/06/Qt-Deploy/" class="title">Qt Deploy</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-06T03:48:57.000Z" itemprop="datePublished">2021-07-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/07/06/Difference-in-Debug-and-Release/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/coding/">coding</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/06/Difference-in-Debug-and-Release/" class="title">Difference in Debug and Release</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-06T02:43:13.000Z" itemprop="datePublished">2021-07-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/06/10/powershell-commands-tree/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/powershell/">powershell</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/10/powershell-commands-tree/" class="title">powershell commands-tree</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-10T15:16:00.000Z" itemprop="datePublished">2021-06-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/06/01/Linux-Environment-Variable/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/usage/">usage</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/01/Linux-Environment-Variable/" class="title">Linux Environment Variable</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-01T03:02:23.000Z" itemprop="datePublished">2021-06-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/05/31/visual-studio-code-cpp-configure/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/configuration/">configuration</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/31/visual-studio-code-cpp-configure/" class="title">visual studio code cpp configure</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-31T12:52:53.000Z" itemprop="datePublished">2021-05-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  <main class="main" role="main">
+  
+  <div class="content article-list">
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/20/python-note/">python_note</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/03/20/python-note/" class="article-date">
+	  <time datetime="2020-03-20T07:00:48.000Z" itemprop="datePublished">3月 20</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/python/" rel="tag">python</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/20/python-note/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/23/Linear-Algebra/">Linear Algebra</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/02/23/Linear-Algebra/" class="article-date">
+	  <time datetime="2020-02-23T05:32:52.000Z" itemprop="datePublished">2月 23</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Mathematics/">Mathematics</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/02/23/Linear-Algebra/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 56(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/06/Gradient-Descent-Method/">Gradient Descent Method</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/02/06/Gradient-Descent-Method/" class="article-date">
+	  <time datetime="2020-02-06T07:25:52.000Z" itemprop="datePublished">2月 6</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Deep-Learning/">Deep Learning</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Gradient-Descent/" rel="tag">Gradient Descent</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/02/06/Gradient-Descent-Method/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/01/hello-world/">Hello World</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/02/01/hello-world/" class="article-date">
+	  <time datetime="2020-02-01T11:50:30.000Z" itemprop="datePublished">2月 1</time>
+	</a>
+</span>
+    
+    
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/02/01/hello-world/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 90(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/21/Brain-Structure-Conference/">Brain Structure Conference</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/01/21/Brain-Structure-Conference/" class="article-date">
+	  <time datetime="2020-01-21T06:11:55.000Z" itemprop="datePublished">1月 21</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Lecture/">Lecture</a>
+  </span>
+
+    
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/01/21/Brain-Structure-Conference/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 318(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/21/Unscented-Kalman-Filter/">Unscented Kalman Filter</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/01/21/Unscented-Kalman-Filter/" class="article-date">
+	  <time datetime="2020-01-21T06:10:25.000Z" itemprop="datePublished">1月 21</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Unscented-Kalman-Filter/" rel="tag">Unscented Kalman Filter</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/01/21/Unscented-Kalman-Filter/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/21/Unity/">Unity</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/01/21/Unity/" class="article-date">
+	  <time datetime="2020-01-21T06:10:10.000Z" itemprop="datePublished">1月 21</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Unity/" rel="tag">Unity</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/01/21/Unity/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 180(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/21/Two-Types-of-Variance/">Two Types of Variance</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/01/21/Two-Types-of-Variance/" class="article-date">
+	  <time datetime="2020-01-21T06:09:44.000Z" itemprop="datePublished">1月 21</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Mathematics/">Mathematics</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Statistics/" rel="tag">Statistics</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/01/21/Two-Types-of-Variance/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 744(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/21/Population-Vector-Algorithm/">Population Vector Algorithm</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/01/21/Population-Vector-Algorithm/" class="article-date">
+	  <time datetime="2020-01-21T06:09:04.000Z" itemprop="datePublished">1月 21</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/PVA/" rel="tag">PVA</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/01/21/Population-Vector-Algorithm/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
+	
+
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/21/Hidden-Markov-Model/">Hidden Markov Model</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/01/21/Hidden-Markov-Model/" class="article-date">
+	  <time datetime="2020-01-21T06:08:45.000Z" itemprop="datePublished">1月 21</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Hidden-Markov-Model/" rel="tag">Hidden Markov Model</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/01/21/Hidden-Markov-Model/#comments" class="article-comment-link">评论</a></span>
+    
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 14(分)</span>
+	
+
+  </p>
+</article>
+
+    
+  </div>
+
+  
+    
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="bar-inner">
+        <ul class="pager pull-left">
+            
+            <li class="prev">
+                <a href="/">
+                    <i class="icon icon-angle-left"></i>
+                    上一页
+                </a>
+            </li>
+            
+            
+            <li class="next">
+                <a href="/page/3/">
+                    下一页
+                    <i class="icon icon-angle-right"></i>
+                </a>
+            </li>
+            
+        </ul>
+        <div class="total-article bar-right">Page 2 of 3</div>
+        </div>
+    </nav>
+    
+ 
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/frankmartinem" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://blog.csdn.net/Frankgoogle" target="_blank" title="Book-Shelf" data-toggle=tooltip data-placement=top><i class="icon icon-book-shelf"></i></a></li>
+        
+        <li><a href="https://twitter.com/frankmartinet" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.zhihu.com/people/frank-wan-31" target="_blank" title="Zhihu" data-toggle=tooltip data-placement=top><i class="icon icon-zhihu"></i></a></li>
+        
+        <li><a href="https://www.douban.com/people/122349831/" target="_blank" title="Douban" data-toggle=tooltip data-placement=top><i class="icon icon-douban"></i></a></li>
+        
+        <li><a href="/frankmartinem@qq.com" target="_blank" title="Email" data-toggle=tooltip data-placement=top><i class="icon icon-email"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2021 Frank Wan
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
         },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
-        });</script></body></html>
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+</body>
+</html>
