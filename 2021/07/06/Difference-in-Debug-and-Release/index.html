@@ -18,17 +18,17 @@
   
   
   <title>Difference in Debug and Release | FrankWan&#39;s Blog</title>
-  <meta name="description" content="VS中Debug和Release的区别问题1问题描述在搭建EMG信号处理系统时，我需要读取一个txt文件。在debug时能正常读取。在release版本下却不能获取其中的信息。后来发现问题在于我使用了assert语句。我的读取代码如下： 12345678910111213141516void Config::gen_data_list()&amp;#123;	QFile f(select_dataset_">
+  <meta name="description" content="VS中Debug和Release的区别  问题1  问题描述 在搭建EMG信号处理系统时，我需要读取一个txt文件。在debug时能正常读取。在release版本下却不能获取其中的信息。后来发现问题在于我使用了assert语句。我的读取代码如下： 12345678910111213141516void Config::gen_data_list()&amp;#123;	QFile f(select_da">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Difference in Debug and Release">
 <meta property="og:url" content="http://frankmartinem.github.io/2021/07/06/Difference-in-Debug-and-Release/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="VS中Debug和Release的区别问题1问题描述在搭建EMG信号处理系统时，我需要读取一个txt文件。在debug时能正常读取。在release版本下却不能获取其中的信息。后来发现问题在于我使用了assert语句。我的读取代码如下： 12345678910111213141516void Config::gen_data_list()&amp;#123;	QFile f(select_dataset_">
+<meta property="og:description" content="VS中Debug和Release的区别  问题1  问题描述 在搭建EMG信号处理系统时，我需要读取一个txt文件。在debug时能正常读取。在release版本下却不能获取其中的信息。后来发现问题在于我使用了assert语句。我的读取代码如下： 12345678910111213141516void Config::gen_data_list()&amp;#123;	QFile f(select_da">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-06T02:43:13.000Z">
-<meta property="article:modified_time" content="2021-07-06T03:46:32.709Z">
+<meta property="article:modified_time" content="2021-07-28T02:11:30.925Z">
 <meta property="article:author" content="Frank Wan">
-<meta property="article:tag" content="C++">
+<meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://frankmartinem.github.io/2021/07/06/Difference-in-Debug-and-Release/index.html">
@@ -227,7 +227,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deep-Learning/">Deep Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lecture/">Lecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/configuration/">configuration</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/powershell/">powershell</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/usage/">usage</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/lecture/">lecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mathematics/">mathematics</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/software/coding/">coding</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/terminal/">terminal</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -237,7 +237,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Science/" rel="tag">Computer Science</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradient-Descent/" rel="tag">Gradient Descent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hidden-Markov-Model/" rel="tag">Hidden Markov Model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalman/" rel="tag">Kalman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lecture/" rel="tag">Lecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Regression/" rel="tag">Linear Regression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Optimal-Linear-Estimation/" rel="tag">Optimal Linear Estimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/" rel="tag">PCA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVA/" rel="tag">PVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/" rel="tag">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Statistics/" rel="tag">Statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unscented-Kalman-Filter/" rel="tag">Unscented Kalman Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wiener-Filter/" rel="tag">Wiener Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/" rel="tag">software</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software-usage/" rel="tag">software usage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conference/" rel="tag">conference</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-coding/" rel="tag">file coding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradient-descent/" rel="tag">gradient descent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hidden-markov-model/" rel="tag">hidden markov model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kalman/" rel="tag">kalman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linear-algebra/" rel="tag">linear algebra</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linear-regression/" rel="tag">linear regression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matlab/" rel="tag">matlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimal-linear-estimation/" rel="tag">optimal linear estimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/population-vector-algorithm/" rel="tag">population vector algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/powershell/" rel="tag">powershell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/principle-component-analysis/" rel="tag">principle component analysis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/public-lecture/" rel="tag">public lecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rnn/" rel="tag">rnn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/" rel="tag">software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software-setting/" rel="tag">software setting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software-usage/" rel="tag">software usage</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/" rel="tag">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/system-setting/" rel="tag">system setting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unscented-kalman-filter/" rel="tag">unscented kalman filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wiener-filter/" rel="tag">wiener filter</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -247,7 +247,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/C/" style="font-size: 13px;">C#</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/Computer-Science/" style="font-size: 13px;">Computer Science</a> <a href="/tags/Gradient-Descent/" style="font-size: 13px;">Gradient Descent</a> <a href="/tags/Hidden-Markov-Model/" style="font-size: 13px;">Hidden Markov Model</a> <a href="/tags/Kalman/" style="font-size: 13px;">Kalman</a> <a href="/tags/Lecture/" style="font-size: 13px;">Lecture</a> <a href="/tags/Linear-Algebra/" style="font-size: 13px;">Linear Algebra</a> <a href="/tags/Linear-Regression/" style="font-size: 13px;">Linear Regression</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Optimal-Linear-Estimation/" style="font-size: 13px;">Optimal Linear Estimation</a> <a href="/tags/PCA/" style="font-size: 13px;">PCA</a> <a href="/tags/PVA/" style="font-size: 13px;">PVA</a> <a href="/tags/RNN/" style="font-size: 13px;">RNN</a> <a href="/tags/Statistics/" style="font-size: 13px;">Statistics</a> <a href="/tags/Unity/" style="font-size: 13.5px;">Unity</a> <a href="/tags/Unscented-Kalman-Filter/" style="font-size: 13px;">Unscented Kalman Filter</a> <a href="/tags/Wiener-Filter/" style="font-size: 13px;">Wiener Filter</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/software/" style="font-size: 14px;">software</a> <a href="/tags/software-usage/" style="font-size: 13px;">software usage</a>
+      <a href="/tags/C/" style="font-size: 13px;">C#</a> <a href="/tags/Unity/" style="font-size: 13.5px;">Unity</a> <a href="/tags/c/" style="font-size: 13.5px;">c++</a> <a href="/tags/conference/" style="font-size: 13px;">conference</a> <a href="/tags/file-coding/" style="font-size: 13px;">file coding</a> <a href="/tags/gradient-descent/" style="font-size: 13px;">gradient descent</a> <a href="/tags/hidden-markov-model/" style="font-size: 13px;">hidden markov model</a> <a href="/tags/kalman/" style="font-size: 13px;">kalman</a> <a href="/tags/latex/" style="font-size: 13px;">latex</a> <a href="/tags/linear-algebra/" style="font-size: 13px;">linear algebra</a> <a href="/tags/linear-regression/" style="font-size: 13px;">linear regression</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/matlab/" style="font-size: 13px;">matlab</a> <a href="/tags/optimal-linear-estimation/" style="font-size: 13px;">optimal linear estimation</a> <a href="/tags/population-vector-algorithm/" style="font-size: 13px;">population vector algorithm</a> <a href="/tags/powershell/" style="font-size: 13px;">powershell</a> <a href="/tags/principle-component-analysis/" style="font-size: 13px;">principle component analysis</a> <a href="/tags/public-lecture/" style="font-size: 13px;">public lecture</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/rnn/" style="font-size: 13px;">rnn</a> <a href="/tags/software/" style="font-size: 13px;">software</a> <a href="/tags/software-setting/" style="font-size: 13px;">software setting</a> <a href="/tags/software-usage/" style="font-size: 13.5px;">software usage</a> <a href="/tags/statistics/" style="font-size: 13px;">statistics</a> <a href="/tags/system-setting/" style="font-size: 13px;">system setting</a> <a href="/tags/unscented-kalman-filter/" style="font-size: 13px;">unscented kalman filter</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/wiener-filter/" style="font-size: 13px;">wiener filter</a>
     </div>
   </div>
 
@@ -256,7 +256,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -268,6 +268,81 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled ">
         
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/07/29/Linux-unzip-file-from-Windows/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/software/">software</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/29/Linux-unzip-file-from-Windows/" class="title">Linux unzip file from Windows</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-29T12:51:07.000Z" itemprop="datePublished">2021-07-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/07/28/Latex-Vscode-Configuration-in-Ubuntu/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/software/">software</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/Latex-Vscode-Configuration-in-Ubuntu/" class="title">Latex+Vscode Configuration in Ubuntu</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:44:38.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/07/28/ZJU-VPN-connection-in-Linux/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/software/">software</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/ZJU-VPN-connection-in-Linux/" class="title">ZJU VPN connection in Linux</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:04:24.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-thumb">
@@ -318,81 +393,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/2021/06/10/powershell-commands-tree/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/powershell/">powershell</a>
-              </p>
-              <p class="item-title">
-                <a href="/2021/06/10/powershell-commands-tree/" class="title">powershell commands-tree</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-06-10T15:16:00.000Z" itemprop="datePublished">2021-06-10</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/2021/06/01/Linux-Environment-Variable/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/usage/">usage</a>
-              </p>
-              <p class="item-title">
-                <a href="/2021/06/01/Linux-Environment-Variable/" class="title">Linux Environment Variable</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-06-01T03:02:23.000Z" itemprop="datePublished">2021-06-01</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/2021/05/31/visual-studio-code-cpp-configure/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/configuration/">configuration</a>
-              </p>
-              <p class="item-title">
-                <a href="/2021/05/31/visual-studio-code-cpp-configure/" class="title">visual studio code cpp configure</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-05-31T12:52:53.000Z" itemprop="datePublished">2021-05-31</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -434,7 +434,7 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/C/" rel="tag">C++</a>
+	<a class="article-tag-link-link" href="/tags/c/" rel="tag">c++</a>
   </span>
 
 
@@ -453,19 +453,30 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="VS中Debug和Release的区别"><a href="#VS中Debug和Release的区别" class="headerlink" title="VS中Debug和Release的区别"></a>VS中Debug和Release的区别</h1><h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在搭建EMG信号处理系统时，我需要读取一个txt文件。在debug时能正常读取。在release版本下却不能获取其中的信息。后来发现问题在于我使用了assert语句。我的读取代码如下：</p>
+        <h1 id="vs中debug和release的区别"><a class="markdownIt-Anchor" href="#vs中debug和release的区别"></a> VS中Debug和Release的区别</h1>
+<h2 id="问题1"><a class="markdownIt-Anchor" href="#问题1"></a> 问题1</h2>
+<h3 id="问题描述"><a class="markdownIt-Anchor" href="#问题描述"></a> 问题描述</h3>
+<p>在搭建EMG信号处理系统时，我需要读取一个txt文件。在debug时能正常读取。在release版本下却不能获取其中的信息。后来发现问题在于我使用了assert语句。我的读取代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">void Config::gen_data_list()</span><br><span class="line">&#123;</span><br><span class="line">	QFile f(select_dataset_path);</span><br><span class="line">	assert(f.open(QIODevice::ReadOnly | QIODevice::Text));</span><br><span class="line">	while (!f.atEnd())</span><br><span class="line">	&#123;</span><br><span class="line">		QString l &#x3D; f.readLine();</span><br><span class="line">		qDebug() &lt;&lt; l &lt;&lt; endl;</span><br><span class="line">		if (l.compare(&#39;\n&#39;) &#x3D;&#x3D; 0)</span><br><span class="line">			continue;</span><br><span class="line">		else</span><br><span class="line">			data_list.append(l.simplified());</span><br><span class="line">	&#125;</span><br><span class="line">	data_num &#x3D; data_list.length();</span><br><span class="line">	trial_num &#x3D; data_num * blk_num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>在release条件下，data_num始终是0。因为assert语句被忽略掉了，所以txt文件一直都没有被读取。将代码改成如下形式，release版本下也能正常读取了。</p>
+<h3 id="解决办法"><a class="markdownIt-Anchor" href="#解决办法"></a> 解决办法</h3>
+<p>在release条件下，data_num始终是0。因为assert语句被忽略掉了，所以txt文件一直都没有被读取。将代码改成如下形式，release版本下也能正常读取了。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void Config::gen_data_list()</span><br><span class="line">&#123;</span><br><span class="line">	QFile f(select_dataset_path);</span><br><span class="line">	bool isOpen &#x3D; f.open(QIODevice::ReadOnly | QIODevice::Text);</span><br><span class="line">	assert(isOpen);</span><br><span class="line">	while (!f.atEnd())</span><br><span class="line">	&#123;</span><br><span class="line">		QString l &#x3D; f.readLine();</span><br><span class="line">		qDebug() &lt;&lt; l &lt;&lt; endl;</span><br><span class="line">		if (l.compare(&#39;\n&#39;) &#x3D;&#x3D; 0)</span><br><span class="line">			continue;</span><br><span class="line">		else</span><br><span class="line">			data_list.append(l.simplified());</span><br><span class="line">	&#125;</span><br><span class="line">	data_num &#x3D; data_list.length();</span><br><span class="line">	trial_num &#x3D; data_num * blk_num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样isOpen的值取决于文件是否打开。所以f.open(QIODevice::ReadOnly | QIODevice::Text)这部分的内容一定会被执行的。<br>在VS中，也可以在属性中打开编译调试代码开关，这样就会编译assert函数了。</p>
-<h3 id="原因探究"><a href="#原因探究" class="headerlink" title="原因探究"></a>原因探究</h3><p>查阅相关资料后，我发现assert语句在windows下，利用VC的编译器时，会被忽略掉而不执行。这取决于release和debug时的编译器优化方式。在linux条件下，使用gcc编译时则不会忽略assert语句。其他深入的编译原理相关的原因就不再接着探究了。<br>总的来说，不管使用何种编译器，代码规范化是很重要的。assert语句不应该被用来检测文件读取，以及输入是否合法等问题。也不能把赋值操作等语句放在其中。总之，检查代码的时候，把assert语句去掉，如果代码的正常逻辑没有问题。那么代码就是正常的。assert应该是用来检测参数的合法性以及参数值的大小等涉及代码完备性和安全性的问题。</p>
-<h2 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>在搭建EMG信号处理系统时，需要通过state参数来判断是否暂停函数中的for循环。在debug条件下，暂停和恢复都能正常运行。暂停条件下停止实验也能正常运行，但是在release条件下，暂停后就没法恢复正常运行了，而且暂停后要么会在下一个trial时停止，要么在后面恢复时，没有响应。代码块如下：</p>
+<p>这样isOpen的值取决于文件是否打开。所以f.open(QIODevice::ReadOnly | QIODevice::Text)这部分的内容一定会被执行的。<br />
+在VS中，也可以在属性中打开编译调试代码开关，这样就会编译assert函数了。</p>
+<h3 id="原因探究"><a class="markdownIt-Anchor" href="#原因探究"></a> 原因探究</h3>
+<p>查阅相关资料后，我发现assert语句在windows下，利用VC的编译器时，会被忽略掉而不执行。这取决于release和debug时的编译器优化方式。在linux条件下，使用gcc编译时则不会忽略assert语句。其他深入的编译原理相关的原因就不再接着探究了。<br />
+总的来说，不管使用何种编译器，代码规范化是很重要的。assert语句不应该被用来检测文件读取，以及输入是否合法等问题。也不能把赋值操作等语句放在其中。总之，检查代码的时候，把assert语句去掉，如果代码的正常逻辑没有问题。那么代码就是正常的。assert应该是用来检测参数的合法性以及参数值的大小等涉及代码完备性和安全性的问题。</p>
+<h2 id="问题2"><a class="markdownIt-Anchor" href="#问题2"></a> 问题2</h2>
+<h3 id="问题描述-2"><a class="markdownIt-Anchor" href="#问题描述-2"></a> 问题描述</h3>
+<p>在搭建EMG信号处理系统时，需要通过state参数来判断是否暂停函数中的for循环。在debug条件下，暂停和恢复都能正常运行。暂停条件下停止实验也能正常运行，但是在release条件下，暂停后就没法恢复正常运行了，而且暂停后要么会在下一个trial时停止，要么在后面恢复时，没有响应。代码块如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">for (int i &#x3D; 1; i &lt;&#x3D; exp_c.blk_num; i++)&#123;</span><br><span class="line">    for (int j &#x3D; 1; j &lt;&#x3D; exp_c.data_num; j++)&#123;</span><br><span class="line">        if (th_record_state &#x3D;&#x3D; 2)&#123;</span><br><span class="line">            while (true)&#123;</span><br><span class="line">                if (main_th_stop)&#123;</span><br><span class="line">                    stop_experiment();</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">                if (th_record_state &#x3D;&#x3D; 1)</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int k &#x3D; 1; k &lt;&#x3D; state_num; k++)&#123;</span><br><span class="line">            Process();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 <p>需要实现的功能是，在th_record_state为1（record state）时，实验正常进行；在th_record_state为2（pause state）时，实验暂停；在th_record_state为0时，main_th_stop为true，实验结束。</p>
-<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><p>由于release版本下，VS的优化器认为while循环中的内容对外部代码没有影响，且while循环会占用很多计算量。所以在release版本下，while循环中的代码会被忽略掉。所以在while循环中加入延时，减少因为暂停导致的循环次数。这样优化器会重新加入while循环的内容。（这部分涉及到VS中的编译优化的问题，没有深究原因）。修改后的代码如下：</p>
+<h3 id="解决办法-2"><a class="markdownIt-Anchor" href="#解决办法-2"></a> 解决办法</h3>
+<p>由于release版本下，VS的优化器认为while循环中的内容对外部代码没有影响，且while循环会占用很多计算量。所以在release版本下，while循环中的代码会被忽略掉。所以在while循环中加入延时，减少因为暂停导致的循环次数。这样优化器会重新加入while循环的内容。（这部分涉及到VS中的编译优化的问题，没有深究原因）。修改后的代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">for (int i &#x3D; 1; i &lt;&#x3D; exp_c.blk_num; i++)&#123;</span><br><span class="line">    for (int j &#x3D; 1; j &lt;&#x3D; exp_c.data_num; j++)&#123;</span><br><span class="line">        if (th_record_state &#x3D;&#x3D; 2)&#123;</span><br><span class="line">            while (true)&#123;</span><br><span class="line">                Sleep(100);</span><br><span class="line">                if (main_th_stop)&#123;</span><br><span class="line">                    stop_experiment();</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">                if (th_record_state &#x3D;&#x3D; 1)</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int k &#x3D; 1; k &lt;&#x3D; state_num; k++)&#123;</span><br><span class="line">            Process();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 <p>尽管这样会损失一些反应时间，但是实验系统对反应时间的要求也不高，而且Sleep函数的时间可以根据实验所需的反应时间修改。这种解决方案也可以接受。</p>
-<h3 id="原因探究-1"><a href="#原因探究-1" class="headerlink" title="原因探究"></a>原因探究</h3><p>主要的原因还是debug和release版本下，VS的优化方法不一样。优化的参数可以在项目属性中调整。但是release版本的代码对稳定性的要求会更高，类似于数组越界，指针赋值等问题，在debug时可能没问题。但是release时就会出现问题。此时一定要检查代码的规范性问题，以及代码中的一些合理性问题，例如本文中出现的assert语句中加入文件读取语句，while循环不加延时导致大量无效循环等问题。</p>
+<h3 id="原因探究-2"><a class="markdownIt-Anchor" href="#原因探究-2"></a> 原因探究</h3>
+<p>主要的原因还是debug和release版本下，VS的优化方法不一样。优化的参数可以在项目属性中调整。但是release版本的代码对稳定性的要求会更高，类似于数组越界，指针赋值等问题，在debug时可能没问题。但是release时就会出现问题。此时一定要检查代码的规范性问题，以及代码中的一些合理性问题，例如本文中出现的assert语句中加入文件读取语句，while循环不加延时导致大量无效循环等问题。</p>
 
       
     </div>

@@ -18,17 +18,17 @@
   
   
   <title>Linear Square Method | FrankWan&#39;s Blog</title>
-  <meta name="description" content="最小二乘法这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。 背景最小二乘法应该是我接触的最早的优化方法，也是求解线性回归的一种方法。线性回归的主要作用是用拟合的方式，求解两组变量之间的线性关系（当然也可以不是线性的，那就是另外的回归方法了）。也就是把一个系统的输出写成输入的线性组合的形式。而这组线性关系的参数求解方法，就是最小二乘法。 我们从最简单的线性回归开">
+  <meta name="description" content="最小二乘法 这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。  背景 最小二乘法应该是我接触的最早的优化方法，也是求解线性回归的一种方法。线性回归的主要作用是用拟合的方式，求解两组变量之间的线性关系（当然也可以不是线性的，那就是另外的回归方法了）。也就是把一个系统的输出写成输入的线性组合的形式。而这组线性关系的参数求解方法，就是最小二乘法。 我们从最简单的线">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linear Square Method">
 <meta property="og:url" content="http://frankmartinem.github.io/2020/04/17/Linear-Square-Method/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="最小二乘法这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。 背景最小二乘法应该是我接触的最早的优化方法，也是求解线性回归的一种方法。线性回归的主要作用是用拟合的方式，求解两组变量之间的线性关系（当然也可以不是线性的，那就是另外的回归方法了）。也就是把一个系统的输出写成输入的线性组合的形式。而这组线性关系的参数求解方法，就是最小二乘法。 我们从最简单的线性回归开">
+<meta property="og:description" content="最小二乘法 这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。  背景 最小二乘法应该是我接触的最早的优化方法，也是求解线性回归的一种方法。线性回归的主要作用是用拟合的方式，求解两组变量之间的线性关系（当然也可以不是线性的，那就是另外的回归方法了）。也就是把一个系统的输出写成输入的线性组合的形式。而这组线性关系的参数求解方法，就是最小二乘法。 我们从最简单的线">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-16T17:09:41.000Z">
-<meta property="article:modified_time" content="2021-04-13T01:02:10.124Z">
+<meta property="article:modified_time" content="2021-07-28T02:13:48.505Z">
 <meta property="article:author" content="Frank Wan">
-<meta property="article:tag" content="Linear Regression">
+<meta property="article:tag" content="linear regression">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://frankmartinem.github.io/2020/04/17/Linear-Square-Method/index.html">
@@ -229,7 +229,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deep-Learning/">Deep Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lecture/">Lecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/configuration/">configuration</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/powershell/">powershell</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/usage/">usage</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/lecture/">lecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mathematics/">mathematics</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/software/coding/">coding</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/terminal/">terminal</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -239,7 +239,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Science/" rel="tag">Computer Science</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradient-Descent/" rel="tag">Gradient Descent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hidden-Markov-Model/" rel="tag">Hidden Markov Model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalman/" rel="tag">Kalman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lecture/" rel="tag">Lecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Regression/" rel="tag">Linear Regression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Optimal-Linear-Estimation/" rel="tag">Optimal Linear Estimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/" rel="tag">PCA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVA/" rel="tag">PVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/" rel="tag">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Statistics/" rel="tag">Statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unscented-Kalman-Filter/" rel="tag">Unscented Kalman Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wiener-Filter/" rel="tag">Wiener Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/" rel="tag">software</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software-usage/" rel="tag">software usage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conference/" rel="tag">conference</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-coding/" rel="tag">file coding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradient-descent/" rel="tag">gradient descent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hidden-markov-model/" rel="tag">hidden markov model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kalman/" rel="tag">kalman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linear-algebra/" rel="tag">linear algebra</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linear-regression/" rel="tag">linear regression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matlab/" rel="tag">matlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimal-linear-estimation/" rel="tag">optimal linear estimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/population-vector-algorithm/" rel="tag">population vector algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/powershell/" rel="tag">powershell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/principle-component-analysis/" rel="tag">principle component analysis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/public-lecture/" rel="tag">public lecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rnn/" rel="tag">rnn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/" rel="tag">software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software-setting/" rel="tag">software setting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software-usage/" rel="tag">software usage</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/" rel="tag">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/system-setting/" rel="tag">system setting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unscented-kalman-filter/" rel="tag">unscented kalman filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wiener-filter/" rel="tag">wiener filter</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -249,7 +249,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/C/" style="font-size: 13px;">C#</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/Computer-Science/" style="font-size: 13px;">Computer Science</a> <a href="/tags/Gradient-Descent/" style="font-size: 13px;">Gradient Descent</a> <a href="/tags/Hidden-Markov-Model/" style="font-size: 13px;">Hidden Markov Model</a> <a href="/tags/Kalman/" style="font-size: 13px;">Kalman</a> <a href="/tags/Lecture/" style="font-size: 13px;">Lecture</a> <a href="/tags/Linear-Algebra/" style="font-size: 13px;">Linear Algebra</a> <a href="/tags/Linear-Regression/" style="font-size: 13px;">Linear Regression</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Optimal-Linear-Estimation/" style="font-size: 13px;">Optimal Linear Estimation</a> <a href="/tags/PCA/" style="font-size: 13px;">PCA</a> <a href="/tags/PVA/" style="font-size: 13px;">PVA</a> <a href="/tags/RNN/" style="font-size: 13px;">RNN</a> <a href="/tags/Statistics/" style="font-size: 13px;">Statistics</a> <a href="/tags/Unity/" style="font-size: 13.5px;">Unity</a> <a href="/tags/Unscented-Kalman-Filter/" style="font-size: 13px;">Unscented Kalman Filter</a> <a href="/tags/Wiener-Filter/" style="font-size: 13px;">Wiener Filter</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/software/" style="font-size: 14px;">software</a> <a href="/tags/software-usage/" style="font-size: 13px;">software usage</a>
+      <a href="/tags/C/" style="font-size: 13px;">C#</a> <a href="/tags/Unity/" style="font-size: 13.5px;">Unity</a> <a href="/tags/c/" style="font-size: 13.5px;">c++</a> <a href="/tags/conference/" style="font-size: 13px;">conference</a> <a href="/tags/file-coding/" style="font-size: 13px;">file coding</a> <a href="/tags/gradient-descent/" style="font-size: 13px;">gradient descent</a> <a href="/tags/hidden-markov-model/" style="font-size: 13px;">hidden markov model</a> <a href="/tags/kalman/" style="font-size: 13px;">kalman</a> <a href="/tags/latex/" style="font-size: 13px;">latex</a> <a href="/tags/linear-algebra/" style="font-size: 13px;">linear algebra</a> <a href="/tags/linear-regression/" style="font-size: 13px;">linear regression</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/matlab/" style="font-size: 13px;">matlab</a> <a href="/tags/optimal-linear-estimation/" style="font-size: 13px;">optimal linear estimation</a> <a href="/tags/population-vector-algorithm/" style="font-size: 13px;">population vector algorithm</a> <a href="/tags/powershell/" style="font-size: 13px;">powershell</a> <a href="/tags/principle-component-analysis/" style="font-size: 13px;">principle component analysis</a> <a href="/tags/public-lecture/" style="font-size: 13px;">public lecture</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/rnn/" style="font-size: 13px;">rnn</a> <a href="/tags/software/" style="font-size: 13px;">software</a> <a href="/tags/software-setting/" style="font-size: 13px;">software setting</a> <a href="/tags/software-usage/" style="font-size: 13.5px;">software usage</a> <a href="/tags/statistics/" style="font-size: 13px;">statistics</a> <a href="/tags/system-setting/" style="font-size: 13px;">system setting</a> <a href="/tags/unscented-kalman-filter/" style="font-size: 13px;">unscented kalman filter</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/wiener-filter/" style="font-size: 13px;">wiener filter</a>
     </div>
   </div>
 
@@ -258,7 +258,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -270,6 +270,81 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled ">
         
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/07/29/Linux-unzip-file-from-Windows/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/software/">software</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/29/Linux-unzip-file-from-Windows/" class="title">Linux unzip file from Windows</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-29T12:51:07.000Z" itemprop="datePublished">2021-07-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/07/28/Latex-Vscode-Configuration-in-Ubuntu/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/software/">software</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/Latex-Vscode-Configuration-in-Ubuntu/" class="title">Latex+Vscode Configuration in Ubuntu</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:44:38.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/07/28/ZJU-VPN-connection-in-Linux/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/software/">software</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/ZJU-VPN-connection-in-Linux/" class="title">ZJU VPN connection in Linux</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:04:24.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-thumb">
@@ -320,81 +395,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/2021/06/10/powershell-commands-tree/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/powershell/">powershell</a>
-              </p>
-              <p class="item-title">
-                <a href="/2021/06/10/powershell-commands-tree/" class="title">powershell commands-tree</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-06-10T15:16:00.000Z" itemprop="datePublished">2021-06-10</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/2021/06/01/Linux-Environment-Variable/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/usage/">usage</a>
-              </p>
-              <p class="item-title">
-                <a href="/2021/06/01/Linux-Environment-Variable/" class="title">Linux Environment Variable</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-06-01T03:02:23.000Z" itemprop="datePublished">2021-06-01</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/2021/05/31/visual-studio-code-cpp-configure/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/configuration/">configuration</a>
-              </p>
-              <p class="item-title">
-                <a href="/2021/05/31/visual-studio-code-cpp-configure/" class="title">visual studio code cpp configure</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-05-31T12:52:53.000Z" itemprop="datePublished">2021-05-31</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -430,13 +430,13 @@
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Linear-Regression/" rel="tag">Linear Regression</a>
+	<a class="article-tag-link-link" href="/tags/linear-regression/" rel="tag">linear regression</a>
   </span>
 
 
@@ -445,7 +445,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/17/Linear-Square-Method/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 918(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 973(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
@@ -455,43 +455,72 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h1><p>这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最小二乘法应该是我接触的最早的优化方法，也是求解线性回归的一种方法。线性回归的主要作用是用拟合的方式，求解两组变量之间的线性关系（当然也可以不是线性的，那就是另外的回归方法了）。也就是把一个系统的输出写成输入的线性组合的形式。而这组线性关系的参数求解方法，就是最小二乘法。</p>
+        <h1 id="最小二乘法"><a class="markdownIt-Anchor" href="#最小二乘法"></a> 最小二乘法</h1>
+<p>这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。</p>
+<h2 id="背景"><a class="markdownIt-Anchor" href="#背景"></a> 背景</h2>
+<p>最小二乘法应该是我接触的最早的优化方法，也是求解线性回归的一种方法。线性回归的主要作用是用拟合的方式，求解两组变量之间的线性关系（当然也可以不是线性的，那就是另外的回归方法了）。也就是把一个系统的输出写成输入的线性组合的形式。而这组线性关系的参数求解方法，就是最小二乘法。</p>
 <p>我们从最简单的线性回归开始，即输入和输出都是1维的。此时，最小二乘法也是最简单的。</p>
-<p>假设有输入信号$x = {x_0, x_1, …, x_t}$，同时输出信号为$y = {y_0, y_1, …, y_t}$，我们假设输入信号$x$和输出信号$y$之间的关系可以写成如下形式：</p>
-<p>$$y_{pre} = ax+b \tag{1}$$</p>
-<p>我们需要求解最优的$a$和$b$，这里最优的含义就是，预测的最准确，也就是预测值和真实值的误差最小，即：</p>
-<p>$$arg, min_{a, b}{\sum_{i=0}^{t}{(y_i-ax_i-b)^2}} \tag{2}$$</p>
+<p>假设有输入信号<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><mo>{</mo><msub><mi>x</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>x</mi><mi>t</mi></msub><mo>}</mo></mrow><annotation encoding="application/x-tex">x = \{x_0, x_1, ..., x_t\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">x</span><span class="mrel">=</span><span class="mopen">{</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">0</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mpunct">,</span><span class="mord mathrm">.</span><span class="mord mathrm">.</span><span class="mord mathrm">.</span><span class="mpunct">,</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">t</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">}</span></span></span></span>，同时输出信号为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><mo>{</mo><msub><mi>y</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>y</mi><mi>t</mi></msub><mo>}</mo></mrow><annotation encoding="application/x-tex">y = \{y_0, y_1, ..., y_t\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mrel">=</span><span class="mopen">{</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">0</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mpunct">,</span><span class="mord mathrm">.</span><span class="mord mathrm">.</span><span class="mord mathrm">.</span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">t</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">}</span></span></span></span>，我们假设输入信号<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">x</span></span></span></span>和输出信号<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03588em;">y</span></span></span></span>之间的关系可以写成如下形式：</p>
+y_{pre} = ax+b \tag{1}
+
+<p>我们需要求解最优的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">a</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">b</span></span></span></span>，这里最优的含义就是，预测的最准确，也就是预测值和真实值的误差最小，即：</p>
+arg\, min_{a, b}{\sum_{i=0}^{t}{(y_i-ax_i-b)^2}} \tag{2}
+
 <p>我们假设误差函数为：</p>
-<p>$$err = \sum_{i=0}^{t}{(y_i-ax_i-b)^2} \tag{3}$$</p>
-<p>$err$对$a$和$b$分别求偏导：</p>
-<p>$$\frac{\partial{err}}{\partial{a}} = \sum_{i=0}^{t}{2(ax_i+b-y_i)*x_i} \tag{4}$$</p>
-<p>$$\frac{\partial{err}}{\partial{b}} = \sum_{i=0}^{t}{2(ax_i+b-y_i)} \tag{5}$$</p>
+err = \sum_{i=0}^{t}{(y_i-ax_i-b)^2} \tag{3}
+
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mi>r</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">err</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">e</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit" style="margin-right:0.02778em;">r</span></span></span></span>对<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">a</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">b</span></span></span></span>分别求偏导：</p>
+\frac{\partial{err}}{\partial{a}} = \sum_{i=0}^{t}{2(ax_i+b-y_i)*x_i} \tag{4}
+
+\frac{\partial{err}}{\partial{b}} = \sum_{i=0}^{t}{2(ax_i+b-y_i)} \tag{5}
+
 <p>根据极值定理，有$$\frac{\partial{err}}{\partial{a}}=0$$，且$$\frac{\partial{err}}{\partial{b}}=0$$，所以有：</p>
-<p>$$\sum_{i=0}^{t}{2(ax_i+b-y_i)} = 0 \tag{6}$$</p>
-<p>$$\sum_{i=0}^{t}(y_i - ax_i) = \sum_{i=0}^{t}{b} \tag{7}$$</p>
-<p>$$\sum_{i=0}^{t}{y_i} - a * \sum_{i=0}^{t}{x_i} = (t+1)*b \tag{8}$$</p>
-<p>$$b = \bar{y} - a\bar{x} \tag{9}$$</p>
-<p>其中，$\bar{y}$表示$y$的均值，$\bar{x}$表示$x$的均值。将Eq(9)代入Eq(4)，有：</p>
-<p>$$\sum_{i=0}^{t}{2(ax_i+b-y_i)*x_i} = 0 \tag{10}$$</p>
-<p>$$\sum_{i=0}^{t}{ax_i^2} + \sum_{i=0}^{t}bx_i = \sum_{i=0}^{t}{y_ix_i} \tag{11}$$</p>
-<p>$$a\sum_{i=0}^{t}x_i^2 + \bar{x}(\bar{y}-a\bar{x}) = \sum_{i=0}^{t}{x_iy_i} \tag{12}$$</p>
-<p>$$a(\sum_{i=0}^{t}{x_i^2 - \bar{x}^2}) = \sum_{i=0}^{t}{x_iy_i}-\bar{x}\bar{y} \tag{13}$$</p>
-<p>$$a = \frac{\sum_{i=0}^{t}{x_iy_i}-\bar{x}\bar{y}}{\sum_{i=0}^{t}{x_i^2 - \bar{x}^2}} \tag{14}$$</p>
+\sum_{i=0}^{t}{2(ax_i+b-y_i)} = 0 \tag{6}
+
+\sum_{i=0}^{t}(y_i - ax_i) = \sum_{i=0}^{t}{b} \tag{7}
+
+\sum_{i=0}^{t}{y_i} - a * \sum_{i=0}^{t}{x_i} = (t+1)*b \tag{8}
+
+b = \bar{y} - a\bar{x} \tag{9}
+
+<p>其中，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi>y</mi></mrow><mo>¯</mo></mover></mrow><annotation encoding="application/x-tex">\bar{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.56778em;"></span><span class="strut bottom" style="height:0.7622199999999999em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord accent"><span class="vlist"><span style="top:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord textstyle cramped"><span class="mord mathit" style="margin-right:0.03588em;">y</span></span></span><span style="top:0em;margin-left:0.11112em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="accent-body"><span>¯</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>表示<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03588em;">y</span></span></span></span>的均值，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi>x</mi></mrow><mo>¯</mo></mover></mrow><annotation encoding="application/x-tex">\bar{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.56778em;"></span><span class="strut bottom" style="height:0.56778em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord accent"><span class="vlist"><span style="top:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord textstyle cramped"><span class="mord mathit">x</span></span></span><span style="top:0em;margin-left:0.05556em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="accent-body"><span>¯</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>表示<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">x</span></span></span></span>的均值。将Eq(9)代入Eq(4)，有：</p>
+\sum_{i=0}^{t}{2(ax_i+b-y_i)*x_i} = 0 \tag{10}
+
+\sum_{i=0}^{t}{ax_i^2} + \sum_{i=0}^{t}bx_i = \sum_{i=0}^{t}{y_ix_i} \tag{11}
+
+a\sum_{i=0}^{t}x_i^2 + \bar{x}(\bar{y}-a\bar{x}) = \sum_{i=0}^{t}{x_iy_i} \tag{12}
+
+a(\sum_{i=0}^{t}{x_i^2 - \bar{x}^2}) = \sum_{i=0}^{t}{x_iy_i}-\bar{x}\bar{y} \tag{13}
+
+a = \frac{\sum_{i=0}^{t}{x_iy_i}-\bar{x}\bar{y}}{\sum_{i=0}^{t}{x_i^2 - \bar{x}^2}} \tag{14}
+
 <p>所以Eq(14)和Eq(9)就是最简单的最小二乘法的计算方法。</p>
 <p>然后我们进一步考虑，如果输入和输出是多维数据，要如何计算。</p>
-<p>假设输入信号为$X \in R^{m<em>t}$， 输出信号为$Y \in R^{n</em>t}$，那么有：</p>
-<p>$$Y = W_0X+B = WX_1 \tag{15}$$</p>
-<p>其中$W_0 \in R^{n<em>m}$是回归矩阵的系数，$B \in R^{1</em>t}$表示常数项，这里可以直接写到$W$矩阵中。$W \in R^{(m+1)*t}$，$X_1 \in R^{(m+1)*t}$<br>$$<br>X_1 = \begin{bmatrix}<br>x_{11} &amp;x_{12} &amp; … &amp;x_{1t}\<br>x_{11} &amp;x_{12} &amp; … &amp;x_{1t}\<br>{\vdots} &amp;{\vdots} &amp;… &amp;{\vdots}\<br>x_{m1} &amp;x_{m2} &amp;… &amp;x_{mt}\<br>1 &amp;1 &amp;… &amp;1\<br>\end{bmatrix} \tag{16}<br>$$</p>
+<p>假设输入信号为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi><mo>∈</mo><msup><mi>R</mi><mrow><mi>m</mi><mo>∗</mo><mi>t</mi></mrow></msup></mrow><annotation encoding="application/x-tex">X \in R^{m*t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.7935559999999999em;"></span><span class="strut bottom" style="height:0.832656em;vertical-align:-0.0391em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mrel">∈</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">m</span><span class="mbin">∗</span><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>， 输出信号为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi><mo>∈</mo><msup><mi>R</mi><mrow><mi>n</mi><mo>∗</mo><mi>t</mi></mrow></msup></mrow><annotation encoding="application/x-tex">Y \in R^{n*t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.7935559999999999em;"></span><span class="strut bottom" style="height:0.832656em;vertical-align:-0.0391em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mrel">∈</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">n</span><span class="mbin">∗</span><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>，那么有：</p>
+Y = W_0X+B = WX_1 \tag{15}
+
+<p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>W</mi><mn>0</mn></msub><mo>∈</mo><msup><mi>R</mi><mrow><mi>n</mi><mo>∗</mo><mi>m</mi></mrow></msup></mrow><annotation encoding="application/x-tex">W_0 \in R^{n*m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.688696em;"></span><span class="strut bottom" style="height:0.838696em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">W</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.13889em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">0</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mrel">∈</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">n</span><span class="mbin">∗</span><span class="mord mathit">m</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>是回归矩阵的系数，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi><mo>∈</mo><msup><mi>R</mi><mrow><mn>1</mn><mo>∗</mo><mi>t</mi></mrow></msup></mrow><annotation encoding="application/x-tex">B \in R^{1*t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.853208em;vertical-align:-0.0391em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="mrel">∈</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">1</span><span class="mbin">∗</span><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>表示常数项，这里可以直接写到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">W</span></span></span></span>矩阵中。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>W</mi><mo>∈</mo><msup><mi>R</mi><mrow><mo>(</mo><mi>m</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>∗</mo><mi>t</mi></mrow></msup></mrow><annotation encoding="application/x-tex">W \in R^{(m+1)*t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8879999999999999em;"></span><span class="strut bottom" style="height:0.9270999999999999em;vertical-align:-0.0391em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">W</span><span class="mrel">∈</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mopen">(</span><span class="mord mathit">m</span><span class="mbin">+</span><span class="mord mathrm">1</span><span class="mclose">)</span><span class="mbin">∗</span><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub><mo>∈</mo><msup><mi>R</mi><mrow><mo>(</mo><mi>m</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>∗</mo><mi>t</mi></mrow></msup></mrow><annotation encoding="application/x-tex">X_1 \in R^{(m+1)*t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8879999999999999em;"></span><span class="strut bottom" style="height:1.0379999999999998em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07847em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mrel">∈</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mopen">(</span><span class="mord mathit">m</span><span class="mbin">+</span><span class="mord mathrm">1</span><span class="mclose">)</span><span class="mbin">∗</span><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span></p>
+X_1 = \begin{bmatrix}
+x_{11} &x_{12} & ... &x_{1t}\\
+x_{11} &x_{12} & ... &x_{1t}\\
+{\vdots} &{\vdots} &... &{\vdots}\\
+x_{m1} &x_{m2} &... &x_{mt}\\
+1 &1 &... &1\\
+\end{bmatrix} \tag{16}
+
 <p>所以有：</p>
-<p>$$\arg min_{W}({Y-WX_1}) \tag{17}$$</p>
-<p>假设误差函数为$E$，则有：</p>
-<p>$$E = (Y-WX_1)(Y-WX_1)^T = YY^T - WX_1Y^T-YX_1^TW^T+WX_1X_1^TW^T \tag{18}$$</p>
-<p>计算$E$对$W$的偏导，则该偏导等于0：</p>
-<p>$$\frac{\partial{E}}{\partial{W}} = -X_1Y^T-X_1^TY + 2WXX^T = 0 \tag{19}$$</p>
+\arg min_{W}({Y-WX_1}) \tag{17}
+
+<p>假设误差函数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05764em;">E</span></span></span></span>，则有：</p>
+E = (Y-WX_1)(Y-WX_1)^T = YY^T - WX_1Y^T-YX_1^TW^T+WX_1X_1^TW^T \tag{18}
+
+<p>计算<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05764em;">E</span></span></span></span>对<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">W</span></span></span></span>的偏导，则该偏导等于0：</p>
+\frac{\partial{E}}{\partial{W}} = -X_1Y^T-X_1^TY + 2WXX^T = 0 \tag{19}
+
 <p>所以有：</p>
-<p>$$W = (X_1X_1^T)^{-1}X_1Y^T \tag{20}$$</p>
-<p>至此矩阵形式的最小二乘法（多元线性回归的参数解法）推导完成。注意这里的$X_1$和$Y$中的数据排列方式为：每一行是一个维度的数据，每一列表示一个时间点。如果不是这么记录的话，那么公式需要加上转置。</p>
+W = (X_1X_1^T)^{-1}X_1Y^T \tag{20}
+
+<p>至此矩阵形式的最小二乘法（多元线性回归的参数解法）推导完成。注意这里的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">X_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07847em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.22222em;">Y</span></span></span></span>中的数据排列方式为：每一行是一个维度的数据，每一列表示一个时间点。如果不是这么记录的话，那么公式需要加上转置。</p>
 <p>后续会附上代码链接</p>
 
       
