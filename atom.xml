@@ -6,7 +6,7 @@
   <link href="http://frankmartinem.github.io/atom.xml" rel="self"/>
   
   <link href="http://frankmartinem.github.io/"/>
-  <updated>2021-08-13T12:22:33.115Z</updated>
+  <updated>2021-09-24T12:21:17.600Z</updated>
   <id>http://frankmartinem.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SVD-UKF</title>
+    <link href="http://frankmartinem.github.io/2021/09/24/SVD-UKF/"/>
+    <id>http://frankmartinem.github.io/2021/09/24/SVD-UKF/</id>
+    <published>2021-09-24T11:52:00.000Z</published>
+    <updated>2021-09-24T12:21:17.600Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="unscented-kalman-filter-based-on-svd"><a class="markdownIt-Anchor" href="#unscented-kalman-filter-based-on-svd"></a> Unscented Kalman Filter based on SVD</h3><h4 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题</h4><p>无迹卡尔曼滤波（Unscented Kalman Filter）是卡尔曼滤波（Kalman Filter）的改进版，其中取消了卡尔曼滤波中对于观测变量的一阶线性隐马尔可夫链的约束，也取消了观测变量和测量变量之间的线性关系。取而代之的是任意的函数，然后用无迹变换（Unscented Transform）来估计观测变量变化时以及观测变量和测量变量变化时的概率分布变化。但是，无迹卡尔曼滤波在计算时需要计算协方差矩阵的Cholesky分解，这一步需要保证协方差矩阵是正定矩阵。在真实计算中，由于观测变量可能有多维，且互相之间可能互相独立，导致协方差矩阵不一定是正定矩阵。也有可能由于参数的选择不当，导致协方差矩阵不满足正定矩阵的要求。从而导致计算无法进行。这也是无迹卡尔曼滤波中需要注意的地方。</p><h4 id="解决方法"><a class="markdownIt-Anchor" href="#解决方法"></a> 解决方法</h4><p>对于协方差矩阵非正定的问题，目前有两种解决办法。一种是选择合适的参数。但是这种方法比较依赖经验，需要多次测试调整。第二种方法就是基于SVD的无迹卡尔曼滤波。这种方法利用奇异值分解（SVD）方法，将协方差矩阵分解为对角矩阵和另外两个矩阵。由于协方差矩阵中，对角线上的值一定是正的，因为对角线上的值就是不同维度的观测变量的方差。所以对角矩阵的值肯定是正的，所以可以开根号。协方差矩阵分解的计算方法如下：</p><p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>S</mi><mo separator="true">,</mo><mi>V</mi><mo separator="true">,</mo><mi>D</mi><mo>]</mo><mo>=</mo><mi>S</mi><mi>V</mi><mi>D</mi><mo>(</mo><mi>P</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">[S, V, D] = SVD(P)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base displaystyle textstyle uncramped"><span class="mopen">[</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.22222em;">V</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mclose">]</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit" style="margin-right:0.22222em;">V</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mclose">)</span></span></span></span></span></p><p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mrow><mi>e</mi><mi>s</mi><mi>t</mi></mrow></msub><mo>=</mo><mi>S</mi><mo>∗</mo><msqrt><mrow><mi>V</mi></mrow></msqrt></mrow><annotation encoding="application/x-tex">P_{est} = S * \sqrt{V}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.9755400000000001em;"></span><span class="strut bottom" style="height:1.12554em;vertical-align:-0.15em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.13889em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">e</span><span class="mord mathit">s</span><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mbin">∗</span><span class="sqrt mord"><span class="sqrt-sign" style="top:-0.13554em;"><span class="style-wrap reset-textstyle textstyle uncramped">√</span></span><span class="vlist"><span style="top:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="mord displaystyle textstyle cramped"><span class="mord mathit" style="margin-right:0.22222em;">V</span></span></span><span style="top:-0.89554em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="reset-textstyle textstyle uncramped sqrt-line"></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span>​</span></span></span></span></span></span></span></p><p>用上述步骤，替换无迹卡尔曼滤波计算中的Cholesky分解，即得到基于SVD的无迹卡尔曼滤波。因为协方差矩阵是对称的，所以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>的转置矩阵是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">D</span></span></span></span>，计算时只考虑一边即可。其余的计算步骤参考<br />[Unscented Kalman Filter]: <a href="https://frankmartinem.github.io/2020/01/21/Unscented-Kalman-Filter/">https://frankmartinem.github.io/2020/01/21/Unscented-Kalman-Filter/</a></p><h4 id="参考文献"><a class="markdownIt-Anchor" href="#参考文献"></a> 参考文献</h4><ol><li>An Improved Unscented Kalman Filter Algorithm for Radar Azimuth Mutation</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;unscented-kalman-filter-based-on-svd&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#unscented-kalman-filter-based-on-svd&quot;&gt;&lt;/a&gt; Unscented Kalma</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
+    
+    
+    <category term="unscented kalman filter" scheme="http://frankmartinem.github.io/tags/unscented-kalman-filter/"/>
+    
+  </entry>
   
   <entry>
     <title>SSH Download and Upload</title>
@@ -498,31 +522,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>Brain Structure Conference</title>
-    <link href="http://frankmartinem.github.io/2020/01/21/Brain-Structure-Conference/"/>
-    <id>http://frankmartinem.github.io/2020/01/21/Brain-Structure-Conference/</id>
-    <published>2020-01-21T06:11:55.000Z</published>
-    <updated>2021-08-13T12:21:06.320Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="介观脑连接研讨会"><a class="markdownIt-Anchor" href="#介观脑连接研讨会"></a> 介观脑连接研讨会</h3><p><img src="/img/Brain-Structure-Conference-1.jpg" alt="open scence" /></p><h4 id="focused-questions"><a class="markdownIt-Anchor" href="#focused-questions"></a> Focused Questions</h4><ul><li>大脑神经回路与功能的关系</li><li>大脑神经连接的建模与计算</li></ul><h4 id="muming-poo"><a class="markdownIt-Anchor" href="#muming-poo"></a> Muming Poo</h4><p><img src="/img/Brain-Structure-Conference-2.jpg" alt="neural types and mappings" /></p><ul><li>mapping and understanding</li><li>genetic programs and neural circuits, subtypes and substates</li></ul><p><img src="/img/Brain-Structure-Conference-3.jpg" alt="Float Chat of Primate Brain Research" /></p><ul><li>Jun Yan<ul><li>single neuron projectome</li><li>projection subtypes, CT</li><li>brain  orders and projectome classification, 观察轴突分叉点的夹角</li></ul></li></ul><h4 id="florian-engert"><a class="markdownIt-Anchor" href="#florian-engert"></a> Florian Engert</h4><ul><li>不同类型的神经元组成不同的神经回路，回路之间互相影响，各有各的作用。</li></ul><h4 id="jiulin-du"><a class="markdownIt-Anchor" href="#jiulin-du"></a> JiuLin Du</h4><ul><li>神经元分类， vglut2a, vglut2b(excitory), GABA(jinhibotiry)等<ul><li>神经信号的传递有兴奋和抑制之分，不同的神经递质对应了不同的神经信号的gate</li></ul></li><li>gene expression</li><li>信息传导通路</li></ul><h4 id="hongkui-zheng"><a class="markdownIt-Anchor" href="#hongkui-zheng"></a> Hongkui Zheng</h4><p><img src="/img/Brain-Structure-Conference-4.jpg" alt="Multi-level decoding of neuron" /></p><ul><li>multi-level approach to decoding the brain</li><li>cell types, connectivity, psyology and behavior, modeling and thery</li><li>层层递进的网络结构设计</li><li>细胞类型的定义，基于细胞类型定义的回路功能研究（<em>对网络结构设计具有一定的参考意义</em>）</li><li>feedforward and feedback pathway（前向神经网络和反馈式神经网络）</li><li>corticalcortical, thalamocoritcal and corticalthalamic projection matrices(Harris, Nature, 2019)</li><li>sparse labeling（稀疏标签）</li><li>shared types of neurons in different cortical areas</li></ul><p><img src="/img/Brain-Structure-Conference-5.jpg" alt="summary" /></p><h4 id="chenyu-li"><a class="markdownIt-Anchor" href="#chenyu-li"></a> Chenyu Li</h4><ul><li>causal map, behavior,<ul><li>memory in the brain</li></ul></li><li>connectome without function is meanless</li></ul><h4 id="linda-richard"><a class="markdownIt-Anchor" href="#linda-richard"></a> Linda Richard</h4><ul><li></li></ul><h4 id="dan-yang"><a class="markdownIt-Anchor" href="#dan-yang"></a> Dan Yang</h4><p><img src="/img/Brain-Structure-Conference-6.jpg" alt="sleep active neurons" /></p><ul><li></li></ul><h4 id="david-van-essen"><a class="markdownIt-Anchor" href="#david-van-essen"></a> David Van Essen</h4><ul><li>resting-state networks</li></ul><h4 id="xiaojing-wang"><a class="markdownIt-Anchor" href="#xiaojing-wang"></a> XiaoJing Wang</h4><p><img src="/img/Brain-Structure-Conference-7.jpg" alt="connectome" /></p><ul><li>Theoretical Neuroscience Rising</li><li>Computational and Congnitive Neuroscience(CCN)</li><li>generative and connectivity</li><li>connectivity is insufficient to predict dynamics</li></ul><p><img src="/img/Brain-Structure-Conference-8.jpg" alt="conectivity is insufficient to predict dynamics" /></p><h4 id="helen-barbas"><a class="markdownIt-Anchor" href="#helen-barbas"></a> Helen Barbas</h4><ul><li></li></ul><h4 id="anthony-movshon"><a class="markdownIt-Anchor" href="#anthony-movshon"></a> Anthony Movshon</h4><p><img src="/img/Brain-Structure-Conference-9.jpg" alt="levels of invistigation" /></p><ul><li>brain models and simulation</li><li>mainflold</li></ul><p><img src="/img/Brain-Structure-Conference-10.jpg" alt="Human Brain Project" /></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;介观脑连接研讨会&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#介观脑连接研讨会&quot;&gt;&lt;/a&gt; 介观脑连接研讨会&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/img/Brain-Structure-Conference-1.jpg&quot; alt=&quot;</summary>
-      
-    
-    
-    
-    <category term="Lecture" scheme="http://frankmartinem.github.io/categories/Lecture/"/>
-    
-    
-    <category term="conference" scheme="http://frankmartinem.github.io/tags/conference/"/>
     
   </entry>
   
