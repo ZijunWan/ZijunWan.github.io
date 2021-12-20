@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Frank Wan&#39;s Blog</title>
+  
+  <subtitle>Learning &amp; Studying</subtitle>
+  <link href="http://frankmartinem.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://frankmartinem.github.io/"/>
+  <updated>2021-12-20T15:39:48.253Z</updated>
+  <id>http://frankmartinem.github.io/</id>
+  
+  <author>
+    <name>Zijun Wan</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://frankmartinem.github.io/2021/12/20/hello-world/"/>
+    <id>http://frankmartinem.github.io/2021/12/20/hello-world/</id>
+    <published>2021-12-19T23:04:45.831Z</published>
+    <updated>2021-12-20T15:39:48.253Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ hexo new "My New Post"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Config Python for Unroot Users</title>
+    <link href="http://frankmartinem.github.io/2021/12/14/Config-Python-for-Unroot-Users/"/>
+    <id>http://frankmartinem.github.io/2021/12/14/Config-Python-for-Unroot-Users/</id>
+    <published>2021-12-14T09:07:05.000Z</published>
+    <updated>2021-12-14T15:39:50.596Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="服务器非管理员配置python环境"><a href="#服务器非管理员配置python环境" class="headerlink" title="服务器非管理员配置python环境"></a>服务器非管理员配置python环境</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Linux服务器配置python环境时，默认的安装位置是”/usr/bin”。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol><li>下载python source code到home/your name 文件夹：</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz</span><br></pre></td></tr></table></figure><p>这里以python-3.10.1为例，可以从<a href="https://www.python.org/downloads/source/">python官网</a>下载对应版本的源代码</p><ol start="2"><li>解压文件</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd download dir</span><br><span class="line">tar -xzvf Python-3.10.1.tgz</span><br></pre></td></tr></table></figure><ol start="3"><li><p>下载好以后，如果直接安装，会有以下的问题：首先是openssl，用于软件的安全通信，避免被窃听的一个toolkit。一般是系统级的app；然后是zlib，这个组件用于数据压缩和解压，如果需要使用科学计算的库，那么zlib是必须的；最后是libffi，相当于C的编译器，同样也是用于科学计算。上述组件均可以通过管理员sudo，yum安装。但是如果没有管理员权限，那么需要自行安装。</p></li><li><p>安装openssl</p><ol><li><p>下载并解压<a href="https://www.openssl.org/source/">openssl</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.openssl.org/source/openssl-3.0.0.tar.gz</span><br><span class="line">tar -xzvf openssl-3.0.0.tar.gz</span><br></pre></td></tr></table></figure></li><li><p>编译并安装</p></li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd openssl-3.0.0.tar.gz</span><br><span class="line">./config --prefix=/home/your name/openssl_dir</span><br><span class="line">make -j48 </span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li><li><p>安装<a href="http://www.zlib.net/">zlib</a></p><ol><li>下载，解压，编译并安装</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.zlib.net/zlib-1.2.11.tar.gz</span><br><span class="line">tar -xzvf zlib-1.2.11.tar.gz</span><br><span class="line">cd zlib-1.2.11.tar.gz</span><br><span class="line">./configure --prefix=/home/your name/zlib_dir</span><br><span class="line">make -j48</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li><li><p>安装<a href="https://github.com/libffi/libffi/releases">libffi</a></p><ol><li>下载，解压，编译并安装</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz</span><br><span class="line">tar -xzvf libffi-3.4.2.tar.gz</span><br><span class="line">cd libffi-3.4.2.tar.gz</span><br><span class="line">./configure --prefix=/home/your name/libffi</span><br><span class="line">make -j48</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li><li><p>将上述安装文件的路径写入环境变量</p></li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/your name/libffi_dir/lib/pkgconfig</span><br><span class="line">export LD_LIBRARY_PATH=$&#123;LD_LIBRARY_PATH&#125;:/home/your_name/openssl_dir/lib:/home/your name/zlib_dir/lib:/home/your_name/libffi_dir/lib</span><br><span class="line">export PKG_CONFIG_PATH=/home/jacob/libffi/lib/pkgconfig</span><br><span class="line">export CFLAGS=-I/home/your name/libffi_dir/include</span><br><span class="line">export LDFLAGS=-L/home/your name/libffi_dir/lib</span><br></pre></td></tr></table></figure><ol start="8"><li>进入python的setup文件，修改部分编译信息</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd python_path/Modules/</span><br><span class="line">vim Setup.dist</span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消下面的注释</span></span><br><span class="line">SSL=/home/your name/openssl_dir</span><br><span class="line">_ssl _ssl.c -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl -L$(SSL)/lib -lssl -lcrypto</span><br><span class="line">zlib zlibmodule.c -I/home/your name/zlib_dir/include -L/home/your name/zlib_dir/lib -lz</span><br></pre></td></tr></table></figure><ol start="9"><li>编译python代码，这里需要gcc编译器，一般Linux发行版都自带gcc编译器，如果没有安装，请联系管理员。同时，编译过程需要配置特定的参数</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd Python-3.10.1</span><br><span class="line">./configure LDFLAGS=&quot;-L/home/your name/libffi_dir/lib64 -Wl,--rpath=/home/your name/libffi_dir/lib64&quot; CFLAGS=&quot;-I/home/your name/libffi_dir/include&quot; PKG_CONFIG_PATH=&quot;$&#123;libffi&#125;/lib/pkgconfig&quot; --prefix=/home/your name/your path --with-openssl=/home/your name/openssl_dir</span><br><span class="line">make # make -j48 这里不推荐，因为会编译所有的test file，耗时较长，机器快的话也要20min-30min左右</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是非管理员账户在home文件夹安装自己的python环境的方法。这种方法能安装简易的python环境，但是如果需要很复杂的计算，例如scikt，pytorch，tensorflow等强烈依赖底层C链接库的模块，那么上述方法或许可行。因为整个过程无非是把库文件的源代码安装到了home文件夹里，然后修改环境变量配置。但是如果真的是很复杂的编译和依赖，不建议使用上述方法。上述方法主要参考以下博客和文章：</p><ol><li><a href="https://blog.csdn.net/u012440550/article/details/109371016">CSDN</a></li><li><a href="https://stackoverflow.com/questions/65691539/locally-compiled-libffi-files-not-getting-picked-up-while-recompiling-python-3-p">Stackoverflow</a></li><li><a href="https://hellovimo.github.io/uvm_testbench_gen/localpythoninstall.html">Github Pages</a></li></ol><p>那么，针对Introduction提出的问题，每个人都需要自定义自己的python环境，是否有更好的解决方法呢。答案是<strong>有的</strong>，那就是由管理员安装python到usr目录。然后每个人可以在home文件夹新建自己的虚拟环境。只需要使用pip3命令即可：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user virtualenv</span><br><span class="line">python3 -m venv /home/your name/python_dir</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;服务器非管理员配置python环境&quot;&gt;&lt;a href=&quot;#服务器非管理员配置python环境&quot; class=&quot;headerlink&quot; title=&quot;服务器非管理员配置python环境&quot;&gt;&lt;/a&gt;服务器非管理员配置python环境&lt;/h1&gt;&lt;h2 id=&quot;Intro</summary>
+      
+    
+    
+    
+    <category term="Software" scheme="http://frankmartinem.github.io/categories/Software/"/>
+    
+    <category term="Linux" scheme="http://frankmartinem.github.io/categories/Software/Linux/"/>
+    
+    
+    <category term="software setting" scheme="http://frankmartinem.github.io/tags/software-setting/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pytorch note</title>
+    <link href="http://frankmartinem.github.io/2021/12/13/pytorch-note/"/>
+    <id>http://frankmartinem.github.io/2021/12/13/pytorch-note/</id>
+    <published>2021-12-13T10:11:16.000Z</published>
+    <updated>2021-12-13T10:50:43.248Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Pytorch-笔记"><a href="#Pytorch-笔记" class="headerlink" title="Pytorch 笔记"></a>Pytorch 笔记</h1><ol><li>Pytorch的中，tensor切片时不需要写全所有的维度</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.rand(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">tensor([[[<span class="number">0.6691</span>, <span class="number">0.2031</span>, <span class="number">0.4246</span>, <span class="number">0.7182</span>],</span><br><span class="line">         [<span class="number">0.7533</span>, <span class="number">0.5432</span>, <span class="number">0.8189</span>, <span class="number">0.2309</span>],</span><br><span class="line">         [<span class="number">0.7979</span>, <span class="number">0.6861</span>, <span class="number">0.9331</span>, <span class="number">0.6360</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="number">0.3718</span>, <span class="number">0.9343</span>, <span class="number">0.3975</span>, <span class="number">0.8068</span>],</span><br><span class="line">         [<span class="number">0.3031</span>, <span class="number">0.7124</span>, <span class="number">0.5972</span>, <span class="number">0.7359</span>],</span><br><span class="line">         [<span class="number">0.6043</span>, <span class="number">0.1800</span>, <span class="number">0.4715</span>, <span class="number">0.8611</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>:<span class="number">1</span>, :]</span><br><span class="line">tensor([[[<span class="number">0.6691</span>, <span class="number">0.2031</span>, <span class="number">0.4246</span>, <span class="number">0.7182</span>],</span><br><span class="line">         [<span class="number">0.7533</span>, <span class="number">0.5432</span>, <span class="number">0.8189</span>, <span class="number">0.2309</span>],</span><br><span class="line">         [<span class="number">0.7979</span>, <span class="number">0.6861</span>, <span class="number">0.9331</span>, <span class="number">0.6360</span>]]])</span><br></pre></td></tr></table></figure><ol start="2"><li>torch.cat 可以拼接list</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.rand(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = [x <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">[tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.cat(y, <span class="number">0</span>)</span><br><span class="line">tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])</span><br></pre></td></tr></table></figure><ol start="3"><li>torch.contiguous()函数用于确保tensor的底层是按照行优先排序的。Tensor底层实现是使用一块连续内存的1维数组，Tensor在元信息里保存了多维数组的形状，在访问元素时，通过多维度索引转化成1维数组相对于数组起始位置的偏移量即可找到对应的数据。某些Tensor操作（如transpose、permute、narrow、expand）与原Tensor是共享内存中的数据，不会改变底层数组的存储，但原来在语义上相邻、内存里也相邻的元素在执行这样的操作后，在语义上相邻，但在内存不相邻，即不连续了（<em>is not contiguous</em>）。</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Pytorch-笔记&quot;&gt;&lt;a href=&quot;#Pytorch-笔记&quot; class=&quot;headerlink&quot; title=&quot;Pytorch 笔记&quot;&gt;&lt;/a&gt;Pytorch 笔记&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;Pytorch的中，tensor切片时不需要写全所有的维度&lt;/l</summary>
+      
+    
+    
+    
+    <category term="Deep Learning" scheme="http://frankmartinem.github.io/categories/Deep-Learning/"/>
+    
+    
+    <category term="pytorch" scheme="http://frankmartinem.github.io/tags/pytorch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Log Likelihood</title>
+    <link href="http://frankmartinem.github.io/2021/12/05/Log-Likelihood/"/>
+    <id>http://frankmartinem.github.io/2021/12/05/Log-Likelihood/</id>
+    <published>2021-12-05T19:23:33.000Z</published>
+    <updated>2021-12-20T13:24:39.594Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="极大似然估计-Log-Likelihood"><a href="#极大似然估计-Log-Likelihood" class="headerlink" title="极大似然估计 - Log Likelihood"></a>极大似然估计 - Log Likelihood</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>极大似然估计是传统机器学习以及深度学习中都常用的计算方法。其主要的目的，是根据现有的数据分布，估计采样得到现有数据的更大的数据集的分布。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>假设从一个很大的数据集中采集到有$m$个数据的数据集$X={x_1,…,x_m}$。所以原始的很大的数据集的分布为$P_{data}(x)$。根据数据计算得到的分布为$P_{model}(x; \theta)$。其中$\theta$是模型的参数。所以：</p><p>$$\theta= \underset{\theta}{\operatorname{arg max}}P_{model}(x;\theta)$$</p><p>$$\theta= \underset{\theta}{\operatorname{arg max}}\prod_{i=1}^{m}P_{model}(x_i;\theta)$$</p><p>这里直接计算概率连乘很不方便，而且容易出现极小值。由于log函数的单调性，且能处理连乘问题，所以这里取对数。</p><p>$$\theta = \underset{\theta}{\operatorname{arg max}}\sum_{i=1}^{m}log(P_{model}(x_i; \theta))$$</p><p>求和符号的计算仍旧存在些许不方便，所以这里缩放$m$倍，且数据从当前数据集中提取，当前数据集的经验分布设为$\hat{P_{data}}$。<br>所以：<br>$$\theta=\underset{\theta}{\operatorname{arg max}} E_{x \sim \hat{P_{data}}}(P_{model}(x;\theta))$$</p><p>以上就是极大似然函数。</p><h3 id="KL散度视角"><a href="#KL散度视角" class="headerlink" title="KL散度视角"></a>KL散度视角</h3><p>根据问题的描述，我们需要求解数据的分布$P_{model}(x; \theta)$，使得其最接近数据集的分布$\hat{P_{data}}(x)$。从KL散度出发，即需要最小化两者的KL散度（注意：KL散度计算是有顺序的，即$D_{KL}(P||Q) \neq D_{KL}(Q||P)$。<br>KL散度计算如下：</p><p>$$D_{KL}(P_{data}(x)|| P_{model}(x; \theta))=E_{x\sim\hat P_{data}}[log(\hat P_{data}(x)) - log(P_{model}(x; \theta))]$$</p><p>第一项和模型参数无关，所以计算时只需要最小化第二项，即：<br>$$\theta = \underset{\theta}{\operatorname{arg max}} -log(P_{model}(x; \theta))$$</p><p>这一步骤和定义中的最大化是相同的。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;极大似然估计-Log-Likelihood&quot;&gt;&lt;a href=&quot;#极大似然估计-Log-Likelihood&quot; class=&quot;headerlink&quot; title=&quot;极大似然估计 - Log Likelihood&quot;&gt;&lt;/a&gt;极大似然估计 - Log Likeliho</summary>
+      
+    
+    
+    
+    <category term="Deep Learning" scheme="http://frankmartinem.github.io/categories/Deep-Learning/"/>
+    
+    
+    <category term="Log Likelihood" scheme="http://frankmartinem.github.io/tags/Log-Likelihood/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SVD-UKF</title>
+    <link href="http://frankmartinem.github.io/2021/09/24/SVD-UKF/"/>
+    <id>http://frankmartinem.github.io/2021/09/24/SVD-UKF/</id>
+    <published>2021-09-24T17:52:00.000Z</published>
+    <updated>2021-12-18T19:58:11.171Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Unscented-Kalman-Filter-based-on-SVD"><a href="#Unscented-Kalman-Filter-based-on-SVD" class="headerlink" title="Unscented Kalman Filter based on SVD"></a>Unscented Kalman Filter based on SVD</h3><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>无迹卡尔曼滤波（Unscented Kalman Filter）是卡尔曼滤波（Kalman Filter）的改进版，其中取消了卡尔曼滤波中对于观测变量的一阶线性隐马尔可夫链的约束，也取消了观测变量和测量变量之间的线性关系。取而代之的是任意的函数，然后用无迹变换（Unscented Transform）来估计观测变量变化时以及观测变量和测量变量变化时的概率分布变化。但是，无迹卡尔曼滤波在计算时需要计算协方差矩阵的Cholesky分解，这一步需要保证协方差矩阵是正定矩阵。在真实计算中，由于观测变量可能有多维，且互相之间可能互相独立，导致协方差矩阵不一定是正定矩阵。也有可能由于参数的选择不当，导致协方差矩阵不满足正定矩阵的要求。从而导致计算无法进行。这也是无迹卡尔曼滤波中需要注意的地方。</p><h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>对于协方差矩阵非正定的问题，目前有两种解决办法。一种是选择合适的参数。但是这种方法比较依赖经验，需要多次测试调整。第二种方法就是基于SVD的无迹卡尔曼滤波。这种方法利用奇异值分解（SVD）方法，将协方差矩阵分解为对角矩阵和另外两个矩阵。由于协方差矩阵中，对角线上的值一定是正的，因为对角线上的值就是不同维度的观测变量的方差。所以对角矩阵的值肯定是正的，所以可以开根号。协方差矩阵分解的计算方法如下：<br>$$<br>[S, V, D] = SVD(P)<br>$$<br>$$<br>P_{est} = S * \sqrt{V}<br>$$<br>用上述步骤，替换无迹卡尔曼滤波计算中的Cholesky分解，即得到基于SVD的无迹卡尔曼滤波。因为协方差矩阵是对称的，所以$S$的转置矩阵是$D$，计算时只考虑一边即可。其余的计算步骤参考<br>[Unscented Kalman Filter]: <a href="https://frankmartinem.github.io/2020/01/21/Unscented-Kalman-Filter/">https://frankmartinem.github.io/2020/01/21/Unscented-Kalman-Filter/</a></p><h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><ol><li>An Improved Unscented Kalman Filter Algorithm for Radar Azimuth Mutation</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;Unscented-Kalman-Filter-based-on-SVD&quot;&gt;&lt;a href=&quot;#Unscented-Kalman-Filter-based-on-SVD&quot; class=&quot;headerlink&quot; title=&quot;Unscented Kalman Fil</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
+    
+    
+    <category term="unscented kalman filter" scheme="http://frankmartinem.github.io/tags/unscented-kalman-filter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SSH Download and Upload</title>
+    <link href="http://frankmartinem.github.io/2021/08/13/SSH-Download-and-Upload/"/>
+    <id>http://frankmartinem.github.io/2021/08/13/SSH-Download-and-Upload/</id>
+    <published>2021-08-13T07:34:41.000Z</published>
+    <updated>2021-12-20T15:30:48.902Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SSH-从服务器下载文件或者上传文件以及文件夹"><a href="#SSH-从服务器下载文件或者上传文件以及文件夹" class="headerlink" title="SSH 从服务器下载文件或者上传文件以及文件夹"></a>SSH 从服务器下载文件或者上传文件以及文件夹</h1><ol><li>从服务器下载文件<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">scp yourname@IP address:/path to your file/ /local path/scp frank@10.212.48.177:~/Downloads/test.py ~/Downloads<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li>从服务器下载文件夹<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">scp -r yourname@IP address:/path to your folder/ /local path/scp -r frank@10.212.48.177:~/Downloads/test ~/Downloads<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li>上传文件到服务器<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">scp /path to your file/ yourname@IP address:/remote path/scp ~/Downloads/test.py frank@10.212.48.177:~/Downloads<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li>上传文件夹到服务器<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">scp -r /path to your folder/ yourname@IP address:/remote path/scp -r ~/Downloads/test frank@10.212.48.177:~/Downloads<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>注意，服务器的IP地址后的冒号和文件地址，文件夹地址之间没有空格</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;SSH-从服务器下载文件或者上传文件以及文件夹&quot;&gt;&lt;a href=&quot;#SSH-从服务器下载文件或者上传文件以及文件夹&quot; class=&quot;headerlink&quot; title=&quot;SSH 从服务器下载文件或者上传文件以及文件夹&quot;&gt;&lt;/a&gt;SSH 从服务器下载文件或者上传文</summary>
+      
+    
+    
+    
+    <category term="Software" scheme="http://frankmartinem.github.io/categories/Software/"/>
+    
+    
+    <category term="SSH" scheme="http://frankmartinem.github.io/tags/SSH/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git Clone Part of Repository</title>
+    <link href="http://frankmartinem.github.io/2021/08/12/Git-Clone-Part-of-Repository/"/>
+    <id>http://frankmartinem.github.io/2021/08/12/Git-Clone-Part-of-Repository/</id>
+    <published>2021-08-12T08:36:05.000Z</published>
+    <updated>2021-12-20T15:32:09.580Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="git下载单个仓库的文件"><a href="#git下载单个仓库的文件" class="headerlink" title="git下载单个仓库的文件"></a>git下载单个仓库的文件</h1><p>如果一个仓库的文件很多，但是又只需要其中的一部分，这时下载全部的文件会很浪费时间，毕竟github的下载速度也慢。所以就需要想办法只下载部分文件。下面介绍三种方法。</p><h2 id="git指令下载"><a href="#git指令下载" class="headerlink" title="git指令下载"></a>git指令下载</h2><p>git目前已经支持通过修改配置文件来下载单个文件，这里以我自己的仓库为例，项目仓库结构如图所示。我需要下载Algorithm项目下的Kalman整个文件夹，以及Wiener-Filter文件夹下的wienerfilter.py文件。那么可以通过如下方法实现。<br><img src="/img/Git-Clone-Part-of-Repository-1.png" alt="项目截图"></p><ol><li>首先新建一个文件夹，然后clone整个仓库的结构以及git的改动文件。<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mkdir filecd filegit initgit remote add -f origin &lt;url of target repository&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li><li>然后配置git config文件，将sparsecheckout设置为true，即允许从仓库中下载部分的文件<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git config core.sparseCheckout true<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li>将你需要下载的文件添加到config文件中，对于例子中的要求，配置如下<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">echo "Kalman" &gt;&gt; .git/info/sparse-checkoutecho "Wiener-Filter/wienerfilter.py" &gt;&gt; .git/info/sparse-checkout<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li>然后直接拉取项目，然后会根据配置文件拉取对应的文件<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git pull origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>命令行截图如图所示<br><img src="/img/Git-Clone-Part-of-Repository-2.png" alt="命令行截图"><br>可以看出，最终只下载了需要的代码。详细的git sparse checkout的配置可以查询git官方文档[link]</li></ol><h2 id="网页工具"><a href="#网页工具" class="headerlink" title="网页工具"></a>网页工具</h2><p>可以通过<a href="https://minhaskamal.github.io/DownGit/#/home">这个网站</a>下载某个项目的部分文件，只需要把对应文件或文件夹的链接复制到下载框中即可。注意这里用的是网页链接，而不是仓库的url<br><img src="/img/Git-Clone-Part-of-Repository-3.png" alt="网页截图"></p><h2 id="用SVN配置只下载部分文件"><a href="#用SVN配置只下载部分文件" class="headerlink" title="用SVN配置只下载部分文件"></a>用SVN配置只下载部分文件</h2><p>找到对应的文件夹，然后修改链接中的/tree/master/为/trunk/。例如例子中的Kalman文件夹链接为<br><a href="https://github.com/FrankMartinem/Algorithm/tree/master/Kalman">https://github.com/FrankMartinem/Algorithm/tree/master/Kalman</a><br>修改为<br><a href="https://github.com/FrankMartinem/Algorithm/trunks/Kalman">https://github.com/FrankMartinem/Algorithm/trunks/Kalman</a><br>然后运行svn checkout命令</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">svn checkout https://github.com/FrankMartinem/Algorithm/trunk/Kalman<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后就可以下载对应文件夹的文件了。如果下载的文件夹不在master分支上，那么需要找到对应的分支，然后修改为/branches/branchname/。例如在develop分支上，则修改为/branches/develop/。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是三种下载单个文件的方法，笔者尝试了前两种方法，均能实现需求。由于笔者没有装svn，所以没有尝试svn方法，但是有很多人也尝试过这种方法，应该是可行的。<br>总体来看，三种方法各有优劣，git checkout方法配置麻烦，但是能同时下载多个不同位置的文件或者文件夹，只需要写好配置文件。但是如果项目文件很复杂，层级很多，而且git记录很多的话，那么第一步初始化就要花很长的时间。<br>网页版的话更方便快捷，但是对于复杂的需求，可能需要复制很多次网页链接然后下载很多次，会比较麻烦。而且这种方法依赖于浏览器和图形界面。<br>svn方法可能和网页版的缺点类似，也是只能针对单一文件夹设置。当然也可能svn还有其他的功能，这里不过多赘述。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;git下载单个仓库的文件&quot;&gt;&lt;a href=&quot;#git下载单个仓库的文件&quot; class=&quot;headerlink&quot; title=&quot;git下载单个仓库的文件&quot;&gt;&lt;/a&gt;git下载单个仓库的文件&lt;/h1&gt;&lt;p&gt;如果一个仓库的文件很多，但是又只需要其中的一部分，这时下载全</summary>
+      
+    
+    
+    
+    <category term="Software" scheme="http://frankmartinem.github.io/categories/Software/"/>
+    
+    
+    <category term="git usage" scheme="http://frankmartinem.github.io/tags/git-usage/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux unzip file from Windows</title>
+    <link href="http://frankmartinem.github.io/2021/07/29/Linux-unzip-file-from-Windows/"/>
+    <id>http://frankmartinem.github.io/2021/07/29/Linux-unzip-file-from-Windows/</id>
+    <published>2021-07-29T18:51:07.000Z</published>
+    <updated>2021-12-20T15:41:27.312Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下解压window中的zip文件的乱码问题"><a href="#Linux下解压window中的zip文件的乱码问题" class="headerlink" title="Linux下解压window中的zip文件的乱码问题"></a>Linux下解压window中的zip文件的乱码问题</h1><p>在windows系统下压缩的zip文件，使用的编码格式是gbk，而Linux默认是utf-8的，所以解码后如果有中文，会出现乱码。解决方法就是利用unzip命令解压。然后设置好编码参数，解压命令如下。</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">unzip -O cp936 file-name.zip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>解压文件会显示在当前目录下，如果想解压到指定文件夹，可以自行修改参数。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Linux下解压window中的zip文件的乱码问题&quot;&gt;&lt;a href=&quot;#Linux下解压window中的zip文件的乱码问题&quot; class=&quot;headerlink&quot; title=&quot;Linux下解压window中的zip文件的乱码问题&quot;&gt;&lt;/a&gt;Linux下解压</summary>
+      
+    
+    
+    
+    <category term="Software" scheme="http://frankmartinem.github.io/categories/Software/"/>
+    
+    
+    <category term="linux" scheme="http://frankmartinem.github.io/tags/linux/"/>
+    
+    <category term="file coding" scheme="http://frankmartinem.github.io/tags/file-coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Latex+Vscode Configuration in Ubuntu</title>
+    <link href="http://frankmartinem.github.io/2021/07/28/Latex-Vscode-Configuration-in-Ubuntu/"/>
+    <id>http://frankmartinem.github.io/2021/07/28/Latex-Vscode-Configuration-in-Ubuntu/</id>
+    <published>2021-07-28T08:44:38.000Z</published>
+    <updated>2021-12-20T15:40:41.832Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Ubuntu下Latex安装以及vscode配置"><a href="#Ubuntu下Latex安装以及vscode配置" class="headerlink" title="Ubuntu下Latex安装以及vscode配置"></a>Ubuntu下Latex安装以及vscode配置</h1><p>本文主要介绍Ubuntu系统下Latex环境的配置，使用的软件有</p><ul><li>TexLive2021</li><li>vscode</li></ul><h2 id="安装TexLive"><a href="#安装TexLive" class="headerlink" title="安装TexLive"></a>安装TexLive</h2><ol><li><p>下载TexLive安装包，下载地址为：[TexLive][<a href="https://www.tug.org/texlive/acquire-netinstall.html]%E3%80%82%08%08%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD%E5%8F%AF%E8%83%BD%E4%BC%9A%E6%AF%94%E8%BE%83%E6%85%A2%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%80%89%E6%8B%A9%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%EF%BC%9A[TexLive">https://www.tug.org/texlive/acquire-netinstall.html]。官网下载可能会比较慢，可以选择国内镜像网站：[TexLive</a> Tsinghua Mirror][<a href="https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/]%E3%80%82">https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/]。</a></p></li><li><p>解压对应的iso文件，Ubuntu18.04可以直接右键解压。也可以用mount命令挂载iso文件然后提取文件，这样会比较麻烦，这里也不多赘述。解压完后，文件内容如图1所示。<br><img src="/img/Latex-Vscode-Configuration-in-Ubuntu-1.png"></p></li><li><p>cd到对应的文件目录，然后运行如下命令，可以在命令行中安装，如图2所示。根据提示，配置好需要安装的组件，然后回车安装即可。</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo ./install-tl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p> <img src="/img/Latex-Vscode-Configuration-in-Ubuntu-2.png"></p></li><li><p>也可以用图形界面安装。先cd到对应文件目录，然后运行如下命令，就会显示和windows类似的图形界面了，如图3所示。</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo ./install-tl -gui -repository https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="/img/Latex-Vscode-Configuration-in-Ubuntu-3.png"><br>建议对于大多数用户，安装完整版的TexLive，省得以后发现缺少依赖不能编译，会很麻烦。TexLive的安装较慢，耐心等待。安装完成后，在terminal中输入xelatex，latexmk等命令，如果显示command not found。那么需要添加TexLive到环境变量，添加的方法如下。如果显示有当前命令，那么直接到vscode配置部分。</p></li></ol><h2 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h2><p>找到对应的终端配置文件，如果是zsh则是.zshrc，如果是bash则是.bashrc。都在用户目录下。打开终端，输入如下命令。如果是其他shell则改成其他shell的配置文件，用不习惯vim可以用gedit。</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo vim ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>在配置文件中加入如下内容：</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export PATH="$PATH:/usr/local/texlive/2021/bin/x86_64-linux/"export MANPATH="$MANPATH:/usr/local/texlive/2018/texmf-dist/doc/man"export INFOPATH="$INFOPATH/usr/local/texlive/2018/texmf-dist/doc/info"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>配置环境变量需要注意的内容，可以参考另外一篇 [blog][<a href="https://frankmartinem.github.io/2021/06/01/Linux-Environment-Variable/]">https://frankmartinem.github.io/2021/06/01/Linux-Environment-Variable/]</a><br>配置完成后，打开终端输入xelatex，latexmk等命令，检查环境变量是否配置成功。</p><h2 id="vscode配置"><a href="#vscode配置" class="headerlink" title="vscode配置"></a>vscode配置</h2><p>TexLive安装完成后，vscode的配置就比较简单了。主要包括以下步骤。</p><ol><li>安装Latex Workshop插件，在vscode的扩展商店里，直接搜索就能找到。</li><li>配置Latex编译的json文件。安装好插件以后，需要配置好编译的一些参数，这里提供我自己的配置文件<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">"latex-workshop.latex.tools":[    {    "name": "latexmk",    "command": "latexmk",    "args": [        "-synctex=1",        "-interaction=nonstopmode",        "-file-line-error",        "-pdf",        "%DOC%"    ]    },    {    "name": "xelatex",    "command": "xelatex",    "args": [        "-synctex=1",        "-interaction=nonstopmode",        "-file-line-error",        "%DOC%"    ]    },    {    "name": "pdflatex",    "command": "pdflatex",    "args": [        "-synctex=1",        "-interaction=nonstopmode",        "-file-line-error",        "%DOC%"    ]    },    {    "name": "bibtex",    "command": "bibtex",    "args": [        "%DOCFILE%"    ]    }],"latex-workshop.latex.recipes":[    {    "name": "latexmk",    "tools": [        "latexmk"    ]    },    {    "name": "xelatex -&gt; bibtex -&gt; xelatex*2",    "tools": [        "xelatex",        "bibtex",        "xelatex",        "xelatex"    ]    },    {    "name": "xelatex",    "tools": [        "xelatex"    ]    },    {    "name": "pdflatex -&gt; bibtex -&gt; pdflatex*2",    "tools": [        "pdflatex",        "bibtex",        "pdflatex",        "pdflatex"    ]    },    {        "name":"pdflatex",        "tools": [            "pdflatex"        ]    }]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>主要的配置是latex的编译命令以及流程化的一些编译过程。latex.tools里面是常用的编译命令，例如latexmk，pdflatex，xelatex等，需要配置好这些命令的参数。latex.recipe主要是一些编译链，用于文档的编译。然后latex插件中显示的编译选项就是对应于latex.recipe的内容。例如这里比较常用的latexmk直接编译，以及涉及到参考文献引用的pdflatex-&gt;bibtex-&gt;pdflatex-&gt;pdflatex的编译链等。<br>以上就是Ubuntu下Latex环境配置以及vscode环境配置的主要内容了。配置完成后基本就能用了，还有一些其他的细节后续可以根据自己的习惯去添加。例如安装sumatra PDF插件，安装Latex英文词库语法插件等。最后，个人建议用vscode写latex时，很有必要开启自动换行，不然手动回车换行会很麻烦，而且后期改起来也很麻烦。打开的方式就是在vscode的设置中，找到Word Wrap选项，然后改成wordwrapcolumn。</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Ubuntu下Latex安装以及vscode配置&quot;&gt;&lt;a href=&quot;#Ubuntu下Latex安装以及vscode配置&quot; class=&quot;headerlink&quot; title=&quot;Ubuntu下Latex安装以及vscode配置&quot;&gt;&lt;/a&gt;Ubuntu下Latex安装</summary>
+      
+    
+    
+    
+    <category term="Software" scheme="http://frankmartinem.github.io/categories/Software/"/>
+    
+    
+    <category term="latex" scheme="http://frankmartinem.github.io/tags/latex/"/>
+    
+    <category term="linux" scheme="http://frankmartinem.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU VPN connection in Linux</title>
+    <link href="http://frankmartinem.github.io/2021/07/28/ZJU-VPN-connection-in-Linux/"/>
+    <id>http://frankmartinem.github.io/2021/07/28/ZJU-VPN-connection-in-Linux/</id>
+    <published>2021-07-28T08:04:24.000Z</published>
+    <updated>2021-12-20T15:43:48.867Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux系统下连接校园网（ZJU-VPN）"><a href="#Linux系统下连接校园网（ZJU-VPN）" class="headerlink" title="Linux系统下连接校园网（ZJU VPN）"></a>Linux系统下连接校园网（ZJU VPN）</h1><h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>在Linux系统下连接校园网和Windows稍有不同，需要使用命令行连接。但是基本过程是一样的，以下为主要步骤：</p><ol><li>设置系统的IP地址。如果有固定分配的IP，那么就在网络选项理设置IP地址。如图1所示。<br><img src="/img/ZJU-VPN-connection-in-Linux-1.png"></li><li>安装xl2tpd。这是VPN设置必要的软件包，由于校园网是以VPN的形式搭建的，所以需要这个安装包，访问校内和校外网址。安装方法为如下命令：<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo apt-get install xl2tpd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li>安装zjunet。这是zju vpn连接的命令行工具，是依赖xl2tpd的，所以需要先进行步骤2。软件的网址是：[zjunet][<a href="https://github.com/QSCTech/zjunet]%E3%80%82%E6%89%BE%E5%88%B0%E6%9C%80%E6%96%B0%E7%9A%84release%E7%89%88%E6%9C%AC%EF%BC%8C%E7%84%B6%E5%90%8E%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85%E3%80%82%E4%BB%A5Ubuntu%E4%B8%BA%E4%BE%8B%EF%BC%8C%E4%B8%8B%E8%BD%BD*.deb%E6%96%87%E4%BB%B6%EF%BC%8C%E5%85%88cd%E5%88%B0%E5%AE%89%E8%A3%85%E5%8C%85%E6%89%80%E5%9C%A8%E8%B7%AF%E5%BE%84%EF%BC%8C%E7%84%B6%E5%90%8E%E7%94%A8%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%EF%BC%9A">https://github.com/QSCTech/zjunet]。找到最新的release版本，然后下载安装包。以Ubuntu为例，下载*.deb文件，先cd到安装包所在路径，然后用如下命令安装：</a><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo dpkg -i *.deb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li>完成上述步骤后，终端输入zjunet可以查看对应的参数以及帮助文档，如图2所示。<br><img src="/img/ZJU-VPN-connection-in-Linux-2.png"><br>以上就完成了对应软件安装，下面是zjunet的基本使用教程</li></ol><h2 id="zjunet使用"><a href="#zjunet使用" class="headerlink" title="zjunet使用"></a>zjunet使用</h2><p>zjunet的使用参数有很多，对大部分人来说，主要的应用场景应该还是连接校园网。所以下面只介绍如何连接校园网。主要有以下几步。</p><ol><li><p>输入你的账号和密码。先输入账号密码，软件会自动记录，下次登录时可以省略这步。配置命令如下。</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">zjunet user add<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后终端会提示你输入账号和密码，如图3所示。<br><img src="/img/ZJU-VPN-connection-in-Linux-3.png"></p></li><li><p>输入账号和密码后，就可以直接连接校园网了，连接命令如下。终端可能会显示retrying，这个属于正常现象，不是配置的问题。</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">zjunet vpn -c<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>连接成功如图4所示。<br><img src="/img/ZJU-VPN-connection-in-Linux-4.png"></p></li><li><p>如果想断开连接，可以输入如下命令，即可断开连接，断开连接后的提示如图5所示。</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">zjunet vpn -d<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="/img/ZJU-VPN-connection-in-Linux-5.png"></p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Linux系统下连接校园网（ZJU-VPN）&quot;&gt;&lt;a href=&quot;#Linux系统下连接校园网（ZJU-VPN）&quot; class=&quot;headerlink&quot; title=&quot;Linux系统下连接校园网（ZJU VPN）&quot;&gt;&lt;/a&gt;Linux系统下连接校园网（ZJU VP</summary>
+      
+    
+    
+    
+    <category term="Software" scheme="http://frankmartinem.github.io/categories/Software/"/>
+    
+    
+    <category term="linux" scheme="http://frankmartinem.github.io/tags/linux/"/>
+    
+    <category term="software usage" scheme="http://frankmartinem.github.io/tags/software-usage/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Qt Deploy</title>
+    <link href="http://frankmartinem.github.io/2021/07/06/Qt-Deploy/"/>
+    <id>http://frankmartinem.github.io/2021/07/06/Qt-Deploy/</id>
+    <published>2021-07-06T09:48:57.000Z</published>
+    <updated>2021-08-13T12:22:27.928Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="发布带运行环境的Qt执行文件"><a href="#发布带运行环境的Qt执行文件" class="headerlink" title="发布带运行环境的Qt执行文件"></a>发布带运行环境的Qt执行文件</h1><p>在VS中生成release版本的exe文件后，文件会依赖于使用的lib以及dll文件等。这样换一个运行环境后，可能会无法运行当前的文件。例如基于Qt的exe文件，会依赖于Qt的lib和dll。Qt提供了此问题的解决办法。</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol><li>打开Qt提供的cmd窗口</li><li>cd到release版本的exe所在的位置</li><li>运行 windeployqt file_name.exe</li><li>当前文件夹下的文件就是对应exe文件所需的运行环境<br>上述操作生成的dll文件以及运行环境，能保证exe文件在没有安装qt环境的PC上运行。此方法只适用于windows系统（运行指令的意思就是win deploy qt的意思）。</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;发布带运行环境的Qt执行文件&quot;&gt;&lt;a href=&quot;#发布带运行环境的Qt执行文件&quot; class=&quot;headerlink&quot; title=&quot;发布带运行环境的Qt执行文件&quot;&gt;&lt;/a&gt;发布带运行环境的Qt执行文件&lt;/h1&gt;&lt;p&gt;在VS中生成release版本的exe文件后</summary>
+      
+    
+    
+    
+    <category term="Coding" scheme="http://frankmartinem.github.io/categories/Coding/"/>
+    
+    
+    <category term="software" scheme="http://frankmartinem.github.io/tags/software/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Difference in Debug and Release</title>
+    <link href="http://frankmartinem.github.io/2021/07/06/Difference-in-Debug-and-Release/"/>
+    <id>http://frankmartinem.github.io/2021/07/06/Difference-in-Debug-and-Release/</id>
+    <published>2021-07-06T08:43:13.000Z</published>
+    <updated>2021-12-20T15:37:17.002Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="VS中Debug和Release的区别"><a href="#VS中Debug和Release的区别" class="headerlink" title="VS中Debug和Release的区别"></a>VS中Debug和Release的区别</h1><h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在搭建EMG信号处理系统时，我需要读取一个txt文件。在debug时能正常读取。在release版本下却不能获取其中的信息。后来发现问题在于我使用了assert语句。我的读取代码如下：</p><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">Config</span><span class="token double-colon punctuation">::</span><span class="token function">gen_data_list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>QFile <span class="token function">f</span><span class="token punctuation">(</span>select_dataset_path<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">assert</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span>QIODevice<span class="token double-colon punctuation">::</span>ReadOnly <span class="token operator">|</span> QIODevice<span class="token double-colon punctuation">::</span>Text<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>f<span class="token punctuation">.</span><span class="token function">atEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>QString l <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">qDebug</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> l <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span><span class="token keyword">if</span> <span class="token punctuation">(</span>l<span class="token punctuation">.</span><span class="token function">compare</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token keyword">continue</span><span class="token punctuation">;</span><span class="token keyword">else</span>data_list<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>l<span class="token punctuation">.</span><span class="token function">simplified</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>data_num <span class="token operator">=</span> data_list<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>trial_num <span class="token operator">=</span> data_num <span class="token operator">*</span> blk_num<span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>在release条件下，data_num始终是0。因为assert语句被忽略掉了，所以txt文件一直都没有被读取。将代码改成如下形式，release版本下也能正常读取了。</p><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">Config</span><span class="token double-colon punctuation">::</span><span class="token function">gen_data_list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>QFile <span class="token function">f</span><span class="token punctuation">(</span>select_dataset_path<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">bool</span> isOpen <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span>QIODevice<span class="token double-colon punctuation">::</span>ReadOnly <span class="token operator">|</span> QIODevice<span class="token double-colon punctuation">::</span>Text<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">assert</span><span class="token punctuation">(</span>isOpen<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>f<span class="token punctuation">.</span><span class="token function">atEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>QString l <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">qDebug</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> l <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span><span class="token keyword">if</span> <span class="token punctuation">(</span>l<span class="token punctuation">.</span><span class="token function">compare</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token keyword">continue</span><span class="token punctuation">;</span><span class="token keyword">else</span>data_list<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>l<span class="token punctuation">.</span><span class="token function">simplified</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>data_num <span class="token operator">=</span> data_list<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>trial_num <span class="token operator">=</span> data_num <span class="token operator">*</span> blk_num<span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>这样isOpen的值取决于文件是否打开。所以f.open(QIODevice::ReadOnly | QIODevice::Text)这部分的内容一定会被执行的。<br>在VS中，也可以在属性中打开编译调试代码开关，这样就会编译assert函数了。</p><h3 id="原因探究"><a href="#原因探究" class="headerlink" title="原因探究"></a>原因探究</h3><p>查阅相关资料后，我发现assert语句在windows下，利用VC的编译器时，会被忽略掉而不执行。这取决于release和debug时的编译器优化方式。在linux条件下，使用gcc编译时则不会忽略assert语句。其他深入的编译原理相关的原因就不再接着探究了。<br>总的来说，不管使用何种编译器，代码规范化是很重要的。assert语句不应该被用来检测文件读取，以及输入是否合法等问题。也不能把赋值操作等语句放在其中。总之，检查代码的时候，把assert语句去掉，如果代码的正常逻辑没有问题。那么代码就是正常的。assert应该是用来检测参数的合法性以及参数值的大小等涉及代码完备性和安全性的问题。</p><h2 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>在搭建EMG信号处理系统时，需要通过state参数来判断是否暂停函数中的for循环。在debug条件下，暂停和恢复都能正常运行。暂停条件下停止实验也能正常运行，但是在release条件下，暂停后就没法恢复正常运行了，而且暂停后要么会在下一个trial时停止，要么在后面恢复时，没有响应。代码块如下：</p><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> exp_c<span class="token punctuation">.</span>blk_num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> exp_c<span class="token punctuation">.</span>data_num<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span>th_record_state <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">{</span>                <span class="token keyword">if</span> <span class="token punctuation">(</span>main_th_stop<span class="token punctuation">)</span><span class="token punctuation">{</span>                    <span class="token function">stop_experiment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                    <span class="token keyword">break</span><span class="token punctuation">;</span>                <span class="token punctuation">}</span>                <span class="token keyword">if</span> <span class="token punctuation">(</span>th_record_state <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>                    <span class="token keyword">break</span><span class="token punctuation">;</span>            <span class="token punctuation">}</span>        <span class="token punctuation">}</span>        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> state_num<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>            <span class="token function">Process</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>需要实现的功能是，在th_record_state为1（record state）时，实验正常进行；在th_record_state为2（pause state）时，实验暂停；在th_record_state为0时，main_th_stop为true，实验结束。</p><h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><p>由于release版本下，VS的优化器认为while循环中的内容对外部代码没有影响，且while循环会占用很多计算量。所以在release版本下，while循环中的代码会被忽略掉。所以在while循环中加入延时，减少因为暂停导致的循环次数。这样优化器会重新加入while循环的内容。（这部分涉及到VS中的编译优化的问题，没有深究原因）。修改后的代码如下：</p><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> exp_c<span class="token punctuation">.</span>blk_num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> exp_c<span class="token punctuation">.</span>data_num<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span>th_record_state <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">{</span>                <span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token keyword">if</span> <span class="token punctuation">(</span>main_th_stop<span class="token punctuation">)</span><span class="token punctuation">{</span>                    <span class="token function">stop_experiment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                    <span class="token keyword">break</span><span class="token punctuation">;</span>                <span class="token punctuation">}</span>                <span class="token keyword">if</span> <span class="token punctuation">(</span>th_record_state <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>                    <span class="token keyword">break</span><span class="token punctuation">;</span>            <span class="token punctuation">}</span>        <span class="token punctuation">}</span>        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> state_num<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>            <span class="token function">Process</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>尽管这样会损失一些反应时间，但是实验系统对反应时间的要求也不高，而且Sleep函数的时间可以根据实验所需的反应时间修改。这种解决方案也可以接受。</p><h3 id="原因探究-1"><a href="#原因探究-1" class="headerlink" title="原因探究"></a>原因探究</h3><p>主要的原因还是debug和release版本下，VS的优化方法不一样。优化的参数可以在项目属性中调整。但是release版本的代码对稳定性的要求会更高，类似于数组越界，指针赋值等问题，在debug时可能没问题。但是release时就会出现问题。此时一定要检查代码的规范性问题，以及代码中的一些合理性问题，例如本文中出现的assert语句中加入文件读取语句，while循环不加延时导致大量无效循环等问题。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;VS中Debug和Release的区别&quot;&gt;&lt;a href=&quot;#VS中Debug和Release的区别&quot; class=&quot;headerlink&quot; title=&quot;VS中Debug和Release的区别&quot;&gt;&lt;/a&gt;VS中Debug和Release的区别&lt;/h1&gt;&lt;h2 i</summary>
+      
+    
+    
+    
+    <category term="Coding" scheme="http://frankmartinem.github.io/categories/Coding/"/>
+    
+    
+    <category term="c++" scheme="http://frankmartinem.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>powershell commands-tree</title>
+    <link href="http://frankmartinem.github.io/2021/06/10/powershell-commands-tree/"/>
+    <id>http://frankmartinem.github.io/2021/06/10/powershell-commands-tree/</id>
+    <published>2021-06-10T21:16:00.000Z</published>
+    <updated>2021-12-20T15:41:56.004Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="powershell命令：tree"><a href="#powershell命令：tree" class="headerlink" title="powershell命令：tree"></a>powershell命令：tree</h1><p>显示文件夹中的文件结构，并生成txt文件或md文件。<br>用法如下：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">tree <span class="token namespace">[drive:]</span><span class="token namespace">[path]</span> <span class="token punctuation">[</span><span class="token operator">/</span>F<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token operator">/</span>A<span class="token punctuation">]</span> &gt;<span class="token namespace">[PRN]</span><span class="token punctuation">[</span><span class="token operator">/</span>F<span class="token punctuation">]</span>: 显示目录下的文件名<span class="token punctuation">[</span><span class="token operator">/</span>A<span class="token punctuation">]</span>: 使用ASCII码字符<span class="token namespace">[PRN]</span>: 存储生成的文件结构的txt或md文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;powershell命令：tree&quot;&gt;&lt;a href=&quot;#powershell命令：tree&quot; class=&quot;headerlink&quot; title=&quot;powershell命令：tree&quot;&gt;&lt;/a&gt;powershell命令：tree&lt;/h1&gt;&lt;p&gt;显示文件夹中的文件结</summary>
+      
+    
+    
+    
+    <category term="Terminal" scheme="http://frankmartinem.github.io/categories/Terminal/"/>
+    
+    
+    <category term="powershell" scheme="http://frankmartinem.github.io/tags/powershell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux Environment Variable</title>
+    <link href="http://frankmartinem.github.io/2021/06/01/Linux-Environment-Variable/"/>
+    <id>http://frankmartinem.github.io/2021/06/01/Linux-Environment-Variable/</id>
+    <published>2021-06-01T09:02:23.000Z</published>
+    <updated>2021-12-20T15:41:15.475Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux-环境变量设置"><a href="#Linux-环境变量设置" class="headerlink" title="Linux 环境变量设置"></a>Linux 环境变量设置</h1><p>Linux环境变量在<del>/.bashrc文件中设置。也可能在</del>/.zshrc，也可能在/etc/profile中。设置的方法是</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export PATH=“$PATH:/yourpath/”<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Linux-环境变量设置&quot;&gt;&lt;a href=&quot;#Linux-环境变量设置&quot; class=&quot;headerlink&quot; title=&quot;Linux 环境变量设置&quot;&gt;&lt;/a&gt;Linux 环境变量设置&lt;/h1&gt;&lt;p&gt;Linux环境变量在&lt;del&gt;/.bashrc文件中设置。也</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="http://frankmartinem.github.io/categories/Linux/"/>
+    
+    
+    <category term="system setting" scheme="http://frankmartinem.github.io/tags/system-setting/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>visual studio code cpp configure</title>
+    <link href="http://frankmartinem.github.io/2021/05/31/visual-studio-code-cpp-configure/"/>
+    <id>http://frankmartinem.github.io/2021/05/31/visual-studio-code-cpp-configure/</id>
+    <published>2021-05-31T18:52:53.000Z</published>
+    <updated>2021-12-20T15:43:21.610Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Visual-Studio-Code-配置c-编译环境"><a href="#Visual-Studio-Code-配置c-编译环境" class="headerlink" title="Visual Studio Code 配置c++编译环境"></a>Visual Studio Code 配置c++编译环境</h1><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>平时写c++大部分时间是在windows环境下，然后用Visual Studio调试和编译代码。但是由于笔记本的系统是macOS，有时候需要远程调试代码。远程调试用Teamviewer或者Microsoft Remote Desktop的话，还是不太方便。再加上也想学习一下g++编译器。相较于msvc，g++跨平台的特性更加实用。</p><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li>安装g++编译器（windows：MinGW，linux：sudo安装，macOS: brew安装）。必装的项目有g++，gcc，gdb，</li><li>vscode安装C++扩展（C/C++）</li><li>配置lanuch.json和tasks.json文件。以下是标准的launch.json文件和tasks.json文件<pre class="line-numbers language-json" data-language="json"><code class="language-json">lanuch.json<span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>        <span class="token punctuation">{</span>            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"生成和调试活动文件"</span><span class="token punctuation">,</span>             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>            <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/${fileBasenameNoExtension}.exe"</span><span class="token punctuation">,</span>            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>            <span class="token property">"stopAtEntry"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>            <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}"</span><span class="token punctuation">,</span>            <span class="token property">"environment"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>            <span class="token property">"externalConsole"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>            <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span> <span class="token comment">//调试模式</span>            <span class="token property">"miDebuggerPath"</span><span class="token operator">:</span> <span class="token string">"D:\\MinGW\\bin\\gdb.exe"</span><span class="token punctuation">,</span>            <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">"g++"</span><span class="token punctuation">,</span>            <span class="token property">"setupCommands"</span><span class="token operator">:</span> <span class="token punctuation">[</span>                <span class="token punctuation">{</span>                    <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"为 gdb 启用整齐打印"</span><span class="token punctuation">,</span>                    <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"-enable-pretty-printing"</span><span class="token punctuation">,</span>                    <span class="token property">"ignoreFailures"</span><span class="token operator">:</span> <span class="token boolean">false</span>                <span class="token punctuation">}</span>            <span class="token punctuation">]</span>        <span class="token punctuation">}</span>    <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ol><pre class="line-numbers language-json" data-language="json"><code class="language-json">tasks.json<span class="token punctuation">{</span>    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>    <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>        <span class="token punctuation">{</span>            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>            <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"g++"</span><span class="token punctuation">,</span>            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"D:\\MinGW\\bin\\g++.exe"</span><span class="token punctuation">,</span>            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>                <span class="token string">"-g"</span><span class="token punctuation">,</span>                <span class="token string">"${file}"</span><span class="token punctuation">,</span>                <span class="token string">"-o"</span><span class="token punctuation">,</span>                <span class="token string">"${workspaceFolder}\\${fileBasenameNoExtension}.exe"</span>            <span class="token punctuation">]</span><span class="token punctuation">,</span>            <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"D:\\MinGW\\bin"</span>            <span class="token punctuation">}</span><span class="token punctuation">,</span>            <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token punctuation">[</span>                <span class="token string">"$gcc"</span>            <span class="token punctuation">]</span><span class="token punctuation">,</span>            <span class="token property">"group"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>            <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"调试器生成的任务。"</span> <span class="token comment">//注意和lanuch.json中的文件匹配</span>        <span class="token punctuation">}</span><span class="token punctuation">,</span>    <span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>然后就是写代码编译生成可执行文件了。这部分和g++编译器的内容相关。后面继续学习g++编译器。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Visual-Studio-Code-配置c-编译环境&quot;&gt;&lt;a href=&quot;#Visual-Studio-Code-配置c-编译环境&quot; class=&quot;headerlink&quot; title=&quot;Visual Studio Code 配置c++编译环境&quot;&gt;&lt;/a&gt;Visu</summary>
+      
+    
+    
+    
+    <category term="Software" scheme="http://frankmartinem.github.io/categories/Software/"/>
+    
+    <category term="Coding" scheme="http://frankmartinem.github.io/categories/Software/Coding/"/>
+    
+    
+    <category term="software setting" scheme="http://frankmartinem.github.io/tags/software-setting/"/>
+    
+    <category term="c++" scheme="http://frankmartinem.github.io/tags/c/"/>
+    
+    <category term="vscode" scheme="http://frankmartinem.github.io/tags/vscode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Optimal Linear Estimation</title>
+    <link href="http://frankmartinem.github.io/2021/05/28/Optimal-Linear-Estimation/"/>
+    <id>http://frankmartinem.github.io/2021/05/28/Optimal-Linear-Estimation/</id>
+    <published>2021-05-28T14:50:27.000Z</published>
+    <updated>2021-08-13T12:21:59.952Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Optimal-Linear-Estimation"><a href="#Optimal-Linear-Estimation" class="headerlink" title="Optimal Linear Estimation"></a>Optimal Linear Estimation</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最优线性估计算法是神经解码中一种比较常用的算法。在算法刚提出来的时候，其解码精度和解码速度都属于较高的水准，因此在脑机接口实验中应用广泛。随着神经网络的兴起以及传统机器学习算法的更新，BCI领域用来解码的算法也越来越多，例如KF，UKF，RNN，CNN等。OLE尽管计算精度不如目前的算法，但是计算量小，反馈迅速。因此目前在线的BCI实验OLE的应用仍然较多。</p><h2 id="算法推导"><a href="#算法推导" class="headerlink" title="算法推导"></a>算法推导</h2><p>OLE算法是PVA算法的改进，PVA算法在之前的Blog中有提到，是BCI中应用最早的算法。但是PVA有自己的缺陷，即很依赖数据的质量。这里的质量指的是用于解码的神经元集群的偏好方向分布。如果偏好方向的分布不均匀，朝某个方向的神经元占大多数，那么解码得到的方向就会偏向于这个方向，导致朝其他方向的运动很困难。为了解决这个问题，Chase等人提出了对于PVA算法的改进方法，即OLE算法[1]。<br>OLE算法的核心思想就是利用线性插值的方法，把神经元的偏好方向调整到尽量在各个方向都是均匀分布的。我们假设有2个神经元，偏好方向如图1中红色和蓝色的虚线所示。当朝各个方向运动时，神经元的发放率变化程度会不一样。当朝着神经元偏好方向运动时，神经元会更活跃，朝反方向运动时，会更加被抑制。但是当朝着垂直于偏好方向的方向运动时，神经元的发放率不会有明显变化，此时，解码误差会很大，或者说，很难解码到朝这个方向的运动。<br>为了便于理解这个问题，我们可以用一个更极端的假设，即所有神经元的偏好方向都朝向x轴正方向，那么此时对于y轴的运动，是无法通过神经元解码得到的。PVA的计算公式里，y轴运动的参数$b_1$是0。这里有一个需要理解的概念，即神经元集群的解码，不是取决于神经元的发放率，而是发放率的变化。朝哪个方向运动能有神经元有强烈的发放率变化，那么朝这个方向的运动解码就准确。<br><img src="/img/Optimal-Linear-Estimation-1.png" alt="图1: Bias Preferred Direction"><br>为了解决上述问题，Chase等人提出了OLE算法，具体的计算方法如下：<br>假设神经元的发放率为$r(t)$。神经元的偏好方向矩阵为$B$，当前的运动方向为$d(t)$。那么有：<br>$$r(t) = B * d(t) + \epsilon(t) $$<br>其中$\epsilon(t)$表示$t$时刻的噪声。假设神经元的个数为$N$，那么$r(t) \in R^{Nx1}$。假设解码的维度为$d$，那么$B \in R^{Nx(d+1)}$。这里加1表示常数项。<br>那么，预测的运动方向为：<br>$$d_{pred}(t) = (B’B)^{-1}B’r(t)$$<br>以上就是OLE算法的计算内容。和PVA算法比较，似乎没什么太大的差别。但是思想是不同的。<br>首先，PVA的计算，前提假设就包括了神经元的分布是均匀的。体现在这里，即$B’B=I$，其中$I$表示单位矩阵。那么上述公式可以写为：$d_{pred}(t) = B’r(t)$。即PVA的计算方法，单独计算每个神经元的发放率，然后计算在当前偏好方向的投影，然后求和之后得到预测的运动方向。<br>对于OLE的计算，更加像是先计算了神经元分布的均匀度。然后根据不同方向的运动权重重新分布当前的偏好方向。使得神经元分布更加均匀。即$B’B$这个矩阵的计算值，也就是运动维度的协方差。这里举个例子，假设所有神经元的偏好方向都是x轴正方向，那么$B’B=[[1, 1], [0, 0]]$。 这个时候x轴和y轴的运动都会存在。即我们把神经元的偏好方向从x轴正方向旋转了45度。Chase的文章中的图可以很好的解释这个原理：<br><img src="/img/Optimal-Linear-Estimation-2.png" alt="图2: Optimal Prefered Direction"><br>需要注意的是，$B$矩阵的计算方法和PVA算法是一致的。<br>以上就是OLE算法的计算过程了，OLE的计算方法和PVA很像，但是解决了神经元分布不均匀的问题。这个问题在BCI中很常见，所以OLE相较于PVA，效果一般都是会更好的。还有一种改进版的OLE算法-‘full OLE’。之前介绍的这种是’minimal OLE’。 ‘full OLE’ 相较于’minimal OLE’的区别在于其假设了神经信号中存在了同源或相似的噪声。那么在计算过程中，这种噪声会体现在解码的结果上，导致运动方向产生误差。其改进方法也很简单，只是在预测公式中，加入了所有通道神经元的协方差矩阵，如下：<br>$$d_{pred}(t) = (B’\Sigma B)^{-1}B’r(t)$$<br>这里的$\Sigma$就是协方差矩阵，如果神经信号之间没有相关性，即没有同源噪声的话，$\Sigma = I$。也就是’minial OLE’的计算方法了。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>后续会附上代码链接</p><p>[1]    S. M. Chase, A. B. Schwartz, and R. E. Kass, “Bias, optimal linear estimation, and the differences between open-loop simulation and closed-loop performance of spiking-based brain–computer interface algorithms,” Neural networks, vol. 22, no. 9, pp. 1203-1213, 2009.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Optimal-Linear-Estimation&quot;&gt;&lt;a href=&quot;#Optimal-Linear-Estimation&quot; class=&quot;headerlink&quot; title=&quot;Optimal Linear Estimation&quot;&gt;&lt;/a&gt;Optimal Lin</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
+    
+    
+    <category term="optimal linear estimation" scheme="http://frankmartinem.github.io/tags/optimal-linear-estimation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU RVPN initialize failed</title>
+    <link href="http://frankmartinem.github.io/2021/05/03/ZJU%20RVPN%20Initialize%20Failed/"/>
+    <id>http://frankmartinem.github.io/2021/05/03/ZJU%20RVPN%20Initialize%20Failed/</id>
+    <published>2021-05-03T16:29:42.000Z</published>
+    <updated>2021-08-13T12:23:37.534Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="ZJU-RVPN-初始化失败的解决办法"><a href="#ZJU-RVPN-初始化失败的解决办法" class="headerlink" title="ZJU RVPN 初始化失败的解决办法"></a>ZJU RVPN 初始化失败的解决办法</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在 macOS系统，遇见easyconnect一直提示初始化失败的问题。重新安装后仍旧不能解决问题。后发现是macOS系统开机时禁止启动了两个easyconnect的进程。分别为：</p><ol><li>com.sangfor.EasyMonitor.plist</li><li>com.sangfor.ECAgentProxy.plist<br>禁止后easyconnect无法启动代理，连接校内网络</li></ol><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>用软件Tencent Lemon设置开机启动项，在“未知应用“选项中找到对应的进程，打开开机启动项。然后重启电脑，即可解决问题</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;ZJU-RVPN-初始化失败的解决办法&quot;&gt;&lt;a href=&quot;#ZJU-RVPN-初始化失败的解决办法&quot; class=&quot;headerlink&quot; title=&quot;ZJU RVPN 初始化失败的解决办法&quot;&gt;&lt;/a&gt;ZJU RVPN 初始化失败的解决办法&lt;/h2&gt;&lt;h3 i</summary>
+      
+    
+    
+    
+    <category term="Software" scheme="http://frankmartinem.github.io/categories/Software/"/>
+    
+    
+    <category term="software usage" scheme="http://frankmartinem.github.io/tags/software-usage/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Berkeley-CS-61A</title>
+    <link href="http://frankmartinem.github.io/2020/05/16/Berkeley-CS-61A/"/>
+    <id>http://frankmartinem.github.io/2020/05/16/Berkeley-CS-61A/</id>
+    <published>2020-05-16T15:01:22.000Z</published>
+    <updated>2021-08-13T12:21:07.237Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Berkeley-CS-61C"><a href="#Berkeley-CS-61C" class="headerlink" title="Berkeley CS 61C"></a>Berkeley CS 61C</h1><h2 id="Lecture-1"><a href="#Lecture-1" class="headerlink" title="Lecture-1"></a>Lecture-1</h2><ol><li>不是所有的问题都能用计算机解决，也不是所有的问题，用计算机解决更加方便</li><li>学会抽象的看待事物，不需要了解其中的详细构造</li><li></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Berkeley-CS-61C&quot;&gt;&lt;a href=&quot;#Berkeley-CS-61C&quot; class=&quot;headerlink&quot; title=&quot;Berkeley CS 61C&quot;&gt;&lt;/a&gt;Berkeley CS 61C&lt;/h1&gt;&lt;h2 id=&quot;Lecture-1&quot;&gt;&lt;a</summary>
+      
+    
+    
+    
+    <category term="Lecture" scheme="http://frankmartinem.github.io/categories/Lecture/"/>
+    
+    
+    <category term="public lecture" scheme="http://frankmartinem.github.io/tags/public-lecture/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linear Square Method</title>
+    <link href="http://frankmartinem.github.io/2020/04/17/Linear-Square-Method/"/>
+    <id>http://frankmartinem.github.io/2020/04/17/Linear-Square-Method/</id>
+    <published>2020-04-16T23:09:41.000Z</published>
+    <updated>2021-08-13T12:21:43.942Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h1><p>这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。</p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最小二乘法应该是我接触的最早的优化方法，也是求解线性回归的一种方法。线性回归的主要作用是用拟合的方式，求解两组变量之间的线性关系（当然也可以不是线性的，那就是另外的回归方法了）。也就是把一个系统的输出写成输入的线性组合的形式。而这组线性关系的参数求解方法，就是最小二乘法。</p><p>我们从最简单的线性回归开始，即输入和输出都是1维的。此时，最小二乘法也是最简单的。</p><p>假设有输入信号$x = {x_0, x_1, …, x_t}$，同时输出信号为$y = {y_0, y_1, …, y_t}$，我们假设输入信号$x$和输出信号$y$之间的关系可以写成如下形式：</p><p>$$y_{pre} = ax+b \tag{1}$$</p><p>我们需要求解最优的$a$和$b$，这里最优的含义就是，预测的最准确，也就是预测值和真实值的误差最小，即：</p><p>$$arg, min_{a, b}{\sum_{i=0}^{t}{(y_i-ax_i-b)^2}} \tag{2}$$</p><p>我们假设误差函数为：</p><p>$$err = \sum_{i=0}^{t}{(y_i-ax_i-b)^2} \tag{3}$$</p><p>$err$对$a$和$b$分别求偏导：</p><p>$$\frac{\partial{err}}{\partial{a}} = \sum_{i=0}^{t}{2(ax_i+b-y_i)*x_i} \tag{4}$$</p><p>$$\frac{\partial{err}}{\partial{b}} = \sum_{i=0}^{t}{2(ax_i+b-y_i)} \tag{5}$$</p><p>根据极值定理，有$$\frac{\partial{err}}{\partial{a}}=0$$，且$$\frac{\partial{err}}{\partial{b}}=0$$，所以有：</p><p>$$\sum_{i=0}^{t}{2(ax_i+b-y_i)} = 0 \tag{6}$$</p><p>$$\sum_{i=0}^{t}(y_i - ax_i) = \sum_{i=0}^{t}{b} \tag{7}$$</p><p>$$\sum_{i=0}^{t}{y_i} - a * \sum_{i=0}^{t}{x_i} = (t+1)*b \tag{8}$$</p><p>$$b = \bar{y} - a\bar{x} \tag{9}$$</p><p>其中，$\bar{y}$表示$y$的均值，$\bar{x}$表示$x$的均值。将Eq(9)代入Eq(4)，有：</p><p>$$\sum_{i=0}^{t}{2(ax_i+b-y_i)*x_i} = 0 \tag{10}$$</p><p>$$\sum_{i=0}^{t}{ax_i^2} + \sum_{i=0}^{t}bx_i = \sum_{i=0}^{t}{y_ix_i} \tag{11}$$</p><p>$$a\sum_{i=0}^{t}x_i^2 + \bar{x}(\bar{y}-a\bar{x}) = \sum_{i=0}^{t}{x_iy_i} \tag{12}$$</p><p>$$a(\sum_{i=0}^{t}{x_i^2 - \bar{x}^2}) = \sum_{i=0}^{t}{x_iy_i}-\bar{x}\bar{y} \tag{13}$$</p><p>$$a = \frac{\sum_{i=0}^{t}{x_iy_i}-\bar{x}\bar{y}}{\sum_{i=0}^{t}{x_i^2 - \bar{x}^2}} \tag{14}$$</p><p>所以Eq(14)和Eq(9)就是最简单的最小二乘法的计算方法。</p><p>然后我们进一步考虑，如果输入和输出是多维数据，要如何计算。</p><p>假设输入信号为$X \in R^{m<em>t}$， 输出信号为$Y \in R^{n</em>t}$，那么有：</p><p>$$Y = W_0X+B = WX_1 \tag{15}$$</p><p>其中$W_0 \in R^{n<em>m}$是回归矩阵的系数，$B \in R^{1</em>t}$表示常数项，这里可以直接写到$W$矩阵中。$W \in R^{(m+1)*t}$，$X_1 \in R^{(m+1)*t}$<br>$$<br>X_1 = \begin{bmatrix}<br>x_{11} &amp;x_{12} &amp; … &amp;x_{1t}\<br>x_{11} &amp;x_{12} &amp; … &amp;x_{1t}\<br>{\vdots} &amp;{\vdots} &amp;… &amp;{\vdots}\<br>x_{m1} &amp;x_{m2} &amp;… &amp;x_{mt}\<br>1 &amp;1 &amp;… &amp;1\<br>\end{bmatrix} \tag{16}<br>$$</p><p>所以有：</p><p>$$\arg min_{W}({Y-WX_1}) \tag{17}$$</p><p>假设误差函数为$E$，则有：</p><p>$$E = (Y-WX_1)(Y-WX_1)^T = YY^T - WX_1Y^T-YX_1^TW^T+WX_1X_1^TW^T \tag{18}$$</p><p>计算$E$对$W$的偏导，则该偏导等于0：</p><p>$$\frac{\partial{E}}{\partial{W}} = -X_1Y^T-X_1^TY + 2WXX^T = 0 \tag{19}$$</p><p>所以有：</p><p>$$W = (X_1X_1^T)^{-1}X_1Y^T \tag{20}$$</p><p>至此矩阵形式的最小二乘法（多元线性回归的参数解法）推导完成。注意这里的$X_1$和$Y$中的数据排列方式为：每一行是一个维度的数据，每一列表示一个时间点。如果不是这么记录的话，那么公式需要加上转置。</p><p>后续会附上代码链接</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;最小二乘法&quot;&gt;&lt;a href=&quot;#最小二乘法&quot; class=&quot;headerlink&quot; title=&quot;最小二乘法&quot;&gt;&lt;/a&gt;最小二乘法&lt;/h1&gt;&lt;p&gt;这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。&lt;/p&gt;
+&lt;h2 id=&quot;背景</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
+    
+    
+    <category term="linear regression" scheme="http://frankmartinem.github.io/tags/linear-regression/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Wiener-Filter</title>
+    <link href="http://frankmartinem.github.io/2020/04/13/Wiener-Filter/"/>
+    <id>http://frankmartinem.github.io/2020/04/13/Wiener-Filter/</id>
+    <published>2020-04-13T15:32:08.000Z</published>
+    <updated>2021-08-13T12:23:03.668Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Wiener-Filter"><a href="#Wiener-Filter" class="headerlink" title="Wiener Filter"></a>Wiener Filter</h1><p>因为最近看文章接触了维纳滤波，所以这里写一下Weiner Filter的一些简单理解和推导。</p><h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>维纳滤波是一种在含噪声的时序信号把信号提取出来的滤波器，其基本框图如下：</p><p><img src="/img/Wiener-Filter-1.jpg" alt="图-1：简单的Wiener-Filter"></p><p>简单的维纳滤波其实就是通过一个FIR滤波器，去除噪声的过程。在这里，$h$的作用也可以理解为： 通过训练集的数据对信号和噪声的建模，然后通过前几个点的信息，预测当前时刻的噪声信号所占的比例，然后去除掉，剩下的就是预测的时序信号了。维纳滤波作为一种使用很广泛的滤波器，其变化的形式也有很多种，可以是单输入输出的，也可以是多输入输出的。$h$所表示的变换也可以写成非线性；$h$可以是有限长的FIR滤波器，也可以是无限长的IIR滤波器。要取决于当前你所解决的问题。但是维纳滤波的基本思想还是一致的。通过滤波（矩阵或者其他模型的形式）来从信号和噪声的混合中提取信号。所以维纳滤波的核心，就是计算这个滤波器（矩阵$h$或者模型的参数）。也就是解Wiener-Hopf方程。</p><p>本文用比较简单的单输入输出，且只考虑有限长滤波（即认为当前时刻的信号只和前有限个时间点的信号相关）。</p><h2 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h2><p>首先，对于图1中的滤波器：</p><p>$$y(n) = x(n) * h(n) = (s(n)+v(n))*h(n) \tag{1}$$</p><p>其中$*$表示卷积，$x(n)$表示输入信号， $y(n)$表示输出信号， $s(n)$表示输入信号中，有用的信号部分；$v(n)$表示输入信号中的噪声部分。</p><p>维纳滤波的目标是，保证输出$y(n)$和真实信号$s(n)$的差别最小，由于$y(n)$和$s(n)$是时序信号，所以要保证两者的均方误差最小，所以有：</p><p>$$E{e^2(n)} = E{(y(n)-s(n))^2} = E{(x(n)*h(n)-s(n))^2} \tag{2} $$</p><p>即求使得Eq(2)最小的$h$。所以$E{e^2}$对$h$求偏导。有：</p><p>$$\frac{\partial{E{e^2(n)}}}{\partial{h}} = 2E{e(n) * \frac{\partial{e(n)}}{\partial{h}}} = 0 \tag{3} $$</p><p>$$\frac{\partial{E{e^2(n)}}}{\partial{h}} = 2E{[\sum_{m=0}^{N-1}{h(m)x(n-m) - s(n)}]x(n-j)}, j = 0, 1, … , N-1 \tag{4} $$</p><p>$$\frac{\partial{E{e^2(n)}}}{\partial{h}} = 2\sum_{m=1}^{N-1}{h(m)}E{x(n-j)x(n-m)} - 2E{s(n)x(n-j)} = 0, j = 0, 1, …, N-1 \tag{5} $$</p><p>我们设$x$和$s$的相关系数为$R_{xs}$，则有：</p><p>$$R_{xs}(j)=\sum_{m=0}^{N-1}{h(m)R_{xx}(j-m)}, j=0,1,…,N-1 \tag{6}$$</p><p>其中，$R_{xx}(j-m)$表示$x(n-j)$和$x(n-m)$的相关系数，这里$m$是固定的，$j$是变化的。且$m&gt;=0$，$R_{xs}(j)$表示$x(n-j)$和$s(n)$的相关系数。上述公式中，$n$表示的是时序信号中的时间点。</p><p>然后，根据Eq(6)，可以得到$N$个线性方程：<br>$$<br>\begin{cases}<br>R_{xs}(0)=h(0)R_{xx}(0)+h(1)R_{xx}(1)+…+h(N-1)R_{xx}(N-1)\<br>R_{xs}(1)=h(1)R_{xx}(1)+h(0)R_{xx}(0)+…+h(N-1)R_{xx}(N-2)\<br>…\<br>R_{xs}(N-1)=h(N-1)R_{xx}(N-1)+h(N-2)R_{xx}(N-2)+…+h(0)R_{xx}(0)\<br>\end{cases} \tag{7}<br>$$<br>写成矩阵形式，有：</p><p>$$\displaystyle \boldsymbol{R_{xx}H}=\boldsymbol{R_{xs}} \tag{8}$$</p><p>其中， $\displaystyle \boldsymbol{H} = [h(0), h(1),…,h(N-1)]^T$是需要求的滤波器参数</p><p>$$\displaystyle \boldsymbol{R_{xs}} = [R_{xs}(0),R_{xs}(1), …, R_{xs}(N-1)]^T$$是$x$和$s$的相关系数<br>$$<br>\displaystyle \boldsymbol{R_{xx}} = \begin{bmatrix}<br>R_{xx}(0)&amp;R_{xx}(1)&amp;…&amp;R_{xx}(N-1)\<br>R_{xx}(1)&amp;R_{xx}(0)&amp;…&amp;R_{xx}(N-2)\<br>{\vdots}&amp;{\vdots}&amp;…&amp;{\vdots}&amp;\<br>R_{xx}(N-1)&amp;R_{xx}(N-2)&amp;…&amp;R_{xx}(0)\<br>\end{bmatrix} \tag{9}<br>$$</p><p>所以根据Eq(8)可以求得：</p><p>$$\displaystyle \boldsymbol{H} = \boldsymbol{R_{xx}^{-1}R_{xs}} \tag{10}$$</p><p>此时，信号的均方误差最小，根据Eq(2)，可得：</p><p>$$E{e^2(n)} = E{(s(n)-\sum_{m=0}^{N-1}h(m)x(n-m))^2} \tag{11}$$</p><p>$$E{e^2(n)} = E{s^2(n) - 2s(n)\sum_{m=0}^{N-1}h(m)x(n-m)+\sum_{m=0}^{N-1}\sum_{r=0}^{N-1}{h(m)x(n-m)h(r)x(n-r)}}$$</p><p>$$E{e^2(n)}=R_{ss}(0)-2\sum_{m=0}^{N-1}{h(m)R_{xs}(m)+\sum_{m=0}^{N-1}{h(m)}\sum_{r=0}^{N-1}{h(r)R_{xx}(n-r)}}$$</p><p>根据Eq(5)，可得：</p><p>$$E{e^2(n)} = R_{ss}(0) - \sum_{m=0}^{N-1}{h(m)R_{xs}(n-m)} \tag{12}$$</p><p>假设信号$s(n)$和噪声$v(n)$互相独立，那么有：</p><p>$$R_{sv}= R_{vs} = 0$$</p><p>$$R_{xs} = R_{ss} + R_{vs} = R_{ss}$$</p><p>$$R_{xx} = R_{ss}+R_{sv}+R_{vs}+R_{vv} = R_{ss}+R_{vv}$$</p><p>则，根据Eq(12)，有：</p><p>$$E{e^2(n)} = R_{ss}(0) - \sum_{m=0}^{N-1}{h(m)R_{ss}(m)} \tag{14}$$</p><p>至此，最简单的维纳滤波的基本公式推导完成，如果涉及到多输入多输出的维纳滤波，会更加复杂，这里不做推导。后续会附上代码链接</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Wiener-Filter&quot;&gt;&lt;a href=&quot;#Wiener-Filter&quot; class=&quot;headerlink&quot; title=&quot;Wiener Filter&quot;&gt;&lt;/a&gt;Wiener Filter&lt;/h1&gt;&lt;p&gt;因为最近看文章接触了维纳滤波，所以这里写一下Wein</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
+    
+    
+    <category term="wiener filter" scheme="http://frankmartinem.github.io/tags/wiener-filter/"/>
+    
+  </entry>
+  
+</feed>
