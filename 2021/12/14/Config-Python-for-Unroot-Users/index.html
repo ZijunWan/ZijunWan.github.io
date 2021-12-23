@@ -393,8 +393,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/software-setting/">
-                                <span class="chip bg-color">software setting</span>
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
                             </a>
                         
                     </div>
@@ -405,11 +405,7 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Software/" class="post-category">
-                                Software
-                            </a>
-                        
-                            <a href="/categories/Software/Linux/" class="post-category">
+                            <a href="/categories/Linux/" class="post-category">
                                 Linux
                             </a>
                         
@@ -429,14 +425,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-14
+                    2021-12-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    989
+                    999
                 </div>
                 
 
@@ -470,13 +466,14 @@
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol>
 <li>下载python source code到home/your name 文件夹：</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这里以python-3.10.1为例，可以从<a target="_blank" rel="noopener" href="https://www.python.org/downloads/source/">python官网</a>下载对应版本的源代码</p>
 <ol start="2">
 <li>解压文件</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd download dir</span><br><span class="line">tar -xzvf Python-3.10.1.tgz</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd download dir
+tar -xzvf Python-3.10.1.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ol start="3">
 <li><p>下载好以后，如果直接安装，会有以下的问题：首先是openssl，用于软件的安全通信，避免被窃听的一个toolkit。一般是系统级的app；然后是zlib，这个组件用于数据压缩和解压，如果需要使用科学计算的库，那么zlib是必须的；最后是libffi，相当于C的编译器，同样也是用于科学计算。上述组件均可以通过管理员sudo，yum安装。但是如果没有管理员权限，那么需要自行安装。</p>
@@ -484,35 +481,61 @@
 <li><p>安装openssl</p>
 <ol>
 <li><p>下载并解压<a target="_blank" rel="noopener" href="https://www.openssl.org/source/">openssl</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.openssl.org/source/openssl-3.0.0.tar.gz</span><br><span class="line">tar -xzvf openssl-3.0.0.tar.gz</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://www.openssl.org/source/openssl-3.0.0.tar.gz
+tar -xzvf openssl-3.0.0.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li><p>编译并安装</p>
 </li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd openssl-3.0.0.tar.gz</span><br><span class="line">./config --prefix=/home/your name/openssl_dir</span><br><span class="line">make -j48 </span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd openssl-3.0.0.tar.gz
+./config --prefix=/home/your name/openssl_dir
+make -j48 
+make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>安装<a target="_blank" rel="noopener" href="http://www.zlib.net/">zlib</a></p>
 <ol>
 <li>下载，解压，编译并安装</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.zlib.net/zlib-1.2.11.tar.gz</span><br><span class="line">tar -xzvf zlib-1.2.11.tar.gz</span><br><span class="line">cd zlib-1.2.11.tar.gz</span><br><span class="line">./configure --prefix=/home/your name/zlib_dir</span><br><span class="line">make -j48</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget http://www.zlib.net/zlib-1.2.11.tar.gz
+tar -xzvf zlib-1.2.11.tar.gz
+cd zlib-1.2.11.tar.gz
+./configure --prefix=/home/your name/zlib_dir
+make -j48
+make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>安装<a target="_blank" rel="noopener" href="https://github.com/libffi/libffi/releases">libffi</a></p>
 <ol>
 <li>下载，解压，编译并安装</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz</span><br><span class="line">tar -xzvf libffi-3.4.2.tar.gz</span><br><span class="line">cd libffi-3.4.2.tar.gz</span><br><span class="line">./configure --prefix=/home/your name/libffi</span><br><span class="line">make -j48</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz
+tar -xzvf libffi-3.4.2.tar.gz
+cd libffi-3.4.2.tar.gz
+./configure --prefix=/home/your name/libffi
+make -j48
+make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>将上述安装文件的路径写入环境变量</p>
 </li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/your name/libffi_dir/lib/pkgconfig</span><br><span class="line">export LD_LIBRARY_PATH=$&#123;LD_LIBRARY_PATH&#125;:/home/your_name/openssl_dir/lib:/home/your name/zlib_dir/lib:/home/your_name/libffi_dir/lib</span><br><span class="line">export PKG_CONFIG_PATH=/home/jacob/libffi/lib/pkgconfig</span><br><span class="line">export CFLAGS=-I/home/your name/libffi_dir/include</span><br><span class="line">export LDFLAGS=-L/home/your name/libffi_dir/lib</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/your name/libffi_dir/lib/pkgconfig
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/your_name/openssl_dir/lib:/home/your name/zlib_dir/lib:/home/your_name/libffi_dir/lib
+export PKG_CONFIG_PATH=/home/jacob/libffi/lib/pkgconfig
+export CFLAGS=-I/home/your name/libffi_dir/include
+export LDFLAGS=-L/home/your name/libffi_dir/lib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="8">
 <li>进入python的setup文件，修改部分编译信息</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd python_path/Modules/</span><br><span class="line">vim Setup.dist</span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消下面的注释</span></span><br><span class="line">SSL=/home/your name/openssl_dir</span><br><span class="line">_ssl _ssl.c -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl -L$(SSL)/lib -lssl -lcrypto</span><br><span class="line">zlib zlibmodule.c -I/home/your name/zlib_dir/include -L/home/your name/zlib_dir/lib -lz</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd python_path/Modules/
+vim Setup.dist
+# 取消下面的注释
+SSL=/home/your name/openssl_dir
+_ssl _ssl.c -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl -L$(SSL)/lib -lssl -lcrypto
+zlib zlibmodule.c -I/home/your name/zlib_dir/include -L/home/your name/zlib_dir/lib -lz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="9">
 <li>编译python代码，这里需要gcc编译器，一般Linux发行版都自带gcc编译器，如果没有安装，请联系管理员。同时，编译过程需要配置特定的参数</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd Python-3.10.1</span><br><span class="line">./configure LDFLAGS=&quot;-L/home/your name/libffi_dir/lib64 -Wl,--rpath=/home/your name/libffi_dir/lib64&quot; CFLAGS=&quot;-I/home/your name/libffi_dir/include&quot; PKG_CONFIG_PATH=&quot;$&#123;libffi&#125;/lib/pkgconfig&quot; --prefix=/home/your name/your path --with-openssl=/home/your name/openssl_dir</span><br><span class="line">make # make -j48 这里不推荐，因为会编译所有的test file，耗时较长，机器快的话也要20min-30min左右</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd Python-3.10.1
+./configure LDFLAGS="-L/home/your name/libffi_dir/lib64 -Wl,--rpath=/home/your name/libffi_dir/lib64" CFLAGS="-I/home/your name/libffi_dir/include" PKG_CONFIG_PATH="${libffi}/lib/pkgconfig" --prefix=/home/your name/your path --with-openssl=/home/your name/openssl_dir
+make # make -j48 这里不推荐，因为会编译所有的test file，耗时较长，机器快的话也要20min-30min左右
+make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -523,7 +546,8 @@
 <li><a target="_blank" rel="noopener" href="https://hellovimo.github.io/uvm_testbench_gen/localpythoninstall.html">Github Pages</a></li>
 </ol>
 <p>那么，针对Introduction提出的问题，每个人都需要自定义自己的python环境，是否有更好的解决方法呢。答案是<strong>有的</strong>，那就是由管理员安装python到usr目录。然后每个人可以在home文件夹新建自己的虚拟环境。只需要使用pip3命令即可：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user virtualenv</span><br><span class="line">python3 -m venv /home/your name/python_dir</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">python3 -m pip install --user virtualenv
+python3 -m venv /home/your name/python_dir<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -588,8 +612,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/software-setting/">
-                                    <span class="chip bg-color">software setting</span>
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
                                 </a>
                             
                         </div>
@@ -1078,7 +1102,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">24.6k</span>
+                        class="white-color">26.3k</span>
             
             
             

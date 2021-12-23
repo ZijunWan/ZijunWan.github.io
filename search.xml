@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Generative Adversarial Nets</title>
+      <link href="/2021/12/23/Generative-Adversarial-Nets/"/>
+      <url>/2021/12/23/Generative-Adversarial-Nets/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Generative-Adversarial-Nets"><a href="#Generative-Adversarial-Nets" class="headerlink" title="Generative Adversarial Nets"></a>Generative Adversarial Nets</h1><p>参考文献： Goodfellow et al., 2014. Generative Adversarial Nets.</p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文将介绍对抗生成网络（GAN）的基础框架，以及主要的推导过程。</p><p>首先是GAN的基本概念：GAN的主要思想是博弈。利用生成器$G$和判别器$D$的博弈。来使得生成器能够准确生成出类似于原始数据分布的样本；同时在博弈过程中，使得判别器能更加准确的区分出原始数据和生成数据。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>假设有一组样本$data$，其数据分布为$p_{data}$。生成器$G$根据一组噪声数据$z$，其分布为$p_z$，生成一组数据$G(z)$，判别器为$D$。其中生成器和判别器的参数分别为$\theta_{g}$和$\theta_{d}$。<br>那么，生成器的目标是使得生成的数据$G(z)$更接近真实数据分布$p_{data}$，也就是说$log[D(G(z))]$要尽可能大。然后对于判别器$D$，其对于真实数据的判别要更准确，即$log[D(x)]$要尽可能大。所以，根据上述问题可以构造以下条件：<br>$$\underset{G}{min} \underset{D}{max} E_{x \sim p_{data}(x)}[log(D(x))] + E_{z \sim p_{z}[log(1-D(G(z)))]}$$</p><p>Goodfellow的论文中给出了下面的图，可以解释GAN的迭代过程。蓝线是判别器输出的数据分布；绿线是生成器输出的数据分布；黑线是真实的数据分布；$z$是噪声数据，通过生成器映射到数据$x$。从而计算生成器输出的分布。在一开始，生成器$G$的输出分布和真实的分布差距很大，判别器可以很轻易的区分生成数据和真实数据；但是也仅限于中间的部分，对于两者重合的部分，判别器的区分效果并不好；然后在(b)图中，对判别器参数进行迭代优化（后面会证明，判别器的参数存在最优解），使得判别器的输出结果更加稳定平滑也更加准确；(c)图中迭代了生成器的参数，使得生成的数据更接近真实数据。如此循环迭代后，最理想的状态即是达到(d)图，判别器无法区分生成数据和真实数据，生成数据的分布和真实数据相等。<br><img src="/img/Generative-Adversarial-Nets-1.png" alt="图-1: GAN的迭代过程"></p><p>所以GAN的训练过程如图-2所示：<br><img src="/img/Generative-Adversarial-Nets-2.jpg" alt="图-2: GAN算法"></p><p>GAN的上述迭代过程能找到使得$G(z)$的分布$p_g$更接近$p_{data}$的最优解，必须满足以下条件：</p><ol><li>上述最优化问题有唯一解（全局最优解）$G^{*}$，且该解满足$p_g=p_{data}$</li><li>上述最优化问题最终收敛（条件-1的必要条件）</li></ol><p>要证明上述条件成立，可以先证明在生成器$G$固定时，判别器$D$的参数具有最优解（根据算法-1的迭代过程来推导）。证明如下：<br>$$V(G, D) = \int_{x}p_{data}(d)log(D(x))dx + \int_{z}p_z(z)log(1-D(G(z)))dz$$<br>$$=\int_{x}p_{data}(d)log(D(x)) + p_{g}p_g(x)log(1-D(x)) dx$$<br>（主要是第二项，这里并不是换元转换，因为$G$并不一定可逆，这里是基于Radon-Nikodym定理。具体证明方法这里不深究）<br>要使得$V(G, D)$取得最大值，$D(x)$就需要使函数$f(D) = p_{data}log(D) + p_{g}log(1-D)$取最大值，根据拉格朗日中值定理，可以计算得到：取最大值的$D(x)$应该满足$D^{*}(x) = \frac{p_{data}}{p_{data}+p_{g}}$。<br>所以，生成器$G$固定时，判别器$D$的参数具有最优解，该最优解满足$D(x) = \frac{p_{data}}{p_{data}+p_{g}}$</p><p>然后，需要证明当且仅当$p_g=p_{data}$时，训练函数$C(G) = \underset{D}{max}V(G, D)$取得全局最小值。证明如下：<br>当$p_g=p_{data}$，根据上述推导可知$D(x) = \frac{1}{2}$。带入到$V(G, D)$中，可得：<br>$$V(G, D^{<em>}) = \int_{x}p_{data}(x)log\frac{1}{2}+p_{g}(x)(1-\frac{1}{2})dx$$<br>$$ = -log(2)\int_{x}p_{data}(x)dx-log(2)\int_{x}p_{g}(x)dx$$<br>$$ = -log(2) - log(2) = -log(4)$$<br>（概率的积分是1）<br>所以当$p_g=p_{data}$时，训练函数的值是$-log(4)$，下面需要证明这是最小值，且只有$p_g=p_{data}$时条件才成立。于是我们假设$p_g \neq p_{data}$。但是判别器$D$仍旧取得最优解。所以有：<br>$$V(G, D^{</em>}) = \int_{x}p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= \int_{x}(log(2)-log(2))p_{data}(x) + p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + \int_{x}(log(2)-log(2))p_{g}(x) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(2)\int_{x}p_{g}(x)+p_{data}(x)dx + \int_{x}p_{data}(x)(log(2)+log(\frac{p_{data}}{p_{data}+p_{g}}))dx + \int_{x}p_{g}(log(2) + log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(4) + \int_{x}p_{data}(x)log(\frac{p_{data}}{(p_{data}+p_{g})/2})) + \int_{x}p_{g}(x)log(\frac{p_{g}}{(p_{data}//2+p_{g})/2})$$<br>根据KL散度的定义，可以得到：<br>$$V(G, D^{*}) = -log(4) + KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2})$$<br>由于$KL(p|q) \geq 0$，所以$V(G, D)$当且仅当$p_{data}=p_{g}$时取得最小值$-log(4)$。<br>($KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2}) = JSD(p_{data}|p_{g}$，论文中是根据Jensen–Shannon散度来计算的。结论是一致的)</p><p>最后是关于$C(G) = V(G, D)$的收敛的证明。论文中的证明主要是根据导数的特性，以及分布$p_{g}$属于凸函数的特点来证明的。</p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是最基础的GAN的概念以及推导过程。尽管已经证明了GAN的推导过程的可行性。但是在实际应用中，要使得GAN收敛并得到好的效果，还需要一些训练技巧。<br>首先是GAN的收敛问题，虽然已经证明GAN的迭代函数是收敛的，但是收敛的前提是生成器函数为凸函数。且由于神经网络迭代的特性。我们无法确定神经网络是通过何种策略调整，来达到纳什均衡的（也就是GAN有很好的表现的状态，论文中的观点）。<br>然后是$p_{g}$没办法显示表示，因为是生成器的输出。然后是$p_{data}$未知，虽然可以根据这一分布计算$D$的最优解，但是并没有办法求出具体数值。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Algorithm </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GAN </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2021/12/20/hello-world/"/>
       <url>/2021/12/20/hello-world/</url>
@@ -21,12 +46,10 @@
       <link href="/2021/12/14/Config-Python-for-Unroot-Users/"/>
       <url>/2021/12/14/Config-Python-for-Unroot-Users/</url>
       
-        <content type="html"><![CDATA[<h1 id="服务器非管理员配置python环境"><a href="#服务器非管理员配置python环境" class="headerlink" title="服务器非管理员配置python环境"></a>服务器非管理员配置python环境</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Linux服务器配置python环境时，默认的安装位置是”/usr/bin”。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol><li>下载python source code到home/your name 文件夹：</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz</span><br></pre></td></tr></table></figure><p>这里以python-3.10.1为例，可以从<a href="https://www.python.org/downloads/source/">python官网</a>下载对应版本的源代码</p><ol start="2"><li>解压文件</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd download dir</span><br><span class="line">tar -xzvf Python-3.10.1.tgz</span><br></pre></td></tr></table></figure><ol start="3"><li><p>下载好以后，如果直接安装，会有以下的问题：首先是openssl，用于软件的安全通信，避免被窃听的一个toolkit。一般是系统级的app；然后是zlib，这个组件用于数据压缩和解压，如果需要使用科学计算的库，那么zlib是必须的；最后是libffi，相当于C的编译器，同样也是用于科学计算。上述组件均可以通过管理员sudo，yum安装。但是如果没有管理员权限，那么需要自行安装。</p></li><li><p>安装openssl</p><ol><li><p>下载并解压<a href="https://www.openssl.org/source/">openssl</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.openssl.org/source/openssl-3.0.0.tar.gz</span><br><span class="line">tar -xzvf openssl-3.0.0.tar.gz</span><br></pre></td></tr></table></figure></li><li><p>编译并安装</p></li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd openssl-3.0.0.tar.gz</span><br><span class="line">./config --prefix=/home/your name/openssl_dir</span><br><span class="line">make -j48 </span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li><li><p>安装<a href="http://www.zlib.net/">zlib</a></p><ol><li>下载，解压，编译并安装</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.zlib.net/zlib-1.2.11.tar.gz</span><br><span class="line">tar -xzvf zlib-1.2.11.tar.gz</span><br><span class="line">cd zlib-1.2.11.tar.gz</span><br><span class="line">./configure --prefix=/home/your name/zlib_dir</span><br><span class="line">make -j48</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li><li><p>安装<a href="https://github.com/libffi/libffi/releases">libffi</a></p><ol><li>下载，解压，编译并安装</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz</span><br><span class="line">tar -xzvf libffi-3.4.2.tar.gz</span><br><span class="line">cd libffi-3.4.2.tar.gz</span><br><span class="line">./configure --prefix=/home/your name/libffi</span><br><span class="line">make -j48</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li><li><p>将上述安装文件的路径写入环境变量</p></li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/your name/libffi_dir/lib/pkgconfig</span><br><span class="line">export LD_LIBRARY_PATH=$&#123;LD_LIBRARY_PATH&#125;:/home/your_name/openssl_dir/lib:/home/your name/zlib_dir/lib:/home/your_name/libffi_dir/lib</span><br><span class="line">export PKG_CONFIG_PATH=/home/jacob/libffi/lib/pkgconfig</span><br><span class="line">export CFLAGS=-I/home/your name/libffi_dir/include</span><br><span class="line">export LDFLAGS=-L/home/your name/libffi_dir/lib</span><br></pre></td></tr></table></figure><ol start="8"><li>进入python的setup文件，修改部分编译信息</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd python_path/Modules/</span><br><span class="line">vim Setup.dist</span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消下面的注释</span></span><br><span class="line">SSL=/home/your name/openssl_dir</span><br><span class="line">_ssl _ssl.c -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl -L$(SSL)/lib -lssl -lcrypto</span><br><span class="line">zlib zlibmodule.c -I/home/your name/zlib_dir/include -L/home/your name/zlib_dir/lib -lz</span><br></pre></td></tr></table></figure><ol start="9"><li>编译python代码，这里需要gcc编译器，一般Linux发行版都自带gcc编译器，如果没有安装，请联系管理员。同时，编译过程需要配置特定的参数</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd Python-3.10.1</span><br><span class="line">./configure LDFLAGS=&quot;-L/home/your name/libffi_dir/lib64 -Wl,--rpath=/home/your name/libffi_dir/lib64&quot; CFLAGS=&quot;-I/home/your name/libffi_dir/include&quot; PKG_CONFIG_PATH=&quot;$&#123;libffi&#125;/lib/pkgconfig&quot; --prefix=/home/your name/your path --with-openssl=/home/your name/openssl_dir</span><br><span class="line">make # make -j48 这里不推荐，因为会编译所有的test file，耗时较长，机器快的话也要20min-30min左右</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是非管理员账户在home文件夹安装自己的python环境的方法。这种方法能安装简易的python环境，但是如果需要很复杂的计算，例如scikt，pytorch，tensorflow等强烈依赖底层C链接库的模块，那么上述方法或许可行。因为整个过程无非是把库文件的源代码安装到了home文件夹里，然后修改环境变量配置。但是如果真的是很复杂的编译和依赖，不建议使用上述方法。上述方法主要参考以下博客和文章：</p><ol><li><a href="https://blog.csdn.net/u012440550/article/details/109371016">CSDN</a></li><li><a href="https://stackoverflow.com/questions/65691539/locally-compiled-libffi-files-not-getting-picked-up-while-recompiling-python-3-p">Stackoverflow</a></li><li><a href="https://hellovimo.github.io/uvm_testbench_gen/localpythoninstall.html">Github Pages</a></li></ol><p>那么，针对Introduction提出的问题，每个人都需要自定义自己的python环境，是否有更好的解决方法呢。答案是<strong>有的</strong>，那就是由管理员安装python到usr目录。然后每个人可以在home文件夹新建自己的虚拟环境。只需要使用pip3命令即可：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user virtualenv</span><br><span class="line">python3 -m venv /home/your name/python_dir</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h1 id="服务器非管理员配置python环境"><a href="#服务器非管理员配置python环境" class="headerlink" title="服务器非管理员配置python环境"></a>服务器非管理员配置python环境</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Linux服务器配置python环境时，默认的安装位置是”/usr/bin”。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol><li>下载python source code到home/your name 文件夹：</li></ol><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这里以python-3.10.1为例，可以从<a href="https://www.python.org/downloads/source/">python官网</a>下载对应版本的源代码</p><ol start="2"><li>解压文件</li></ol><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd download dirtar -xzvf Python-3.10.1.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol start="3"><li><p>下载好以后，如果直接安装，会有以下的问题：首先是openssl，用于软件的安全通信，避免被窃听的一个toolkit。一般是系统级的app；然后是zlib，这个组件用于数据压缩和解压，如果需要使用科学计算的库，那么zlib是必须的；最后是libffi，相当于C的编译器，同样也是用于科学计算。上述组件均可以通过管理员sudo，yum安装。但是如果没有管理员权限，那么需要自行安装。</p></li><li><p>安装openssl</p><ol><li><p>下载并解压<a href="https://www.openssl.org/source/">openssl</a></p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://www.openssl.org/source/openssl-3.0.0.tar.gztar -xzvf openssl-3.0.0.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li><p>编译并安装</p></li></ol><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd openssl-3.0.0.tar.gz./config --prefix=/home/your name/openssl_dirmake -j48 make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>安装<a href="http://www.zlib.net/">zlib</a></p><ol><li>下载，解压，编译并安装</li></ol><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget http://www.zlib.net/zlib-1.2.11.tar.gztar -xzvf zlib-1.2.11.tar.gzcd zlib-1.2.11.tar.gz./configure --prefix=/home/your name/zlib_dirmake -j48make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>安装<a href="https://github.com/libffi/libffi/releases">libffi</a></p><ol><li>下载，解压，编译并安装</li></ol><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gztar -xzvf libffi-3.4.2.tar.gzcd libffi-3.4.2.tar.gz./configure --prefix=/home/your name/libffimake -j48make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>将上述安装文件的路径写入环境变量</p></li></ol><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/your name/libffi_dir/lib/pkgconfigexport LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/your_name/openssl_dir/lib:/home/your name/zlib_dir/lib:/home/your_name/libffi_dir/libexport PKG_CONFIG_PATH=/home/jacob/libffi/lib/pkgconfigexport CFLAGS=-I/home/your name/libffi_dir/includeexport LDFLAGS=-L/home/your name/libffi_dir/lib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol start="8"><li>进入python的setup文件，修改部分编译信息</li></ol><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd python_path/Modules/vim Setup.dist# 取消下面的注释SSL=/home/your name/openssl_dir_ssl _ssl.c -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl -L$(SSL)/lib -lssl -lcryptozlib zlibmodule.c -I/home/your name/zlib_dir/include -L/home/your name/zlib_dir/lib -lz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol start="9"><li>编译python代码，这里需要gcc编译器，一般Linux发行版都自带gcc编译器，如果没有安装，请联系管理员。同时，编译过程需要配置特定的参数</li></ol><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd Python-3.10.1./configure LDFLAGS="-L/home/your name/libffi_dir/lib64 -Wl,--rpath=/home/your name/libffi_dir/lib64" CFLAGS="-I/home/your name/libffi_dir/include" PKG_CONFIG_PATH="${libffi}/lib/pkgconfig" --prefix=/home/your name/your path --with-openssl=/home/your name/openssl_dirmake # make -j48 这里不推荐，因为会编译所有的test file，耗时较长，机器快的话也要20min-30min左右make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是非管理员账户在home文件夹安装自己的python环境的方法。这种方法能安装简易的python环境，但是如果需要很复杂的计算，例如scikt，pytorch，tensorflow等强烈依赖底层C链接库的模块，那么上述方法或许可行。因为整个过程无非是把库文件的源代码安装到了home文件夹里，然后修改环境变量配置。但是如果真的是很复杂的编译和依赖，不建议使用上述方法。上述方法主要参考以下博客和文章：</p><ol><li><a href="https://blog.csdn.net/u012440550/article/details/109371016">CSDN</a></li><li><a href="https://stackoverflow.com/questions/65691539/locally-compiled-libffi-files-not-getting-picked-up-while-recompiling-python-3-p">Stackoverflow</a></li><li><a href="https://hellovimo.github.io/uvm_testbench_gen/localpythoninstall.html">Github Pages</a></li></ol><p>那么，针对Introduction提出的问题，每个人都需要自定义自己的python环境，是否有更好的解决方法呢。答案是<strong>有的</strong>，那就是由管理员安装python到usr目录。然后每个人可以在home文件夹新建自己的虚拟环境。只需要使用pip3命令即可：</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">python3 -m pip install --user virtualenvpython3 -m venv /home/your name/python_dir<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>]]></content>
       
       
       <categories>
-          
-          <category> Software </category>
           
           <category> Linux </category>
           
@@ -35,7 +58,7 @@
       
         <tags>
             
-            <tag> software setting </tag>
+            <tag> python </tag>
             
         </tags>
       
@@ -80,6 +103,8 @@
           
           <category> Deep Learning </category>
           
+          <category> Algorithm </category>
+          
       </categories>
       
       
@@ -110,7 +135,7 @@
       
         <tags>
             
-            <tag> unscented kalman filter </tag>
+            <tag> UKF </tag>
             
         </tags>
       
@@ -128,7 +153,7 @@
       
       <categories>
           
-          <category> Software </category>
+          <category> Development </category>
           
       </categories>
       
@@ -153,16 +178,10 @@
       
       <categories>
           
-          <category> Software </category>
+          <category> Git </category>
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> git usage </tag>
-            
-        </tags>
       
     </entry>
     
@@ -178,18 +197,10 @@
       
       <categories>
           
-          <category> Software </category>
+          <category> Linux </category>
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-            <tag> file coding </tag>
-            
-        </tags>
       
     </entry>
     
@@ -205,16 +216,14 @@
       
       <categories>
           
-          <category> Software </category>
+          <category> Linux </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> latex </tag>
-            
-            <tag> linux </tag>
+            <tag> Latex </tag>
             
         </tags>
       
@@ -232,16 +241,14 @@
       
       <categories>
           
-          <category> Software </category>
+          <category> Development </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> linux </tag>
-            
-            <tag> software usage </tag>
+            <tag> VPN </tag>
             
         </tags>
       
@@ -259,14 +266,14 @@
       
       <categories>
           
-          <category> Coding </category>
+          <category> Development </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> software </tag>
+            <tag> Qt </tag>
             
         </tags>
       
@@ -284,7 +291,7 @@
       
       <categories>
           
-          <category> Coding </category>
+          <category> Language </category>
           
       </categories>
       
@@ -339,12 +346,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> system setting </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -359,20 +360,14 @@
       
       <categories>
           
-          <category> Software </category>
-          
-          <category> Coding </category>
+          <category> Development </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> software setting </tag>
-            
-            <tag> c++ </tag>
-            
-            <tag> vscode </tag>
+            <tag> vs code </tag>
             
         </tags>
       
@@ -397,7 +392,7 @@
       
         <tags>
             
-            <tag> optimal linear estimation </tag>
+            <tag> OLE </tag>
             
         </tags>
       
@@ -415,14 +410,14 @@
       
       <categories>
           
-          <category> Software </category>
+          <category> Development </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> software usage </tag>
+            <tag> VPN </tag>
             
         </tags>
       
@@ -497,7 +492,7 @@
       
         <tags>
             
-            <tag> wiener filter </tag>
+            <tag> WF </tag>
             
         </tags>
       
@@ -515,7 +510,7 @@
       
       <categories>
           
-          <category> Coding </category>
+          <category> Language </category>
           
       </categories>
       
@@ -566,6 +561,8 @@
       <categories>
           
           <category> Deep Learning </category>
+          
+          <category> Algorithm </category>
           
       </categories>
       
@@ -622,7 +619,7 @@
       
         <tags>
             
-            <tag> unscented kalman filter </tag>
+            <tag> UKF </tag>
             
         </tags>
       
@@ -640,14 +637,14 @@
       
       <categories>
           
-          <category> Coding </category>
+          <category> Development </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Unity </tag>
+            <tag> unity </tag>
             
         </tags>
       
@@ -670,12 +667,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> statistics </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -697,7 +688,7 @@
       
         <tags>
             
-            <tag> population vector algorithm </tag>
+            <tag> PVA </tag>
             
         </tags>
       
@@ -735,7 +726,7 @@
       <link href="/2020/01/21/Principle-Component-Analysis/"/>
       <url>/2020/01/21/Principle-Component-Analysis/</url>
       
-        <content type="html"><![CDATA[<h1 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h1><p>写一下算法的基本原理和实现 </p><h2 id="PCA-Principle-Component-Analysis"><a href="#PCA-Principle-Component-Analysis" class="headerlink" title="PCA(Principle Component Analysis)"></a>PCA(Principle Component Analysis)</h2><p> PCA是最常见的一种降维算法，其核心思想是数据从高维到低维的投影，使其方差最大化。这个也很好理解，比如，这里我们假设有3组数据$a_1,a_2,a_3$，然后第1组的值可以用第2组数据的函数表示，比如$a_2=2*a_1$。如果以$a_1,a_2,a_3$为坐标画出对应的图像，那么在3维空间中就对应了一个平面，以这个平面的坐标轴为参数，此时看到的就是二维数据，相当于降维了。</p><p> 插图（参考文献）<br> <img src="/img/dimensionality-reduction-1.png" alt="dimensionality reduction-1"></p><p> 参考文献： </p><p> 假设我们有$m$组$n$维数据，希望能降维到$k$维($k&lt;d$)，PCA的计算过程如下： </p><p> 数据零均值化</p><p> 求协方差矩阵</p><p> 求协方差矩阵对应的特征值和特征向量</p><p> 将特征向量按特征值大小取前$k$行从上向下组成矩阵 </p><p> 将得到的矩阵乘以$X$就能得到降维后的数据 </p><p> 这里数据零均值化主要是为了方便后面的计算（测试一下不做这一步有什么问题） </p><p> 然后求协方差矩阵，之所以选择协方差矩阵，是因为协方差能很好地反应不同维度之间的差异，假设数据集为$X={x_1,x_2,…,x_m}\in R^{m*n}$，</p><p> 那么协方差矩阵$Cov$的定义为 </p><p> $$CovX(i,j)=\sum_{} x_ix_j\frac{1}{m}$$</p><p> 因为之前做过零均值化，所以这里$x_i$和$x_j$的均值都是0。 可以看出，协方差矩阵非对角线上的值表示了不同维度上数据之间的差异，对角线上的数据表示了每个维度的数据分布的差异。即在所有组数据中，每个维度上的变化大小的评价。对于协方差矩阵，当$CovX(i,j)=0$时，说明第$i$维和第$j$维的数据是相互独立的，所以，PCA优化的目标在于，尽可能让不同维度之间的协方差为0，而尽可能增大维度自身的方差。 关于求协方差矩阵的特征值，可以理解为将一个特征向量在$n$维空间中进行旋转和拉伸变换，使之与特征向量自己在同一直线上并成一定的比例，那么这个变换就是这个矩阵（参考二维情况下，二维平面中对向量的拉伸和旋转都可以通过一个二阶方阵来实现，高维空间中同理），而这个比例就是特征值。在$n$维空间中，这样的特征向量最多有$n$个，这个可以参考特征向量的求法，当转换成方程组之后，$n$个方程组最多只能有$n$组解。关于为什么要求矩阵的特征值和特征向量，这是根据优化问题的解得到的。假设降维后的矩阵为$Y \in R^{m*k}$，转换矩阵为$T$，那么$Y$的协方差为</p><p> $$CovY=Y * Y^T * \frac{1}{m}$$</p><p> $$=(TY) * (TY)^T * \frac{1}{m}$$ </p><p> $$=T * CovX * T^T$$ </p><p> 所以对于转换矩阵$T$，我们需要通过计算后，使得$CovY$为一个对角矩阵，并且矩阵中的值依次从大到小排列，因为根据优化的目标，我们需要使$CovY$的对角线上的值最大，且除对角线以外的数都为0。我们知道，实对称矩阵的不同特征向量是正交的。所以将$CovX$进行特征分解求出特征值和特征向量，然后取前$k$组特征向量组成转换矩阵$T$，就可以使得降维后的矩阵$Y$的维度与维度之间的差异值最大。 关于代码和计算，matlab中有princomp和pca函数可以直接计算。 这里数据用的是鸢尾花数据集， 代码如下： </p> <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">load fixeddata; </span><br><span class="line">[coeff,score,latent] = pca(newdata); </span><br><span class="line">result=score(:,<span class="number">1</span>:<span class="number">2</span>); </span><br><span class="line">x=result(:,<span class="number">1</span>); </span><br><span class="line">y=result(:,<span class="number">2</span>); </span><br><span class="line"><span class="built_in">scatter</span>(x,y,<span class="string">&#x27;x&#x27;</span>); </span><br></pre></td></tr></table></figure><p> 结果如图：<br> <img src="/img/dimensionality-reduction-2.png" alt="result of PCA"></p><p> 综上，PCA是一种很常用的降维方法，也是一种无监督的降维方法。同时，从PCA的原理中可以看出，PCA对于线性相关的降维效果会比较好，但是对于非线性的数据，其降维效果可能就会差很多。 </p>]]></content>
+        <content type="html"><![CDATA[<h1 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h1><p>写一下算法的基本原理和实现 </p><h2 id="PCA-Principle-Component-Analysis"><a href="#PCA-Principle-Component-Analysis" class="headerlink" title="PCA(Principle Component Analysis)"></a>PCA(Principle Component Analysis)</h2><p> PCA是最常见的一种降维算法，其核心思想是数据从高维到低维的投影，使其方差最大化。这个也很好理解，比如，这里我们假设有3组数据$a_1,a_2,a_3$，然后第1组的值可以用第2组数据的函数表示，比如$a_2=2*a_1$。如果以$a_1,a_2,a_3$为坐标画出对应的图像，那么在3维空间中就对应了一个平面，以这个平面的坐标轴为参数，此时看到的就是二维数据，相当于降维了。</p><p> 插图（参考文献）<br> <img src="/img/dimensionality-reduction-1.png" alt="dimensionality reduction-1"></p><p> 参考文献： </p><p> 假设我们有$m$组$n$维数据，希望能降维到$k$维($k&lt;d$)，PCA的计算过程如下： </p><p> 数据零均值化</p><p> 求协方差矩阵</p><p> 求协方差矩阵对应的特征值和特征向量</p><p> 将特征向量按特征值大小取前$k$行从上向下组成矩阵 </p><p> 将得到的矩阵乘以$X$就能得到降维后的数据 </p><p> 这里数据零均值化主要是为了方便后面的计算（测试一下不做这一步有什么问题） </p><p> 然后求协方差矩阵，之所以选择协方差矩阵，是因为协方差能很好地反应不同维度之间的差异，假设数据集为$X={x_1,x_2,…,x_m}\in R^{m*n}$，</p><p> 那么协方差矩阵$Cov$的定义为 </p><p> $$CovX(i,j)=\sum_{} x_ix_j\frac{1}{m}$$</p><p> 因为之前做过零均值化，所以这里$x_i$和$x_j$的均值都是0。 可以看出，协方差矩阵非对角线上的值表示了不同维度上数据之间的差异，对角线上的数据表示了每个维度的数据分布的差异。即在所有组数据中，每个维度上的变化大小的评价。对于协方差矩阵，当$CovX(i,j)=0$时，说明第$i$维和第$j$维的数据是相互独立的，所以，PCA优化的目标在于，尽可能让不同维度之间的协方差为0，而尽可能增大维度自身的方差。 关于求协方差矩阵的特征值，可以理解为将一个特征向量在$n$维空间中进行旋转和拉伸变换，使之与特征向量自己在同一直线上并成一定的比例，那么这个变换就是这个矩阵（参考二维情况下，二维平面中对向量的拉伸和旋转都可以通过一个二阶方阵来实现，高维空间中同理），而这个比例就是特征值。在$n$维空间中，这样的特征向量最多有$n$个，这个可以参考特征向量的求法，当转换成方程组之后，$n$个方程组最多只能有$n$组解。关于为什么要求矩阵的特征值和特征向量，这是根据优化问题的解得到的。假设降维后的矩阵为$Y \in R^{m*k}$，转换矩阵为$T$，那么$Y$的协方差为</p><p> $$CovY=Y * Y^T * \frac{1}{m}$$</p><p> $$=(TY) * (TY)^T * \frac{1}{m}$$ </p><p> $$=T * CovX * T^T$$ </p><p> 所以对于转换矩阵$T$，我们需要通过计算后，使得$CovY$为一个对角矩阵，并且矩阵中的值依次从大到小排列，因为根据优化的目标，我们需要使$CovY$的对角线上的值最大，且除对角线以外的数都为0。我们知道，实对称矩阵的不同特征向量是正交的。所以将$CovX$进行特征分解求出特征值和特征向量，然后取前$k$组特征向量组成转换矩阵$T$，就可以使得降维后的矩阵$Y$的维度与维度之间的差异值最大。 关于代码和计算，matlab中有princomp和pca函数可以直接计算。 这里数据用的是鸢尾花数据集， 代码如下： </p> <pre class="line-numbers language-matlab" data-language="matlab"><code class="language-matlab">load fixeddata<span class="token punctuation">;</span> <span class="token punctuation">[</span>coeff<span class="token punctuation">,</span>score<span class="token punctuation">,</span>latent<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">pca</span><span class="token punctuation">(</span>newdata<span class="token punctuation">)</span><span class="token punctuation">;</span> result<span class="token operator">=</span><span class="token function">score</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> x<span class="token operator">=</span><span class="token function">result</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> y<span class="token operator">=</span><span class="token function">result</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">scatter</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span><span class="token string">'x'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p> 结果如图：<br> <img src="/img/dimensionality-reduction-2.png" alt="result of PCA"></p><p> 综上，PCA是一种很常用的降维方法，也是一种无监督的降维方法。同时，从PCA的原理中可以看出，PCA对于线性相关的降维效果会比较好，但是对于非线性的数据，其降维效果可能就会差很多。 </p>]]></content>
       
       
       <categories>
@@ -747,7 +738,7 @@
       
         <tags>
             
-            <tag> principle component analysis </tag>
+            <tag> PCA </tag>
             
         </tags>
       
@@ -772,8 +763,6 @@
       
         <tags>
             
-            <tag> rnn </tag>
-            
             <tag> matlab </tag>
             
         </tags>
@@ -792,7 +781,7 @@
       
       <categories>
           
-          <category> coding </category>
+          <category> Language </category>
           
       </categories>
       
@@ -800,8 +789,6 @@
         <tags>
             
             <tag> C# </tag>
-            
-            <tag> Unity </tag>
             
         </tags>
       

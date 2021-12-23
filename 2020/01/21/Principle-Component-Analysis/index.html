@@ -394,8 +394,8 @@ PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核�
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/principle-component-analysis/">
-                                <span class="chip bg-color">principle component analysis</span>
+                            <a href="/tags/PCA/">
+                                <span class="chip bg-color">PCA</span>
                             </a>
                         
                     </div>
@@ -426,7 +426,7 @@ PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核�
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-08-13
+                    2021-12-23
                 </div>
                 
 
@@ -482,7 +482,12 @@ PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核�
 <p> $$=(TY) * (TY)^T * \frac{1}{m}$$ </p>
 <p> $$=T * CovX * T^T$$ </p>
 <p> 所以对于转换矩阵$T$，我们需要通过计算后，使得$CovY$为一个对角矩阵，并且矩阵中的值依次从大到小排列，因为根据优化的目标，我们需要使$CovY$的对角线上的值最大，且除对角线以外的数都为0。我们知道，实对称矩阵的不同特征向量是正交的。所以将$CovX$进行特征分解求出特征值和特征向量，然后取前$k$组特征向量组成转换矩阵$T$，就可以使得降维后的矩阵$Y$的维度与维度之间的差异值最大。 关于代码和计算，matlab中有princomp和pca函数可以直接计算。 这里数据用的是鸢尾花数据集， 代码如下： </p>
- <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">load fixeddata; </span><br><span class="line">[coeff,score,latent] = pca(newdata); </span><br><span class="line">result=score(:,<span class="number">1</span>:<span class="number">2</span>); </span><br><span class="line">x=result(:,<span class="number">1</span>); </span><br><span class="line">y=result(:,<span class="number">2</span>); </span><br><span class="line"><span class="built_in">scatter</span>(x,y,<span class="string">&#x27;x&#x27;</span>); </span><br></pre></td></tr></table></figure>
+ <pre class="line-numbers language-matlab" data-language="matlab"><code class="language-matlab">load fixeddata<span class="token punctuation">;</span> 
+<span class="token punctuation">[</span>coeff<span class="token punctuation">,</span>score<span class="token punctuation">,</span>latent<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">pca</span><span class="token punctuation">(</span>newdata<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+result<span class="token operator">=</span><span class="token function">score</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+x<span class="token operator">=</span><span class="token function">result</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+y<span class="token operator">=</span><span class="token function">result</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token function">scatter</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span><span class="token string">'x'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p> 结果如图：<br> <img src="/img/dimensionality-reduction-2.png" alt="result of PCA"></p>
 <p> 综上，PCA是一种很常用的降维方法，也是一种无监督的降维方法。同时，从PCA的原理中可以看出，PCA对于线性相关的降维效果会比较好，但是对于非线性的数据，其降维效果可能就会差很多。 </p>
@@ -550,8 +555,8 @@ PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核�
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/principle-component-analysis/">
-                                    <span class="chip bg-color">principle component analysis</span>
+                                <a href="/tags/PCA/">
+                                    <span class="chip bg-color">PCA</span>
                                 </a>
                             
                         </div>
@@ -810,10 +815,6 @@ PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/rnn/">
-                        <span class="chip bg-color">rnn</span>
-                    </a>
-                    
                     <a href="/tags/matlab/">
                         <span class="chip bg-color">matlab</span>
                     </a>
@@ -1063,7 +1064,7 @@ PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核�
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">24.6k</span>
+                        class="white-color">26.3k</span>
             
             
             
