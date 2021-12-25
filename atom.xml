@@ -6,7 +6,7 @@
   <link href="http://frankmartinem.github.io/atom.xml" rel="self"/>
   
   <link href="http://frankmartinem.github.io/"/>
-  <updated>2021-12-20T15:39:48.253Z</updated>
+  <updated>2021-12-25T20:37:04.654Z</updated>
   <id>http://frankmartinem.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Generative Adversarial Nets</title>
+    <link href="http://frankmartinem.github.io/2021/12/23/Generative-Adversarial-Nets/"/>
+    <id>http://frankmartinem.github.io/2021/12/23/Generative-Adversarial-Nets/</id>
+    <published>2021-12-23T17:40:39.000Z</published>
+    <updated>2021-12-25T20:37:04.654Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Generative-Adversarial-Nets"><a href="#Generative-Adversarial-Nets" class="headerlink" title="Generative Adversarial Nets"></a>Generative Adversarial Nets</h1><p>参考文献： Goodfellow et al., 2014. Generative Adversarial Nets.</p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文将介绍对抗生成网络（GAN）的基础框架，以及主要的推导过程。</p><p>首先是GAN的基本概念：GAN的主要思想是博弈。利用生成器$G$和判别器$D$的博弈。来使得生成器能够准确生成出类似于原始数据分布的样本；同时在博弈过程中，使得判别器能更加准确的区分出原始数据和生成数据。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>假设有一组样本$data$，其数据分布为$p_{data}$。生成器$G$根据一组噪声数据$z$，其分布为$p_z$，生成一组数据$G(z)$，判别器为$D$。其中生成器和判别器的参数分别为$\theta_{g}$和$\theta_{d}$。<br>那么，生成器的目标是使得生成的数据$G(z)$更接近真实数据分布$p_{data}$，也就是说$log[D(G(z))]$要尽可能大。然后对于判别器$D$，其对于真实数据的判别要更准确，即$log[D(x)]$要尽可能大。所以，根据上述问题可以构造以下条件：<br>$$\underset{G}{min} \underset{D}{max} E_{x \sim p_{data}(x)}[log(D(x))] + E_{z \sim p_{z}[log(1-D(G(z)))]}$$</p><p>Goodfellow的论文中给出了下面的图，可以解释GAN的迭代过程。蓝线是判别器输出的数据分布；绿线是生成器输出的数据分布；黑线是真实的数据分布；$z$是噪声数据，通过生成器映射到数据$x$。从而计算生成器输出的分布。在一开始，生成器$G$的输出分布和真实的分布差距很大，判别器可以很轻易的区分生成数据和真实数据；但是也仅限于中间的部分，对于两者重合的部分，判别器的区分效果并不好；然后在(b)图中，对判别器参数进行迭代优化（后面会证明，判别器的参数存在最优解），使得判别器的输出结果更加稳定平滑也更加准确；(c)图中迭代了生成器的参数，使得生成的数据更接近真实数据。如此循环迭代后，最理想的状态即是达到(d)图，判别器无法区分生成数据和真实数据，生成数据的分布和真实数据相等。<br><img src="/img/Generative-Adversarial-Nets-1.png" alt="图-1: GAN的迭代过程"></p><p>所以GAN的训练过程如图-2所示：<br><img src="/img/Generative-Adversarial-Nets-2.jpg" alt="图-2: GAN算法"></p><p>GAN的上述迭代过程能找到使得$G(z)$的分布$p_g$更接近$p_{data}$的最优解，必须满足以下条件：</p><ol><li>上述最优化问题有唯一解（全局最优解）$G^{*}$，且该解满足$p_g=p_{data}$</li><li>上述最优化问题最终收敛（条件-1的必要条件）</li></ol><p>要证明上述条件成立，可以先证明在生成器$G$固定时，判别器$D$的参数具有最优解（根据算法-1的迭代过程来推导）。证明如下：<br>$$V(G, D) = \int_{x}p_{data}(d)log(D(x))dx + \int_{z}p_z(z)log(1-D(G(z)))dz$$<br>$$=\int_{x}p_{data}(d)log(D(x)) + p_{g}p_g(x)log(1-D(x)) dx$$<br>（主要是第二项，这里并不是换元转换，因为$G$并不一定可逆，这里是基于Radon-Nikodym定理。具体证明方法这里不深究）<br>要使得$V(G, D)$取得最大值，$D(x)$就需要使函数$f(D) = p_{data}log(D) + p_{g}log(1-D)$取最大值，根据拉格朗日中值定理，可以计算得到：取最大值的$D(x)$应该满足$D^{*}(x) = \frac{p_{data}}{p_{data}+p_{g}}$。<br>所以，生成器$G$固定时，判别器$D$的参数具有最优解，该最优解满足$D(x) = \frac{p_{data}}{p_{data}+p_{g}}$</p><p>然后，需要证明当且仅当$p_g=p_{data}$时，训练函数$C(G) = \underset{D}{max}V(G, D)$取得全局最小值。证明如下：<br>当$p_g=p_{data}$，根据上述推导可知$D(x) = \frac{1}{2}$。带入到$V(G, D)$中，可得：<br>$$V(G, D^*) = \int_{x}p_{data}(x)log(\frac{1}{2})+p_{g}(x)log(1-\frac{1}{2})dx$$<br>$$ = -log(2)\int_{x}p_{data}(x)dx-log(2)\int_{x}p_{g}(x)dx$$<br>$$ = -log(2) - log(2) = -log(4)$$<br>（概率的积分是1）<br>所以当$p_g=p_{data}$时，训练函数的值是$-log(4)$，下面需要证明这是最小值，且只有$p_g=p_{data}$时条件才成立。于是我们假设$p_g \neq p_{data}$。但是判别器$D$仍旧取得最优解。所以有：<br>$$V(G, D^*) = \int_{x}p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= \int_{x}(log(2)-log(2))p_{data}(x) + p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + $$<br>$$ \int_{x}(log(2)-log(2))p_{g}(x) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(2)\int_{x}p_{g}(x)+p_{data}(x)dx + \int_{x}p_{data}(x)(log(2)+log(\frac{p_{data}}{p_{data}+p_{g}}))dx + $$<br>$$ \int_{x}p_{g}(log(2) + log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(4) + \int_{x}p_{data}(x)log(\frac{p_{data}}{(p_{data}+p_{g})/2})) + \int_{x}p_{g}(x)log(\frac{p_{g}}{(p_{data}//2+p_{g})/2})$$<br>根据KL散度的定义，可以得到：<br>$$V(G, D^*) = -log(4) + KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2})$$<br>由于$KL(p|q) \geq 0$，所以$V(G, D)$当且仅当$p_{data}=p_{g}$时取得最小值$-log(4)$。<br>($KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2}) = JSD(p_{data}|p_{g}$，论文中是根据Jensen–Shannon散度来计算的。结论是一致的)</p><p>最后是关于$C(G) = V(G, D)$的收敛的证明。论文中的证明主要是根据导数的特性，以及分布$p_{g}$属于凸函数的特点来证明的。</p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是最基础的GAN的概念以及推导过程。尽管已经证明了GAN的推导过程的可行性。但是在实际应用中，要使得GAN收敛并得到好的效果，还需要一些训练技巧。</p><ul><li>首先是GAN的收敛问题，虽然已经证明GAN的迭代函数是收敛的，但是收敛的前提是生成器函数为凸函数。且由于神经网络迭代的特性。我们无法确定神经网络是通过何种策略调整，来达到纳什均衡的（也就是GAN有很好的表现的状态，论文中的观点）。</li><li>然后是$p_{g}$没办法显示表示，因为是生成器的输出。然后是$p_{data}$未知，虽然可以根据这一分布计算$D$的最优解，但是并没有办法求出具体数值。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Generative-Adversarial-Nets&quot;&gt;&lt;a href=&quot;#Generative-Adversarial-Nets&quot; class=&quot;headerlink&quot; title=&quot;Generative Adversarial Nets&quot;&gt;&lt;/a&gt;Gener</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
+    
+    
+    <category term="GAN" scheme="http://frankmartinem.github.io/tags/GAN/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
@@ -463,30 +487,6 @@
     
     
     <category term="linear regression" scheme="http://frankmartinem.github.io/tags/linear-regression/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Wiener-Filter</title>
-    <link href="http://frankmartinem.github.io/2020/04/13/Wiener-Filter/"/>
-    <id>http://frankmartinem.github.io/2020/04/13/Wiener-Filter/</id>
-    <published>2020-04-13T15:32:08.000Z</published>
-    <updated>2021-12-23T17:49:31.765Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Wiener-Filter"><a href="#Wiener-Filter" class="headerlink" title="Wiener Filter"></a>Wiener Filter</h1><p>因为最近看文章接触了维纳滤波，所以这里写一下Weiner Filter的一些简单理解和推导。</p><h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>维纳滤波是一种在含噪声的时序信号把信号提取出来的滤波器，其基本框图如下：</p><p><img src="/img/Wiener-Filter-1.jpg" alt="图-1：简单的Wiener-Filter"></p><p>简单的维纳滤波其实就是通过一个FIR滤波器，去除噪声的过程。在这里，$h$的作用也可以理解为： 通过训练集的数据对信号和噪声的建模，然后通过前几个点的信息，预测当前时刻的噪声信号所占的比例，然后去除掉，剩下的就是预测的时序信号了。维纳滤波作为一种使用很广泛的滤波器，其变化的形式也有很多种，可以是单输入输出的，也可以是多输入输出的。$h$所表示的变换也可以写成非线性；$h$可以是有限长的FIR滤波器，也可以是无限长的IIR滤波器。要取决于当前你所解决的问题。但是维纳滤波的基本思想还是一致的。通过滤波（矩阵或者其他模型的形式）来从信号和噪声的混合中提取信号。所以维纳滤波的核心，就是计算这个滤波器（矩阵$h$或者模型的参数）。也就是解Wiener-Hopf方程。</p><p>本文用比较简单的单输入输出，且只考虑有限长滤波（即认为当前时刻的信号只和前有限个时间点的信号相关）。</p><h2 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h2><p>首先，对于图1中的滤波器：</p><p>$$y(n) = x(n) * h(n) = (s(n)+v(n))*h(n) \tag{1}$$</p><p>其中$*$表示卷积，$x(n)$表示输入信号， $y(n)$表示输出信号， $s(n)$表示输入信号中，有用的信号部分；$v(n)$表示输入信号中的噪声部分。</p><p>维纳滤波的目标是，保证输出$y(n)$和真实信号$s(n)$的差别最小，由于$y(n)$和$s(n)$是时序信号，所以要保证两者的均方误差最小，所以有：</p><p>$$E{e^2(n)} = E{(y(n)-s(n))^2} = E{(x(n)*h(n)-s(n))^2} \tag{2} $$</p><p>即求使得Eq(2)最小的$h$。所以$E{e^2}$对$h$求偏导。有：</p><p>$$\frac{\partial{E{e^2(n)}}}{\partial{h}} = 2E{e(n) * \frac{\partial{e(n)}}{\partial{h}}} = 0 \tag{3} $$</p><p>$$\frac{\partial{E{e^2(n)}}}{\partial{h}} = 2E{[\sum_{m=0}^{N-1}{h(m)x(n-m) - s(n)}]x(n-j)}, j = 0, 1, … , N-1 \tag{4} $$</p><p>$$\frac{\partial{E{e^2(n)}}}{\partial{h}} = 2\sum_{m=1}^{N-1}{h(m)}E{x(n-j)x(n-m)} - 2E{s(n)x(n-j)} = 0, j = 0, 1, …, N-1 \tag{5} $$</p><p>我们设$x$和$s$的相关系数为$R_{xs}$，则有：</p><p>$$R_{xs}(j)=\sum_{m=0}^{N-1}{h(m)R_{xx}(j-m)}, j=0,1,…,N-1 \tag{6}$$</p><p>其中，$R_{xx}(j-m)$表示$x(n-j)$和$x(n-m)$的相关系数，这里$m$是固定的，$j$是变化的。且$m&gt;=0$，$R_{xs}(j)$表示$x(n-j)$和$s(n)$的相关系数。上述公式中，$n$表示的是时序信号中的时间点。</p><p>然后，根据Eq(6)，可以得到$N$个线性方程：<br>$$<br>\begin{cases}<br>R_{xs}(0)=h(0)R_{xx}(0)+h(1)R_{xx}(1)+…+h(N-1)R_{xx}(N-1)\<br>R_{xs}(1)=h(1)R_{xx}(1)+h(0)R_{xx}(0)+…+h(N-1)R_{xx}(N-2)\<br>…\<br>R_{xs}(N-1)=h(N-1)R_{xx}(N-1)+h(N-2)R_{xx}(N-2)+…+h(0)R_{xx}(0)\<br>\end{cases} \tag{7}<br>$$<br>写成矩阵形式，有：</p><p>$$\displaystyle \boldsymbol{R_{xx}H}=\boldsymbol{R_{xs}} \tag{8}$$</p><p>其中， $\displaystyle \boldsymbol{H} = [h(0), h(1),…,h(N-1)]^T$是需要求的滤波器参数</p><p>$$\displaystyle \boldsymbol{R_{xs}} = [R_{xs}(0),R_{xs}(1), …, R_{xs}(N-1)]^T$$是$x$和$s$的相关系数<br>$$<br>\displaystyle \boldsymbol{R_{xx}} = \begin{bmatrix}<br>R_{xx}(0)&amp;R_{xx}(1)&amp;…&amp;R_{xx}(N-1)\<br>R_{xx}(1)&amp;R_{xx}(0)&amp;…&amp;R_{xx}(N-2)\<br>{\vdots}&amp;{\vdots}&amp;…&amp;{\vdots}&amp;\<br>R_{xx}(N-1)&amp;R_{xx}(N-2)&amp;…&amp;R_{xx}(0)\<br>\end{bmatrix} \tag{9}<br>$$</p><p>所以根据Eq(8)可以求得：</p><p>$$\displaystyle \boldsymbol{H} = \boldsymbol{R_{xx}^{-1}R_{xs}} \tag{10}$$</p><p>此时，信号的均方误差最小，根据Eq(2)，可得：</p><p>$$E{e^2(n)} = E{(s(n)-\sum_{m=0}^{N-1}h(m)x(n-m))^2} \tag{11}$$</p><p>$$E{e^2(n)} = E{s^2(n) - 2s(n)\sum_{m=0}^{N-1}h(m)x(n-m)+\sum_{m=0}^{N-1}\sum_{r=0}^{N-1}{h(m)x(n-m)h(r)x(n-r)}}$$</p><p>$$E{e^2(n)}=R_{ss}(0)-2\sum_{m=0}^{N-1}{h(m)R_{xs}(m)+\sum_{m=0}^{N-1}{h(m)}\sum_{r=0}^{N-1}{h(r)R_{xx}(n-r)}}$$</p><p>根据Eq(5)，可得：</p><p>$$E{e^2(n)} = R_{ss}(0) - \sum_{m=0}^{N-1}{h(m)R_{xs}(n-m)} \tag{12}$$</p><p>假设信号$s(n)$和噪声$v(n)$互相独立，那么有：</p><p>$$R_{sv}= R_{vs} = 0$$</p><p>$$R_{xs} = R_{ss} + R_{vs} = R_{ss}$$</p><p>$$R_{xx} = R_{ss}+R_{sv}+R_{vs}+R_{vv} = R_{ss}+R_{vv}$$</p><p>则，根据Eq(12)，有：</p><p>$$E{e^2(n)} = R_{ss}(0) - \sum_{m=0}^{N-1}{h(m)R_{ss}(m)} \tag{14}$$</p><p>至此，最简单的维纳滤波的基本公式推导完成，如果涉及到多输入多输出的维纳滤波，会更加复杂，这里不做推导。后续会附上代码链接</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Wiener-Filter&quot;&gt;&lt;a href=&quot;#Wiener-Filter&quot; class=&quot;headerlink&quot; title=&quot;Wiener Filter&quot;&gt;&lt;/a&gt;Wiener Filter&lt;/h1&gt;&lt;p&gt;因为最近看文章接触了维纳滤波，所以这里写一下Wein</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
-    
-    
-    <category term="WF" scheme="http://frankmartinem.github.io/tags/WF/"/>
     
   </entry>
   
