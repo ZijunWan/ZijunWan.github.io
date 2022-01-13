@@ -6,7 +6,7 @@
   <link href="http://frankmartinem.github.io/atom.xml" rel="self"/>
   
   <link href="http://frankmartinem.github.io/"/>
-  <updated>2021-12-25T20:37:04.654Z</updated>
+  <updated>2022-01-13T15:50:24.492Z</updated>
   <id>http://frankmartinem.github.io/</id>
   
   <author>
@@ -17,13 +17,109 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>tensorboard ssh</title>
+    <link href="http://frankmartinem.github.io/2022/01/13/tensorboard-ssh/"/>
+    <id>http://frankmartinem.github.io/2022/01/13/tensorboard-ssh/</id>
+    <published>2022-01-13T15:30:51.000Z</published>
+    <updated>2022-01-13T15:50:24.492Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="本地打开远程tensorboard"><a href="#本地打开远程tensorboard" class="headerlink" title="本地打开远程tensorboard"></a>本地打开远程tensorboard</h1><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进度了。整个过程其实是一个映射的过程。</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><ul><li><p>在服务器上运行tensorboard</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tensorboard --logdir=&lt;log path&gt; --port=&lt;server port&gt; --host=&lt;server ip&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中log path是tensorboard的日志路径，server port是tensorboard的端口，注意不要和本地其他端口冲突。server ip是服务器的IP地址。</p></li><li><p>在本地运行ssh连接服务器</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">ssh -L &lt;local port&gt;:&lt;server ip&gt;:6006 username@&lt;server ip&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中local port是本地的映射端口，server ip是服务器的ip地址，username是ssh的用户名。</p></li><li><p>在本地浏览器打开本地端口<br>打开浏览器，输入网址：localhost:<local port="">，就能查看tensorboard的进度了。</local></p></li></ul><h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="./img/tensorboard_ssh-1.jpg" alt="tensorboard in local"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;本地打开远程tensorboard&quot;&gt;&lt;a href=&quot;#本地打开远程tensorboard&quot; class=&quot;headerlink&quot; title=&quot;本地打开远程tensorboard&quot;&gt;&lt;/a&gt;本地打开远程tensorboard&lt;/h1&gt;&lt;h3 id=&quot;问题&quot;&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="Deep Learning" scheme="http://frankmartinem.github.io/categories/Deep-Learning/"/>
+    
+    
+    <category term="SSH" scheme="http://frankmartinem.github.io/tags/SSH/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>self-attention</title>
+    <link href="http://frankmartinem.github.io/2022/01/10/self-attention/"/>
+    <id>http://frankmartinem.github.io/2022/01/10/self-attention/</id>
+    <published>2022-01-10T21:45:47.000Z</published>
+    <updated>2022-01-11T08:21:33.988Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="self-attention"><a href="#self-attention" class="headerlink" title="self attention"></a>self attention</h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;self-attention&quot;&gt;&lt;a href=&quot;#self-attention&quot; class=&quot;headerlink&quot; title=&quot;self attention&quot;&gt;&lt;/a&gt;self attention&lt;/h1&gt;</summary>
+      
+    
+    
+    
+    <category term="Deep Learning" scheme="http://frankmartinem.github.io/categories/Deep-Learning/"/>
+    
+    
+    <category term="self attention" scheme="http://frankmartinem.github.io/tags/self-attention/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tmux command</title>
+    <link href="http://frankmartinem.github.io/2022/01/07/tmux-command/"/>
+    <id>http://frankmartinem.github.io/2022/01/07/tmux-command/</id>
+    <published>2022-01-07T09:24:53.000Z</published>
+    <updated>2022-01-07T09:47:12.630Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="tmux常用命令"><a href="#tmux常用命令" class="headerlink" title="tmux常用命令"></a>tmux常用命令</h1><p>使用ssh连接服务器时，如果本地长时间没有操作，ssh会断开连接。这样会带来很多麻烦。首先是需要重新输入密码再连接，当然如果服务器有public key，这个过程可以省略。然后是ssh断开前的终端会自动关闭，这样如果是在跑代码的话，程序就中断了。为了解决这个问题，可以使用tmux，一个终端的多窗口管理工具。<br>tmux的作用很简单，就是新建终端，这个终端会一直保持在后台，即是ssh连接断开，终端也会继续运行。所以也就避免了上述的第二个问题。对于第一个问题，tmux在网络正常的情况下，是一直连接的。并不会出现ssh这种长时间不操作就断开的情况。tmux的主要用法如下：</p><ul><li>创建终端，这一步要在服务器上进行，在哪儿进行就是在哪台机器上新建终端，所以一般都是在服务器<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tmux new -s &lt;name&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li></ul><p>这里的name是终端的名字，如果不设置的话，直接输入tmux就可以了，那么终端的名字默认是0，1，2以此类推。但是后期查找起来会很麻烦，如果终端很多的话。所以还是建议写个名字</p><ul><li>连接到已有的tmux终端</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tmux attach -t &lt;name&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这里的name就是上面的name。如果没设置的话，就是0，1，2这些数字编号。如果忘记了终端的名字，那么可以用</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tmux ls<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>上述命令可以查询已有的tmux终端名字</p><ul><li>分离终端，如果需要关闭某一个终端，可以使用这一命令。值得注意的是，此命令只会关闭终端显示，但是仍旧会在后台运行</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tmux detach<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这一命令没有参数，在哪个tmux终端窗口运行就detach哪个</p><ul><li>切换终端</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tmux switch -t &lt;name&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>将当前终端切换到另外一个终端</p><ul><li>退出终端</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tmux kill-session -t &lt;name&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这一命令会退出当前的终端，其中运行的任务也会自动终止</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;tmux常用命令&quot;&gt;&lt;a href=&quot;#tmux常用命令&quot; class=&quot;headerlink&quot; title=&quot;tmux常用命令&quot;&gt;&lt;/a&gt;tmux常用命令&lt;/h1&gt;&lt;p&gt;使用ssh连接服务器时，如果本地长时间没有操作，ssh会断开连接。这样会带来很多麻烦。首先是</summary>
+      
+    
+    
+    
+    <category term="Terminal" scheme="http://frankmartinem.github.io/categories/Terminal/"/>
+    
+    
+    <category term="SSH" scheme="http://frankmartinem.github.io/tags/SSH/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Conditional Generative Adversarial Nets</title>
+    <link href="http://frankmartinem.github.io/2021/12/25/Conditional-Generative-Adversarial-Nets/"/>
+    <id>http://frankmartinem.github.io/2021/12/25/Conditional-Generative-Adversarial-Nets/</id>
+    <published>2021-12-25T20:46:40.000Z</published>
+    <updated>2021-12-27T16:38:46.085Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Conditional-Generative-Adversarial-Nets"><a href="#Conditional-Generative-Adversarial-Nets" class="headerlink" title="Conditional Generative Adversarial Nets"></a>Conditional Generative Adversarial Nets</h1><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li>Conditional Generative Adversarial Nets (<a href="https://arxiv.org/pdf/1411.1784.pdf">https://arxiv.org/pdf/1411.1784.pdf</a>)</li><li>Image-to-Image Translation with Conditional Adversarial Networks (<a href="https://arxiv.org/pdf/1611.07004.pdf">https://arxiv.org/pdf/1611.07004.pdf</a>)</li></ol><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文主要介绍GAN的一种改进形式，Conditional GAN。原始的GAN更多的关注于数据的生成，但是由于输入的随机性，所以GAN生成数据具有很强的随机性。数据生成很”自由“。对于目前的应用来说，我们更希望是生成的数据能是受控制的，是和输入有关的。于是就有了CGAN。</p><h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><p>CGAN的基本框架如图-1所示。主要的改进就是在生成器和判别器的输入中都加入了label。生成器中加入label，可以生成对应的数据，即生成的数据分布和label相关$G(z|y)$。判别器中加入label，可以判断数据是否和label相关。这样经过CGAN的损失函数迭代，可以使得生成的数据越来越靠近label对应的数据分布。<br><img src="/img/Conditional-Generative-Adversarial-Nets-1.jpg" alt="图-1: CGAN基本框架"><br>CGAN的损失函数为：<br>$$\underset{G}{min} \underset{D}{max} V(D, G) = E_{x \sim p_{data}(x)}[log(D(x|y))]+E_{z \sim p_{z}}[log(1-D(G(z|y)))]$$<br>其中，$x$是真实数据，$y$是label，$z$是用于生成数据的噪声信号。</p><h2 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h2><p>CGAN的应用很广泛，可以用来生成特定风格的图像，或者特定的文字等内容。例如在pix2pix中[2]，我们用CGAN根据图像轮廓去进行颜色填充，根据地图轮廓去生成真实图像等。根据黑夜的图像生成白天的图像等。图2展示了根据轮廓进行颜色填充。<br><img src="/img/Conditional-Generative-Adversarial-Nets-2.jpg" alt="图2: pix2pix生成图像"></p><p>参考文献[2]总结了CGAN生成图像时的一些常用的技巧，例如loss function的定义，patchGAN的应用等。文章中提到了，现有的生成模型的损失函数主要集中于计算像素点直接的平均距离，这样很容易忽视局部的信息，导致生成图像模糊。所以文章的改进如下：</p><ul><li>在CGAN的损失函数中加入L1范数，关注全局的相似度；而CGAN本身的损失函数则关注于图像的轮廓等局部信息<br>GAN的损失函数：<br>$$L_{GAN}(G, D) = \underset{G}{min}\underset{D}{max}E_y[log(D(y))]+E_{x, z}[log(1-D(G(x, z)))]$$<br>L1范数：<br>$$L_{L1}(G) = E_{(x,y,z)} ||(y - G(x, z))||^1 $$<br>损失函数：<br>$$G^* = L_{GAN}(G, D) + \lambda * L_{L1}(G)$$</li><li>加入dropout，BatchNorm层</li><li>生成器的CNN网络使用U-Net结构，并采用skip连接</li><li>使用Markovian判别器(PatchGAN)，更加关注于图像局部信息</li></ul><h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>基于CGAN的原理，利用MNIST数据集，输入为图像的标签和噪声，生成图像，判断生成图像的标签和真实图像标签是否相同。<br>代码链接：<a href="https://github.com/FrankMartinem/Algorithm">CGAN代码</a><br>原始图像如图3所示，生成图像如图4所示。<br><img src="/img/Conditional-Generative-Adversarial-Nets-3.png" alt="图3: 原始图像"><br><img src="/img/Conditional-Generative-Adversarial-Nets-4.png" alt="图3: 生成图像"><br>可以看出，生成图像的数字和原始数据是相似的。</p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>CGAN相较于GAN，加入了label，使得数据生成更加可控，生成的数据和label更加相关。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Conditional-Generative-Adversarial-Nets&quot;&gt;&lt;a href=&quot;#Conditional-Generative-Adversarial-Nets&quot; class=&quot;headerlink&quot; title=&quot;Conditional Ge</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
+    
+    
+    <category term="GAN" scheme="http://frankmartinem.github.io/tags/GAN/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Generative Adversarial Nets</title>
     <link href="http://frankmartinem.github.io/2021/12/23/Generative-Adversarial-Nets/"/>
     <id>http://frankmartinem.github.io/2021/12/23/Generative-Adversarial-Nets/</id>
     <published>2021-12-23T17:40:39.000Z</published>
-    <updated>2021-12-25T20:37:04.654Z</updated>
+    <updated>2021-12-27T13:34:22.245Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Generative-Adversarial-Nets"><a href="#Generative-Adversarial-Nets" class="headerlink" title="Generative Adversarial Nets"></a>Generative Adversarial Nets</h1><p>参考文献： Goodfellow et al., 2014. Generative Adversarial Nets.</p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文将介绍对抗生成网络（GAN）的基础框架，以及主要的推导过程。</p><p>首先是GAN的基本概念：GAN的主要思想是博弈。利用生成器$G$和判别器$D$的博弈。来使得生成器能够准确生成出类似于原始数据分布的样本；同时在博弈过程中，使得判别器能更加准确的区分出原始数据和生成数据。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>假设有一组样本$data$，其数据分布为$p_{data}$。生成器$G$根据一组噪声数据$z$，其分布为$p_z$，生成一组数据$G(z)$，判别器为$D$。其中生成器和判别器的参数分别为$\theta_{g}$和$\theta_{d}$。<br>那么，生成器的目标是使得生成的数据$G(z)$更接近真实数据分布$p_{data}$，也就是说$log[D(G(z))]$要尽可能大。然后对于判别器$D$，其对于真实数据的判别要更准确，即$log[D(x)]$要尽可能大。所以，根据上述问题可以构造以下条件：<br>$$\underset{G}{min} \underset{D}{max} E_{x \sim p_{data}(x)}[log(D(x))] + E_{z \sim p_{z}[log(1-D(G(z)))]}$$</p><p>Goodfellow的论文中给出了下面的图，可以解释GAN的迭代过程。蓝线是判别器输出的数据分布；绿线是生成器输出的数据分布；黑线是真实的数据分布；$z$是噪声数据，通过生成器映射到数据$x$。从而计算生成器输出的分布。在一开始，生成器$G$的输出分布和真实的分布差距很大，判别器可以很轻易的区分生成数据和真实数据；但是也仅限于中间的部分，对于两者重合的部分，判别器的区分效果并不好；然后在(b)图中，对判别器参数进行迭代优化（后面会证明，判别器的参数存在最优解），使得判别器的输出结果更加稳定平滑也更加准确；(c)图中迭代了生成器的参数，使得生成的数据更接近真实数据。如此循环迭代后，最理想的状态即是达到(d)图，判别器无法区分生成数据和真实数据，生成数据的分布和真实数据相等。<br><img src="/img/Generative-Adversarial-Nets-1.png" alt="图-1: GAN的迭代过程"></p><p>所以GAN的训练过程如图-2所示：<br><img src="/img/Generative-Adversarial-Nets-2.jpg" alt="图-2: GAN算法"></p><p>GAN的上述迭代过程能找到使得$G(z)$的分布$p_g$更接近$p_{data}$的最优解，必须满足以下条件：</p><ol><li>上述最优化问题有唯一解（全局最优解）$G^{*}$，且该解满足$p_g=p_{data}$</li><li>上述最优化问题最终收敛（条件-1的必要条件）</li></ol><p>要证明上述条件成立，可以先证明在生成器$G$固定时，判别器$D$的参数具有最优解（根据算法-1的迭代过程来推导）。证明如下：<br>$$V(G, D) = \int_{x}p_{data}(d)log(D(x))dx + \int_{z}p_z(z)log(1-D(G(z)))dz$$<br>$$=\int_{x}p_{data}(d)log(D(x)) + p_{g}p_g(x)log(1-D(x)) dx$$<br>（主要是第二项，这里并不是换元转换，因为$G$并不一定可逆，这里是基于Radon-Nikodym定理。具体证明方法这里不深究）<br>要使得$V(G, D)$取得最大值，$D(x)$就需要使函数$f(D) = p_{data}log(D) + p_{g}log(1-D)$取最大值，根据拉格朗日中值定理，可以计算得到：取最大值的$D(x)$应该满足$D^{*}(x) = \frac{p_{data}}{p_{data}+p_{g}}$。<br>所以，生成器$G$固定时，判别器$D$的参数具有最优解，该最优解满足$D(x) = \frac{p_{data}}{p_{data}+p_{g}}$</p><p>然后，需要证明当且仅当$p_g=p_{data}$时，训练函数$C(G) = \underset{D}{max}V(G, D)$取得全局最小值。证明如下：<br>当$p_g=p_{data}$，根据上述推导可知$D(x) = \frac{1}{2}$。带入到$V(G, D)$中，可得：<br>$$V(G, D^*) = \int_{x}p_{data}(x)log(\frac{1}{2})+p_{g}(x)log(1-\frac{1}{2})dx$$<br>$$ = -log(2)\int_{x}p_{data}(x)dx-log(2)\int_{x}p_{g}(x)dx$$<br>$$ = -log(2) - log(2) = -log(4)$$<br>（概率的积分是1）<br>所以当$p_g=p_{data}$时，训练函数的值是$-log(4)$，下面需要证明这是最小值，且只有$p_g=p_{data}$时条件才成立。于是我们假设$p_g \neq p_{data}$。但是判别器$D$仍旧取得最优解。所以有：<br>$$V(G, D^*) = \int_{x}p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= \int_{x}(log(2)-log(2))p_{data}(x) + p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + $$<br>$$ \int_{x}(log(2)-log(2))p_{g}(x) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(2)\int_{x}p_{g}(x)+p_{data}(x)dx + \int_{x}p_{data}(x)(log(2)+log(\frac{p_{data}}{p_{data}+p_{g}}))dx + $$<br>$$ \int_{x}p_{g}(log(2) + log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(4) + \int_{x}p_{data}(x)log(\frac{p_{data}}{(p_{data}+p_{g})/2})) + \int_{x}p_{g}(x)log(\frac{p_{g}}{(p_{data}//2+p_{g})/2})$$<br>根据KL散度的定义，可以得到：<br>$$V(G, D^*) = -log(4) + KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2})$$<br>由于$KL(p|q) \geq 0$，所以$V(G, D)$当且仅当$p_{data}=p_{g}$时取得最小值$-log(4)$。<br>($KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2}) = JSD(p_{data}|p_{g}$，论文中是根据Jensen–Shannon散度来计算的。结论是一致的)</p><p>最后是关于$C(G) = V(G, D)$的收敛的证明。论文中的证明主要是根据导数的特性，以及分布$p_{g}$属于凸函数的特点来证明的。</p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是最基础的GAN的概念以及推导过程。尽管已经证明了GAN的推导过程的可行性。但是在实际应用中，要使得GAN收敛并得到好的效果，还需要一些训练技巧。</p><ul><li>首先是GAN的收敛问题，虽然已经证明GAN的迭代函数是收敛的，但是收敛的前提是生成器函数为凸函数。且由于神经网络迭代的特性。我们无法确定神经网络是通过何种策略调整，来达到纳什均衡的（也就是GAN有很好的表现的状态，论文中的观点）。</li><li>然后是$p_{g}$没办法显示表示，因为是生成器的输出。然后是$p_{data}$未知，虽然可以根据这一分布计算$D$的最优解，但是并没有办法求出具体数值。</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="Generative-Adversarial-Nets"><a href="#Generative-Adversarial-Nets" class="headerlink" title="Generative Adversarial Nets"></a>Generative Adversarial Nets</h1><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>参考文献： Goodfellow et al., 2014. Generative Adversarial Nets.</p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文将介绍对抗生成网络（GAN）的基础框架，以及主要的推导过程。</p><p>首先是GAN的基本概念：GAN的主要思想是博弈。利用生成器$G$和判别器$D$的博弈。来使得生成器能够准确生成出类似于原始数据分布的样本；同时在博弈过程中，使得判别器能更加准确的区分出原始数据和生成数据。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>假设有一组样本$data$，其数据分布为$p_{data}$。生成器$G$根据一组噪声数据$z$，其分布为$p_z$，生成一组数据$G(z)$，判别器为$D$。其中生成器和判别器的参数分别为$\theta_{g}$和$\theta_{d}$。<br>那么，生成器的目标是使得生成的数据$G(z)$更接近真实数据分布$p_{data}$，也就是说$log[D(G(z))]$要尽可能大。然后对于判别器$D$，其对于真实数据的判别要更准确，即$log[D(x)]$要尽可能大。所以，根据上述问题可以构造以下条件：<br>$$\underset{G}{min} \underset{D}{max} E_{x \sim p_{data}(x)}[log(D(x))] + E_{z \sim p_{z}[log(1-D(G(z)))]}$$</p><p>Goodfellow的论文中给出了下面的图，可以解释GAN的迭代过程。蓝线是判别器输出的数据分布；绿线是生成器输出的数据分布；黑线是真实的数据分布；$z$是噪声数据，通过生成器映射到数据$x$。从而计算生成器输出的分布。在一开始，生成器$G$的输出分布和真实的分布差距很大，判别器可以很轻易的区分生成数据和真实数据；但是也仅限于中间的部分，对于两者重合的部分，判别器的区分效果并不好；然后在(b)图中，对判别器参数进行迭代优化（后面会证明，判别器的参数存在最优解），使得判别器的输出结果更加稳定平滑也更加准确；(c)图中迭代了生成器的参数，使得生成的数据更接近真实数据。如此循环迭代后，最理想的状态即是达到(d)图，判别器无法区分生成数据和真实数据，生成数据的分布和真实数据相等。<br><img src="/img/Generative-Adversarial-Nets-1.png" alt="图-1: GAN的迭代过程"></p><p>所以GAN的训练过程如图-2所示：<br><img src="/img/Generative-Adversarial-Nets-2.jpg" alt="图-2: GAN算法"></p><p>GAN的上述迭代过程能找到使得$G(z)$的分布$p_g$更接近$p_{data}$的最优解，必须满足以下条件：</p><ol><li>上述最优化问题有唯一解（全局最优解）$G^{*}$，且该解满足$p_g=p_{data}$</li><li>上述最优化问题最终收敛（条件-1的必要条件）</li></ol><p>要证明上述条件成立，可以先证明在生成器$G$固定时，判别器$D$的参数具有最优解（根据算法-1的迭代过程来推导）。证明如下：<br>$$V(G, D) = \int_{x}p_{data}(d)log(D(x))dx + \int_{z}p_z(z)log(1-D(G(z)))dz$$<br>$$=\int_{x}p_{data}(d)log(D(x)) + p_{g}p_g(x)log(1-D(x)) dx$$<br>（主要是第二项，这里并不是换元转换，因为$G$并不一定可逆，这里是基于Radon-Nikodym定理。具体证明方法这里不深究）<br>要使得$V(G, D)$取得最大值，$D(x)$就需要使函数$f(D) = p_{data}log(D) + p_{g}log(1-D)$取最大值，根据拉格朗日中值定理，可以计算得到：取最大值的$D(x)$应该满足$D^{*}(x) = \frac{p_{data}}{p_{data}+p_{g}}$。<br>所以，生成器$G$固定时，判别器$D$的参数具有最优解，该最优解满足$D(x) = \frac{p_{data}}{p_{data}+p_{g}}$</p><p>然后，需要证明当且仅当$p_g=p_{data}$时，训练函数$C(G) = \underset{D}{max}V(G, D)$取得全局最小值。证明如下：<br>当$p_g=p_{data}$，根据上述推导可知$D(x) = \frac{1}{2}$。带入到$V(G, D)$中，可得：<br>$$V(G, D^*) = \int_{x}p_{data}(x)log(\frac{1}{2})+p_{g}(x)log(1-\frac{1}{2})dx$$<br>$$ = -log(2)\int_{x}p_{data}(x)dx-log(2)\int_{x}p_{g}(x)dx$$<br>$$ = -log(2) - log(2) = -log(4)$$<br>（概率的积分是1）<br>所以当$p_g=p_{data}$时，训练函数的值是$-log(4)$，下面需要证明这是最小值，且只有$p_g=p_{data}$时条件才成立。于是我们假设$p_g \neq p_{data}$。但是判别器$D$仍旧取得最优解。所以有：<br>$$V(G, D^*) = \int_{x}p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= \int_{x}(log(2)-log(2))p_{data}(x) + p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + $$<br>$$ \int_{x}(log(2)-log(2))p_{g}(x) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(2)\int_{x}p_{g}(x)+p_{data}(x)dx + \int_{x}p_{data}(x)(log(2)+log(\frac{p_{data}}{p_{data}+p_{g}}))dx + $$<br>$$ \int_{x}p_{g}(log(2) + log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(4) + \int_{x}p_{data}(x)log(\frac{p_{data}}{(p_{data}+p_{g})/2})) + \int_{x}p_{g}(x)log(\frac{p_{g}}{(p_{data}//2+p_{g})/2})$$<br>根据KL散度的定义，可以得到：<br>$$V(G, D^*) = -log(4) + KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2})$$<br>由于$KL(p|q) \geq 0$，所以$V(G, D)$当且仅当$p_{data}=p_{g}$时取得最小值$-log(4)$。<br>($KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2}) = JSD(p_{data}|p_{g}$，论文中是根据Jensen–Shannon散度来计算的。结论是一致的)</p><p>最后是关于$C(G) = V(G, D)$的收敛的证明。论文中的证明主要是根据导数的特性，以及分布$p_{g}$属于凸函数的特点来证明的。</p><h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>基于GAN的原理，本文使用MNIST数据集进行实验。判断GAN是否能生成和MNIST数据集很像的图像。<br><a href="https://github.com/FrankMartinem/Algorithm">代码链接</a><br>原始的MNIST数据如图3所示。生成的数据如图4所示。<br><img src="/img/Generative-Adversarial-Nets-3.png" alt="图3：MNIST原始数据"><br><img src="/img/Generative-Adversarial-Nets-4.png" alt="图4：生成的数据"></p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是最基础的GAN的概念以及推导过程。尽管已经证明了GAN的推导过程的可行性。但是在实际应用中，要使得GAN收敛并得到好的效果，还需要一些训练技巧。</p><ul><li>首先是GAN的收敛问题，虽然已经证明GAN的迭代函数是收敛的，但是收敛的前提是生成器函数为凸函数。且由于神经网络迭代的特性。我们无法确定神经网络是通过何种策略调整，来达到纳什均衡的（也就是GAN有很好的表现的状态，论文中的观点）。</li><li>然后是$p_{g}$没办法显示表示，因为是生成器的输出。然后是$p_{data}$未知，虽然可以根据这一分布计算$D$的最优解，但是并没有办法求出具体数值。</li></ul>]]></content>
     
     
       
@@ -390,103 +486,6 @@
     
     
     <category term="vs code" scheme="http://frankmartinem.github.io/tags/vs-code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Optimal Linear Estimation</title>
-    <link href="http://frankmartinem.github.io/2021/05/28/Optimal-Linear-Estimation/"/>
-    <id>http://frankmartinem.github.io/2021/05/28/Optimal-Linear-Estimation/</id>
-    <published>2021-05-28T14:50:27.000Z</published>
-    <updated>2021-12-23T17:47:16.303Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Optimal-Linear-Estimation"><a href="#Optimal-Linear-Estimation" class="headerlink" title="Optimal Linear Estimation"></a>Optimal Linear Estimation</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最优线性估计算法是神经解码中一种比较常用的算法。在算法刚提出来的时候，其解码精度和解码速度都属于较高的水准，因此在脑机接口实验中应用广泛。随着神经网络的兴起以及传统机器学习算法的更新，BCI领域用来解码的算法也越来越多，例如KF，UKF，RNN，CNN等。OLE尽管计算精度不如目前的算法，但是计算量小，反馈迅速。因此目前在线的BCI实验OLE的应用仍然较多。</p><h2 id="算法推导"><a href="#算法推导" class="headerlink" title="算法推导"></a>算法推导</h2><p>OLE算法是PVA算法的改进，PVA算法在之前的Blog中有提到，是BCI中应用最早的算法。但是PVA有自己的缺陷，即很依赖数据的质量。这里的质量指的是用于解码的神经元集群的偏好方向分布。如果偏好方向的分布不均匀，朝某个方向的神经元占大多数，那么解码得到的方向就会偏向于这个方向，导致朝其他方向的运动很困难。为了解决这个问题，Chase等人提出了对于PVA算法的改进方法，即OLE算法[1]。<br>OLE算法的核心思想就是利用线性插值的方法，把神经元的偏好方向调整到尽量在各个方向都是均匀分布的。我们假设有2个神经元，偏好方向如图1中红色和蓝色的虚线所示。当朝各个方向运动时，神经元的发放率变化程度会不一样。当朝着神经元偏好方向运动时，神经元会更活跃，朝反方向运动时，会更加被抑制。但是当朝着垂直于偏好方向的方向运动时，神经元的发放率不会有明显变化，此时，解码误差会很大，或者说，很难解码到朝这个方向的运动。<br>为了便于理解这个问题，我们可以用一个更极端的假设，即所有神经元的偏好方向都朝向x轴正方向，那么此时对于y轴的运动，是无法通过神经元解码得到的。PVA的计算公式里，y轴运动的参数$b_1$是0。这里有一个需要理解的概念，即神经元集群的解码，不是取决于神经元的发放率，而是发放率的变化。朝哪个方向运动能有神经元有强烈的发放率变化，那么朝这个方向的运动解码就准确。<br><img src="/img/Optimal-Linear-Estimation-1.png" alt="图1: Bias Preferred Direction"><br>为了解决上述问题，Chase等人提出了OLE算法，具体的计算方法如下：<br>假设神经元的发放率为$r(t)$。神经元的偏好方向矩阵为$B$，当前的运动方向为$d(t)$。那么有：<br>$$r(t) = B * d(t) + \epsilon(t) $$<br>其中$\epsilon(t)$表示$t$时刻的噪声。假设神经元的个数为$N$，那么$r(t) \in R^{Nx1}$。假设解码的维度为$d$，那么$B \in R^{Nx(d+1)}$。这里加1表示常数项。<br>那么，预测的运动方向为：<br>$$d_{pred}(t) = (B’B)^{-1}B’r(t)$$<br>以上就是OLE算法的计算内容。和PVA算法比较，似乎没什么太大的差别。但是思想是不同的。<br>首先，PVA的计算，前提假设就包括了神经元的分布是均匀的。体现在这里，即$B’B=I$，其中$I$表示单位矩阵。那么上述公式可以写为：$d_{pred}(t) = B’r(t)$。即PVA的计算方法，单独计算每个神经元的发放率，然后计算在当前偏好方向的投影，然后求和之后得到预测的运动方向。<br>对于OLE的计算，更加像是先计算了神经元分布的均匀度。然后根据不同方向的运动权重重新分布当前的偏好方向。使得神经元分布更加均匀。即$B’B$这个矩阵的计算值，也就是运动维度的协方差。这里举个例子，假设所有神经元的偏好方向都是x轴正方向，那么$B’B=[[1, 1], [0, 0]]$。 这个时候x轴和y轴的运动都会存在。即我们把神经元的偏好方向从x轴正方向旋转了45度。Chase的文章中的图可以很好的解释这个原理：<br><img src="/img/Optimal-Linear-Estimation-2.png" alt="图2: Optimal Prefered Direction"><br>需要注意的是，$B$矩阵的计算方法和PVA算法是一致的。<br>以上就是OLE算法的计算过程了，OLE的计算方法和PVA很像，但是解决了神经元分布不均匀的问题。这个问题在BCI中很常见，所以OLE相较于PVA，效果一般都是会更好的。还有一种改进版的OLE算法-‘full OLE’。之前介绍的这种是’minimal OLE’。 ‘full OLE’ 相较于’minimal OLE’的区别在于其假设了神经信号中存在了同源或相似的噪声。那么在计算过程中，这种噪声会体现在解码的结果上，导致运动方向产生误差。其改进方法也很简单，只是在预测公式中，加入了所有通道神经元的协方差矩阵，如下：<br>$$d_{pred}(t) = (B’\Sigma B)^{-1}B’r(t)$$<br>这里的$\Sigma$就是协方差矩阵，如果神经信号之间没有相关性，即没有同源噪声的话，$\Sigma = I$。也就是’minial OLE’的计算方法了。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>后续会附上代码链接</p><p>[1]    S. M. Chase, A. B. Schwartz, and R. E. Kass, “Bias, optimal linear estimation, and the differences between open-loop simulation and closed-loop performance of spiking-based brain–computer interface algorithms,” Neural networks, vol. 22, no. 9, pp. 1203-1213, 2009.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Optimal-Linear-Estimation&quot;&gt;&lt;a href=&quot;#Optimal-Linear-Estimation&quot; class=&quot;headerlink&quot; title=&quot;Optimal Linear Estimation&quot;&gt;&lt;/a&gt;Optimal Lin</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
-    
-    
-    <category term="OLE" scheme="http://frankmartinem.github.io/tags/OLE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ZJU RVPN initialize failed</title>
-    <link href="http://frankmartinem.github.io/2021/05/03/ZJU%20RVPN%20Initialize%20Failed/"/>
-    <id>http://frankmartinem.github.io/2021/05/03/ZJU%20RVPN%20Initialize%20Failed/</id>
-    <published>2021-05-03T16:29:42.000Z</published>
-    <updated>2021-12-23T22:08:33.140Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="ZJU-RVPN-初始化失败的解决办法"><a href="#ZJU-RVPN-初始化失败的解决办法" class="headerlink" title="ZJU RVPN 初始化失败的解决办法"></a>ZJU RVPN 初始化失败的解决办法</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在 macOS系统，遇见easyconnect一直提示初始化失败的问题。重新安装后仍旧不能解决问题。后发现是macOS系统开机时禁止启动了两个easyconnect的进程。分别为：</p><ol><li>com.sangfor.EasyMonitor.plist</li><li>com.sangfor.ECAgentProxy.plist<br>禁止后easyconnect无法启动代理，连接校内网络</li></ol><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>用软件Tencent Lemon设置开机启动项，在“未知应用“选项中找到对应的进程，打开开机启动项。然后重启电脑，即可解决问题</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;ZJU-RVPN-初始化失败的解决办法&quot;&gt;&lt;a href=&quot;#ZJU-RVPN-初始化失败的解决办法&quot; class=&quot;headerlink&quot; title=&quot;ZJU RVPN 初始化失败的解决办法&quot;&gt;&lt;/a&gt;ZJU RVPN 初始化失败的解决办法&lt;/h2&gt;&lt;h3 i</summary>
-      
-    
-    
-    
-    <category term="Development" scheme="http://frankmartinem.github.io/categories/Development/"/>
-    
-    
-    <category term="VPN" scheme="http://frankmartinem.github.io/tags/VPN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Berkeley-CS-61A</title>
-    <link href="http://frankmartinem.github.io/2020/05/16/Berkeley-CS-61A/"/>
-    <id>http://frankmartinem.github.io/2020/05/16/Berkeley-CS-61A/</id>
-    <published>2020-05-16T15:01:22.000Z</published>
-    <updated>2021-08-13T12:21:07.237Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Berkeley-CS-61C"><a href="#Berkeley-CS-61C" class="headerlink" title="Berkeley CS 61C"></a>Berkeley CS 61C</h1><h2 id="Lecture-1"><a href="#Lecture-1" class="headerlink" title="Lecture-1"></a>Lecture-1</h2><ol><li>不是所有的问题都能用计算机解决，也不是所有的问题，用计算机解决更加方便</li><li>学会抽象的看待事物，不需要了解其中的详细构造</li><li></li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Berkeley-CS-61C&quot;&gt;&lt;a href=&quot;#Berkeley-CS-61C&quot; class=&quot;headerlink&quot; title=&quot;Berkeley CS 61C&quot;&gt;&lt;/a&gt;Berkeley CS 61C&lt;/h1&gt;&lt;h2 id=&quot;Lecture-1&quot;&gt;&lt;a</summary>
-      
-    
-    
-    
-    <category term="Lecture" scheme="http://frankmartinem.github.io/categories/Lecture/"/>
-    
-    
-    <category term="public lecture" scheme="http://frankmartinem.github.io/tags/public-lecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linear Square Method</title>
-    <link href="http://frankmartinem.github.io/2020/04/17/Linear-Square-Method/"/>
-    <id>http://frankmartinem.github.io/2020/04/17/Linear-Square-Method/</id>
-    <published>2020-04-16T23:09:41.000Z</published>
-    <updated>2021-08-13T12:21:43.942Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h1><p>这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。</p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最小二乘法应该是我接触的最早的优化方法，也是求解线性回归的一种方法。线性回归的主要作用是用拟合的方式，求解两组变量之间的线性关系（当然也可以不是线性的，那就是另外的回归方法了）。也就是把一个系统的输出写成输入的线性组合的形式。而这组线性关系的参数求解方法，就是最小二乘法。</p><p>我们从最简单的线性回归开始，即输入和输出都是1维的。此时，最小二乘法也是最简单的。</p><p>假设有输入信号$x = {x_0, x_1, …, x_t}$，同时输出信号为$y = {y_0, y_1, …, y_t}$，我们假设输入信号$x$和输出信号$y$之间的关系可以写成如下形式：</p><p>$$y_{pre} = ax+b \tag{1}$$</p><p>我们需要求解最优的$a$和$b$，这里最优的含义就是，预测的最准确，也就是预测值和真实值的误差最小，即：</p><p>$$arg, min_{a, b}{\sum_{i=0}^{t}{(y_i-ax_i-b)^2}} \tag{2}$$</p><p>我们假设误差函数为：</p><p>$$err = \sum_{i=0}^{t}{(y_i-ax_i-b)^2} \tag{3}$$</p><p>$err$对$a$和$b$分别求偏导：</p><p>$$\frac{\partial{err}}{\partial{a}} = \sum_{i=0}^{t}{2(ax_i+b-y_i)*x_i} \tag{4}$$</p><p>$$\frac{\partial{err}}{\partial{b}} = \sum_{i=0}^{t}{2(ax_i+b-y_i)} \tag{5}$$</p><p>根据极值定理，有$$\frac{\partial{err}}{\partial{a}}=0$$，且$$\frac{\partial{err}}{\partial{b}}=0$$，所以有：</p><p>$$\sum_{i=0}^{t}{2(ax_i+b-y_i)} = 0 \tag{6}$$</p><p>$$\sum_{i=0}^{t}(y_i - ax_i) = \sum_{i=0}^{t}{b} \tag{7}$$</p><p>$$\sum_{i=0}^{t}{y_i} - a * \sum_{i=0}^{t}{x_i} = (t+1)*b \tag{8}$$</p><p>$$b = \bar{y} - a\bar{x} \tag{9}$$</p><p>其中，$\bar{y}$表示$y$的均值，$\bar{x}$表示$x$的均值。将Eq(9)代入Eq(4)，有：</p><p>$$\sum_{i=0}^{t}{2(ax_i+b-y_i)*x_i} = 0 \tag{10}$$</p><p>$$\sum_{i=0}^{t}{ax_i^2} + \sum_{i=0}^{t}bx_i = \sum_{i=0}^{t}{y_ix_i} \tag{11}$$</p><p>$$a\sum_{i=0}^{t}x_i^2 + \bar{x}(\bar{y}-a\bar{x}) = \sum_{i=0}^{t}{x_iy_i} \tag{12}$$</p><p>$$a(\sum_{i=0}^{t}{x_i^2 - \bar{x}^2}) = \sum_{i=0}^{t}{x_iy_i}-\bar{x}\bar{y} \tag{13}$$</p><p>$$a = \frac{\sum_{i=0}^{t}{x_iy_i}-\bar{x}\bar{y}}{\sum_{i=0}^{t}{x_i^2 - \bar{x}^2}} \tag{14}$$</p><p>所以Eq(14)和Eq(9)就是最简单的最小二乘法的计算方法。</p><p>然后我们进一步考虑，如果输入和输出是多维数据，要如何计算。</p><p>假设输入信号为$X \in R^{m<em>t}$， 输出信号为$Y \in R^{n</em>t}$，那么有：</p><p>$$Y = W_0X+B = WX_1 \tag{15}$$</p><p>其中$W_0 \in R^{n<em>m}$是回归矩阵的系数，$B \in R^{1</em>t}$表示常数项，这里可以直接写到$W$矩阵中。$W \in R^{(m+1)*t}$，$X_1 \in R^{(m+1)*t}$<br>$$<br>X_1 = \begin{bmatrix}<br>x_{11} &amp;x_{12} &amp; … &amp;x_{1t}\<br>x_{11} &amp;x_{12} &amp; … &amp;x_{1t}\<br>{\vdots} &amp;{\vdots} &amp;… &amp;{\vdots}\<br>x_{m1} &amp;x_{m2} &amp;… &amp;x_{mt}\<br>1 &amp;1 &amp;… &amp;1\<br>\end{bmatrix} \tag{16}<br>$$</p><p>所以有：</p><p>$$\arg min_{W}({Y-WX_1}) \tag{17}$$</p><p>假设误差函数为$E$，则有：</p><p>$$E = (Y-WX_1)(Y-WX_1)^T = YY^T - WX_1Y^T-YX_1^TW^T+WX_1X_1^TW^T \tag{18}$$</p><p>计算$E$对$W$的偏导，则该偏导等于0：</p><p>$$\frac{\partial{E}}{\partial{W}} = -X_1Y^T-X_1^TY + 2WXX^T = 0 \tag{19}$$</p><p>所以有：</p><p>$$W = (X_1X_1^T)^{-1}X_1Y^T \tag{20}$$</p><p>至此矩阵形式的最小二乘法（多元线性回归的参数解法）推导完成。注意这里的$X_1$和$Y$中的数据排列方式为：每一行是一个维度的数据，每一列表示一个时间点。如果不是这么记录的话，那么公式需要加上转置。</p><p>后续会附上代码链接</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;最小二乘法&quot;&gt;&lt;a href=&quot;#最小二乘法&quot; class=&quot;headerlink&quot; title=&quot;最小二乘法&quot;&gt;&lt;/a&gt;最小二乘法&lt;/h1&gt;&lt;p&gt;这几天看书的时候突然注意到了这个经典的优化方法，于是重新推导了一遍，为以后应用做参考。&lt;/p&gt;
-&lt;h2 id=&quot;背景</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://frankmartinem.github.io/categories/Algorithm/"/>
-    
-    
-    <category term="linear regression" scheme="http://frankmartinem.github.io/tags/linear-regression/"/>
     
   </entry>
   

@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Generative Adversarial Nets, Neural Network, Computer Science">
-    <meta name="description" content="Generative Adversarial Nets参考文献： Goodfellow et al., 2014. Generative Adversarial Nets.
-Introduction本文将介绍对抗生成网络（GAN）的基础框架">
+    <meta name="description" content="Generative Adversarial NetsReferences参考文献： Goodfellow et al., 2014. Generative Adversarial Nets.
+Introduction本文将介绍对抗生成网络">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -426,21 +426,21 @@ Introduction本文将介绍对抗生成网络（GAN）的基础框架">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-25
+                    2021-12-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    7 分
                 </div>
                 
 
@@ -463,7 +463,7 @@ Introduction本文将介绍对抗生成网络（GAN）的基础框架">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Generative-Adversarial-Nets"><a href="#Generative-Adversarial-Nets" class="headerlink" title="Generative Adversarial Nets"></a>Generative Adversarial Nets</h1><p>参考文献： Goodfellow et al., 2014. Generative Adversarial Nets.</p>
+                <h1 id="Generative-Adversarial-Nets"><a href="#Generative-Adversarial-Nets" class="headerlink" title="Generative Adversarial Nets"></a>Generative Adversarial Nets</h1><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>参考文献： Goodfellow et al., 2014. Generative Adversarial Nets.</p>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文将介绍对抗生成网络（GAN）的基础框架，以及主要的推导过程。</p>
 <p>首先是GAN的基本概念：GAN的主要思想是博弈。利用生成器$G$和判别器$D$的博弈。来使得生成器能够准确生成出类似于原始数据分布的样本；同时在博弈过程中，使得判别器能更加准确的区分出原始数据和生成数据。</p>
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>假设有一组样本$data$，其数据分布为$p_{data}$。生成器$G$根据一组噪声数据$z$，其分布为$p_z$，生成一组数据$G(z)$，判别器为$D$。其中生成器和判别器的参数分别为$\theta_{g}$和$\theta_{d}$。<br>那么，生成器的目标是使得生成的数据$G(z)$更接近真实数据分布$p_{data}$，也就是说$log[D(G(z))]$要尽可能大。然后对于判别器$D$，其对于真实数据的判别要更准确，即$log[D(x)]$要尽可能大。所以，根据上述问题可以构造以下条件：<br>$$\underset{G}{min} \underset{D}{max} E_{x \sim p_{data}(x)}[log(D(x))] + E_{z \sim p_{z}[log(1-D(G(z)))]}$$</p>
@@ -477,6 +477,7 @@ Introduction本文将介绍对抗生成网络（GAN）的基础框架">
 <p>要证明上述条件成立，可以先证明在生成器$G$固定时，判别器$D$的参数具有最优解（根据算法-1的迭代过程来推导）。证明如下：<br>$$V(G, D) = \int_{x}p_{data}(d)log(D(x))dx + \int_{z}p_z(z)log(1-D(G(z)))dz$$<br>$$=\int_{x}p_{data}(d)log(D(x)) + p_{g}p_g(x)log(1-D(x)) dx$$<br>（主要是第二项，这里并不是换元转换，因为$G$并不一定可逆，这里是基于Radon-Nikodym定理。具体证明方法这里不深究）<br>要使得$V(G, D)$取得最大值，$D(x)$就需要使函数$f(D) = p_{data}log(D) + p_{g}log(1-D)$取最大值，根据拉格朗日中值定理，可以计算得到：取最大值的$D(x)$应该满足$D^{*}(x) = \frac{p_{data}}{p_{data}+p_{g}}$。<br>所以，生成器$G$固定时，判别器$D$的参数具有最优解，该最优解满足$D(x) = \frac{p_{data}}{p_{data}+p_{g}}$</p>
 <p>然后，需要证明当且仅当$p_g=p_{data}$时，训练函数$C(G) = \underset{D}{max}V(G, D)$取得全局最小值。证明如下：<br>当$p_g=p_{data}$，根据上述推导可知$D(x) = \frac{1}{2}$。带入到$V(G, D)$中，可得：<br>$$V(G, D^*) = \int_{x}p_{data}(x)log(\frac{1}{2})+p_{g}(x)log(1-\frac{1}{2})dx$$<br>$$ = -log(2)\int_{x}p_{data}(x)dx-log(2)\int_{x}p_{g}(x)dx$$<br>$$ = -log(2) - log(2) = -log(4)$$<br>（概率的积分是1）<br>所以当$p_g=p_{data}$时，训练函数的值是$-log(4)$，下面需要证明这是最小值，且只有$p_g=p_{data}$时条件才成立。于是我们假设$p_g \neq p_{data}$。但是判别器$D$仍旧取得最优解。所以有：<br>$$V(G, D^*) = \int_{x}p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= \int_{x}(log(2)-log(2))p_{data}(x) + p_{data}(x)log(\frac{p_{data}}{p_{data}+p_{g}}) + $$<br>$$ \int_{x}(log(2)-log(2))p_{g}(x) + p_{g}(x)log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(2)\int_{x}p_{g}(x)+p_{data}(x)dx + \int_{x}p_{data}(x)(log(2)+log(\frac{p_{data}}{p_{data}+p_{g}}))dx + $$<br>$$ \int_{x}p_{g}(log(2) + log(\frac{p_{g}}{p_{data}+p_{g}})dx$$<br>$$= -log(4) + \int_{x}p_{data}(x)log(\frac{p_{data}}{(p_{data}+p_{g})/2})) + \int_{x}p_{g}(x)log(\frac{p_{g}}{(p_{data}//2+p_{g})/2})$$<br>根据KL散度的定义，可以得到：<br>$$V(G, D^*) = -log(4) + KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2})$$<br>由于$KL(p|q) \geq 0$，所以$V(G, D)$当且仅当$p_{data}=p_{g}$时取得最小值$-log(4)$。<br>($KL(p_{data}|\frac{p_{data}+p_{g}}{2}) + KL(p_{g}|\frac{p_{data}+p_{g}}{2}) = JSD(p_{data}|p_{g}$，论文中是根据Jensen–Shannon散度来计算的。结论是一致的)</p>
 <p>最后是关于$C(G) = V(G, D)$的收敛的证明。论文中的证明主要是根据导数的特性，以及分布$p_{g}$属于凸函数的特点来证明的。</p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>基于GAN的原理，本文使用MNIST数据集进行实验。判断GAN是否能生成和MNIST数据集很像的图像。<br><a target="_blank" rel="noopener" href="https://github.com/FrankMartinem/Algorithm">代码链接</a><br>原始的MNIST数据如图3所示。生成的数据如图4所示。<br><img src="/img/Generative-Adversarial-Nets-3.png" alt="图3：MNIST原始数据"><br><img src="/img/Generative-Adversarial-Nets-4.png" alt="图4：生成的数据"></p>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是最基础的GAN的概念以及推导过程。尽管已经证明了GAN的推导过程的可行性。但是在实际应用中，要使得GAN收敛并得到好的效果，还需要一些训练技巧。</p>
 <ul>
 <li>首先是GAN的收敛问题，虽然已经证明GAN的迭代函数是收敛的，但是收敛的前提是生成器函数为凸函数。且由于神经网络迭代的特性。我们无法确定神经网络是通过何种策略调整，来达到纳什均衡的（也就是GAN有很好的表现的状态，论文中的观点）。</li>
@@ -719,18 +720,17 @@ Introduction本文将介绍对抗生成网络（GAN）的基础框架">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/12/23/Generative-Adversarial-Nets/">
+                <a href="/2021/12/25/Conditional-Generative-Adversarial-Nets/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Generative Adversarial Nets">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Conditional Generative Adversarial Nets">
                         
-                        <span class="card-title">Generative Adversarial Nets</span>
+                        <span class="card-title">Conditional Generative Adversarial Nets</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -740,9 +740,9 @@ Introduction本文将介绍对抗生成网络（GAN）的基础框架">
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-23
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-25
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -755,7 +755,6 @@ Introduction本文将介绍对抗生成网络（GAN）的基础框架">
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1037,7 +1036,7 @@ Introduction本文将介绍对抗生成网络（GAN）的基础框架">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021</span>
+                <span id="year">2021-2022</span>
             
             <a href="/about" target="_blank">Zijun Wan</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1045,7 +1044,7 @@ Introduction本文将介绍对抗生成网络（GAN）的基础框架">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">26.3k</span>
+                        class="white-color">28k</span>
             
             
             
