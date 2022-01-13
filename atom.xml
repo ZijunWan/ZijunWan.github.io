@@ -6,7 +6,7 @@
   <link href="http://frankmartinem.github.io/atom.xml" rel="self"/>
   
   <link href="http://frankmartinem.github.io/"/>
-  <updated>2022-01-13T15:50:24.492Z</updated>
+  <updated>2022-01-13T16:12:10.877Z</updated>
   <id>http://frankmartinem.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://frankmartinem.github.io/2022/01/13/tensorboard-ssh/"/>
     <id>http://frankmartinem.github.io/2022/01/13/tensorboard-ssh/</id>
     <published>2022-01-13T15:30:51.000Z</published>
-    <updated>2022-01-13T15:50:24.492Z</updated>
+    <updated>2022-01-13T16:12:10.877Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="本地打开远程tensorboard"><a href="#本地打开远程tensorboard" class="headerlink" title="本地打开远程tensorboard"></a>本地打开远程tensorboard</h1><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进度了。整个过程其实是一个映射的过程。</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><ul><li><p>在服务器上运行tensorboard</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tensorboard --logdir=&lt;log path&gt; --port=&lt;server port&gt; --host=&lt;server ip&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中log path是tensorboard的日志路径，server port是tensorboard的端口，注意不要和本地其他端口冲突。server ip是服务器的IP地址。</p></li><li><p>在本地运行ssh连接服务器</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">ssh -L &lt;local port&gt;:&lt;server ip&gt;:6006 username@&lt;server ip&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中local port是本地的映射端口，server ip是服务器的ip地址，username是ssh的用户名。</p></li><li><p>在本地浏览器打开本地端口<br>打开浏览器，输入网址：localhost:<local port="">，就能查看tensorboard的进度了。</local></p></li></ul><h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="./img/tensorboard_ssh-1.jpg" alt="tensorboard in local"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="本地打开远程tensorboard"><a href="#本地打开远程tensorboard" class="headerlink" title="本地打开远程tensorboard"></a>本地打开远程tensorboard</h1><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进度了。整个过程其实是一个映射的过程。</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><ul><li><p>在服务器上运行tensorboard</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tensorboard --logdir=&lt;log path&gt; --port=&lt;server port&gt; --host=&lt;server ip&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中log path是tensorboard的日志路径，server port是tensorboard的端口，注意不要和本地其他端口冲突。server ip是服务器的IP地址。</p></li><li><p>在本地运行ssh连接服务器</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">ssh -L &lt;local port&gt;:&lt;server ip&gt;:6006 username@&lt;server ip&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中local port是本地的映射端口，server ip是服务器的ip地址，username是ssh的用户名。</p></li><li><p>在本地浏览器打开本地端口<br>打开浏览器，输入网址：localhost:<local port="">，就能查看tensorboard的进度了。</local></p></li></ul><h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="/img/tensorboard_ssh-1.jpg" alt="tensorboard in local"></p>]]></content>
     
     
       
