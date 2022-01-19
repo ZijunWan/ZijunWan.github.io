@@ -8,7 +8,10 @@
     <meta name="description" content="Pytorch 笔记
 Pytorch的中，tensor切片时不需要写全所有的维度
 
-1234567891011121314import torchx = torch.rand(2, 3, 4)&amp;gt;&amp;gt;&amp;gt; xtensor([[[">
+import torch
+x = torch.rand(2, 3, 4)
+&amp;gt;&amp;gt;&amp;gt; x
+tensor([[[0.6691, 0.2031, ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -42,6 +45,16 @@ Pytorch的中，tensor切片时不需要写全所有的维度
 <link rel="alternate" href="/atom.xml" title="Frank Wan's Blog" type="application/atom+xml">
 </head>
 
+
+
+   <style>
+    body{
+       background-image: url(/medias/banner/2.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
 
 
 
@@ -275,7 +288,7 @@ Pytorch的中，tensor切片时不需要写全所有的维度
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -400,6 +413,10 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                                 <span class="chip bg-color">pytorch</span>
                             </a>
                         
+                            <a href="/tags/notes/">
+                                <span class="chip bg-color">notes</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -408,8 +425,8 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Deep-Learning/" class="post-category">
-                                Deep Learning
+                            <a href="/categories/DEEP-LEARNING/" class="post-category">
+                                DEEP LEARNING
                             </a>
                         
                     </div>
@@ -428,14 +445,14 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-13
+                    2022-01-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    443
+                    446
                 </div>
                 
 
@@ -468,12 +485,45 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                 <h1 id="Pytorch-笔记"><a href="#Pytorch-笔记" class="headerlink" title="Pytorch 笔记"></a>Pytorch 笔记</h1><ol>
 <li>Pytorch的中，tensor切片时不需要写全所有的维度</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.rand(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">tensor([[[<span class="number">0.6691</span>, <span class="number">0.2031</span>, <span class="number">0.4246</span>, <span class="number">0.7182</span>],</span><br><span class="line">         [<span class="number">0.7533</span>, <span class="number">0.5432</span>, <span class="number">0.8189</span>, <span class="number">0.2309</span>],</span><br><span class="line">         [<span class="number">0.7979</span>, <span class="number">0.6861</span>, <span class="number">0.9331</span>, <span class="number">0.6360</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="number">0.3718</span>, <span class="number">0.9343</span>, <span class="number">0.3975</span>, <span class="number">0.8068</span>],</span><br><span class="line">         [<span class="number">0.3031</span>, <span class="number">0.7124</span>, <span class="number">0.5972</span>, <span class="number">0.7359</span>],</span><br><span class="line">         [<span class="number">0.6043</span>, <span class="number">0.1800</span>, <span class="number">0.4715</span>, <span class="number">0.8611</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>:<span class="number">1</span>, :]</span><br><span class="line">tensor([[[<span class="number">0.6691</span>, <span class="number">0.2031</span>, <span class="number">0.4246</span>, <span class="number">0.7182</span>],</span><br><span class="line">         [<span class="number">0.7533</span>, <span class="number">0.5432</span>, <span class="number">0.8189</span>, <span class="number">0.2309</span>],</span><br><span class="line">         [<span class="number">0.7979</span>, <span class="number">0.6861</span>, <span class="number">0.9331</span>, <span class="number">0.6360</span>]]])</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> x
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6691</span><span class="token punctuation">,</span> <span class="token number">0.2031</span><span class="token punctuation">,</span> <span class="token number">0.4246</span><span class="token punctuation">,</span> <span class="token number">0.7182</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">0.7533</span><span class="token punctuation">,</span> <span class="token number">0.5432</span><span class="token punctuation">,</span> <span class="token number">0.8189</span><span class="token punctuation">,</span> <span class="token number">0.2309</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">0.7979</span><span class="token punctuation">,</span> <span class="token number">0.6861</span><span class="token punctuation">,</span> <span class="token number">0.9331</span><span class="token punctuation">,</span> <span class="token number">0.6360</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+        <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.3718</span><span class="token punctuation">,</span> <span class="token number">0.9343</span><span class="token punctuation">,</span> <span class="token number">0.3975</span><span class="token punctuation">,</span> <span class="token number">0.8068</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">0.3031</span><span class="token punctuation">,</span> <span class="token number">0.7124</span><span class="token punctuation">,</span> <span class="token number">0.5972</span><span class="token punctuation">,</span> <span class="token number">0.7359</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">0.6043</span><span class="token punctuation">,</span> <span class="token number">0.1800</span><span class="token punctuation">,</span> <span class="token number">0.4715</span><span class="token punctuation">,</span> <span class="token number">0.8611</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6691</span><span class="token punctuation">,</span> <span class="token number">0.2031</span><span class="token punctuation">,</span> <span class="token number">0.4246</span><span class="token punctuation">,</span> <span class="token number">0.7182</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">0.7533</span><span class="token punctuation">,</span> <span class="token number">0.5432</span><span class="token punctuation">,</span> <span class="token number">0.8189</span><span class="token punctuation">,</span> <span class="token number">0.2309</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">0.7979</span><span class="token punctuation">,</span> <span class="token number">0.6861</span><span class="token punctuation">,</span> <span class="token number">0.9331</span><span class="token punctuation">,</span> <span class="token number">0.6360</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li>torch.cat 可以拼接list</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.rand(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = [x <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">[tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.cat(y, <span class="number">0</span>)</span><br><span class="line">tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> x <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> x
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> y <span class="token operator">=</span> <span class="token punctuation">[</span>x <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> y
+<span class="token punctuation">[</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span>y<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="3">
 <li>torch.contiguous()函数用于确保tensor的底层是按照行优先排序的。Tensor底层实现是使用一块连续内存的1维数组，Tensor在元信息里保存了多维数组的形状，在访问元素时，通过多维度索引转化成1维数组相对于数组起始位置的偏移量即可找到对应的数据。某些Tensor操作（如transpose、permute、narrow、expand）与原Tensor是共享内存中的数据，不会改变底层数组的存储，但原来在语义上相邻、内存里也相邻的元素在执行这样的操作后，在语义上相邻，但在内存不相邻，即不连续了（<em>is not contiguous</em>）。</li>
@@ -544,6 +594,10 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                             
                                 <a href="/tags/pytorch/">
                                     <span class="chip bg-color">pytorch</span>
+                                </a>
+                            
+                                <a href="/tags/notes/">
+                                    <span class="chip bg-color">notes</span>
                                 </a>
                             
                         </div>
@@ -723,7 +777,7 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Config Python for Unroot Users">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Config Python for Unroot Users">
                         
                         <span class="card-title">Config Python for Unroot Users</span>
                     </div>
@@ -742,8 +796,8 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux/" class="post-category">
-                                    Linux
+                            <a href="/categories/DEVELOPMENT/" class="post-category">
+                                    DEVELOPMENT
                                 </a>
                             
                             
@@ -753,8 +807,8 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
                     </a>
                     
                 </div>
@@ -772,7 +826,7 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Log Likelihood">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Log Likelihood">
                         
                         <span class="card-title">Log Likelihood</span>
                     </div>
@@ -791,12 +845,8 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Deep-Learning/" class="post-category">
-                                    Deep Learning
-                                </a>
-                            
-                            <a href="/categories/Deep-Learning/Algorithm/" class="post-category">
-                                    Algorithm
+                            <a href="/categories/MACHINE-LEARNING/" class="post-category">
+                                    MACHINE LEARNING
                                 </a>
                             
                             
@@ -806,8 +856,8 @@ Pytorch的中，tensor切片时不需要写全所有的维度
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Log-Likelihood/">
-                        <span class="chip bg-color">Log Likelihood</span>
+                    <a href="/tags/probability/">
+                        <span class="chip bg-color">probability</span>
                     </a>
                     
                 </div>
@@ -1048,7 +1098,7 @@ Pytorch的中，tensor切片时不需要写全所有的维度
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">28k</span>
+                        class="white-color">29.7k</span>
             
             
             
@@ -1304,8 +1354,6 @@ $(function () {
 
     <!-- Baidu Push -->
 
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>

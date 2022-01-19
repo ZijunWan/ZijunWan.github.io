@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Mel Frequency Cepstral Coefficients</title>
+      <link href="/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/"/>
+      <url>/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Mel-Frequency-Cepstral-Coefficients-MFCC"><a href="#Mel-Frequency-Cepstral-Coefficients-MFCC" class="headerlink" title="Mel Frequency Cepstral Coefficients (MFCC)"></a>Mel Frequency Cepstral Coefficients (MFCC)</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>在语音信号处理中，我们需要得到不同声音的不同特征表示。这样我们可以对声音进行区分。对于传统的信号处理，我们常用频域分布，功率谱，能量等特征来描述一个一维信号。语音信号也不例外，作为一种常用的一维信号，其处理仍旧会使用传统的方法。但是也有些许不同。于是，我们就需要用 MFCC，即梅尔倒频谱系数来计算语音信号的特征。<br>与传统的信号处理不同的是，语音信号的处理需要考虑到人耳听到声音的感觉和传统方式处理后的数据的对应关系。例如：人的耳蜗会根据声音的不同在不同的地方共振；也不会太区分两个很细微的频率，特别是高频的声音；而且，人类对于声音大小的感知不是线性的，所以我们会计算对数。</p><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>MFCC的计算主要包括以下几个步骤：</p><ol><li>预加重(Pre-Emphasis)</li></ol><p>$$ y(t) = x(t) - \alpha x(t-1) $$</p><p>其中，$y(t)$是预加重后的数据, $x(t)$是原始信号, $\alpha$是预加重系数，一般介于0.97-1之间。其目的主要是提升高频部分，使信号的频谱更加平坦。同时，也避免后面计算傅立叶变换时出现数值问题。比较预加重前后的音频信号，如图1所示。<br><img src="/img/Mel-Frequency-Cepstral-Coefficients-1.png" alt="Fig-1: 预加重前后音频信号对比"></p><ol start="2"><li><p>分帧(Frame)<br>也就是分bin，需要将原始信号拼接起来形成帧。每一帧的时间长度一般是20ms-30ms左右。然后也会采取滑动窗的形式，避免帧和帧之间差距过大。目前常用处理方式是，控制帧的范围在20ms-30ms之间，每一帧的重叠部分在50%左右。分帧后的音频信号如图2所示。可以看出和预加重的信号基本一致。<br><img src="/img/Mel-Frequency-Cepstral-Coefficients-2.png" alt="Fig-2: 分帧后的音频信号"></p></li><li><p>加窗 (Window)<br>对每一帧数据进行划窗处理，用增加数据之间的连续性。对于非周期信号，由于傅立叶变换只能计算有限长度的信号，如果不加滑动窗，会产生频域泄漏。所以，可以用窗函数对信号进行截断，来减少这种频域的泄漏问题。这里我们使用汉宁窗。<br>$$ w(n) = (1-a) - a \times cos(\frac{2\pi n}{N-1})$$<br>其中，$N$是汉宁窗的长度，$a$是汉宁窗的系数，一般取0.46。<br>所以，加窗后的信号为：<br>$$s(n) = x(n) \times w(n)$$<br>其中，$s(n)$是加窗后的信号，$x(n)$是原始信号。</p></li><li><p>傅立叶变换(FFT)<br>对信号进行FFT，计算当前信号的频谱特性。<br>$$ X(k) = \sum_{n=0}^{N-1} x(n) \times e^{-2\pi i k / N}, 0 \leq k \leq N-1 $$<br>其中，$X(k)$是频谱，$x(n)$是加窗后的语音信号，$N$是FFT点数。上述音频信号的功率谱如图3所示:<br><img src="/img/Mel-Frequency-Cepstral-Coefficients-3.png" alt="Fig-3: 音频信号的功率谱"></p></li><li><p>三角带通滤波器<br>将计算后的频谱用三角滤波器滤波。这组三角滤波器是与Mel尺度匹配的。一般来讲滤波器的个数在40个。梅尔频谱会更加关注低频的信号，而对高频的信号用低分辨率的感知。Mel三角滤波器组如图4所示。<br><img src="/img/Mel-Frequency-Cepstral-Coefficients-4.jpeg" alt="Fig-4: Mel三角滤波器组"><br>Mel频谱和真实频谱之间的换算关系如下:<br>$$ m = 2595 log_10(1+\frac{f}{700})$$<br>$$ f = 700(10^{m/2595}-1)$$<br>其中，$m$是Mel频谱，$f$是真实频谱。<br>三角滤波器组的频率响应可以如下表示：<br>$$<br>H_m(k) =<br> \begin{cases}<br> 0 &amp; {k\leq f(m-1)} \newline<br> \frac{2(k-f(m-1))}{(f(m+1)-f(m-1))(f(m)-f(m-1))} &amp; {f(m-1) \leq k \leq f(m)} \newline<br> \frac{2(f(m+1)-k)}{(f(m+1)-f(m-1))(f(m)-f(m-1))} &amp; {f(m) \leq k \leq f(m+1)} \newline<br> 0 &amp; {k \geq f(m+1)}<br> \end{cases}<br>$$<br>其中，$H_m(k)$是三角滤波器组的频率响应。$f(m)$表示第$m$个三角滤波器的中心频率。</p></li><li><p>离散余弦变换(DCT)<br>将上述滤波器组的系数进行离散余弦变换：<br>$$ C(n) = \sum_{m=0}^{n-1}s(m)cos(\frac{\pi n(m-0.5)}{M}), n = 1, 2, …, L $$<br>DCT在这里的主要作用，是去除滤波器组中系数的高度相关性，将滤波器组系数的能量聚集起来，去除那些能量小的系数。经过计算以后，得到的就是MFCC系数了。</p></li></ol><p>以上就是MFCC的计算过程。对于语音问题，我们一般在计算DCT得到MFCC后，会再用正弦函数进行处理 (sinusoidal liftering)。主要是来淡化高阶MFCC系数的影响。因为在语音识别时，更高频的信号大多数是噪声。最后，我们一般也会进行归一化处理。得到的结果如图5所示。<br><img src="/img/Mel-Frequency-Cepstral-Coefficients-5.png" alt="Fig-5: Filter Bank 和 MFCC归一化后的结果"></p><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np<span class="token keyword">import</span> soundfile <span class="token keyword">as</span> sf<span class="token keyword">from</span> scipy<span class="token punctuation">.</span>fftpack <span class="token keyword">import</span> dct<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt<span class="token comment"># pre-emphasis</span>alpha <span class="token operator">=</span> <span class="token number">0.97</span>f <span class="token operator">=</span> sf<span class="token punctuation">.</span>SoundFile<span class="token punctuation">(</span><span class="token string">'bjkjg.wav'</span><span class="token punctuation">)</span>d<span class="token punctuation">,</span> sr <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>sampleratepd <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>d<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> d<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">-</span> alpha <span class="token operator">*</span> d<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token comment"># framing</span>frame_size<span class="token punctuation">,</span> frame_stride <span class="token operator">=</span> <span class="token number">0.025</span><span class="token punctuation">,</span> <span class="token number">0.01</span>frame_length <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">round</span><span class="token punctuation">(</span>frame_size<span class="token operator">*</span>sr<span class="token punctuation">)</span><span class="token punctuation">)</span>frame_step <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">round</span><span class="token punctuation">(</span>frame_stride<span class="token operator">*</span>sr<span class="token punctuation">)</span><span class="token punctuation">)</span> signal_length <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>pd<span class="token punctuation">)</span>num_frames <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>ceil<span class="token punctuation">(</span><span class="token builtin">float</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span>signal_length<span class="token operator">-</span>frame_length<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span>frame_step<span class="token punctuation">)</span><span class="token punctuation">)</span>pad_signal_length <span class="token operator">=</span> num_frames <span class="token operator">*</span> frame_step <span class="token operator">+</span> frame_lengthpad_signal <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>pd<span class="token punctuation">,</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>pad_signal_length <span class="token operator">-</span> signal_length<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>indices <span class="token operator">=</span> np<span class="token punctuation">.</span>tile<span class="token punctuation">(</span>np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>frame_length<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>num_frames<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">+</span>np<span class="token punctuation">.</span>tile<span class="token punctuation">(</span>np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>num_frames<span class="token operator">*</span>frame_step<span class="token punctuation">,</span>frame_step<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>frame_length<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Tframes <span class="token operator">=</span> pad_signal<span class="token punctuation">[</span>np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>indices<span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">,</span> copy<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token comment"># windowing</span>frames <span class="token operator">*=</span> np<span class="token punctuation">.</span>hamming<span class="token punctuation">(</span>frame_length<span class="token punctuation">)</span><span class="token comment"># fft</span>NFFT <span class="token operator">=</span> <span class="token number">512</span>mag_frames <span class="token operator">=</span> np<span class="token punctuation">.</span>absolute<span class="token punctuation">(</span>np<span class="token punctuation">.</span>fft<span class="token punctuation">.</span>rfft<span class="token punctuation">(</span>frames<span class="token punctuation">,</span> NFFT<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># Magnitude of the FFT</span>pow_frames <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">/</span> NFFT<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>mag_frames <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token comment"># filter banks</span>nfilt<span class="token operator">=</span><span class="token number">40</span>low_freq_mel <span class="token operator">=</span> <span class="token number">0</span>high_freq_mel <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">2595</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>log10<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">(</span>sr <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">700</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># Convert Hz to Mel</span>mel_points <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span>low_freq_mel<span class="token punctuation">,</span> high_freq_mel<span class="token punctuation">,</span> nfilt <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment"># Equally spaced in Mel scale</span>hz_points <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">700</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token operator">**</span><span class="token punctuation">(</span>mel_points <span class="token operator">/</span> <span class="token number">2595</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># Convert Mel to Hz</span><span class="token builtin">bin</span> <span class="token operator">=</span> np<span class="token punctuation">.</span>floor<span class="token punctuation">(</span><span class="token punctuation">(</span>NFFT <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> hz_points <span class="token operator">/</span> sr<span class="token punctuation">)</span>fbank <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>nfilt<span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>NFFT <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token keyword">for</span> m <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> nfilt <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    f_m_minus <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">bin</span><span class="token punctuation">[</span>m <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>   <span class="token comment"># left</span>    f_m <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">bin</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span>             <span class="token comment"># center</span>    f_m_plus <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">bin</span><span class="token punctuation">[</span>m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    <span class="token comment"># right</span>    <span class="token keyword">for</span> k <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>f_m_minus<span class="token punctuation">,</span> f_m<span class="token punctuation">)</span><span class="token punctuation">:</span>        fbank<span class="token punctuation">[</span>m <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>k <span class="token operator">-</span> <span class="token builtin">bin</span><span class="token punctuation">[</span>m <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token builtin">bin</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token builtin">bin</span><span class="token punctuation">[</span>m <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    <span class="token keyword">for</span> k <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>f_m<span class="token punctuation">,</span> f_m_plus<span class="token punctuation">)</span><span class="token punctuation">:</span>        fbank<span class="token punctuation">[</span>m <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">bin</span><span class="token punctuation">[</span>m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> k<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token builtin">bin</span><span class="token punctuation">[</span>m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token builtin">bin</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span>filter_banks <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>pow_frames<span class="token punctuation">,</span> fbank<span class="token punctuation">.</span>T<span class="token punctuation">)</span>filter_banks <span class="token operator">=</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>filter_banks <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>finfo<span class="token punctuation">(</span><span class="token builtin">float</span><span class="token punctuation">)</span><span class="token punctuation">.</span>eps<span class="token punctuation">,</span> filter_banks<span class="token punctuation">)</span>  <span class="token comment"># Numerical Stability</span>filter_banks <span class="token operator">=</span> <span class="token number">20</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>log10<span class="token punctuation">(</span>filter_banks<span class="token punctuation">)</span>  <span class="token comment"># dB</span><span class="token comment"># dct</span>num_ceps <span class="token operator">=</span> <span class="token number">24</span>mfcc <span class="token operator">=</span> dct<span class="token punctuation">(</span>filter_banks<span class="token punctuation">,</span> <span class="token builtin">type</span><span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> norm<span class="token operator">=</span><span class="token string">'ortho'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span>num_ceps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">(</span>nframes<span class="token punctuation">,</span> ncoeff<span class="token punctuation">)</span> <span class="token operator">=</span> mfcc<span class="token punctuation">.</span>shape<span class="token comment"># liftering</span>n <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>ncoeff<span class="token punctuation">)</span>cep_lifter <span class="token operator">=</span><span class="token number">22</span>lift <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">(</span>cep_lifter <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>np<span class="token punctuation">.</span>pi <span class="token operator">*</span> n <span class="token operator">/</span> cep_lifter<span class="token punctuation">)</span>mfcc <span class="token operator">*=</span> lift<span class="token comment"># normalize</span>filter_banks <span class="token operator">-=</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>filter_banks<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1e-8</span><span class="token punctuation">)</span>mfcc <span class="token operator">-=</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>mfcc<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1e-8</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html">Speech Processing for Machine Learning: Filter banks, Mel-Frequency Cepstral Coefficients (MFCCs) and What’s In-Between</a></li><li><a href="https://blog.csdn.net/jojozhangju/article/details/18678861">语音特征参数MFCC提取过程详解</a></li><li><a href="https://zhuanlan.zhihu.com/p/24318554">语音识别第4讲：语音特征参数MFCC</a></li><li><a href="https://zhuanlan.zhihu.com/p/85299446">详解离散余弦变换（DCT）</a></li><li>Mohamed A. Deep Neural Network Acoustic Models for ASR[D]. University of Toronto, 2014.</li><li>Muda L, Begam M, Elamvazuthi I. Voice recognition algorithms using mel frequency cepstral coefficient (MFCC) and dynamic time warping (DTW) techniques[J]. arXiv preprint arXiv:1003.4083, 2010.</li><li>Zheng F, Zhang G, Song Z. Comparison of different implementations of MFCC[J]. Journal of Computer science and Technology, 2001, 16(6): 582-589.</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> SIGNAL PROCESSING </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Audio </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>tensorboard ssh</title>
       <link href="/2022/01/13/tensorboard-ssh/"/>
       <url>/2022/01/13/tensorboard-ssh/</url>
@@ -13,14 +38,14 @@
       
       <categories>
           
-          <category> Deep Learning </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> SSH </tag>
+            <tag> ssh </tag>
             
         </tags>
       
@@ -38,14 +63,14 @@
       
       <categories>
           
-          <category> Deep Learning </category>
+          <category> DEEP LEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> self attention </tag>
+            <tag> attention </tag>
             
         </tags>
       
@@ -63,14 +88,14 @@
       
       <categories>
           
-          <category> Terminal </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> SSH </tag>
+            <tag> ssh </tag>
             
         </tags>
       
@@ -88,14 +113,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> DEEP LEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> GAN </tag>
+            <tag> cgan </tag>
             
         </tags>
       
@@ -113,14 +138,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> DEEPLEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> GAN </tag>
+            <tag> gan </tag>
             
         </tags>
       
@@ -151,14 +176,14 @@
       
       <categories>
           
-          <category> Linux </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> python </tag>
+            <tag> linux </tag>
             
         </tags>
       
@@ -171,12 +196,12 @@
       <link href="/2021/12/13/pytorch-note/"/>
       <url>/2021/12/13/pytorch-note/</url>
       
-        <content type="html"><![CDATA[<h1 id="Pytorch-笔记"><a href="#Pytorch-笔记" class="headerlink" title="Pytorch 笔记"></a>Pytorch 笔记</h1><ol><li>Pytorch的中，tensor切片时不需要写全所有的维度</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.rand(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">tensor([[[<span class="number">0.6691</span>, <span class="number">0.2031</span>, <span class="number">0.4246</span>, <span class="number">0.7182</span>],</span><br><span class="line">         [<span class="number">0.7533</span>, <span class="number">0.5432</span>, <span class="number">0.8189</span>, <span class="number">0.2309</span>],</span><br><span class="line">         [<span class="number">0.7979</span>, <span class="number">0.6861</span>, <span class="number">0.9331</span>, <span class="number">0.6360</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="number">0.3718</span>, <span class="number">0.9343</span>, <span class="number">0.3975</span>, <span class="number">0.8068</span>],</span><br><span class="line">         [<span class="number">0.3031</span>, <span class="number">0.7124</span>, <span class="number">0.5972</span>, <span class="number">0.7359</span>],</span><br><span class="line">         [<span class="number">0.6043</span>, <span class="number">0.1800</span>, <span class="number">0.4715</span>, <span class="number">0.8611</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>:<span class="number">1</span>, :]</span><br><span class="line">tensor([[[<span class="number">0.6691</span>, <span class="number">0.2031</span>, <span class="number">0.4246</span>, <span class="number">0.7182</span>],</span><br><span class="line">         [<span class="number">0.7533</span>, <span class="number">0.5432</span>, <span class="number">0.8189</span>, <span class="number">0.2309</span>],</span><br><span class="line">         [<span class="number">0.7979</span>, <span class="number">0.6861</span>, <span class="number">0.9331</span>, <span class="number">0.6360</span>]]])</span><br></pre></td></tr></table></figure><ol start="2"><li>torch.cat 可以拼接list</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.rand(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = [x <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">[tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]]), tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.cat(y, <span class="number">0</span>)</span><br><span class="line">tensor([[<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>],</span><br><span class="line">        [<span class="number">0.6009</span>, <span class="number">0.1935</span>, <span class="number">0.3899</span>],</span><br><span class="line">        [<span class="number">0.8208</span>, <span class="number">0.1878</span>, <span class="number">0.9621</span>]])</span><br></pre></td></tr></table></figure><ol start="3"><li>torch.contiguous()函数用于确保tensor的底层是按照行优先排序的。Tensor底层实现是使用一块连续内存的1维数组，Tensor在元信息里保存了多维数组的形状，在访问元素时，通过多维度索引转化成1维数组相对于数组起始位置的偏移量即可找到对应的数据。某些Tensor操作（如transpose、permute、narrow、expand）与原Tensor是共享内存中的数据，不会改变底层数组的存储，但原来在语义上相邻、内存里也相邻的元素在执行这样的操作后，在语义上相邻，但在内存不相邻，即不连续了（<em>is not contiguous</em>）。</li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="Pytorch-笔记"><a href="#Pytorch-笔记" class="headerlink" title="Pytorch 笔记"></a>Pytorch 笔记</h1><ol><li>Pytorch的中，tensor切片时不需要写全所有的维度</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torchx <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> xtensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6691</span><span class="token punctuation">,</span> <span class="token number">0.2031</span><span class="token punctuation">,</span> <span class="token number">0.4246</span><span class="token punctuation">,</span> <span class="token number">0.7182</span><span class="token punctuation">]</span><span class="token punctuation">,</span>         <span class="token punctuation">[</span><span class="token number">0.7533</span><span class="token punctuation">,</span> <span class="token number">0.5432</span><span class="token punctuation">,</span> <span class="token number">0.8189</span><span class="token punctuation">,</span> <span class="token number">0.2309</span><span class="token punctuation">]</span><span class="token punctuation">,</span>         <span class="token punctuation">[</span><span class="token number">0.7979</span><span class="token punctuation">,</span> <span class="token number">0.6861</span><span class="token punctuation">,</span> <span class="token number">0.9331</span><span class="token punctuation">,</span> <span class="token number">0.6360</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.3718</span><span class="token punctuation">,</span> <span class="token number">0.9343</span><span class="token punctuation">,</span> <span class="token number">0.3975</span><span class="token punctuation">,</span> <span class="token number">0.8068</span><span class="token punctuation">]</span><span class="token punctuation">,</span>         <span class="token punctuation">[</span><span class="token number">0.3031</span><span class="token punctuation">,</span> <span class="token number">0.7124</span><span class="token punctuation">,</span> <span class="token number">0.5972</span><span class="token punctuation">,</span> <span class="token number">0.7359</span><span class="token punctuation">]</span><span class="token punctuation">,</span>         <span class="token punctuation">[</span><span class="token number">0.6043</span><span class="token punctuation">,</span> <span class="token number">0.1800</span><span class="token punctuation">,</span> <span class="token number">0.4715</span><span class="token punctuation">,</span> <span class="token number">0.8611</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6691</span><span class="token punctuation">,</span> <span class="token number">0.2031</span><span class="token punctuation">,</span> <span class="token number">0.4246</span><span class="token punctuation">,</span> <span class="token number">0.7182</span><span class="token punctuation">]</span><span class="token punctuation">,</span>         <span class="token punctuation">[</span><span class="token number">0.7533</span><span class="token punctuation">,</span> <span class="token number">0.5432</span><span class="token punctuation">,</span> <span class="token number">0.8189</span><span class="token punctuation">,</span> <span class="token number">0.2309</span><span class="token punctuation">]</span><span class="token punctuation">,</span>         <span class="token punctuation">[</span><span class="token number">0.7979</span><span class="token punctuation">,</span> <span class="token number">0.6861</span><span class="token punctuation">,</span> <span class="token number">0.9331</span><span class="token punctuation">,</span> <span class="token number">0.6360</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol start="2"><li>torch.cat 可以拼接list</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> x <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> xtensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> y <span class="token operator">=</span> <span class="token punctuation">[</span>x <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> y<span class="token punctuation">[</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span>y<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.6009</span><span class="token punctuation">,</span> <span class="token number">0.1935</span><span class="token punctuation">,</span> <span class="token number">0.3899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>        <span class="token punctuation">[</span><span class="token number">0.8208</span><span class="token punctuation">,</span> <span class="token number">0.1878</span><span class="token punctuation">,</span> <span class="token number">0.9621</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol start="3"><li>torch.contiguous()函数用于确保tensor的底层是按照行优先排序的。Tensor底层实现是使用一块连续内存的1维数组，Tensor在元信息里保存了多维数组的形状，在访问元素时，通过多维度索引转化成1维数组相对于数组起始位置的偏移量即可找到对应的数据。某些Tensor操作（如transpose、permute、narrow、expand）与原Tensor是共享内存中的数据，不会改变底层数组的存储，但原来在语义上相邻、内存里也相邻的元素在执行这样的操作后，在语义上相邻，但在内存不相邻，即不连续了（<em>is not contiguous</em>）。</li></ol>]]></content>
       
       
       <categories>
           
-          <category> Deep Learning </category>
+          <category> DEEP LEARNING </category>
           
       </categories>
       
@@ -184,6 +209,8 @@
         <tags>
             
             <tag> pytorch </tag>
+            
+            <tag> notes </tag>
             
         </tags>
       
@@ -201,16 +228,14 @@
       
       <categories>
           
-          <category> Deep Learning </category>
-          
-          <category> Algorithm </category>
+          <category> MACHINE LEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Log Likelihood </tag>
+            <tag> probability </tag>
             
         </tags>
       
@@ -228,14 +253,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> MACHINE LEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> UKF </tag>
+            <tag> ukf </tag>
             
         </tags>
       
@@ -253,14 +278,14 @@
       
       <categories>
           
-          <category> Development </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> SSH </tag>
+            <tag> ssh </tag>
             
         </tags>
       
@@ -278,10 +303,16 @@
       
       <categories>
           
-          <category> Git </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
       
     </entry>
     
@@ -297,10 +328,16 @@
       
       <categories>
           
-          <category> Linux </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
       
     </entry>
     
@@ -316,14 +353,16 @@
       
       <categories>
           
-          <category> Linux </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Latex </tag>
+            <tag> latex </tag>
+            
+            <tag> linux </tag>
             
         </tags>
       
@@ -341,14 +380,16 @@
       
       <categories>
           
-          <category> Development </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> VPN </tag>
+            <tag> linux </tag>
+            
+            <tag> vpn </tag>
             
         </tags>
       
@@ -366,14 +407,14 @@
       
       <categories>
           
-          <category> Development </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Qt </tag>
+            <tag> qt </tag>
             
         </tags>
       
@@ -391,14 +432,16 @@
       
       <categories>
           
-          <category> Language </category>
+          <category> LANGUAGE </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> c++ </tag>
+            <tag> compile </tag>
+            
+            <tag> cpp </tag>
             
         </tags>
       
@@ -416,7 +459,7 @@
       
       <categories>
           
-          <category> Terminal </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
@@ -441,10 +484,16 @@
       
       <categories>
           
-          <category> Linux </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
       
     </entry>
     
@@ -460,14 +509,16 @@
       
       <categories>
           
-          <category> Development </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> vs code </tag>
+            <tag> cpp </tag>
+            
+            <tag> configuration </tag>
             
         </tags>
       
@@ -485,14 +536,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> ALGORITHMS </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> OLE </tag>
+            <tag> ole </tag>
             
         </tags>
       
@@ -510,14 +561,14 @@
       
       <categories>
           
-          <category> Development </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> VPN </tag>
+            <tag> vpn </tag>
             
         </tags>
       
@@ -535,14 +586,16 @@
       
       <categories>
           
-          <category> Lecture </category>
+          <category> COURSE </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> public lecture </tag>
+            <tag> compile </tag>
+            
+            <tag> notes </tag>
             
         </tags>
       
@@ -560,7 +613,7 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> ALGORITHMS </category>
           
       </categories>
       
@@ -585,14 +638,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> MACHINE LEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> WF </tag>
+            <tag> wiener </tag>
             
         </tags>
       
@@ -610,7 +663,7 @@
       
       <categories>
           
-          <category> Language </category>
+          <category> LANGUAGE </category>
           
       </categories>
       
@@ -618,6 +671,8 @@
         <tags>
             
             <tag> python </tag>
+            
+            <tag> notes </tag>
             
         </tags>
       
@@ -635,7 +690,7 @@
       
       <categories>
           
-          <category> Mathematics </category>
+          <category> ALGORITHMS </category>
           
       </categories>
       
@@ -660,9 +715,9 @@
       
       <categories>
           
-          <category> Deep Learning </category>
+          <category> DEEP LEARNING </category>
           
-          <category> Algorithm </category>
+          <category> ALGORITHMS </category>
           
       </categories>
       
@@ -687,7 +742,7 @@
       
       <categories>
           
-          <category> Lecture </category>
+          <category> COURSE </category>
           
       </categories>
       
@@ -712,14 +767,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> MACHINE LEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> UKF </tag>
+            <tag> ukf </tag>
             
         </tags>
       
@@ -737,7 +792,7 @@
       
       <categories>
           
-          <category> Development </category>
+          <category> DEVELOPMENT </category>
           
       </categories>
       
@@ -745,6 +800,8 @@
         <tags>
             
             <tag> unity </tag>
+            
+            <tag> notes </tag>
             
         </tags>
       
@@ -762,10 +819,16 @@
       
       <categories>
           
-          <category> Mathematics </category>
+          <category> ALGORITHMS </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> probability </tag>
+            
+        </tags>
       
     </entry>
     
@@ -781,14 +844,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> ALGORITHMS </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> PVA </tag>
+            <tag> pva </tag>
             
         </tags>
       
@@ -806,14 +869,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> MACHINE LEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> hidden markov model </tag>
+            <tag> hmm </tag>
             
         </tags>
       
@@ -831,14 +894,14 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> MACHINE LEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> PCA </tag>
+            <tag> pca </tag>
             
         </tags>
       
@@ -856,14 +919,14 @@
       
       <categories>
           
-          <category> Deep Learning </category>
+          <category> DEEPLEARNING </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> matlab </tag>
+            <tag> notes </tag>
             
         </tags>
       
@@ -881,14 +944,14 @@
       
       <categories>
           
-          <category> Language </category>
+          <category> LANGUAGE </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> C# </tag>
+            <tag> notes </tag>
             
         </tags>
       
@@ -906,7 +969,7 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> MACHINE LEARNING </category>
           
       </categories>
       
