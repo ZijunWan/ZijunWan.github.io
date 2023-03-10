@@ -18,15 +18,15 @@
   
   
   <title>python_note | Hexo</title>
-  <meta name="description" content="Python Basic Knowledge  python中新建一个变量并赋值，在计算机中是怎么处理的 x &#x3D; 1 例如上述代码，计算机首先是开辟一块内存 ，如果是C++，Java等静态语言，那么会根据变量类型指定内存大小。如果是python等动态语言，则智能开辟内存大小，在内存中写入这一数据；但是计算机到目前为止，还不能将x和该值绑定，所以计算机中还会开辟一块内存，名字为x，然后将这一内存指向">
+  <meta name="description" content="Python Basic Knowledge  python中新建一个变量并赋值，在计算机中是怎么处理的  x &#x3D; 1 例如上述代码，计算机首先是开辟一块内存 ，如果是C++，Java等静态语言，那么会根据变量类型指定内存大小。如果是python等动态语言，则智能开辟内存大小，在内存中写入这一数据；但是计算机到目前为止，还不能将x和该值绑定，所以计算机中还会开辟一块内存，名字为x，然后将这一内存指">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python_note">
 <meta property="og:url" content="http://zijunwan.github.io/2020/03/20/python-note/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="Python Basic Knowledge  python中新建一个变量并赋值，在计算机中是怎么处理的 x &#x3D; 1 例如上述代码，计算机首先是开辟一块内存 ，如果是C++，Java等静态语言，那么会根据变量类型指定内存大小。如果是python等动态语言，则智能开辟内存大小，在内存中写入这一数据；但是计算机到目前为止，还不能将x和该值绑定，所以计算机中还会开辟一块内存，名字为x，然后将这一内存指向">
+<meta property="og:description" content="Python Basic Knowledge  python中新建一个变量并赋值，在计算机中是怎么处理的  x &#x3D; 1 例如上述代码，计算机首先是开辟一块内存 ，如果是C++，Java等静态语言，那么会根据变量类型指定内存大小。如果是python等动态语言，则智能开辟内存大小，在内存中写入这一数据；但是计算机到目前为止，还不能将x和该值绑定，所以计算机中还会开辟一块内存，名字为x，然后将这一内存指">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-20T14:00:48.000Z">
-<meta property="article:modified_time" content="2022-01-18T09:50:43.224Z">
+<meta property="article:published_time" content="2020-03-20T07:00:48.000Z">
+<meta property="article:modified_time" content="2023-03-10T03:58:39.500Z">
 <meta property="article:author" content="Zijun Wan">
 <meta property="article:tag" content="notes">
 <meta property="article:tag" content="python">
@@ -48,11 +48,7 @@
     <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
   
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -259,7 +255,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -281,7 +277,7 @@
                 <a href="/2022/01/25/WORLD-Vocoder/" class="title">WORLD Vocoder</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-25T09:22:32.000Z" itemprop="datePublished">2022-01-25</time>
+                <time datetime="2022-01-25T02:22:32.000Z" itemprop="datePublished">2022-01-25</time>
               </p>
             </div>
           </li>
@@ -296,7 +292,7 @@
                 <a href="/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/" class="title">Mel Frequency Cepstral Coefficients</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-18T09:27:41.000Z" itemprop="datePublished">2022-01-18</time>
+                <time datetime="2022-01-18T02:27:41.000Z" itemprop="datePublished">2022-01-18</time>
               </p>
             </div>
           </li>
@@ -308,10 +304,10 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/13/tensorboard-ssh/" class="title">tensorboard ssh</a>
+                <a href="/2022/01/13/tensorboard-ssh/" class="title">本地打开远程tensorboard</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-13T15:30:51.000Z" itemprop="datePublished">2022-01-13</time>
+                <time datetime="2022-01-13T08:30:51.000Z" itemprop="datePublished">2022-01-13</time>
               </p>
             </div>
           </li>
@@ -323,10 +319,10 @@
                 <a class="category-link" href="/categories/DEEP-LEARNING/">DEEP LEARNING</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/11/self-attention/" class="title">self-attention</a>
+                <a href="/2022/01/10/self-attention/" class="title">self-attention</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-10T21:45:47.000Z" itemprop="datePublished">2022-01-11</time>
+                <time datetime="2022-01-10T14:45:47.000Z" itemprop="datePublished">2022-01-10</time>
               </p>
             </div>
           </li>
@@ -338,7 +334,7 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/07/tmux-command/" class="title">tmux command</a>
+                <a href="/2022/01/07/tmux-command/" class="title">tmux常用命令</a>
               </p>
               <p class="item-date">
                 <time datetime="2022-01-07T02:24:53.000Z" itemprop="datePublished">2022-01-07</time>
@@ -375,7 +371,7 @@
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2020/03/20/python-note/" class="article-date">
-	  <time datetime="2020-03-20T14:00:48.000Z" itemprop="datePublished">2020-03-20</time>
+	  <time datetime="2020-03-20T07:00:48.000Z" itemprop="datePublished">2020-03-20</time>
 	</a>
 </span>
         
@@ -409,10 +405,13 @@
         <h2 id="python">Python</h2>
 <h4 id="basic-knowledge">Basic Knowledge</h4>
 <ol type="1">
-<li><p>python中新建一个变量并赋值，在计算机中是怎么处理的</p>
+<li>python中新建一个变量并赋值，在计算机中是怎么处理的</li>
+</ol>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">x <span class="token operator">=</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>例如上述代码，计算机首先是开辟一块内存 ，如果是C++，Java等静态语言，那么会根据变量类型指定内存大小。如果是python等动态语言，则智能开辟内存大小，在内存中写入这一数据；但是计算机到目前为止，还不能将x和该值绑定，所以计算机中还会开辟一块内存，名字为x，然后将这一内存指向刚才开辟的内存地址。</p></li>
-<li><p>python中没有指针的概念，例如下面的代码</p>
+<p>例如上述代码，计算机首先是开辟一块内存 ，如果是C++，Java等静态语言，那么会根据变量类型指定内存大小。如果是python等动态语言，则智能开辟内存大小，在内存中写入这一数据；但是计算机到目前为止，还不能将x和该值绑定，所以计算机中还会开辟一块内存，名字为x，然后将这一内存指向刚才开辟的内存地址。</p>
+<ol start="2" type="1">
+<li>python中没有指针的概念，例如下面的代码</li>
+</ol>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">x <span class="token operator">=</span> <span class="token number">1</span>
 y <span class="token operator">=</span> x
 x <span class="token operator">=</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -422,37 +421,51 @@ x <span class="token operator">=</span> <span class="token number">2</span><span
 <li>开辟内存，存入y，并将y也指向x指向的那块内存</li>
 <li>开辟内存，存入2，并将x指向新开的地址</li>
 </ol>
-<p>如果是在C++, Java等有指针概念的语言中，第二步应该是这样的，开辟新的内存，将x指向的地址的值复制一份存入新地址，开辟内存，存入y，并指向新地址</p></li>
-<li><p>python循环</p>
+<p>如果是在C++, Java等有指针概念的语言中，第二步应该是这样的，开辟新的内存，将x指向的地址的值复制一份存入新地址，开辟内存，存入y，并指向新地址</p>
+<ol start="3" type="1">
+<li>python循环</li>
+</ol>
 <p>python中的循环有如下2种方式：</p>
 <ol type="1">
 <li><p>for循环</p>
 <p>python中的for循环的写法是for x in y, 也就是遍历数组y中的所有变量，提取出来的数是x，在数值计算中运用最多的是for x in range(1, 100), 这种方法是定义了一个1到100的数组，通过range函数，在内存中存储这样的数组，再遍历</p></li>
 <li><p>while循环</p>
 <p>这种方法和其他语言类似，不再赘述</p></li>
-</ol></li>
-<li><p>python函数</p>
+<li><p>python函数</p></li>
+</ol>
 <p>在python中，函数名是指向函数对象的一个引用，所以在python中，可以把函数名赋值给一个变量，这有点类似于matlab中的@func句柄的意思。</p>
-<p>也就是说在python中，函数名对应的内存中，只存储了函数的名字以及对应这个Object的地址，所以可以幅值给另外一个变量。真正的函数对象是存储在另外的内存中的</p></li>
+<p>也就是说在python中，函数名对应的内存中，只存储了函数的名字以及对应这个Object的地址，所以可以幅值给另外一个变量。真正的函数对象是存储在另外的内存中的</p>
+<ol start="5" type="1">
 <li><p>函数的默认参数</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">add_end</span><span class="token punctuation">(</span>L<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     L<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string">'END'</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> L<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>这样一个函数，用默认参数调用一次，结果是['END']，调用两次，结果是['END', 'END']，这是因为，函数在运行时，默认参数也是存放在一块内存中的，每次调用时，由于内存 能够写入，所以每次运行完函数后，默认参数对应的内存都会刷新。所以python中，默认参数最好写成不变的量。</p></li>
-<li><p>python迭代器</p>
-<p>python中可以通过列表生成式的方式得到（类似于Matlab中的矩阵运算）。但是列表很大的时候，而且列表的数据很有规律（例如range(10000000)），但是又只需要用到列表中的少量数据，那么可以用迭代器(generator)的方法，描述列表的数字规律，当需要某个数时，根据规律计算得到，就不需要占用很大的内存了。</p></li>
-<li><p>函数闭包(closure)</p>
-<p>一个函数将另外一个函数作为返回值，并且在返回的函数中存储了内部的局部变量，这种方法称为闭包。闭包能保存原有的局部变量，在调用函数时引用，应用范围较广。但是闭包的应用中，要注意不能引用循环变量。因为闭包返回的函数是等所有函数都返回了才执行，而当所有函数都返回时，循环变量已经变为最终值。</p></li>
-<li><p>偏函数</p>
-<p>偏函数存在于functiontools中，主要的作用就是固定函数的某些参数，其返回值是一个函数。</p></li>
-<li><p>线程锁</p>
-<p>线程与进程的一个不同之处在于，进程之间的变量是独立的，如果两个进程同时读写某一内存，那么用Queue或者Pipe来保证读写的顺序。同时，进程只是把数据读取到自己的运算域内，相当于把数据拷贝一份。但是线程不一样，线程之间的变量是共享的，所以会导致线程对变量的赋值混乱。所以我们需要用线程锁。获得线程锁的线程，会保证在运行期间，变量只能由该线程修改。从而保证变量不会混乱。但是线程锁用完了一定要释放，最好用try…finally保证一定会释放。不然其他线程永远不能修改。但是线程锁也有缺陷，在一些并发线程中并不适用。</p></li>
-<li><p>GIL锁</p>
-<p>在Python的解释器中，有GIL(Global Interpreter Lock)。Python的线程在执行前，一定要获得GIL锁，然后一定时间后，解释器释放GIL锁，然后其他线程再获得GIL锁。这样会保证，同一个进程的多个线程，最多只能用到CPU的一个核。而不能跑满CPU。如果要充分利用CPU，那么可以用多进程的方式，或者用其他的语言实现，例如C，Java等。</p></li>
+    <span class="token keyword">return</span> L<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ol>
-<h4 id="正则表达式">正则表达式</h4>
+<p>这样一个函数，用默认参数调用一次，结果是['END']，调用两次，结果是['END', 'END']，这是因为，函数在运行时，默认参数也是存放在一块内存中的，每次调用时，由于内存 能够写入，所以每次运行完函数后，默认参数对应的内存都会刷新。所以python中，默认参数最好写成不变的量。</p>
+<ol start="6" type="1">
+<li>python迭代器</li>
+</ol>
+<p>python中可以通过列表生成式的方式得到（类似于Matlab中的矩阵运算）。但是列表很大的时候，而且列表的数据很有规律（例如range(10000000)），但是又只需要用到列表中的少量数据，那么可以用迭代器(generator)的方法，描述列表的数字规律，当需要某个数时，根据规律计算得到，就不需要占用很大的内存了。</p>
+<ol start="7" type="1">
+<li>函数闭包(closure)</li>
+</ol>
+<p>一个函数将另外一个函数作为返回值，并且在返回的函数中存储了内部的局部变量，这种方法称为闭包。闭包能保存原有的局部变量，在调用函数时引用，应用范围较广。但是闭包的应用中，要注意不能引用循环变量。因为闭包返回的函数是等所有函数都返回了才执行，而当所有函数都返回时，循环变量已经变为最终值。</p>
+<ol start="8" type="1">
+<li>偏函数</li>
+</ol>
+<p>偏函数存在于functiontools中，主要的作用就是固定函数的某些参数，其返回值是一个函数。</p>
+<ol start="9" type="1">
+<li>线程锁</li>
+</ol>
+<p>线程与进程的一个不同之处在于，进程之间的变量是独立的，如果两个进程同时读写某一内存，那么用Queue或者Pipe来保证读写的顺序。同时，进程只是把数据读取到自己的运算域内，相当于把数据拷贝一份。但是线程不一样，线程之间的变量是共享的，所以会导致线程对变量的赋值混乱。所以我们需要用线程锁。获得线程锁的线程，会保证在运行期间，变量只能由该线程修改。从而保证变量不会混乱。但是线程锁用完了一定要释放，最好用try…finally保证一定会释放。不然其他线程永远不能修改。但是线程锁也有缺陷，在一些并发线程中并不适用。</p>
+<ol start="10" type="1">
+<li>GIL锁</li>
+</ol>
+<p>在Python的解释器中，有GIL(Global Interpreter Lock)。Python的线程在执行前，一定要获得GIL锁，然后一定时间后，解释器释放GIL锁，然后其他线程再获得GIL锁。这样会保证，同一个进程的多个线程，最多只能用到CPU的一个核。而不能跑满CPU。如果要充分利用CPU，那么可以用多进程的方式，或者用其他的语言实现，例如C，Java等。</p>
+<h2 id="正则表达式">正则表达式</h2>
 <ol type="1">
-<li><p>正则表达式的基本表达方式</p>
+<li>正则表达式的基本表达方式</li>
+</ol>
 <table>
 <thead>
 <tr class="header">
@@ -518,10 +531,11 @@ x <span class="token operator">=</span> <span class="token number">2</span><span
 <td>表示分组</td>
 </tr>
 </tbody>
-</table></li>
-<li><p>正则表达式一般采用贪婪匹配，也就是说，如果前面的表达式符合要求，会一直匹配到不符合要求的那个数字，有可能导致后面的表达式匹配到空字符串。如果不想用贪婪匹配，那么需要在每一段表达式后面加上?。</p></li>
+</table>
+<ol start="2" type="1">
+<li>正则表达式一般采用贪婪匹配，也就是说，如果前面的表达式符合要求，会一直匹配到不符合要求的那个数字，有可能导致后面的表达式匹配到空字符串。如果不想用贪婪匹配，那么需要在每一段表达式后面加上?。</li>
 </ol>
-<h4 id="难理解的点">难理解的点</h4>
+<h3 id="难理解的点">难理解的点</h3>
 <ol type="1">
 <li>元类，metaclass</li>
 <li>装饰器，decorator</li>
@@ -597,7 +611,7 @@ x <span class="token operator">=</span> <span class="token number">2</span><span
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/04/13/Wiener-Filter/" title="Wiener-Filter"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2020/04/13/Wiener-Filter/" title="维纳滤波"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
@@ -691,7 +705,7 @@ x <span class="token operator">=</span> <span class="token number">2</span><span
 
     <div class="copyright">
     	
-        &copy; 2022 Zijun Wan
+        &copy; 2023 Zijun Wan
         
         <div class="publishby">
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
@@ -776,5 +790,21 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

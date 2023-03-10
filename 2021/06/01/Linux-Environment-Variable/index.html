@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Linux Environment Variable | Hexo</title>
-  <meta name="description" content="Linux 环境变量设置 Linux环境变量在&#x2F;.bashrc文件中设置。也可能在&#x2F;.zshrc，也可能在&#x2F;etc&#x2F;profile中。设置的方法是 export PATH&#x3D;“$PATH:&#x2F;yourpath&#x2F;” 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径">
+  <title>Linux 环境变量设置 | Hexo</title>
+  <meta name="description" content="Linux环境变量在&#x2F;.bashrc文件中设置。也可能在&#x2F;.zshrc，也可能在&#x2F;etc&#x2F;profile中。设置的方法是 export PATH&#x3D;“$PATH:&#x2F;yourpath&#x2F;” 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux Environment Variable">
+<meta property="og:title" content="Linux 环境变量设置">
 <meta property="og:url" content="http://zijunwan.github.io/2021/06/01/Linux-Environment-Variable/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="Linux 环境变量设置 Linux环境变量在&#x2F;.bashrc文件中设置。也可能在&#x2F;.zshrc，也可能在&#x2F;etc&#x2F;profile中。设置的方法是 export PATH&#x3D;“$PATH:&#x2F;yourpath&#x2F;” 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径">
+<meta property="og:description" content="Linux环境变量在&#x2F;.bashrc文件中设置。也可能在&#x2F;.zshrc，也可能在&#x2F;etc&#x2F;profile中。设置的方法是 export PATH&#x3D;“$PATH:&#x2F;yourpath&#x2F;” 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-01T09:02:23.000Z">
-<meta property="article:modified_time" content="2022-01-18T09:48:24.882Z">
+<meta property="article:published_time" content="2021-06-01T03:02:23.000Z">
+<meta property="article:modified_time" content="2023-03-10T03:55:35.669Z">
 <meta property="article:author" content="Zijun Wan">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -47,11 +47,7 @@
     <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
   
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -258,7 +254,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -280,7 +276,7 @@
                 <a href="/2022/01/25/WORLD-Vocoder/" class="title">WORLD Vocoder</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-25T09:22:32.000Z" itemprop="datePublished">2022-01-25</time>
+                <time datetime="2022-01-25T02:22:32.000Z" itemprop="datePublished">2022-01-25</time>
               </p>
             </div>
           </li>
@@ -295,7 +291,7 @@
                 <a href="/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/" class="title">Mel Frequency Cepstral Coefficients</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-18T09:27:41.000Z" itemprop="datePublished">2022-01-18</time>
+                <time datetime="2022-01-18T02:27:41.000Z" itemprop="datePublished">2022-01-18</time>
               </p>
             </div>
           </li>
@@ -307,10 +303,10 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/13/tensorboard-ssh/" class="title">tensorboard ssh</a>
+                <a href="/2022/01/13/tensorboard-ssh/" class="title">本地打开远程tensorboard</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-13T15:30:51.000Z" itemprop="datePublished">2022-01-13</time>
+                <time datetime="2022-01-13T08:30:51.000Z" itemprop="datePublished">2022-01-13</time>
               </p>
             </div>
           </li>
@@ -322,10 +318,10 @@
                 <a class="category-link" href="/categories/DEEP-LEARNING/">DEEP LEARNING</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/11/self-attention/" class="title">self-attention</a>
+                <a href="/2022/01/10/self-attention/" class="title">self-attention</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-10T21:45:47.000Z" itemprop="datePublished">2022-01-11</time>
+                <time datetime="2022-01-10T14:45:47.000Z" itemprop="datePublished">2022-01-10</time>
               </p>
             </div>
           </li>
@@ -337,7 +333,7 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/07/tmux-command/" class="title">tmux command</a>
+                <a href="/2022/01/07/tmux-command/" class="title">tmux常用命令</a>
               </p>
               <p class="item-date">
                 <time datetime="2022-01-07T02:24:53.000Z" itemprop="datePublished">2022-01-07</time>
@@ -365,7 +361,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Linux Environment Variable
+      Linux 环境变量设置
     </h1>
   
 
@@ -374,7 +370,7 @@
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2021/06/01/Linux-Environment-Variable/" class="article-date">
-	  <time datetime="2021-06-01T09:02:23.000Z" itemprop="datePublished">2021-06-01</time>
+	  <time datetime="2021-06-01T03:02:23.000Z" itemprop="datePublished">2021-06-01</time>
 	</a>
 </span>
         
@@ -405,8 +401,9 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="linux-环境变量设置">Linux 环境变量设置</h1>
-<p>Linux环境变量在<sub>/.bashrc文件中设置。也可能在</sub>/.zshrc，也可能在/etc/profile中。设置的方法是 </p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export PATH=“$PATH:/yourpath/”<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre> 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格<p></p>
+        <p>Linux环境变量在<sub>/.bashrc文件中设置。也可能在</sub>/.zshrc，也可能在/etc/profile中。设置的方法是</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>“<span class="token environment constant">$PATH</span>:/yourpath/”<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格</p>
 
       
     </div>
@@ -416,7 +413,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://zijunwan.github.io/2021/06/01/Linux-Environment-Variable/" title="Linux Environment Variable" target="_blank" rel="external">http://zijunwan.github.io/2021/06/01/Linux-Environment-Variable/</a>
+      <a href="http://zijunwan.github.io/2021/06/01/Linux-Environment-Variable/" title="Linux 环境变量设置" target="_blank" rel="external">http://zijunwan.github.io/2021/06/01/Linux-Environment-Variable/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -461,12 +458,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2021/06/11/powershell-commands-tree/" title="powershell commands-tree"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2021/06/10/powershell-commands-tree/" title="powershell命令：tree"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2021/06/01/visual-studio-code-cpp-configure/" title="visual studio code cpp configure"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/05/31/visual-studio-code-cpp-configure/" title="Visual Studio Code 配置c++编译环境"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -555,7 +552,7 @@
 
     <div class="copyright">
     	
-        &copy; 2022 Zijun Wan
+        &copy; 2023 Zijun Wan
         
         <div class="publishby">
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
@@ -640,5 +637,21 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

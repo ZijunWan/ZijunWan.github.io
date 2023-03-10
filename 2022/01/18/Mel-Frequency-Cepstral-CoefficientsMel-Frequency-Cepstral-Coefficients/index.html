@@ -18,20 +18,20 @@
   
   
   <title>Mel Frequency Cepstral Coefficients | Hexo</title>
-  <meta name="description" content="Mel Frequency Cepstral Coefficients (MFCC) Introduction 在语音信号处理中，我们需要得到不同声音的不同特征表示。这样我们可以对声音进行区分。对于传统的信号处理，我们常用频域分布，功率谱，能量等特征来描述一个一维信号。语音信号也不例外，作为一种常用的一维信号，其处理仍旧会使用传统的方法。但是也有些许不同。于是，我们就需要用 MFCC，即梅尔倒频谱">
+  <meta name="description" content="Introduction 在语音信号处理中，我们需要得到不同声音的不同特征表示。这样我们可以对声音进行区分。对于传统的信号处理，我们常用频域分布，功率谱，能量等特征来描述一个一维信号。语音信号也不例外，作为一种常用的一维信号，其处理仍旧会使用传统的方法。但是也有些许不同。于是，我们就需要用 MFCC，即梅尔倒频谱系数来计算语音信号的特征。 与传统的信号处理不同的是，语音信号的处理需要考虑到人耳听到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mel Frequency Cepstral Coefficients">
 <meta property="og:url" content="http://zijunwan.github.io/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="Mel Frequency Cepstral Coefficients (MFCC) Introduction 在语音信号处理中，我们需要得到不同声音的不同特征表示。这样我们可以对声音进行区分。对于传统的信号处理，我们常用频域分布，功率谱，能量等特征来描述一个一维信号。语音信号也不例外，作为一种常用的一维信号，其处理仍旧会使用传统的方法。但是也有些许不同。于是，我们就需要用 MFCC，即梅尔倒频谱">
+<meta property="og:description" content="Introduction 在语音信号处理中，我们需要得到不同声音的不同特征表示。这样我们可以对声音进行区分。对于传统的信号处理，我们常用频域分布，功率谱，能量等特征来描述一个一维信号。语音信号也不例外，作为一种常用的一维信号，其处理仍旧会使用传统的方法。但是也有些许不同。于是，我们就需要用 MFCC，即梅尔倒频谱系数来计算语音信号的特征。 与传统的信号处理不同的是，语音信号的处理需要考虑到人耳听到">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://zijunwan.github.io/img/Mel-Frequency-Cepstral-Coefficients-1.png">
 <meta property="og:image" content="http://zijunwan.github.io/img/Mel-Frequency-Cepstral-Coefficients-2.png">
 <meta property="og:image" content="http://zijunwan.github.io/img/Mel-Frequency-Cepstral-Coefficients-3.png">
 <meta property="og:image" content="http://zijunwan.github.io/img/Mel-Frequency-Cepstral-Coefficients-4.jpeg">
 <meta property="og:image" content="http://zijunwan.github.io/img/Mel-Frequency-Cepstral-Coefficients-5.png">
-<meta property="article:published_time" content="2022-01-18T09:27:41.000Z">
-<meta property="article:modified_time" content="2022-01-23T19:33:16.584Z">
+<meta property="article:published_time" content="2022-01-18T02:27:41.000Z">
+<meta property="article:modified_time" content="2023-03-10T03:21:42.323Z">
 <meta property="article:author" content="Zijun Wan">
 <meta property="article:tag" content="Audio">
 <meta name="twitter:card" content="summary">
@@ -55,11 +55,7 @@
     <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
   
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -266,7 +262,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -288,7 +284,7 @@
                 <a href="/2022/01/25/WORLD-Vocoder/" class="title">WORLD Vocoder</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-25T09:22:32.000Z" itemprop="datePublished">2022-01-25</time>
+                <time datetime="2022-01-25T02:22:32.000Z" itemprop="datePublished">2022-01-25</time>
               </p>
             </div>
           </li>
@@ -303,7 +299,7 @@
                 <a href="/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/" class="title">Mel Frequency Cepstral Coefficients</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-18T09:27:41.000Z" itemprop="datePublished">2022-01-18</time>
+                <time datetime="2022-01-18T02:27:41.000Z" itemprop="datePublished">2022-01-18</time>
               </p>
             </div>
           </li>
@@ -315,10 +311,10 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/13/tensorboard-ssh/" class="title">tensorboard ssh</a>
+                <a href="/2022/01/13/tensorboard-ssh/" class="title">本地打开远程tensorboard</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-13T15:30:51.000Z" itemprop="datePublished">2022-01-13</time>
+                <time datetime="2022-01-13T08:30:51.000Z" itemprop="datePublished">2022-01-13</time>
               </p>
             </div>
           </li>
@@ -330,10 +326,10 @@
                 <a class="category-link" href="/categories/DEEP-LEARNING/">DEEP LEARNING</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/11/self-attention/" class="title">self-attention</a>
+                <a href="/2022/01/10/self-attention/" class="title">self-attention</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-10T21:45:47.000Z" itemprop="datePublished">2022-01-11</time>
+                <time datetime="2022-01-10T14:45:47.000Z" itemprop="datePublished">2022-01-10</time>
               </p>
             </div>
           </li>
@@ -345,7 +341,7 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/07/tmux-command/" class="title">tmux command</a>
+                <a href="/2022/01/07/tmux-command/" class="title">tmux常用命令</a>
               </p>
               <p class="item-date">
                 <time datetime="2022-01-07T02:24:53.000Z" itemprop="datePublished">2022-01-07</time>
@@ -382,7 +378,7 @@
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/" class="article-date">
-	  <time datetime="2022-01-18T09:27:41.000Z" itemprop="datePublished">2022-01-18</time>
+	  <time datetime="2022-01-18T02:27:41.000Z" itemprop="datePublished">2022-01-18</time>
 	</a>
 </span>
         
@@ -413,16 +409,18 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="mel-frequency-cepstral-coefficients-mfcc">Mel Frequency Cepstral Coefficients (MFCC)</h1>
-<h2 id="introduction">Introduction</h2>
+        <h2 id="introduction">Introduction</h2>
 <p>在语音信号处理中，我们需要得到不同声音的不同特征表示。这样我们可以对声音进行区分。对于传统的信号处理，我们常用频域分布，功率谱，能量等特征来描述一个一维信号。语音信号也不例外，作为一种常用的一维信号，其处理仍旧会使用传统的方法。但是也有些许不同。于是，我们就需要用 MFCC，即梅尔倒频谱系数来计算语音信号的特征。 与传统的信号处理不同的是，语音信号的处理需要考虑到人耳听到声音的感觉和传统方式处理后的数据的对应关系。例如：人的耳蜗会根据声音的不同在不同的地方共振；也不会太区分两个很细微的频率，特别是高频的声音；而且，人类对于声音大小的感知不是线性的，所以我们会计算对数。</p>
 <h2 id="method">Method</h2>
-<p>MFCC的计算主要包括以下几个步骤： 1. 预加重(Pre-Emphasis)</p>
+<p>MFCC的计算主要包括以下几个步骤：</p>
+<ol type="1">
+<li>预加重(Pre-Emphasis)</li>
+</ol>
 <p><span class="math display">\[ y(t) = x(t) - \alpha x(t-1) \]</span></p>
 <p>其中，<span class="math inline">\(y(t)\)</span>是预加重后的数据, <span class="math inline">\(x(t)\)</span>是原始信号, <span class="math inline">\(\alpha\)</span>是预加重系数，一般介于0.97-1之间。其目的主要是提升高频部分，使信号的频谱更加平坦。同时，也避免后面计算傅立叶变换时出现数值问题。比较预加重前后的音频信号，如图1所示。 <img src="/img/Mel-Frequency-Cepstral-Coefficients-1.png" alt="Fig-1: 预加重前后音频信号对比"></p>
 <ol start="2" type="1">
 <li><p>分帧(Frame) 也就是分bin，需要将原始信号拼接起来形成帧。每一帧的时间长度一般是20ms-30ms左右。然后也会采取滑动窗的形式，避免帧和帧之间差距过大。目前常用处理方式是，控制帧的范围在20ms-30ms之间，每一帧的重叠部分在50%左右。分帧后的音频信号如图2所示。可以看出和预加重的信号基本一致。 <img src="/img/Mel-Frequency-Cepstral-Coefficients-2.png" alt="Fig-2: 分帧后的音频信号"></p></li>
-<li><p>加窗 (Window) 对每一帧数据进行划窗处理，用增加数据之间的连续性。对于非周期信号，由于傅立叶变换只能计算有限长度的信号，如果不加滑动窗，会产生频域泄漏。所以，可以用窗函数对信号进行截断，来减少这种频域的泄漏问题。这里我们使用汉宁窗。 <span class="math display">\[ w(n) = (1-a) - a \times cos(\frac{2\pi n}{N-1})\]</span> 其中，<span class="math inline">\(N\)</span>是汉宁窗的长度，<span class="math inline">\(a\)</span>是汉宁窗的系数，一般取0.46。 所以，加窗后的信号为： <span class="math display">\[s(n) = x(n) \times w(n)\]</span> 其中，<span class="math inline">\(s(n)\)</span>是加窗后的信号，<span class="math inline">\(x(n)\)</span>是原始信号。</p></li>
+<li><p>加窗 (Window) 对每一帧数据进行划窗处理，用增加数据之间的连续性。对于非周期信号，由于傅立叶变换只能计算有限长度的信号，如果不加滑动窗，会产生频域泄漏。所以，可以用窗函数对信号进行截断，来减少这种频域的泄漏问题。这里我们使用汉宁窗。 <span class="math display">\[ w(n) = (1-a) - a \times cos(\frac{2 \pi n}{N-1})\]</span> 其中，<span class="math inline">\(N\)</span>是汉宁窗的长度，<span class="math inline">\(a\)</span>是汉宁窗的系数，一般取0.46。 所以，加窗后的信号为： <span class="math display">\[s(n) = x(n) \times w(n)\]</span> 其中，<span class="math inline">\(s(n)\)</span>是加窗后的信号，<span class="math inline">\(x(n)\)</span>是原始信号。</p></li>
 <li><p>傅立叶变换(FFT) 对信号进行FFT，计算当前信号的频谱特性。 <span class="math display">\[ X(k) = \sum_{n=0}^{N-1} x(n) \times e^{-2\pi i k / N}, 0 \leq k \leq N-1 \]</span> 其中，<span class="math inline">\(X(k)\)</span>是频谱，<span class="math inline">\(x(n)\)</span>是加窗后的语音信号，<span class="math inline">\(N\)</span>是FFT点数。上述音频信号的功率谱如图3所示: <img src="/img/Mel-Frequency-Cepstral-Coefficients-3.png" alt="Fig-3: 音频信号的功率谱"></p></li>
 <li><p>三角带通滤波器 将计算后的频谱用三角滤波器滤波。这组三角滤波器是与Mel尺度匹配的。一般来讲滤波器的个数在40个。梅尔频谱会更加关注低频的信号，而对高频的信号用低分辨率的感知。Mel三角滤波器组如图4所示。 <img src="/img/Mel-Frequency-Cepstral-Coefficients-4.jpeg" alt="Fig-4: Mel三角滤波器组"> Mel频谱和真实频谱之间的换算关系如下: <span class="math display">\[ m = 2595 log_{10}(1+\frac{f}{700})\]</span> <span class="math display">\[ f = 700(10^{m/2595}-1)\]</span> 其中，<span class="math inline">\(m\)</span>是Mel频谱，<span class="math inline">\(f\)</span>是真实频谱。 三角滤波器组的频率响应可以如下表示： <span class="math display">\[ 
 H_m(k) =
@@ -437,7 +435,8 @@ H_m(k) =
 </ol>
 <p>以上就是MFCC的计算过程。对于语音问题，我们一般在计算DCT得到MFCC后，会再用正弦函数进行处理 (sinusoidal liftering)。主要是来淡化高阶MFCC系数的影响。因为在语音识别时，更高频的信号大多数是噪声。最后，我们一般也会进行归一化处理。得到的结果如图5所示。 <img src="/img/Mel-Frequency-Cepstral-Coefficients-5.png" alt="Fig-5: Filter Bank 和 MFCC归一化后的结果"></p>
 <h2 id="code">Code</h2>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 <span class="token keyword">import</span> soundfile <span class="token keyword">as</span> sf
 <span class="token keyword">from</span> scipy<span class="token punctuation">.</span>fftpack <span class="token keyword">import</span> dct
 <span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
@@ -504,7 +503,7 @@ mfcc <span class="token operator">*=</span> lift
 
 <span class="token comment"># normalize</span>
 filter_banks <span class="token operator">-=</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>filter_banks<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1e-8</span><span class="token punctuation">)</span>
-mfcc <span class="token operator">-=</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>mfcc<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1e-8</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+mfcc <span class="token operator">-=</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>mfcc<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1e-8</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="references">References</h2>
 <ol type="1">
 <li><a target="_blank" rel="noopener" href="https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html">Speech Processing for Machine Learning: Filter banks, Mel-Frequency Cepstral Coefficients (MFCCs) and What's In-Between</a></li>
@@ -574,7 +573,7 @@ mfcc <span class="token operator">-=</span> <span class="token punctuation">(</s
     
     
     <li class="next">
-      <a href="/2022/01/13/tensorboard-ssh/" title="tensorboard ssh"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2022/01/13/tensorboard-ssh/" title="本地打开远程tensorboard"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -663,7 +662,7 @@ mfcc <span class="token operator">-=</span> <span class="token punctuation">(</s
 
     <div class="copyright">
     	
-        &copy; 2022 Zijun Wan
+        &copy; 2023 Zijun Wan
         
         <div class="publishby">
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
@@ -748,5 +747,21 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

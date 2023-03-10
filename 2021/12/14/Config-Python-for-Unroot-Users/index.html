@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Config Python for Unroot Users | Hexo</title>
-  <meta name="description" content="服务器非管理员配置python环境 Introduction Linux服务器配置python环境时，默认的安装位置是&quot;&#x2F;usr&#x2F;bin&quot;。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。">
+  <title>服务器非管理员配置python环境 | Hexo</title>
+  <meta name="description" content="Introduction Linux服务器配置python环境时，默认的安装位置是&quot;&#x2F;usr&#x2F;bin&quot;。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。 Method  下载python s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Config Python for Unroot Users">
+<meta property="og:title" content="服务器非管理员配置python环境">
 <meta property="og:url" content="http://zijunwan.github.io/2021/12/14/Config-Python-for-Unroot-Users/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="服务器非管理员配置python环境 Introduction Linux服务器配置python环境时，默认的安装位置是&quot;&#x2F;usr&#x2F;bin&quot;。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。">
+<meta property="og:description" content="Introduction Linux服务器配置python环境时，默认的安装位置是&quot;&#x2F;usr&#x2F;bin&quot;。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。 Method  下载python s">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-14T09:07:05.000Z">
-<meta property="article:modified_time" content="2022-01-18T09:38:16.581Z">
+<meta property="article:published_time" content="2021-12-14T02:07:05.000Z">
+<meta property="article:modified_time" content="2023-03-10T03:47:34.773Z">
 <meta property="article:author" content="Zijun Wan">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -47,11 +47,7 @@
     <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
   
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -258,7 +254,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -280,7 +276,7 @@
                 <a href="/2022/01/25/WORLD-Vocoder/" class="title">WORLD Vocoder</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-25T09:22:32.000Z" itemprop="datePublished">2022-01-25</time>
+                <time datetime="2022-01-25T02:22:32.000Z" itemprop="datePublished">2022-01-25</time>
               </p>
             </div>
           </li>
@@ -295,7 +291,7 @@
                 <a href="/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/" class="title">Mel Frequency Cepstral Coefficients</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-18T09:27:41.000Z" itemprop="datePublished">2022-01-18</time>
+                <time datetime="2022-01-18T02:27:41.000Z" itemprop="datePublished">2022-01-18</time>
               </p>
             </div>
           </li>
@@ -307,10 +303,10 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/13/tensorboard-ssh/" class="title">tensorboard ssh</a>
+                <a href="/2022/01/13/tensorboard-ssh/" class="title">本地打开远程tensorboard</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-13T15:30:51.000Z" itemprop="datePublished">2022-01-13</time>
+                <time datetime="2022-01-13T08:30:51.000Z" itemprop="datePublished">2022-01-13</time>
               </p>
             </div>
           </li>
@@ -322,10 +318,10 @@
                 <a class="category-link" href="/categories/DEEP-LEARNING/">DEEP LEARNING</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/11/self-attention/" class="title">self-attention</a>
+                <a href="/2022/01/10/self-attention/" class="title">self-attention</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-10T21:45:47.000Z" itemprop="datePublished">2022-01-11</time>
+                <time datetime="2022-01-10T14:45:47.000Z" itemprop="datePublished">2022-01-10</time>
               </p>
             </div>
           </li>
@@ -337,7 +333,7 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/07/tmux-command/" class="title">tmux command</a>
+                <a href="/2022/01/07/tmux-command/" class="title">tmux常用命令</a>
               </p>
               <p class="item-date">
                 <time datetime="2022-01-07T02:24:53.000Z" itemprop="datePublished">2022-01-07</time>
@@ -365,7 +361,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Config Python for Unroot Users
+      服务器非管理员配置python环境
     </h1>
   
 
@@ -374,7 +370,7 @@
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2021/12/14/Config-Python-for-Unroot-Users/" class="article-date">
-	  <time datetime="2021-12-14T09:07:05.000Z" itemprop="datePublished">2021-12-14</time>
+	  <time datetime="2021-12-14T02:07:05.000Z" itemprop="datePublished">2021-12-14</time>
 	</a>
 </span>
         
@@ -405,76 +401,83 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="服务器非管理员配置python环境">服务器非管理员配置python环境</h1>
-<h2 id="introduction">Introduction</h2>
+        <h2 id="introduction">Introduction</h2>
 <p>Linux服务器配置python环境时，默认的安装位置是"/usr/bin"。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。</p>
 <h2 id="method">Method</h2>
 <ol type="1">
 <li>下载python source code到home/your name 文件夹：</li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这里以python-3.10.1为例，可以从<a target="_blank" rel="noopener" href="https://www.python.org/downloads/source/">python官网</a>下载对应版本的源代码</p>
 <ol start="2" type="1">
 <li>解压文件</li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd download dir
-tar -xzvf Python-3.10.1.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> download <span class="token function">dir</span>
+<span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> Python-3.10.1.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ol start="3" type="1">
 <li><p>下载好以后，如果直接安装，会有以下的问题：首先是openssl，用于软件的安全通信，避免被窃听的一个toolkit。一般是系统级的app；然后是zlib，这个组件用于数据压缩和解压，如果需要使用科学计算的库，那么zlib是必须的；最后是libffi，相当于C的编译器，同样也是用于科学计算。上述组件均可以通过管理员sudo，yum安装。但是如果没有管理员权限，那么需要自行安装。</p></li>
 <li><p>安装openssl</p>
 <ol type="1">
-<li><p>下载并解压<a target="_blank" rel="noopener" href="https://www.openssl.org/source/">openssl</a></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://www.openssl.org/source/openssl-3.0.0.tar.gz
-tar -xzvf openssl-3.0.0.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li><p>编译并安装</p></li>
+<li>下载并解压<a target="_blank" rel="noopener" href="https://www.openssl.org/source/">openssl</a></li>
+</ol></li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd openssl-3.0.0.tar.gz
-./config --prefix=/home/your name/openssl_dir
-make -j48 
-make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://www.openssl.org/source/openssl-3.0.0.tar.gz
+<span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> openssl-3.0.0.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ol start="2" type="1">
+<li>编译并安装</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> openssl-3.0.0.tar.gz
+./config <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/home/your name/openssl_dir
+<span class="token function">make</span> <span class="token parameter variable">-j48</span> 
+<span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="5" type="1">
 <li><p>安装<a target="_blank" rel="noopener" href="http://www.zlib.net/">zlib</a></p>
 <ol type="1">
 <li>下载，解压，编译并安装</li>
+</ol></li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget http://www.zlib.net/zlib-1.2.11.tar.gz
-tar -xzvf zlib-1.2.11.tar.gz
-cd zlib-1.2.11.tar.gz
-./configure --prefix=/home/your name/zlib_dir
-make -j48
-make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> http://www.zlib.net/zlib-1.2.11.tar.gz
+<span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> zlib-1.2.11.tar.gz
+<span class="token builtin class-name">cd</span> zlib-1.2.11.tar.gz
+./configure <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/home/your name/zlib_dir
+<span class="token function">make</span> <span class="token parameter variable">-j48</span>
+<span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="6" type="1">
 <li><p>安装<a target="_blank" rel="noopener" href="https://github.com/libffi/libffi/releases">libffi</a></p>
 <ol type="1">
 <li>下载，解压，编译并安装</li>
+</ol></li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz
-tar -xzvf libffi-3.4.2.tar.gz
-cd libffi-3.4.2.tar.gz
-./configure --prefix=/home/your name/libffi
-make -j48
-make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>将上述安装文件的路径写入环境变量</p></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz
+<span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> libffi-3.4.2.tar.gz
+<span class="token builtin class-name">cd</span> libffi-3.4.2.tar.gz
+./configure <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/home/your name/libffi
+<span class="token function">make</span> <span class="token parameter variable">-j48</span>
+<span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="7" type="1">
+<li>将上述安装文件的路径写入环境变量</li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/your name/libffi_dir/lib/pkgconfig
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/your_name/openssl_dir/lib:/home/your name/zlib_dir/lib:/home/your_name/libffi_dir/lib
-export PKG_CONFIG_PATH=/home/jacob/libffi/lib/pkgconfig
-export CFLAGS=-I/home/your name/libffi_dir/include
-export LDFLAGS=-L/home/your name/libffi_dir/lib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">PKG_CONFIG_PATH</span><span class="token operator">=</span><span class="token variable">$PKG_CONFIG_PATH</span>:/home/your name/libffi_dir/lib/pkgconfig
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">LD_LIBRARY_PATH</span><span class="token operator">=</span><span class="token variable">${LD_LIBRARY_PATH}</span>:/home/your_name/openssl_dir/lib:/home/your name/zlib_dir/lib:/home/your_name/libffi_dir/lib
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">PKG_CONFIG_PATH</span><span class="token operator">=</span>/home/jacob/libffi/lib/pkgconfig
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CFLAGS</span><span class="token operator">=</span>-I/home/your name/libffi_dir/include
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">LDFLAGS</span><span class="token operator">=</span>-L/home/your name/libffi_dir/lib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol start="8" type="1">
 <li>进入python的setup文件，修改部分编译信息</li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd python_path/Modules/
-vim Setup.dist
-# 取消下面的注释
-SSL=/home/your name/openssl_dir
-_ssl _ssl.c -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl -L$(SSL)/lib -lssl -lcrypto
-zlib zlibmodule.c -I/home/your name/zlib_dir/include -L/home/your name/zlib_dir/lib -lz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> python_path/Modules/
+<span class="token function">vim</span> Setup.dist
+<span class="token comment"># 取消下面的注释</span>
+<span class="token assign-left variable">SSL</span><span class="token operator">=</span>/home/your name/openssl_dir
+_ssl _ssl.c <span class="token parameter variable">-DUSE_SSL</span> -I<span class="token variable"><span class="token variable">$(</span>SSL<span class="token variable">)</span></span>/include -I<span class="token variable"><span class="token variable">$(</span>SSL<span class="token variable">)</span></span>/include/openssl -L<span class="token variable"><span class="token variable">$(</span>SSL<span class="token variable">)</span></span>/lib <span class="token parameter variable">-lssl</span> <span class="token parameter variable">-lcrypto</span>
+zlib zlibmodule.c -I/home/your name/zlib_dir/include -L/home/your name/zlib_dir/lib <span class="token parameter variable">-lz</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol start="9" type="1">
 <li>编译python代码，这里需要gcc编译器，一般Linux发行版都自带gcc编译器，如果没有安装，请联系管理员。同时，编译过程需要配置特定的参数</li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd Python-3.10.1
-./configure LDFLAGS="-L/home/your name/libffi_dir/lib64 -Wl,--rpath=/home/your name/libffi_dir/lib64" CFLAGS="-I/home/your name/libffi_dir/include" PKG_CONFIG_PATH="${libffi}/lib/pkgconfig" --prefix=/home/your name/your path --with-openssl=/home/your name/openssl_dir
-make # make -j48 这里不推荐，因为会编译所有的test file，耗时较长，机器快的话也要20min-30min左右
-make install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> Python-3.10.1
+./configure <span class="token assign-left variable">LDFLAGS</span><span class="token operator">=</span><span class="token string">"-L/home/your name/libffi_dir/lib64 -Wl,--rpath=/home/your name/libffi_dir/lib64"</span> <span class="token assign-left variable">CFLAGS</span><span class="token operator">=</span><span class="token string">"-I/home/your name/libffi_dir/include"</span> <span class="token assign-left variable">PKG_CONFIG_PATH</span><span class="token operator">=</span><span class="token string">"<span class="token variable">${libffi}</span>/lib/pkgconfig"</span> <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/home/your name/your path --with-openssl<span class="token operator">=</span>/home/your name/openssl_dir
+<span class="token function">make</span> <span class="token comment"># make -j48 这里不推荐，因为会编译所有的test file，耗时较长，机器快的话也要20min-30min左右</span>
+<span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="summary">Summary</h2>
 <p>以上就是非管理员账户在home文件夹安装自己的python环境的方法。这种方法能安装简易的python环境，但是如果需要很复杂的计算，例如scikt，pytorch，tensorflow等强烈依赖底层C链接库的模块，那么上述方法或许可行。因为整个过程无非是把库文件的源代码安装到了home文件夹里，然后修改环境变量配置。但是如果真的是很复杂的编译和依赖，不建议使用上述方法。上述方法主要参考以下博客和文章：</p>
 <ol type="1">
@@ -483,8 +486,8 @@ make install<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
 <li><a target="_blank" rel="noopener" href="https://hellovimo.github.io/uvm_testbench_gen/localpythoninstall.html">Github Pages</a></li>
 </ol>
 <p>那么，针对Introduction提出的问题，每个人都需要自定义自己的python环境，是否有更好的解决方法呢。答案是<strong>有的</strong>，那就是由管理员安装python到usr目录。然后每个人可以在home文件夹新建自己的虚拟环境。只需要使用pip3命令即可：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">python3 -m pip install --user virtualenv
-python3 -m venv /home/your name/python_dir<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python3 <span class="token parameter variable">-m</span> pip <span class="token function">install</span> <span class="token parameter variable">--user</span> virtualenv
+python3 <span class="token parameter variable">-m</span> venv /home/your name/python_dir<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -494,7 +497,7 @@ python3 -m venv /home/your name/python_dir<span aria-hidden="true" class="line-n
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://zijunwan.github.io/2021/12/14/Config-Python-for-Unroot-Users/" title="Config Python for Unroot Users" target="_blank" rel="external">http://zijunwan.github.io/2021/12/14/Config-Python-for-Unroot-Users/</a>
+      <a href="http://zijunwan.github.io/2021/12/14/Config-Python-for-Unroot-Users/" title="服务器非管理员配置python环境" target="_blank" rel="external">http://zijunwan.github.io/2021/12/14/Config-Python-for-Unroot-Users/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -633,7 +636,7 @@ python3 -m venv /home/your name/python_dir<span aria-hidden="true" class="line-n
 
     <div class="copyright">
     	
-        &copy; 2022 Zijun Wan
+        &copy; 2023 Zijun Wan
         
         <div class="publishby">
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
@@ -718,5 +721,21 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

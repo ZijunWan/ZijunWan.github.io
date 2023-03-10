@@ -17,18 +17,18 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Hidden Markov Model | Hexo</title>
-  <meta name="description" content="Hidden Markov Model 背景 隐马尔可夫模型(Hidden Markov Model)是一种常用的统计模型。应用也比较广泛，在时序问题，以及语音识别等问题上有广泛的应用。下面简单介绍一下隐马尔可夫模型。 隐马尔可夫模型是在马尔可夫过程的基础上，加入了隐含状态后的一种结构。这里首先介绍一下什么是马尔可夫过程(Markov Process) 在一个随机过程中，有一个状态变量\(I\)，">
+  <title>隐马尔科夫模型 | Hexo</title>
+  <meta name="description" content="背景 隐马尔可夫模型(Hidden Markov Model)是一种常用的统计模型。应用也比较广泛，在时序问题，以及语音识别等问题上有广泛的应用。下面简单介绍一下隐马尔可夫模型。 隐马尔可夫模型是在马尔可夫过程的基础上，加入了隐含状态后的一种结构。这里首先介绍一下什么是马尔可夫过程(Markov Process) 在一个随机过程中，有一个状态变量\(I\)，其下一时刻的状态之和之前的状态有关。例如">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hidden Markov Model">
+<meta property="og:title" content="隐马尔科夫模型">
 <meta property="og:url" content="http://zijunwan.github.io/2020/01/21/Hidden-Markov-Model/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="Hidden Markov Model 背景 隐马尔可夫模型(Hidden Markov Model)是一种常用的统计模型。应用也比较广泛，在时序问题，以及语音识别等问题上有广泛的应用。下面简单介绍一下隐马尔可夫模型。 隐马尔可夫模型是在马尔可夫过程的基础上，加入了隐含状态后的一种结构。这里首先介绍一下什么是马尔可夫过程(Markov Process) 在一个随机过程中，有一个状态变量\(I\)，">
+<meta property="og:description" content="背景 隐马尔可夫模型(Hidden Markov Model)是一种常用的统计模型。应用也比较广泛，在时序问题，以及语音识别等问题上有广泛的应用。下面简单介绍一下隐马尔可夫模型。 隐马尔可夫模型是在马尔可夫过程的基础上，加入了隐含状态后的一种结构。这里首先介绍一下什么是马尔可夫过程(Markov Process) 在一个随机过程中，有一个状态变量\(I\)，其下一时刻的状态之和之前的状态有关。例如">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://zijunwan.github.io/img/HiddenMarkovModel-1.jpg">
 <meta property="og:image" content="http://zijunwan.github.io/img/HiddenMarkovModel-2.jpg">
-<meta property="article:published_time" content="2020-01-21T13:08:45.000Z">
-<meta property="article:modified_time" content="2022-01-18T09:47:01.598Z">
+<meta property="article:published_time" content="2020-01-21T06:08:45.000Z">
+<meta property="article:modified_time" content="2023-03-10T03:53:16.794Z">
 <meta property="article:author" content="Zijun Wan">
 <meta property="article:tag" content="hmm">
 <meta name="twitter:card" content="summary">
@@ -52,11 +52,7 @@
     <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
   
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -263,7 +259,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -285,7 +281,7 @@
                 <a href="/2022/01/25/WORLD-Vocoder/" class="title">WORLD Vocoder</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-25T09:22:32.000Z" itemprop="datePublished">2022-01-25</time>
+                <time datetime="2022-01-25T02:22:32.000Z" itemprop="datePublished">2022-01-25</time>
               </p>
             </div>
           </li>
@@ -300,7 +296,7 @@
                 <a href="/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/" class="title">Mel Frequency Cepstral Coefficients</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-18T09:27:41.000Z" itemprop="datePublished">2022-01-18</time>
+                <time datetime="2022-01-18T02:27:41.000Z" itemprop="datePublished">2022-01-18</time>
               </p>
             </div>
           </li>
@@ -312,10 +308,10 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/13/tensorboard-ssh/" class="title">tensorboard ssh</a>
+                <a href="/2022/01/13/tensorboard-ssh/" class="title">本地打开远程tensorboard</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-13T15:30:51.000Z" itemprop="datePublished">2022-01-13</time>
+                <time datetime="2022-01-13T08:30:51.000Z" itemprop="datePublished">2022-01-13</time>
               </p>
             </div>
           </li>
@@ -327,10 +323,10 @@
                 <a class="category-link" href="/categories/DEEP-LEARNING/">DEEP LEARNING</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/11/self-attention/" class="title">self-attention</a>
+                <a href="/2022/01/10/self-attention/" class="title">self-attention</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-10T21:45:47.000Z" itemprop="datePublished">2022-01-11</time>
+                <time datetime="2022-01-10T14:45:47.000Z" itemprop="datePublished">2022-01-10</time>
               </p>
             </div>
           </li>
@@ -342,7 +338,7 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/07/tmux-command/" class="title">tmux command</a>
+                <a href="/2022/01/07/tmux-command/" class="title">tmux常用命令</a>
               </p>
               <p class="item-date">
                 <time datetime="2022-01-07T02:24:53.000Z" itemprop="datePublished">2022-01-07</time>
@@ -370,7 +366,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hidden Markov Model
+      隐马尔科夫模型
     </h1>
   
 
@@ -379,7 +375,7 @@
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2020/01/21/Hidden-Markov-Model/" class="article-date">
-	  <time datetime="2020-01-21T13:08:45.000Z" itemprop="datePublished">2020-01-21</time>
+	  <time datetime="2020-01-21T06:08:45.000Z" itemprop="datePublished">2020-01-21</time>
 	</a>
 </span>
         
@@ -410,8 +406,7 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="hidden-markov-model">Hidden Markov Model</h1>
-<h2 id="背景">背景</h2>
+        <h2 id="背景">背景</h2>
 <p>隐马尔可夫模型(Hidden Markov Model)是一种常用的统计模型。应用也比较广泛，在时序问题，以及语音识别等问题上有广泛的应用。下面简单介绍一下隐马尔可夫模型。</p>
 <p>隐马尔可夫模型是在马尔可夫过程的基础上，加入了隐含状态后的一种结构。这里首先介绍一下什么是马尔可夫过程(Markov Process)</p>
 <p>在一个随机过程中，有一个状态变量<span class="math inline">\(I\)</span>，其下一时刻的状态之和之前的状态有关。例如布朗运动，粒子的下一时刻状态之和之前时刻的状态有关。而<span class="math inline">\(I\)</span>变化的过程，也就是马尔科夫链。这个约束，也就是马尔可夫假设。</p>
@@ -502,7 +497,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://zijunwan.github.io/2020/01/21/Hidden-Markov-Model/" title="Hidden Markov Model" target="_blank" rel="external">http://zijunwan.github.io/2020/01/21/Hidden-Markov-Model/</a>
+      <a href="http://zijunwan.github.io/2020/01/21/Hidden-Markov-Model/" title="隐马尔科夫模型" target="_blank" rel="external">http://zijunwan.github.io/2020/01/21/Hidden-Markov-Model/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -552,7 +547,7 @@
     
     
     <li class="next">
-      <a href="/2020/01/21/Principle-Component-Analysis/" title="Principle Component Analysis"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/01/21/Principle-Component-Analysis/" title="主成分分析"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -641,7 +636,7 @@
 
     <div class="copyright">
     	
-        &copy; 2022 Zijun Wan
+        &copy; 2023 Zijun Wan
         
         <div class="publishby">
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
@@ -726,5 +721,21 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

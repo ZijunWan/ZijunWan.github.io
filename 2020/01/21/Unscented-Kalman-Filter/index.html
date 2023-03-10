@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Unscented Kalman Filter | Hexo</title>
-  <meta name="description" content="Unscented Kalman Filter 最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考 我的一点点理解 无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合">
+  <title>无迹卡尔曼滤波 | Hexo</title>
+  <meta name="description" content="最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考 我的一点点理解 无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合的情况。所以就有了无极卡尔曼滤波。这种方法的主要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unscented Kalman Filter">
+<meta property="og:title" content="无迹卡尔曼滤波">
 <meta property="og:url" content="http://zijunwan.github.io/2020/01/21/Unscented-Kalman-Filter/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="Unscented Kalman Filter 最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考 我的一点点理解 无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合">
+<meta property="og:description" content="最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考 我的一点点理解 无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合的情况。所以就有了无极卡尔曼滤波。这种方法的主要">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-21T13:10:25.000Z">
-<meta property="article:modified_time" content="2022-01-18T09:54:10.659Z">
+<meta property="article:published_time" content="2020-01-21T06:10:25.000Z">
+<meta property="article:modified_time" content="2023-03-10T04:01:38.684Z">
 <meta property="article:author" content="Zijun Wan">
 <meta property="article:tag" content="ukf">
 <meta name="twitter:card" content="summary">
@@ -49,11 +49,7 @@
     <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
   
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -260,7 +256,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -282,7 +278,7 @@
                 <a href="/2022/01/25/WORLD-Vocoder/" class="title">WORLD Vocoder</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-25T09:22:32.000Z" itemprop="datePublished">2022-01-25</time>
+                <time datetime="2022-01-25T02:22:32.000Z" itemprop="datePublished">2022-01-25</time>
               </p>
             </div>
           </li>
@@ -297,7 +293,7 @@
                 <a href="/2022/01/18/Mel-Frequency-Cepstral-CoefficientsMel-Frequency-Cepstral-Coefficients/" class="title">Mel Frequency Cepstral Coefficients</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-18T09:27:41.000Z" itemprop="datePublished">2022-01-18</time>
+                <time datetime="2022-01-18T02:27:41.000Z" itemprop="datePublished">2022-01-18</time>
               </p>
             </div>
           </li>
@@ -309,10 +305,10 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/13/tensorboard-ssh/" class="title">tensorboard ssh</a>
+                <a href="/2022/01/13/tensorboard-ssh/" class="title">本地打开远程tensorboard</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-13T15:30:51.000Z" itemprop="datePublished">2022-01-13</time>
+                <time datetime="2022-01-13T08:30:51.000Z" itemprop="datePublished">2022-01-13</time>
               </p>
             </div>
           </li>
@@ -324,10 +320,10 @@
                 <a class="category-link" href="/categories/DEEP-LEARNING/">DEEP LEARNING</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/11/self-attention/" class="title">self-attention</a>
+                <a href="/2022/01/10/self-attention/" class="title">self-attention</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-01-10T21:45:47.000Z" itemprop="datePublished">2022-01-11</time>
+                <time datetime="2022-01-10T14:45:47.000Z" itemprop="datePublished">2022-01-10</time>
               </p>
             </div>
           </li>
@@ -339,7 +335,7 @@
                 <a class="category-link" href="/categories/DEVELOPMENT/">DEVELOPMENT</a>
               </p>
               <p class="item-title">
-                <a href="/2022/01/07/tmux-command/" class="title">tmux command</a>
+                <a href="/2022/01/07/tmux-command/" class="title">tmux常用命令</a>
               </p>
               <p class="item-date">
                 <time datetime="2022-01-07T02:24:53.000Z" itemprop="datePublished">2022-01-07</time>
@@ -367,7 +363,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Unscented Kalman Filter
+      无迹卡尔曼滤波
     </h1>
   
 
@@ -376,7 +372,7 @@
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2020/01/21/Unscented-Kalman-Filter/" class="article-date">
-	  <time datetime="2020-01-21T13:10:25.000Z" itemprop="datePublished">2020-01-21</time>
+	  <time datetime="2020-01-21T06:10:25.000Z" itemprop="datePublished">2020-01-21</time>
 	</a>
 </span>
         
@@ -407,11 +403,10 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="unscented-kalman-filter">Unscented Kalman Filter</h4>
-<p>最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考</p>
-<h5 id="我的一点点理解">我的一点点理解</h5>
+        <p>最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考</p>
+<h2 id="我的一点点理解">我的一点点理解</h2>
 <p>无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合的情况。所以就有了无极卡尔曼滤波。这种方法的主要改进在于，不再用线性的模型去计算预测模型以及转换矩阵，而是通过采样和计算均值方法的方式，去估计样本的方差和均值。</p>
-<h5 id="计算过程">计算过程</h5>
+<h2 id="计算过程">计算过程</h2>
 <p>无迹卡尔曼滤波的计算方式和卡尔曼滤波比较类似，只是讲线性转换模型换成了采样的方式。具体的原理推导比较复杂，所以这里只写一下无迹卡尔曼滤波的计算过程：</p>
 <p>无迹卡尔曼的计算步骤和卡尔曼滤波基本是一致的，只是对其中的一些步骤进行了修改，首先，我们看一下Kalman Filter的计算过程：</p>
 <ol type="1">
@@ -525,7 +520,7 @@ P(x_t|X_t) = P(x_t|x_t')-P_{xz, t}(P_{zz, t}^{-1})^TP_{xz, t}^{T}
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://zijunwan.github.io/2020/01/21/Unscented-Kalman-Filter/" title="Unscented Kalman Filter" target="_blank" rel="external">http://zijunwan.github.io/2020/01/21/Unscented-Kalman-Filter/</a>
+      <a href="http://zijunwan.github.io/2020/01/21/Unscented-Kalman-Filter/" title="无迹卡尔曼滤波" target="_blank" rel="external">http://zijunwan.github.io/2020/01/21/Unscented-Kalman-Filter/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -570,12 +565,12 @@ P(x_t|X_t) = P(x_t|x_t')-P_{xz, t}(P_{zz, t}^{-1})^TP_{xz, t}^{T}
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/02/06/Gradient-Descent-Method/" title="Gradient Descent Method"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2020/02/06/Gradient-Descent-Method/" title="梯度下降法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/01/21/Unity/" title="Unity"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/01/21/Unity/" title="Unity相关概念"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -664,7 +659,7 @@ P(x_t|X_t) = P(x_t|x_t')-P_{xz, t}(P_{zz, t}^{-1})^TP_{xz, t}^{T}
 
     <div class="copyright">
     	
-        &copy; 2022 Zijun Wan
+        &copy; 2023 Zijun Wan
         
         <div class="publishby">
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
@@ -749,5 +744,21 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
