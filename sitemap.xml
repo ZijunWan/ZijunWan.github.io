@@ -2,9 +2,63 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zijunwan.github.io/2021/12/14/Config-Python-for-Unroot-Users/</loc>
+    <loc>http://zijunwan.github.io/2020/01/21/Unity/</loc>
     
-    <lastmod>2023-03-10</lastmod>
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2020/02/06/Gradient-Descent-Method/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2020/04/13/Wiener-Filter/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2021/07/28/Latex-Vscode-Configuration-in-Ubuntu/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2021/07/29/Linux-unzip-file-from-Windows/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2021/08/12/Git-Clone-Part-of-Repository/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2021/08/13/SSH-Download-and-Upload/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +67,61 @@
   <url>
     <loc>http://zijunwan.github.io/2021/09/24/SVD-UKF/</loc>
     
-    <lastmod>2023-03-10</lastmod>
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2021/12/14/Config-Python-for-Unroot-Users/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2021/12/23/Generative-Adversarial-Nets/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2022/01/25/WORLD-Vocoder/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2021/12/25/Conditional-Generative-Adversarial-Nets/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2020/05/16/Berkeley-CS-61A/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/2020/01/21/C-Sharp-Notes/</loc>
+    
+    <lastmod>2023-12-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -83,15 +191,6 @@
   </url>
   
   <url>
-    <loc>http://zijunwan.github.io/2020/04/13/Wiener-Filter/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://zijunwan.github.io/2021/05/31/visual-studio-code-cpp-configure/</loc>
     
     <lastmod>2023-03-10</lastmod>
@@ -110,25 +209,7 @@
   </url>
   
   <url>
-    <loc>http://zijunwan.github.io/2020/01/21/Unity/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://zijunwan.github.io/2020/01/21/Two-Types-of-Variance/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zijunwan.github.io/2021/08/13/SSH-Download-and-Upload/</loc>
     
     <lastmod>2023-03-10</lastmod>
     
@@ -191,15 +272,6 @@
   </url>
   
   <url>
-    <loc>http://zijunwan.github.io/2021/07/29/Linux-unzip-file-from-Windows/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://zijunwan.github.io/2021/06/01/Linux-Environment-Variable/</loc>
     
     <lastmod>2023-03-10</lastmod>
@@ -218,34 +290,7 @@
   </url>
   
   <url>
-    <loc>http://zijunwan.github.io/2021/07/28/Latex-Vscode-Configuration-in-Ubuntu/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://zijunwan.github.io/2020/01/21/Hidden-Markov-Model/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zijunwan.github.io/2020/02/06/Gradient-Descent-Method/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zijunwan.github.io/2021/08/12/Git-Clone-Part-of-Repository/</loc>
     
     <lastmod>2023-03-10</lastmod>
     
@@ -272,33 +317,6 @@
   </url>
   
   <url>
-    <loc>http://zijunwan.github.io/2020/01/21/C-Sharp-Notes/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zijunwan.github.io/2021/12/23/Generative-Adversarial-Nets/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zijunwan.github.io/2021/12/25/Conditional-Generative-Adversarial-Nets/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://zijunwan.github.io/2022/01/07/tmux-command/</loc>
     
     <lastmod>2023-03-10</lastmod>
@@ -309,15 +327,6 @@
   
   <url>
     <loc>http://zijunwan.github.io/2022/01/13/tensorboard-ssh/</loc>
-    
-    <lastmod>2023-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zijunwan.github.io/2022/01/25/WORLD-Vocoder/</loc>
     
     <lastmod>2023-03-10</lastmod>
     
@@ -363,15 +372,6 @@
   
   <url>
     <loc>http://zijunwan.github.io/2020/02/23/Linear-Algebra/</loc>
-    
-    <lastmod>2022-01-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zijunwan.github.io/2020/05/16/Berkeley-CS-61A/</loc>
     
     <lastmod>2022-01-18</lastmod>
     
@@ -436,7 +436,7 @@
 
   <url>
     <loc>http://zijunwan.github.io/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -444,203 +444,217 @@
   
   <url>
     <loc>http://zijunwan.github.io/tags/compile/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/notes/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/linux/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/cgan/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/git/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/gradient-descent/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/hmm/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/kalman/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/latex/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/linear-algebra/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/linear-regression/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/probability/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/cpp/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/ole/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/pva/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/pca/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/qt/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/ssh/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/ukf/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/gan/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/unity/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/wiener/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/vpn/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/Audio/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/powershell/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/python/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/pytorch/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/configuration/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/tags/attention/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/tags/CS-61A/</loc>
+    <lastmod>2023-12-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/tags/C/</loc>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -648,64 +662,64 @@
 
   
   <url>
-    <loc>http://zijunwan.github.io/categories/COURSE/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://zijunwan.github.io/categories/DEEPLEARNING/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/categories/DEVELOPMENT/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/categories/DEEP-LEARNING/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/categories/MACHINE-LEARNING/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/categories/ALGORITHMS/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/categories/LANGUAGE/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/categories/DEEP-LEARNING/ALGORITHMS/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://zijunwan.github.io/categories/SIGNAL-PROCESSING/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-12-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://zijunwan.github.io/categories/NOTES/</loc>
+    <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
