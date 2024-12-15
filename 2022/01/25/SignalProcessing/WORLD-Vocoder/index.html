@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zijun Wan">
+  <meta name="keywords" content="Neural Network, Computer Science">
+  
+    <meta name="description" content="Introduction WORLD是由Yamanashi大学的MORISE团队在2016年开发的一款语音合成软件[1]，可以用来合成高质量的语音信号。该软件的特点是计算量小，能实时合成语音信息，且合成声音质量高于传统的合成算法。 Method WORLD的系统框架如图1所示，其合成主要包括以下几个步骤：  计算基础频率F0，使用DIO算法 计算频谱的包络线， 使用CheapTrick算法 计算非">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WORLD Vocoder">
+<meta property="og:url" content="http://zijunwan.github.io/2022/01/25/SignalProcessing/WORLD-Vocoder/index.html">
+<meta property="og:site_name" content="Frank Wan&#39;s Blog">
+<meta property="og:description" content="Introduction WORLD是由Yamanashi大学的MORISE团队在2016年开发的一款语音合成软件[1]，可以用来合成高质量的语音信号。该软件的特点是计算量小，能实时合成语音信息，且合成声音质量高于传统的合成算法。 Method WORLD的系统框架如图1所示，其合成主要包括以下几个步骤：  计算基础频率F0，使用DIO算法 计算频谱的包络线， 使用CheapTrick算法 计算非">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zijunwan.github.io/img/WORLD-Vocoder/1.png">
+<meta property="og:image" content="http://zijunwan.github.io/img/WORLD-Vocoder/2.png">
+<meta property="og:image" content="http://zijunwan.github.io/img/WORLD-Vocoder/3.png">
+<meta property="article:published_time" content="2022-01-25T02:22:32.000Z">
+<meta property="article:modified_time" content="2024-12-15T11:36:08.257Z">
+<meta property="article:author" content="Zijun Wan">
+<meta property="article:tag" content="Audio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://zijunwan.github.io/img/WORLD-Vocoder/1.png">
+  
+  
+  
+  <title>WORLD Vocoder - Frank Wan&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zijunwan.github.io","root":"/","version":"1.9.4","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Frank Wan's Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zijun</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">WORLD Vocoder</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-01-25 10:22" pubdate>
+          2022年1月25日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WORLD Vocoder</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="introduction">Introduction</h2>
+<p>WORLD是由Yamanashi大学的MORISE团队在2016年开发的一款语音合成软件[1]，可以用来合成高质量的语音信号。该软件的特点是计算量小，能实时合成语音信息，且合成声音质量高于传统的合成算法。</p>
+<h2 id="method">Method</h2>
+<p>WORLD的系统框架如图1所示，其合成主要包括以下几个步骤：</p>
+<ul>
+<li>计算基础频率F0，使用DIO算法</li>
+<li>计算频谱的包络线， 使用CheapTrick算法</li>
+<li>计算非周期信号参数Aperiodicity parameters，使用PLATINUM算法</li>
+</ul>
+<figure>
+<img src="/img/WORLD-Vocoder/1.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>图1：WORLD声码器计算流程图</figcaption>
+</figure>
+<h3 id="f0计算">F0计算</h3>
+<p>F0是指一段声音信号的基频，即一段周期信号变化的最小频率。人声信号的F0决定了一段声音的音调特征，即被试声带的振动频率。一般来讲，男声的F0会比女声的低。F0有多种估计方法，例如YIN[2]、SWIPE[3]等。本文使用的是DIO算法[4, 5]，相较于之前的算法，DIO的计算更快，质量也很高。</p>
+<p>DIO的计算分为3步：首先，我们用不同截止频率的低通滤波器对信号滤波，如果滤波后只有单个频率，将其转换为正弦周期信号并计算其周期<span class="math inline">\(T_0\)</span>。这样就得到了多个周期；然后计算信号的峰峰值，过零点间距等4个值，如图2所示。对于每个周期信号，这4个值的平均值就作为其对F0的估计，然后这4个值的标准差作为F0计算可信度的量化指标。因为理论上对于F0，这4个值应该是相等的，即标准差为0；最后选择可信度最高的周期信号对应的F0作为最终的估计值。</p>
+<figure>
+<img src="/img/WORLD-Vocoder/2.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>图2：使用DIO算法计算F0</figcaption>
+</figure>
+<h3 id="频谱估计">频谱估计</h3>
+<p>频谱估计中，会计算声音信号的倒频谱（Cepstrum）然后用线性预测编码（Linear Prediction Coding）进行估计。LPC的计算依赖于信号的时序特征，而频谱的估计需要尽量避免这种依赖。因此发展出了一些估计算法，例如STRAIGHT及其改进版。WORLD中使用的是CheapTrick算法[6, 7]，其主要计算如下：</p>
+<ul>
+<li>首先估计信号的功率谱，使用的是长度为<span class="math inline">\(3T_0\)</span>的汉宁窗</li>
+</ul>
+<p><span class="math display">\[\sum_{0}^{3T_0}(y(t)\omega(t))^2dt = 1.125 \sum_{0}^{T_0}y^2(t)dt\]</span></p>
+<ul>
+<li>然后对功率谱做平滑处理，用宽度为<span class="math inline">\(2\omega_0 / 3\)</span>的三角窗平滑，其中<span class="math inline">\(\omega_0 = 2\pi / T_0\)</span></li>
+</ul>
+<p><span class="math display">\[P_s(\omega) = \frac{3}{2\omega_0} \sum_{\omega_0/3}^{-\omega_0/3}P(\omega+\lambda)d\lambda\]</span></p>
+<ul>
+<li>最后计算倒频谱，用同态滤波来计算</li>
+</ul>
+<p><span class="math display">\[P_l(\omega) = exp(F(\frac{sin(\pi f_0 \tau)}{\pi f_0 \tau} * (q_0 + 2q_1 cos(\frac{2\pi \tau}{T_0})) p_s(\tau)))\]</span></p>
+<p><span class="math display">\[p_s(\tau) = F^{-1}(log(P_s(\omega)))\]</span></p>
+<h3 id="非周期信号参数估计">非周期信号参数估计</h3>
+<p>WORLD用PLATINUM算法[8]来估计非周期参数（Aperiodic Parameter）。AP的计算在其他合成算法中也有使用，例如STRAIGHT、TANDEM-STRAIGHT等。PLATINUM算法计算如下：。</p>
+<ul>
+<li><p>首先对波形添加宽为<span class="math inline">\(2T_0\)</span>的窗，计算其频谱<span class="math inline">\(X(\omega)\)</span></p></li>
+<li><p>然后用频谱除以最小相谱得到<span class="math inline">\(X_p(\omega)\)</span></p></li>
+</ul>
+<p><span class="math display">\[X_p(\omega) = \frac{X(\omega)}{S_m(\omega)}\]</span></p>
+<ul>
+<li>最小相谱的计算如下：</li>
+</ul>
+<p><span class="math display">\[S_m(\omega) = exp(F[c_m(\tau)])\]</span></p>
+<p><span class="math display">\[c_m(\tau)=\left \{ \begin{align}
+  2c(\tau), \tau&gt;0\\
+  c(\tau), \tau=0\\
+  0, \tau&lt;0
+\end{align}\right.
+\]</span></p>
+<ul>
+<li>最后计算<span class="math inline">\(X_p(\omega)\)</span>的逆傅立叶变换，得到非周期参数<span class="math inline">\(x_p(t)\)</span></li>
+</ul>
+<p><span class="math display">\[x_p(t) = F^{-1}[X_p(\omega)]\]</span></p>
+<h2 id="合成">合成</h2>
+<p>计算得到F0，频谱和非周期信号后。通过频谱包络计算最小相位谱，然后与激励信号计算卷积，即可得到合成的语音信号，计算框架如图3所示</p>
+<figure>
+<img src="/img/WORLD-Vocoder/3.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>图3：使用WORLD合成语音的系统框架</figcaption>
+</figure>
+<h2 id="代码">代码</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/mmorise/World">WORLD</a>的代码是基于C++的。Github上也有其Python Wrapper库--<a target="_blank" rel="noopener" href="https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder">PyWorld</a>。其使用样例如下：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#获取音频的采样点数值以及采样率</span><br>x, fs = sf. read( <span class="hljs-string">'utterance/vaiueo2d.wav'</span>)<br><span class="hljs-comment">#使用DIO算法计算音频的基频F0</span><br>_f <span class="hljs-number">0</span>, t = pw.dio( x, fs, f0_floor= <span class="hljs-number">50.0</span>, f0_ceil= <span class="hljs-number">600.0</span>, channels_in_octave= <span class="hljs-number">2</span>, frame_period=args.frame_period, speed=args.speed)<br><span class="hljs-comment">#使用CheapTrick算法计算音频的频谱包络</span><br>_sp = pw.cheaptrick( x, _f <span class="hljs-number">0</span>, t, fs)<br><span class="hljs-comment">#计算aperiodic参数</span><br>_ap = pw.d4c( x, _f <span class="hljs-number">0</span>, t, fs)<br><span class="hljs-comment">#基于以上参数合成音频</span><br>_y = pw.synthesize(_f <span class="hljs-number">0</span>, _sp, _ap, fs, args.frame_period)<br><span class="hljs-comment">#写入音频文件</span><br>sf. write( <span class="hljs-string">'test/y_without_f0_refinement.wav'</span>, _y, fs)<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="references">References</h2>
+<p>[1] Morise M, Yokomori F, Ozawa K. WORLD: a vocoder-based high-quality speech synthesis system for real-time applications[J]. IEICE TRANSACTIONS on Information and Systems, 2016, 99(7): 1877-1884.</p>
+<p>[2] A. Cheveign´e and H. Kawahara, “Yin, a fundamental frequency estimator for speech and music,” J. Acoust. Soc. Am., vol.111, no.4, pp.1917–1930, 2002.</p>
+<p>[3] A. Camacho and J.G. Harris, “A sawtooth waveform inspired pitch estimator for speech and music,” J. Acoust. Soc. Am., vol.124, no.3, pp.1638–1652, 2008.</p>
+<p>[4] M. Morise, H. Kawahara, and H. Katayose, “Fast and reliable f0 estimation method based on the period extraction of vocal fold vibration of singing voice and speech,” in Proc. AES 35th International Conference, CD-ROM Proceedings, 2009.</p>
+<p>[5] M. Morise, H. Kawahara, and T. Nishiura, “Rapid f0 estimation for high-snr speech based on fundamental component extraction,” IEICE Trans. Inf. &amp; Syst. (Japanese Edition), vol.J93-D, no.2, pp.109–117, 2010.</p>
+<p>[6] M. Morise, “Cheaptrick, a spectral envelope estimator for high-quality speech synthesis,” Speech Communication, vol.67, pp.1–7, 2015.</p>
+<p>[7] M. Morise, “Error evaluation of an f0-adaptive spectral envelope estimator in robustness against the additive noise and f0 error,” IEICE Trans. on Information Systems, vol.E98-D, no.7, pp.1405–1408, 2015.</p>
+<p>[8] M. Morise, “Platinum: A method to extract excitation signals for voice synthesis system,” Acoust. Sci. &amp; Tech., vol.33, no.2, pp.123–125, 2012.</p>
+<p>[9] <a target="_blank" rel="noopener" href="https://www.sohu.com/a/219420730_723464">开源的语音合成系统WORLD介绍以及使用方法</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SIGNAL-PROCESSING/" class="category-chain-item">SIGNAL PROCESSING</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Audio/">#Audio</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>WORLD Vocoder</div>
+      <div>http://zijunwan.github.io/2022/01/25/SignalProcessing/WORLD-Vocoder/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zijun Wan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年1月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/15/Embedded/QuartusII/" title="Quartus ii 9.0软件的使用和win10不兼容解决方案">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Quartus ii 9.0软件的使用和win10不兼容解决方案</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/18/SignalProcessing/Mel-Frequency-Cepstral-Coefficients/" title="Mel Frequency Cepstral Coefficients">
+                        <span class="hidden-mobile">Mel Frequency Cepstral Coefficients</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>

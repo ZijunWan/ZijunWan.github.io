@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zijun Wan">
+  <meta name="keywords" content="Neural Network, Computer Science">
+  
+    <meta name="description" content="最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考 我的一点点理解 无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合的情况。所以就有了无极卡尔曼滤波。这种方法的主要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无迹卡尔曼滤波">
+<meta property="og:url" content="http://zijunwan.github.io/2020/01/21/MachineLearning/Unscented-Kalman-Filter/index.html">
+<meta property="og:site_name" content="Frank Wan&#39;s Blog">
+<meta property="og:description" content="最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考 我的一点点理解 无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合的情况。所以就有了无极卡尔曼滤波。这种方法的主要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-21T06:10:25.000Z">
+<meta property="article:modified_time" content="2024-12-15T10:49:30.776Z">
+<meta property="article:author" content="Zijun Wan">
+<meta property="article:tag" content="UKF">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>无迹卡尔曼滤波 - Frank Wan&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zijunwan.github.io","root":"/","version":"1.9.4","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Frank Wan's Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Zijun</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">无迹卡尔曼滤波</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-01-21 14:10" pubdate>
+          2020年1月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">无迹卡尔曼滤波</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近读了一篇文献，里面用到了无迹卡尔曼滤波(Unscented Kalman Filter)。这里写一下我对这种方法的理解。卡尔曼滤波的理解部分可以参考</p>
+<h2 id="我的一点点理解">我的一点点理解</h2>
+<p>无迹卡尔曼滤波是对卡尔曼滤波的一种改进。这种改进主要是针对非线性的信号。因为在卡尔曼滤波中，预测模型以及测量空间对应的转换矩阵都是都是线性转换。但是在面对非线性信号时，会出现无法拟合的情况。所以就有了无极卡尔曼滤波。这种方法的主要改进在于，不再用线性的模型去计算预测模型以及转换矩阵，而是通过采样和计算均值方法的方式，去估计样本的方差和均值。</p>
+<h2 id="计算过程">计算过程</h2>
+<p>无迹卡尔曼滤波的计算方式和卡尔曼滤波比较类似，只是讲线性转换模型换成了采样的方式。具体的原理推导比较复杂，所以这里只写一下无迹卡尔曼滤波的计算过程：</p>
+<p>无迹卡尔曼的计算步骤和卡尔曼滤波基本是一致的，只是对其中的一些步骤进行了修改，首先，我们看一下Kalman Filter的计算过程：</p>
+<ol type="1">
+<li><p>建立编码模型和转换模型， 假设观测变量是<span class="math inline">\(z\)</span>， 测量变量是<span class="math inline">\(x\)</span>， 那么首先我们假设：</p>
+<ol type="1">
+<li>当前时刻的测量变量是可以根据上一时刻的测量变量估计： <span class="math display">\[
+x_{t} = Fx_{t-1} + w_t, (w_t -N(0, Q))
+\]</span></li>
+</ol></li>
+<li><p>当前时刻的观测变量可以根据测量变量估计： <span class="math display">\[
+   z_t = Hx_t + r_t, (r_t - N(0, R))
+   \]</span></p></li>
+<li><p>根据以上的编码模型和转换模型，Kalman Filter的计算流程如下：</p>
+<ol type="1">
+<li>首先，根据已知的模型，以及上一时刻的卡尔曼估计值，计算当前时刻的模型预测值</li>
+</ol>
+<p><span class="math display">\[
+x_t'=Fx_{t-1}
+\]</span></p>
+<ol start="2" type="1">
+<li>根据当前的模型预测值，计算对应的协方差</li>
+</ol>
+<p><span class="math display">\[
+P(x_t|x_t')=FP(x_t|X_t)F^T
+\]</span></p>
+<ol start="3" type="1">
+<li>根据当前的协方差和测量空间的转换矩阵，计算当前时刻的卡尔曼增益</li>
+</ol>
+<p><span class="math display">\[
+K_t=P(x_t|x_t')H^T(HP(x_t|x_t')H^T+R)^{-1}
+\]</span></p>
+<ol start="4" type="1">
+<li>根据卡尔曼增益和测量值，计算当前时刻的卡尔曼估计值</li>
+</ol>
+<p><span class="math display">\[
+x_t=x_t'+K_t(z_t-Hx_t')
+\]</span></p>
+<ol start="5" type="1">
+<li>计算了当前时刻的卡尔曼估计值之后，还需要计算当前的估计值和真实值的协方差矩阵，方便下一次计算</li>
+</ol>
+<p><span class="math display">\[
+P(x_t|X_t)=(I-HK_t)P(x_t|x_t')
+\]</span></p>
+<p>作为线性的解码器，Kalman Filter确实能找到观测变量和测量变量之间的关系，并用观测变量去纠正当前测量变量中的误差。但是涉及到非线性关系的时候，Kalman Filter的线性假设就不成立了。这时有两种优化的方法：</p>
+<ol type="1">
+<li>如果已知这种非线性关系的公式，例如加速度和位置的关系等，那么可以把上述转换模型和观测模型换成已知的非线性模型，增加解码准确率。这种方法就是<strong>扩展卡尔曼滤波(Extend Kalman Filter)</strong>。这种方法的优点在于拟合更加准确，但是缺点也很明显。首先是计算量增加，如果非线性拟合涉及很复杂的模型，那么计算量比Kalman Filter增加很多。然后是非线性模型，并不是任何时候，这种模型都是已知的，如果不是已知的，那就需要进行非线性拟合，找到最合适的拟合模型，例如指数模型，高阶模型等，再次增加计算量。</li>
+<li>如果不知道这种非线性关系的公式，那么我们可以进行非线性拟合或者直接假设一个公式。但是我们观察Kalman Filter的计算过程，整个估计过程中，用到了当前时刻的值，以及协方差。而这两个量，我们是能通过采样的方式得到的，即，可以不需要直接计算非线性模型的协方差矩阵，直接通过采样估计，类似蒙特卡洛的方法。但是采样的计算量会更大，因为需要大样本才能得到准确的估计。目前有另外一种办法，能够用很少的采样点(几个)就得到准确的估计，这种方法是无迹变换(Unscented Transform)，结合到Kalman Filter中，就是<strong>无迹卡尔曼滤波(Unscented Kalman Filter)</strong></li>
+</ol>
+<p>所以无迹卡尔曼滤波的主要流程如下：</p>
+<ol type="1">
+<li>计算转换模型和编码模型
+<ol type="1">
+<li><p>建立转换模型，可以是非线性也可以是线性，这里用线性模型： <span class="math display">\[
+x_{t} = Fx_{t-1} + w_t, (w_t -N(0, Q))
+\]</span></p></li>
+<li><p>建立编码模型，也可以是线性或非线性模型： <span class="math display">\[
+z_t = Hx_t + r_t, (r_t - N(0, R))
+\]</span></p></li>
+</ol></li>
+</ol></li>
+<li><p>根据上述模型和训练集数据，用最小二乘法或其他的拟合方法，得到模型参数，然后开始无迹卡尔曼的预测和更新阶段</p>
+<ol type="1">
+<li><p>根据模型预测<span class="math inline">\(x_{t}\)</span> <span class="math display">\[
+   x_t'=Fx_{t-1}
+   \]</span></p></li>
+<li><p>预测<span class="math inline">\(x_{t}\)</span>的协方差 <span class="math display">\[
+   P(x_t|x_t')=FP(x_t|X_t)F^T + Q
+   \]</span></p></li>
+<li><p>用采样点估计当前协方差矩阵，先采样<span class="math inline">\(2d+1\)</span>个点，并保证中心点的值为<span class="math inline">\(x_t'\)</span> <span class="math display">\[
+   X_0 = x_t'
+   \]</span></p>
+<p><span class="math display">\[
+   X_i = x_t' + (\sqrt{(d + k)P(x_t|x_t')})_{i}, i = 1, ..., d
+\]</span></p>
+<p><span class="math display">\[
+   X_i = x_t' - (\sqrt{(d + k)P(x_t|x_t')})_{i}, i = d + 1, ..., 2d
+\]</span></p></li>
+<li><p>计算采样点的权重值 <span class="math display">\[
+   w_0= \frac{k}{d+k}, w_i = \frac{1}{2d+k}, i = 1, ... 2d
+   \]</span></p></li>
+<li><p>根据转换矩阵，采样点，计算观测值和测量值的关系 <span class="math display">\[
+Z_i = h(X_i), i = 0, ...2d
+\]</span></p>
+<p><span class="math display">\[
+z_t = \sum_{i = 0, ...2d}{w_{i}Z_{i}}
+\]</span></p></li>
+<li><p>根据采样点估计的观测值，计算观测值<span class="math inline">\(z\)</span>的方差，以及观测值<span class="math inline">\(z\)</span>和测量值<span class="math inline">\(x\)</span>的协方差 <span class="math display">\[
+P_{zz, t} = w_{0}(Z_{0}-z_{t})(Z_{0}-z_{t})^T + (\sum_{i=1, ...,2d}{w_{i}(Z_{i}-Z_{0})(Z_{i}-z_{0})^T}) + R
+\]</span></p>
+<p><span class="math display">\[
+P_{xz, t} = w_{0}(Z_{0}-z_{t})(Z_{0}-z_{t})^T + (\sum_{i=1, ..., 2d}{w_{i}(X_{i}-X_{0})(Z_{i}-Z{0})^T})
+\]</span></p></li>
+<li><p>根据计算的协方差，可以计算Kalman增益 <span class="math display">\[
+K = P_{xz, t}P_{zz, t}^{-1}
+\]</span></p></li>
+<li><p>用Kalman增益计算最有估计值 <span class="math display">\[
+x_t = x_t' + K_t(h(x_t')-z_t)
+\]</span></p>
+<p><span class="math display">\[
+P(x_t|X_t) = P(x_t|x_t')-P_{xz, t}(P_{zz, t}^{-1})^TP_{xz, t}^{T}
+\]</span></p>
+<p>以上就是无迹卡尔曼滤波的主要步骤，后续会附上代码链接</p></li>
+</ol></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/MACHINE-LEARNING/" class="category-chain-item">MACHINE LEARNING</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UKF/">#UKF</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>无迹卡尔曼滤波</div>
+      <div>http://zijunwan.github.io/2020/01/21/MachineLearning/Unscented-Kalman-Filter/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zijun Wan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年1月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/02/06/DeepLearning/Gradient-Descent-Method/" title="梯度下降法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">梯度下降法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/21/Algorithm/Two-Types-of-Variance/" title="样本方差和统计方差">
+                        <span class="hidden-mobile">样本方差和统计方差</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
