@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="SSH 从服务器下载文件或者上传文件以及文件夹  从服务器下载文件  12scp yourname@IP address:&#x2F;path to your file&#x2F; &#x2F;local path&#x2F;scp frank@10.212.48.177:~&#x2F;Downloads&#x2F;test.py ~&#x2F;Downloads  从服务器下载文件夹  12scp -r yourname@IP address:&#x2F;path to y">
+    <meta name="description" content="SSH 从服务器下载文件或者上传文件以及文件夹 从服务器下载文件  12scp yourname@IP address:&#x2F;path to your file&#x2F; &#x2F;local path&#x2F;scp frank@10.212.48.177:~&#x2F;Downloads&#x2F;test.py ~&#x2F;Downloads  从服务器下载文件夹  12scp -r yourname@IP address:&#x2F;path to yo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH Download and Upload">
 <meta property="og:url" content="http://zijunwan.github.io/2021/08/13/Software/SSH-Download-and-Upload/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="SSH 从服务器下载文件或者上传文件以及文件夹  从服务器下载文件  12scp yourname@IP address:&#x2F;path to your file&#x2F; &#x2F;local path&#x2F;scp frank@10.212.48.177:~&#x2F;Downloads&#x2F;test.py ~&#x2F;Downloads  从服务器下载文件夹  12scp -r yourname@IP address:&#x2F;path to y">
+<meta property="og:description" content="SSH 从服务器下载文件或者上传文件以及文件夹 从服务器下载文件  12scp yourname@IP address:&#x2F;path to your file&#x2F; &#x2F;local path&#x2F;scp frank@10.212.48.177:~&#x2F;Downloads&#x2F;test.py ~&#x2F;Downloads  从服务器下载文件夹  12scp -r yourname@IP address:&#x2F;path to yo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-13T01:34:41.000Z">
 <meta property="article:modified_time" content="2023-12-04T08:42:17.344Z">
@@ -290,20 +290,19 @@
             
               <div class="markdown-body">
                 
-                <h1 id="ssh-从服务器下载文件或者上传文件以及文件夹">SSH 从服务器下载文件或者上传文件以及文件夹</h1>
-<ol type="1">
+                <h1 id="SSH-从服务器下载文件或者上传文件以及文件夹"><a href="#SSH-从服务器下载文件或者上传文件以及文件夹" class="headerlink" title="SSH 从服务器下载文件或者上传文件以及文件夹"></a>SSH 从服务器下载文件或者上传文件以及文件夹</h1><ol>
 <li>从服务器下载文件</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp yourname@IP address:/path to your file/ /local path/<br>scp frank@10.212.48.177:~/Downloads/test.py ~/Downloads<br></code></pre></td></tr></tbody></table></figure>
-<ol start="2" type="1">
+<ol>
 <li>从服务器下载文件夹</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp -r yourname@IP address:/path to your folder/ /local path/<br>scp -r frank@10.212.48.177:~/Downloads/test ~/Downloads<br></code></pre></td></tr></tbody></table></figure>
-<ol start="3" type="1">
+<ol>
 <li>上传文件到服务器</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp /path to your file/ yourname@IP address:/remote path/<br>scp ~/Downloads/test.py frank@10.212.48.177:~/Downloads<br></code></pre></td></tr></tbody></table></figure>
-<ol start="4" type="1">
+<ol>
 <li>上传文件夹到服务器</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp -r /path to your folder/ yourname@IP address:/remote path/<br>scp -r ~/Downloads/test frank@10.212.48.177:~/Downloads<br></code></pre></td></tr></tbody></table></figure>
@@ -710,5 +709,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

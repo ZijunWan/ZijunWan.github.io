@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="本文内容简介 今天重装了系统，一时没想清楚直接用360粉碎了windows.old文件夹。导致C盘中出现了一个以数字命名的文件夹。当我尝试去删除的时候，发现文件夹需要各种权限才能删除，有管理员权限，有system权限，还有trustedinstaller权限。这里统一给出解决方案。另外，重装系统后windows.old文件夹的删除方式应该是磁盘清理，而不是用其他的方式。  首先打开文件夹属性，然后">
+    <meta name="description" content="本文内容简介今天重装了系统，一时没想清楚直接用360粉碎了windows.old文件夹。导致C盘中出现了一个以数字命名的文件夹。当我尝试去删除的时候，发现文件夹需要各种权限才能删除，有管理员权限，有system权限，还有trustedinstaller权限。这里统一给出解决方案。另外，重装系统后windows.old文件夹的删除方式应该是磁盘清理，而不是用其他的方式。  首先打开文件夹属性，然后选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="win10需要system权限才能修改的解决办法">
 <meta property="og:url" content="http://zijunwan.github.io/2024/12/15/Software/Sloving-change-permission-win10/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="本文内容简介 今天重装了系统，一时没想清楚直接用360粉碎了windows.old文件夹。导致C盘中出现了一个以数字命名的文件夹。当我尝试去删除的时候，发现文件夹需要各种权限才能删除，有管理员权限，有system权限，还有trustedinstaller权限。这里统一给出解决方案。另外，重装系统后windows.old文件夹的删除方式应该是磁盘清理，而不是用其他的方式。  首先打开文件夹属性，然后">
+<meta property="og:description" content="本文内容简介今天重装了系统，一时没想清楚直接用360粉碎了windows.old文件夹。导致C盘中出现了一个以数字命名的文件夹。当我尝试去删除的时候，发现文件夹需要各种权限才能删除，有管理员权限，有system权限，还有trustedinstaller权限。这里统一给出解决方案。另外，重装系统后windows.old文件夹的删除方式应该是磁盘清理，而不是用其他的方式。  首先打开文件夹属性，然后选">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://zijunwan.github.io/img/Sloving-change-permission-win10/1.png">
 <meta property="og:image" content="http://zijunwan.github.io/img/Sloving-change-permission-win10/2.png">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          442 字
+          436 字
         
       </span>
     
@@ -297,30 +297,17 @@
             
               <div class="markdown-body">
                 
-                <h1 id="本文内容简介">本文内容简介</h1>
-<p>今天重装了系统，一时没想清楚直接用360粉碎了windows.old文件夹。导致C盘中出现了一个以数字命名的文件夹。当我尝试去删除的时候，发现文件夹需要各种权限才能删除，有管理员权限，有system权限，还有trustedinstaller权限。这里统一给出解决方案。另外，重装系统后windows.old文件夹的删除方式应该是磁盘清理，而不是用其他的方式。</p>
-<ol type="1">
+                <h1 id="本文内容简介"><a href="#本文内容简介" class="headerlink" title="本文内容简介"></a>本文内容简介</h1><p>今天重装了系统，一时没想清楚直接用360粉碎了windows.old文件夹。导致C盘中出现了一个以数字命名的文件夹。当我尝试去删除的时候，发现文件夹需要各种权限才能删除，有管理员权限，有system权限，还有trustedinstaller权限。这里统一给出解决方案。另外，重装系统后windows.old文件夹的删除方式应该是磁盘清理，而不是用其他的方式。</p>
+<ol>
 <li>首先打开文件夹属性，然后选择安全，然后选择编辑，给自己的账号对文件夹的完全控制权，这样就能删除文件夹中的内容了，但是文件夹中的子文件夹是不能删除的，所以还需要选择高级，然后更改所有者，在跳出来的弹窗中选择高级，然后选择立即查找，找到自己的账号，然后选中，让所有者是自己的账号。然后选择左下角的启用继承，并勾选下面的使用可从此对象继承的权限项目替换所有子对象的权限项目。这样只要给最上层的文件夹设置完全控制，就可以删除整个文件夹中的内容了。</li>
 </ol>
-<figure>
-<img src="/img/Sloving-change-permission-win10/1.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>1</figcaption>
-</figure>
-<figure>
-<img src="/img/Sloving-change-permission-win10/2.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>2</figcaption>
-</figure>
+<p><img src="/img/Sloving-change-permission-win10/1.png" srcset="/img/loading.gif" lazyload alt="1"></p>
+<p><img src="/img/Sloving-change-permission-win10/2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
 <p>若是列表中没有自己的账号，可以添加一个，方法和修改所有者是一样的</p>
-<figure>
-<img src="/img/Sloving-change-permission-win10/3.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>3</figcaption>
-</figure>
-<figure>
-<img src="/img/Sloving-change-permission-win10/4.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>4</figcaption>
-</figure>
-<figure>
-<img src="/img/Sloving-change-permission-win10/5.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>5</figcaption>
-</figure>
-<figure>
-<img src="/img/Sloving-change-permission-win10/6.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>6</figcaption>
-</figure>
+<p><img src="/img/Sloving-change-permission-win10/3.png" srcset="/img/loading.gif" lazyload alt="3"></p>
+<p><img src="/img/Sloving-change-permission-win10/4.png" srcset="/img/loading.gif" lazyload alt="4"></p>
+<p><img src="/img/Sloving-change-permission-win10/5.png" srcset="/img/loading.gif" lazyload alt="5"></p>
+<p><img src="/img/Sloving-change-permission-win10/6.png" srcset="/img/loading.gif" lazyload alt="6"></p>
 
                 
               </div>
@@ -723,5 +710,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

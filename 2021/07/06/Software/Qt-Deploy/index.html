@@ -16,15 +16,15 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="发布带运行环境的Qt执行文件 在VS中生成release版本的exe文件后，文件会依赖于使用的lib以及dll文件等。这样换一个运行环境后，可能会无法运行当前的文件。例如基于Qt的exe文件，会依赖于Qt的lib和dll。Qt提供了此问题的解决办法。 解决方法  打开Qt提供的cmd窗口 cd到release版本的exe所在的位置 运行 windeployqt file_name.exe 当前文件">
+    <meta name="description" content="发布带运行环境的Qt执行文件在VS中生成release版本的exe文件后，文件会依赖于使用的lib以及dll文件等。这样换一个运行环境后，可能会无法运行当前的文件。例如基于Qt的exe文件，会依赖于Qt的lib和dll。Qt提供了此问题的解决办法。 解决方法 打开Qt提供的cmd窗口 cd到release版本的exe所在的位置 运行 windeployqt file_name.exe 当前文件夹下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qt Deploy">
 <meta property="og:url" content="http://zijunwan.github.io/2021/07/06/Software/Qt-Deploy/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="发布带运行环境的Qt执行文件 在VS中生成release版本的exe文件后，文件会依赖于使用的lib以及dll文件等。这样换一个运行环境后，可能会无法运行当前的文件。例如基于Qt的exe文件，会依赖于Qt的lib和dll。Qt提供了此问题的解决办法。 解决方法  打开Qt提供的cmd窗口 cd到release版本的exe所在的位置 运行 windeployqt file_name.exe 当前文件">
+<meta property="og:description" content="发布带运行环境的Qt执行文件在VS中生成release版本的exe文件后，文件会依赖于使用的lib以及dll文件等。这样换一个运行环境后，可能会无法运行当前的文件。例如基于Qt的exe文件，会依赖于Qt的lib和dll。Qt提供了此问题的解决办法。 解决方法 打开Qt提供的cmd窗口 cd到release版本的exe所在的位置 运行 windeployqt file_name.exe 当前文件夹下">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-06T03:48:57.000Z">
-<meta property="article:modified_time" content="2024-12-15T11:42:22.245Z">
+<meta property="article:modified_time" content="2024-12-29T05:42:04.815Z">
 <meta property="article:author" content="Zijun Wan">
 <meta property="article:tag" content="qt">
 <meta name="twitter:card" content="summary_large_image">
@@ -290,14 +290,12 @@
             
               <div class="markdown-body">
                 
-                <h1 id="发布带运行环境的qt执行文件">发布带运行环境的Qt执行文件</h1>
-<p>在VS中生成release版本的exe文件后，文件会依赖于使用的lib以及dll文件等。这样换一个运行环境后，可能会无法运行当前的文件。例如基于Qt的exe文件，会依赖于Qt的lib和dll。Qt提供了此问题的解决办法。</p>
-<h2 id="解决方法">解决方法</h2>
-<ol type="1">
+                <h1 id="发布带运行环境的Qt执行文件"><a href="#发布带运行环境的Qt执行文件" class="headerlink" title="发布带运行环境的Qt执行文件"></a>发布带运行环境的Qt执行文件</h1><p>在VS中生成release版本的exe文件后，文件会依赖于使用的lib以及dll文件等。这样换一个运行环境后，可能会无法运行当前的文件。例如基于Qt的exe文件，会依赖于Qt的lib和dll。Qt提供了此问题的解决办法。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
 <li>打开Qt提供的cmd窗口</li>
 <li>cd到release版本的exe所在的位置</li>
 <li>运行 windeployqt file_name.exe</li>
-<li>当前文件夹下的文件就是对应exe文件所需的运行环境 上述操作生成的dll文件以及运行环境，能保证exe文件在没有安装qt环境的PC上运行。此方法只适用于windows系统（运行指令的意思就是win deploy qt的意思）。</li>
+<li>当前文件夹下的文件就是对应exe文件所需的运行环境<br>上述操作生成的dll文件以及运行环境，能保证exe文件在没有安装qt环境的PC上运行。此方法只适用于windows系统（运行指令的意思就是win deploy qt的意思）。</li>
 </ol>
 
                 
@@ -701,5 +699,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

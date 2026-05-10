@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="写一下算法的基本原理和实现 PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核心思想是数据从高维到低维的投影，使其方差最大化。这个也很好理解，比如，这里我们假设有3组数据\(a_1,a_2,a_3\)，然后第1组的值可以用第2组数据的函数表示，比如\(a_2&#x3D;2*a_1\)。如果以\(a_1,a_2,a_3\)为坐标画出对应的图像，那么在3维空间">
+    <meta name="description" content="写一下算法的基本原理和实现  PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核心思想是数据从高维到低维的投影，使其方差最大化。这个也很好理解，比如，这里我们假设有3组数据$a_1,a_2,a_3$，然后第1组的值可以用第2组数据的函数表示，比如$a_2&#x3D;2*a_1$。如果以$a_1,a_2,a_3$为坐标画出对应的图像，那么在3维空间中就对应了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="主成分分析">
 <meta property="og:url" content="http://zijunwan.github.io/2020/01/21/MachineLearning/Principle-Component-Analysis/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="写一下算法的基本原理和实现 PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核心思想是数据从高维到低维的投影，使其方差最大化。这个也很好理解，比如，这里我们假设有3组数据\(a_1,a_2,a_3\)，然后第1组的值可以用第2组数据的函数表示，比如\(a_2&#x3D;2*a_1\)。如果以\(a_1,a_2,a_3\)为坐标画出对应的图像，那么在3维空间">
+<meta property="og:description" content="写一下算法的基本原理和实现  PCA(Principle Component Analysis) PCA是最常见的一种降维算法，其核心思想是数据从高维到低维的投影，使其方差最大化。这个也很好理解，比如，这里我们假设有3组数据$a_1,a_2,a_3$，然后第1组的值可以用第2组数据的函数表示，比如$a_2&#x3D;2*a_1$。如果以$a_1,a_2,a_3$为坐标画出对应的图像，那么在3维空间中就对应了">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://zijunwan.github.io/img/dimensionality-reduction/1.png">
 <meta property="og:image" content="http://zijunwan.github.io/img/dimensionality-reduction/2.png">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.5k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          14 分钟
+          13 分钟
         
       </span>
     
@@ -293,32 +293,25 @@
             
               <div class="markdown-body">
                 
-                <p>写一下算法的基本原理和实现</p>
-<h2 id="pcaprinciple-component-analysis">PCA(Principle Component Analysis)</h2>
-<p>PCA是最常见的一种降维算法，其核心思想是数据从高维到低维的投影，使其方差最大化。这个也很好理解，比如，这里我们假设有3组数据<span class="math inline">\(a_1,a_2,a_3\)</span>，然后第1组的值可以用第2组数据的函数表示，比如<span class="math inline">\(a_2=2*a_1\)</span>。如果以<span class="math inline">\(a_1,a_2,a_3\)</span>为坐标画出对应的图像，那么在3维空间中就对应了一个平面，以这个平面的坐标轴为参数，此时看到的就是二维数据，相当于降维了。</p>
-<p>插图（参考文献） <img src="/img/dimensionality-reduction/1.png" srcset="/img/loading.gif" lazyload alt="dimensionality reduction-1"></p>
-<p>参考文献：</p>
-<p>假设我们有<span class="math inline">\(m\)</span>组<span class="math inline">\(n\)</span>维数据，希望能降维到<span class="math inline">\(k\)</span>维(<span class="math inline">\(k&lt;d\)</span>)，PCA的计算过程如下：</p>
-<p>数据零均值化</p>
-<p>求协方差矩阵</p>
-<p>求协方差矩阵对应的特征值和特征向量</p>
-<p>将特征向量按特征值大小取前<span class="math inline">\(k\)</span>行从上向下组成矩阵</p>
-<p>将得到的矩阵乘以<span class="math inline">\(X\)</span>就能得到降维后的数据</p>
-<p>这里数据零均值化主要是为了方便后面的计算（测试一下不做这一步有什么问题）</p>
-<p>然后求协方差矩阵，之所以选择协方差矩阵，是因为协方差能很好地反应不同维度之间的差异，假设数据集为<span class="math inline">\(X={x_1,x_2,...,x_m}\in R^{m*n}\)</span>，</p>
-<p>那么协方差矩阵<span class="math inline">\(Cov\)</span>的定义为</p>
-<p><span class="math display">\[CovX(i,j)=\sum_{} x_ix_j\frac{1}{m}\]</span></p>
-<p>因为之前做过零均值化，所以这里<span class="math inline">\(x_i\)</span>和<span class="math inline">\(x_j\)</span>的均值都是0。 可以看出，协方差矩阵非对角线上的值表示了不同维度上数据之间的差异，对角线上的数据表示了每个维度的数据分布的差异。即在所有组数据中，每个维度上的变化大小的评价。对于协方差矩阵，当<span class="math inline">\(CovX(i,j)=0\)</span>时，说明第<span class="math inline">\(i\)</span>维和第<span class="math inline">\(j\)</span>维的数据是相互独立的，所以，PCA优化的目标在于，尽可能让不同维度之间的协方差为0，而尽可能增大维度自身的方差。 关于求协方差矩阵的特征值，可以理解为将一个特征向量在<span class="math inline">\(n\)</span>维空间中进行旋转和拉伸变换，使之与特征向量自己在同一直线上并成一定的比例，那么这个变换就是这个矩阵（参考二维情况下，二维平面中对向量的拉伸和旋转都可以通过一个二阶方阵来实现，高维空间中同理），而这个比例就是特征值。在<span class="math inline">\(n\)</span>维空间中，这样的特征向量最多有<span class="math inline">\(n\)</span>个，这个可以参考特征向量的求法，当转换成方程组之后，<span class="math inline">\(n\)</span>个方程组最多只能有<span class="math inline">\(n\)</span>组解。关于为什么要求矩阵的特征值和特征向量，这是根据优化问题的解得到的。假设降维后的矩阵为<span class="math inline">\(Y \in R^{m*k}\)</span>，转换矩阵为<span class="math inline">\(T\)</span>，那么<span class="math inline">\(Y\)</span>的协方差为</p>
-<p><span class="math display">\[CovY=Y * Y^T * \frac{1}{m}\]</span></p>
-<p><span class="math display">\[=(TY) * (TY)^T * \frac{1}{m}\]</span></p>
-<p><span class="math display">\[=T * CovX * T^T\]</span></p>
-<p>所以对于转换矩阵<span class="math inline">\(T\)</span>，我们需要通过计算后，使得<span class="math inline">\(CovY\)</span>为一个对角矩阵，并且矩阵中的值依次从大到小排列，因为根据优化的目标，我们需要使<span class="math inline">\(CovY\)</span>的对角线上的值最大，且除对角线以外的数都为0。我们知道，实对称矩阵的不同特征向量是正交的。所以将<span class="math inline">\(CovX\)</span>进行特征分解求出特征值和特征向量，然后取前<span class="math inline">\(k\)</span>组特征向量组成转换矩阵<span class="math inline">\(T\)</span>，就可以使得降维后的矩阵<span class="math inline">\(Y\)</span>的维度与维度之间的差异值最大。 关于代码和计算，matlab中有princomp和pca函数可以直接计算。 这里数据用的是鸢尾花数据集， 代码如下：</p>
-<p></p><figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs matlab">load fixeddata; <br>[coeff,score,latent] = pca(newdata); <br>result=score(:,<span class="hljs-number">1</span>:<span class="hljs-number">2</span>); <br>x=result(:,<span class="hljs-number">1</span>); <br>y=result(:,<span class="hljs-number">2</span>); <br><span class="hljs-built_in">scatter</span>(x,y,<span class="hljs-string">'x'</span>); <br></code></pre></td></tr></tbody></table></figure><p></p>
-<p>结果如图：</p>
-<figure>
-<img src="/img/dimensionality-reduction/2.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>result of PCA</figcaption>
-</figure>
-<p>综上，PCA是一种很常用的降维方法，也是一种无监督的降维方法。同时，从PCA的原理中可以看出，PCA对于线性相关的降维效果会比较好，但是对于非线性的数据，其降维效果可能就会差很多。</p>
+                <p>写一下算法的基本原理和实现 </p>
+<h2 id="PCA-Principle-Component-Analysis"><a href="#PCA-Principle-Component-Analysis" class="headerlink" title="PCA(Principle Component Analysis)"></a>PCA(Principle Component Analysis)</h2><p> PCA是最常见的一种降维算法，其核心思想是数据从高维到低维的投影，使其方差最大化。这个也很好理解，比如，这里我们假设有3组数据$a_1,a_2,a_3$，然后第1组的值可以用第2组数据的函数表示，比如$a_2=2*a_1$。如果以$a_1,a_2,a_3$为坐标画出对应的图像，那么在3维空间中就对应了一个平面，以这个平面的坐标轴为参数，此时看到的就是二维数据，相当于降维了。</p>
+<p> 插图（参考文献）<br> <img src="/img/dimensionality-reduction/1.png" srcset="/img/loading.gif" lazyload alt="dimensionality reduction-1"></p>
+<p> 参考文献： </p>
+<p> 假设我们有$m$组$n$维数据，希望能降维到$k$维($k&lt;d$)，PCA的计算过程如下： </p>
+<p> 数据零均值化</p>
+<p> 求协方差矩阵</p>
+<p> 求协方差矩阵对应的特征值和特征向量</p>
+<p> 将特征向量按特征值大小取前$k$行从上向下组成矩阵 </p>
+<p> 将得到的矩阵乘以$X$就能得到降维后的数据 </p>
+<p> 这里数据零均值化主要是为了方便后面的计算（测试一下不做这一步有什么问题） </p>
+<p> 然后求协方差矩阵，之所以选择协方差矩阵，是因为协方差能很好地反应不同维度之间的差异，假设数据集为$X={x_1,x_2,…,x_m}\in R^{m*n}$，</p>
+<p> 那么协方差矩阵$Cov$的定义为 </p>
+<script type="math/tex; mode=display">CovX(i,j)=\sum_{} x_ix_j\frac{1}{m}</script><p> 因为之前做过零均值化，所以这里$x_i$和$x_j$的均值都是0。 可以看出，协方差矩阵非对角线上的值表示了不同维度上数据之间的差异，对角线上的数据表示了每个维度的数据分布的差异。即在所有组数据中，每个维度上的变化大小的评价。对于协方差矩阵，当$CovX(i,j)=0$时，说明第$i$维和第$j$维的数据是相互独立的，所以，PCA优化的目标在于，尽可能让不同维度之间的协方差为0，而尽可能增大维度自身的方差。 关于求协方差矩阵的特征值，可以理解为将一个特征向量在$n$维空间中进行旋转和拉伸变换，使之与特征向量自己在同一直线上并成一定的比例，那么这个变换就是这个矩阵（参考二维情况下，二维平面中对向量的拉伸和旋转都可以通过一个二阶方阵来实现，高维空间中同理），而这个比例就是特征值。在$n$维空间中，这样的特征向量最多有$n$个，这个可以参考特征向量的求法，当转换成方程组之后，$n$个方程组最多只能有$n$组解。关于为什么要求矩阵的特征值和特征向量，这是根据优化问题的解得到的。假设降维后的矩阵为$Y \in R^{m*k}$，转换矩阵为$T$，那么$Y$的协方差为</p>
+<script type="math/tex; mode=display">CovY=Y * Y^T * \frac{1}{m}</script><script type="math/tex; mode=display">=(TY) * (TY)^T * \frac{1}{m}</script><script type="math/tex; mode=display">=T * CovX * T^T</script><p> 所以对于转换矩阵$T$，我们需要通过计算后，使得$CovY$为一个对角矩阵，并且矩阵中的值依次从大到小排列，因为根据优化的目标，我们需要使$CovY$的对角线上的值最大，且除对角线以外的数都为0。我们知道，实对称矩阵的不同特征向量是正交的。所以将$CovX$进行特征分解求出特征值和特征向量，然后取前$k$组特征向量组成转换矩阵$T$，就可以使得降维后的矩阵$Y$的维度与维度之间的差异值最大。 关于代码和计算，matlab中有princomp和pca函数可以直接计算。 这里数据用的是鸢尾花数据集， 代码如下： </p>
+ <figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs matlab">load fixeddata; <br>[coeff,score,latent] = pca(newdata); <br>result=score(:,<span class="hljs-number">1</span>:<span class="hljs-number">2</span>); <br>x=result(:,<span class="hljs-number">1</span>); <br>y=result(:,<span class="hljs-number">2</span>); <br><span class="hljs-built_in">scatter</span>(x,y,<span class="hljs-string">'x'</span>); <br></code></pre></td></tr></tbody></table></figure>
+<p> 结果如图：</p>
+<p> <img src="/img/dimensionality-reduction/2.png" srcset="/img/loading.gif" lazyload alt="result of PCA"></p>
+<p> 综上，PCA是一种很常用的降维方法，也是一种无监督的降维方法。同时，从PCA的原理中可以看出，PCA对于线性相关的降维效果会比较好，但是对于非线性的数据，其降维效果可能就会差很多。 </p>
 
                 
               </div>
@@ -721,5 +714,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

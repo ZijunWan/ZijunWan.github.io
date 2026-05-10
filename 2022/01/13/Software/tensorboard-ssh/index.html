@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="问题 在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。 解决办法 如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进">
+    <meta name="description" content="问题在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。 解决办法如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进度了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="本地打开远程tensorboard">
 <meta property="og:url" content="http://zijunwan.github.io/2022/01/13/Software/tensorboard-ssh/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="问题 在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。 解决办法 如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进">
+<meta property="og:description" content="问题在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。 解决办法如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进度了">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://zijunwan.github.io/img/tensorboard_ssh/1.jpg">
 <meta property="article:published_time" content="2022-01-13T08:30:51.000Z">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          616 字
+          598 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          6 分钟
+          5 分钟
         
       </span>
     
@@ -292,12 +292,9 @@
             
               <div class="markdown-body">
                 
-                <h3 id="问题">问题</h3>
-<p>在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。</p>
-<h3 id="解决办法">解决办法</h3>
-<p>如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进度了。整个过程其实是一个映射的过程。</p>
-<h3 id="代码">代码</h3>
-<ul>
+                <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在实验过程中，代码一般运行在服务器，但是连接服务器的图形界面一般比较麻烦，大部分情况下还是ssh连接。所以我们需要能在本地查看服务器上的代码运行进度。</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>如何解决这个问题呢？我们在服务器上运行tensorboard，设置好对应的端口，然后用ssh将本地的端口映射到服务器上tensorboard的端口。然后在本地浏览器打开localhost的对应端口，就能查看tensorboard的进度了。整个过程其实是一个映射的过程。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><ul>
 <li>在服务器上运行tensorboard</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tensorboard --logdir=&lt;log path&gt; --port=&lt;server port&gt; --host=&lt;server ip&gt;<br></code></pre></td></tr></tbody></table></figure>
@@ -308,12 +305,9 @@
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh -L &lt;local port&gt;:&lt;server ip&gt;:6006 username@&lt;server ip&gt;<br></code></pre></td></tr></tbody></table></figure>
 <p>其中local port是本地的映射端口，server ip是服务器的ip地址，username是ssh的用户名。</p>
 <ul>
-<li>在本地浏览器打开本地端口 打开浏览器，输入网址：localhost:<local port="">，就能查看tensorboard的进度了。</local></li>
+<li>在本地浏览器打开本地端口<br>打开浏览器，输入网址：localhost:<local port="">，就能查看tensorboard的进度了。</local></li>
 </ul>
-<h3 id="结果">结果</h3>
-<figure>
-<img src="/img/tensorboard_ssh/1.jpg" srcset="/img/loading.gif" lazyload alt=""><figcaption>tensorboard in local</figcaption>
-</figure>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="/img/tensorboard_ssh/1.jpg" srcset="/img/loading.gif" lazyload alt="tensorboard in local"></p>
 
                 
               </div>
@@ -716,5 +710,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="Introduction Linux服务器配置python环境时，默认的安装位置是&quot;&#x2F;usr&#x2F;bin&quot;。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。 Method  下载python s">
+    <meta name="description" content="IntroductionLinux服务器配置python环境时，默认的安装位置是”&#x2F;usr&#x2F;bin”。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。 Method 下载python sou">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务器非管理员配置python环境">
 <meta property="og:url" content="http://zijunwan.github.io/2021/12/14/Software/Config-Python-for-Unroot-Users/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="Introduction Linux服务器配置python环境时，默认的安装位置是&quot;&#x2F;usr&#x2F;bin&quot;。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。 Method  下载python s">
+<meta property="og:description" content="IntroductionLinux服务器配置python环境时，默认的安装位置是”&#x2F;usr&#x2F;bin”。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。 Method 下载python sou">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-14T02:07:05.000Z">
 <meta property="article:modified_time" content="2024-12-15T11:41:45.591Z">
@@ -290,50 +290,49 @@
             
               <div class="markdown-body">
                 
-                <h2 id="introduction">Introduction</h2>
-<p>Linux服务器配置python环境时，默认的安装位置是"/usr/bin"。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。</p>
-<h2 id="method">Method</h2>
-<ol type="1">
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Linux服务器配置python环境时，默认的安装位置是”/usr/bin”。但没有管理员权限时是无法写文件到当前路径的。而且多人共用一个服务器时，大家的python环境各不相同，每个人也会配置自己的python环境。所以在home文件夹安装配置自己的python环境是更合适的。一下是在没有root权限的情况下配置python的方法。</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol>
 <li>下载python source code到home/your name 文件夹。这里以python-3.10.1为例，可以从<a target="_blank" rel="noopener" href="https://www.python.org/downloads/source/">python官网</a>下载对应版本的源代码</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz<br></code></pre></td></tr></tbody></table></figure>
-<ol start="2" type="1">
+<ol>
 <li>解压文件</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd download dir<br>tar -xzvf Python-3.10.1.tgz<br></code></pre></td></tr></tbody></table></figure>
-<ol start="3" type="1">
-<li><p>下载好以后，如果直接安装，会有以下的问题：首先是openssl，用于软件的安全通信，避免被窃听的一个toolkit。一般是系统级的app；然后是zlib，这个组件用于数据压缩和解压，如果需要使用科学计算的库，那么zlib是必须的；最后是libffi，相当于C的编译器，同样也是用于科学计算。上述组件均可以通过管理员sudo，yum安装。但是如果没有管理员权限，那么需要自行安装。</p></li>
-<li><p>安装openssl</p></li>
+<ol>
+<li><p>下载好以后，如果直接安装，会有以下的问题：首先是openssl，用于软件的安全通信，避免被窃听的一个toolkit。一般是系统级的app；然后是zlib，这个组件用于数据压缩和解压，如果需要使用科学计算的库，那么zlib是必须的；最后是libffi，相当于C的编译器，同样也是用于科学计算。上述组件均可以通过管理员sudo，yum安装。但是如果没有管理员权限，那么需要自行安装。</p>
+</li>
+<li><p>安装openssl</p>
+</li>
 </ol>
 <p>下载并解压<a target="_blank" rel="noopener" href="https://www.openssl.org/source/">openssl</a></p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://www.openssl.org/source/openssl-3.0.0.tar.gz<br>tar -xzvf openssl-3.0.0.tar.gz<br></code></pre></td></tr></tbody></table></figure>
 <p>编译并安装</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd openssl-3.0.0.tar.gz<br>./config --prefix=/home/your name/openssl_dir<br>make -j48 <br>make install<br></code></pre></td></tr></tbody></table></figure>
-<ol start="5" type="1">
+<ol>
 <li>安装<a target="_blank" rel="noopener" href="http://www.zlib.net/">zlib</a></li>
 </ol>
 <p>下载，解压，编译并安装</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget http://www.zlib.net/zlib-1.2.11.tar.gz<br>tar -xzvf zlib-1.2.11.tar.gz<br>cd zlib-1.2.11.tar.gz<br>./configure --prefix=/home/your name/zlib_dir<br>make -j48<br>make install<br></code></pre></td></tr></tbody></table></figure>
-<ol start="6" type="1">
+<ol>
 <li>安装<a target="_blank" rel="noopener" href="https://github.com/libffi/libffi/releases">libffi</a></li>
 </ol>
 <p>下载，解压，编译并安装</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz<br>tar -xzvf libffi-3.4.2.tar.gz<br>cd libffi-3.4.2.tar.gz<br>./configure --prefix=/home/your name/libffi<br>make -j48<br>make install<br></code></pre></td></tr></tbody></table></figure>
-<ol start="7" type="1">
+<ol>
 <li>将上述安装文件的路径写入环境变量</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/your name/libffi_dir/lib/pkgconfig<br>export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/your_name/openssl_dir/lib:/home/your name/zlib_dir/lib:/home/your_name/libffi_dir/lib<br>export PKG_CONFIG_PATH=/home/jacob/libffi/lib/pkgconfig<br>export CFLAGS=-I/home/your name/libffi_dir/include<br>export LDFLAGS=-L/home/your name/libffi_dir/lib<br></code></pre></td></tr></tbody></table></figure>
-<ol start="8" type="1">
+<ol>
 <li>进入python的setup文件，修改部分编译信息</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd python_path/Modules/<br>vim Setup.dist<br><span class="hljs-meta prompt_"># </span><span class="language-bash">取消下面的注释</span><br>SSL=/home/your name/openssl_dir<br>_ssl _ssl.c -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl -L$(SSL)/lib -lssl -lcrypto<br>zlib zlibmodule.c -I/home/your name/zlib_dir/include -L/home/your name/zlib_dir/lib -lz<br></code></pre></td></tr></tbody></table></figure>
-<ol start="9" type="1">
+<ol>
 <li>编译python代码，这里需要gcc编译器，一般Linux发行版都自带gcc编译器，如果没有安装，请联系管理员。同时，编译过程需要配置特定的参数</li>
 </ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd Python-3.10.1<br>./configure LDFLAGS="-L/home/your name/libffi_dir/lib64 -Wl,--rpath=/home/your name/libffi_dir/lib64" CFLAGS="-I/home/your name/libffi_dir/include" PKG_CONFIG_PATH="${libffi}/lib/pkgconfig" --prefix=/home/your name/your path --with-openssl=/home/your name/openssl_dir<br>make # make -j48 这里不推荐，因为会编译所有的test file，耗时较长，机器快的话也要20min-30min左右<br>make install<br></code></pre></td></tr></tbody></table></figure>
-<h2 id="summary">Summary</h2>
-<p>以上就是非管理员账户在home文件夹安装自己的python环境的方法。这种方法能安装简易的python环境，但是如果需要很复杂的计算，例如scikt，pytorch，tensorflow等强烈依赖底层C链接库的模块，那么上述方法或许可行。因为整个过程无非是把库文件的源代码安装到了home文件夹里，然后修改环境变量配置。但是如果真的是很复杂的编译和依赖，不建议使用上述方法。上述方法主要参考以下博客和文章：</p>
-<ol type="1">
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>以上就是非管理员账户在home文件夹安装自己的python环境的方法。这种方法能安装简易的python环境，但是如果需要很复杂的计算，例如scikt，pytorch，tensorflow等强烈依赖底层C链接库的模块，那么上述方法或许可行。因为整个过程无非是把库文件的源代码安装到了home文件夹里，然后修改环境变量配置。但是如果真的是很复杂的编译和依赖，不建议使用上述方法。上述方法主要参考以下博客和文章：</p>
+<ol>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012440550/article/details/109371016">CSDN</a></li>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/65691539/locally-compiled-libffi-files-not-getting-picked-up-while-recompiling-python-3-p">Stackoverflow</a></li>
 <li><a target="_blank" rel="noopener" href="https://hellovimo.github.io/uvm_testbench_gen/localpythoninstall.html">Github Pages</a></li>
@@ -742,5 +741,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

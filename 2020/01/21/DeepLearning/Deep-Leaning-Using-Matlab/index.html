@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.6k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          19 分钟
+          22 分钟
         
       </span>
     
@@ -290,270 +290,15 @@
             
               <div class="markdown-body">
                 
-                <ol type="1">
+                <ol>
 <li><p>常见的matlab搭建神经网络的代码结构</p>
 <figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs matlab">options = trainingOptions(solverName, Name, Value);<br>layer = [layer1, layer2];<br>net = trainNetwork(TrainX, TrainY, options, layers);<br></code></pre></td></tr></tbody></table></figure>
 <p>其中，trainingOptions的主要作用就是设置网络中的一些参数，主要包括以下参数：</p>
-<table>
-
-<thead>
-<tr class="header">
-<th>参数名称</th>
-<th>参数值</th>
-<th>参数含义</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>solverName</td>
-<td>'sgdm'|'rmsprop'|'adam'</td>
-<td>优化方法</td>
-</tr>
-<tr class="even">
-<td>Plots</td>
-<td>'none' | 'training-progress'</td>
-<td>是否画优化曲线</td>
-</tr>
-<tr class="odd">
-<td>Verbose</td>
-<td>1 | 0</td>
-<td>是否显示优化信息，包括Loss，Epoch等信息</td>
-</tr>
-<tr class="even">
-<td>VerboseFrequency</td>
-<td>int value</td>
-<td>多长时间刷新一次信息，默认值是50</td>
-</tr>
-<tr class="odd">
-<td>MaxEpochs</td>
-<td>int value</td>
-<td>最大循环次数，训练数据最多重复多少次</td>
-</tr>
-<tr class="even">
-<td>MiniBatchSize</td>
-<td>int value</td>
-<td>最小的batch size，每次训练的最小数据量</td>
-</tr>
-<tr class="odd">
-<td>‘Shuffle'</td>
-<td>’once‘ | 'never' | 'every-epoch'</td>
-<td>每个epoch是否重新排序训练数据</td>
-</tr>
-<tr class="even">
-<td>‘ValidationData'</td>
-<td>imageData，Data Store, Table，Cell array{X, Y}</td>
-<td>用来验证网络的数据，一般用cell</td>
-</tr>
-<tr class="odd">
-<td>'ValidationFrequency'</td>
-<td>int value</td>
-<td>迭代多少次验证一次</td>
-</tr>
-<tr class="even">
-<td>’ValidationPatience'</td>
-<td>int value</td>
-<td>如果这次的验证loss比上一次大，这种情况出现的次数超过这个值，那么停止网络训练</td>
-</tr>
-<tr class="odd">
-<td>‘InitialLearnRate'</td>
-<td>scalar</td>
-<td>初始学习率</td>
-</tr>
-<tr class="even">
-<td>'LearnRateSchedule'</td>
-<td>'none'|'piecewise'</td>
-<td>调整学习率下降的方法，’piecewise‘方法会隔特定数目的epoch(LearnRateDropPeriod)就将LearnRate乘以一个factor(LearRateDropFactor)</td>
-</tr>
-<tr class="odd">
-<td>’LearnRateDropPeriod'</td>
-<td>int value</td>
-<td>隔特定数目的epoch调整一次LearnRate</td>
-</tr>
-<tr class="even">
-<td>‘LearnRateDropFactor’</td>
-<td>scalar(0-1)</td>
-<td>每次LearnRate调整时乘以的因子</td>
-</tr>
-<tr class="odd">
-<td>‘L2Regularization'</td>
-<td>nonnegative scalar</td>
-<td>用来减少过拟合，（需要继续学习）</td>
-</tr>
-<tr class="even">
-<td>’Momentum'</td>
-<td>scalar(0-1)</td>
-<td>动量，sgdm中前一次迭代中的参数在下一次迭代中所占的比例</td>
-</tr>
-<tr class="odd">
-<td>‘GradientDecayFactor'</td>
-<td>scalar(0-1)</td>
-<td>adam方法中梯度值降低的平均值</td>
-</tr>
-<tr class="even">
-<td>’SquaredGradientDecayFactor‘</td>
-<td>nonnegative scalar less than 1</td>
-<td>梯度平方降低的平均值（Adam， RMSProp）</td>
-</tr>
-<tr class="odd">
-<td>’Epsilon‘</td>
-<td>int value</td>
-<td>分母的偏置值(Adam, RMSProp)</td>
-</tr>
-<tr class="even">
-<td>'ResetInputNormalization'</td>
-<td>true | false</td>
-<td>每次训练都将输入值标准化</td>
-</tr>
-<tr class="odd">
-<td>’GradientThreshold‘</td>
-<td>int value</td>
-<td>梯度的阈值</td>
-</tr>
-<tr class="even">
-<td>’GradientThresholdMethod‘</td>
-<td>’l2norm‘|'global-l2norm'|'absolute-value'</td>
-<td>梯度阈值的计算方法</td>
-</tr>
-<tr class="odd">
-<td>’SequenceLength‘</td>
-<td>'longest'|'shortest'|int value</td>
-<td>输入的序列长度</td>
-</tr>
-<tr class="even">
-<td>’SequencePaddingDirection‘</td>
-<td>’right'|'left'</td>
-<td>如果序列需要截取，截取的方向</td>
-</tr>
-<tr class="odd">
-<td>‘SequencePaddingValue’</td>
-<td>int value</td>
-<td>填充到序列中的值，用来补充数据长度</td>
-</tr>
-<tr class="even">
-<td>‘ExecutionEnvironment’</td>
-<td>‘auto’|'cpu'|'gpu'|'multi-gpu'|'parallel'</td>
-<td>选择硬件</td>
-</tr>
-<tr class="odd">
-<td>‘WorkLoad’</td>
-<td>scalar(0-1)|int|vector</td>
-<td>GPU或CPU的负载，用到的核心数，以及并行计算时的负载</td>
-</tr>
-<tr class="even">
-<td>‘DispatchInBackground’</td>
-<td>false | true</td>
-<td>后台拆分数据并分配核心同时读取</td>
-</tr>
-<tr class="odd">
-<td>‘CheckpointPath’</td>
-<td>character</td>
-<td>存放网络训练中间值的路径</td>
-</tr>
-<tr class="even">
-<td>‘OutputFunc’</td>
-<td>function handle</td>
-<td>网络训练时，trainNetwork函数会在刚开始训练时，每次迭代结束时，训练结束时调用这个函数</td>
-</tr>
-</tbody>
-</table>
+<p>| 参数名称                     | 参数值                                         | 参数含义                                                     |<br>| —————————————— | ——————————————————————— | —————————————————————————————— |<br>| solverName                   | ‘sgdm’|‘rmsprop’|‘adam’                      | 优化方法                                                     |<br>| Plots                        | ‘none’ | ‘training-progress’                  | 是否画优化曲线                                               |<br>| Verbose                      | 1 | 0                                         | 是否显示优化信息，包括Loss，Epoch等信息                      |<br>| VerboseFrequency             | int value                                      | 多长时间刷新一次信息，默认值是50                             |<br>| MaxEpochs                    | int value                                      | 最大循环次数，训练数据最多重复多少次                         |<br>| MiniBatchSize                | int value                                      | 最小的batch size，每次训练的最小数据量                       |<br>| ‘Shuffle’                    | ’once‘ | ‘never’ | ‘every-epoch’             | 每个epoch是否重新排序训练数据                                |<br>| ‘ValidationData’             | imageData，Data Store, Table，Cell array{X, Y} | 用来验证网络的数据，一般用cell                               |<br>| ‘ValidationFrequency’        | int value                                      | 迭代多少次验证一次                                           |<br>| ’ValidationPatience’         | int value                                      | 如果这次的验证loss比上一次大，这种情况出现的次数超过这个值，那么停止网络训练 |<br>| ‘InitialLearnRate’           | scalar                                         | 初始学习率                                                   |<br>| ‘LearnRateSchedule’          | ‘none’|‘piecewise’                            | 调整学习率下降的方法，’piecewise‘方法会隔特定数目的epoch(LearnRateDropPeriod)就将LearnRate乘以一个factor(LearRateDropFactor) |<br>| ’LearnRateDropPeriod’        | int value                                      | 隔特定数目的epoch调整一次LearnRate                           |<br>| ‘LearnRateDropFactor’        | scalar(0-1)                                    | 每次LearnRate调整时乘以的因子                                |<br>| ‘L2Regularization’           | nonnegative scalar                             | 用来减少过拟合，（需要继续学习）                             |<br>| ’Momentum’                   | scalar(0-1)                                    | 动量，sgdm中前一次迭代中的参数在下一次迭代中所占的比例       |<br>| ‘GradientDecayFactor’        | scalar(0-1)                                    | adam方法中梯度值降低的平均值                                 |<br>| ’SquaredGradientDecayFactor‘ | nonnegative scalar less than 1                 | 梯度平方降低的平均值（Adam， RMSProp）                       |<br>| ’Epsilon‘                    | int value                                      | 分母的偏置值(Adam, RMSProp)                                  |<br>| ‘ResetInputNormalization’    | true | false                                  | 每次训练都将输入值标准化                                     |<br>| ’GradientThreshold‘          | int value                                      | 梯度的阈值                                                   |<br>| ’GradientThresholdMethod‘    | ’l2norm‘|‘global-l2norm’|‘absolute-value’    | 梯度阈值的计算方法                                           |<br>| ’SequenceLength‘             | ‘longest’|‘shortest’|int value               | 输入的序列长度                                               |<br>| ’SequencePaddingDirection‘   | ’right’|‘left’                                | 如果序列需要截取，截取的方向                                 |<br>| ‘SequencePaddingValue’       | int value                                      | 填充到序列中的值，用来补充数据长度                           |<br>| ‘ExecutionEnvironment’       | ‘auto’|‘cpu’|‘gpu’|‘multi-gpu’|‘parallel’  | 选择硬件                                                     |<br>| ‘WorkLoad’                   | scalar(0-1)|int|vector                       | GPU或CPU的负载，用到的核心数，以及并行计算时的负载           |<br>| ‘DispatchInBackground’       | false | true                                  | 后台拆分数据并分配核心同时读取                               |<br>| ‘CheckpointPath’             | character                                      | 存放网络训练中间值的路径                                     |<br>| ‘OutputFunc’                 | function handle                                | 网络训练时，trainNetwork函数会在刚开始训练时，每次迭代结束时，训练结束时调用这个函数 |</p>
 <p>trainingOptions函数主要用来设置网络训练过程中的参数，需要熟悉其中的参数的作用</p>
 <p>layers主要表示网络的结构，层与层之间的连接等，其中主要包括各种网络层，目前常用的有如下几类：</p>
-<table>
-<thead>
-<tr class="header">
-<th>网络层</th>
-<th>参数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>allLayer</td>
-<td>Name</td>
-<td>网络层的名称</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>NumInputs</td>
-<td>输入的个数</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>InputNames</td>
-<td>输入数据的名称，cell</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>NumOutputs</td>
-<td>输出的个数</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>OutputNames</td>
-<td>输出数据的名称，cell</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>sequenceLayer</td>
-<td>InputSize</td>
-<td>输入序列的大小，如果是图像的话，那么就是一个三维或四维矩阵</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Normalization</td>
-<td>数据归一化的方法选择</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>NormalizationDimension</td>
-<td>归一化的维度，按照通道，按照元素或者全部统一</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Mean</td>
-<td>设置数据的均值配合zscore和zerocenter等归一化方法使用</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>StandardDeviation</td>
-<td>标准差，配合对应的归一化方法使用</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Min</td>
-<td>归一化后的最小值</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Max</td>
-<td>归一化后的最大值</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>fullyConnectedLayer</td>
-<td>OutputSize</td>
-<td>输出层大小</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>InputSize</td>
-<td>输入层大小</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table></li>
+<p>| 网络层              | 参数                   | 含义                                                       |<br>| —————————- | ——————————— | ————————————————————————————— |<br>| allLayer            | Name                   | 网络层的名称                                               |<br>|                     | NumInputs              | 输入的个数                                                 |<br>|                     | InputNames             | 输入数据的名称，cell                                       |<br>|                     | NumOutputs             | 输出的个数                                                 |<br>|                     | OutputNames            | 输出数据的名称，cell                                       |<br>|                     |                        |                                                            |<br>| sequenceLayer       | InputSize              | 输入序列的大小，如果是图像的话，那么就是一个三维或四维矩阵 |<br>|                     | Normalization          | 数据归一化的方法选择                                       |<br>|                     | NormalizationDimension | 归一化的维度，按照通道，按照元素或者全部统一               |<br>|                     | Mean                   | 设置数据的均值配合zscore和zerocenter等归一化方法使用       |<br>|                     | StandardDeviation      | 标准差，配合对应的归一化方法使用                           |<br>|                     | Min                    | 归一化后的最小值                                           |<br>|                     | Max                    | 归一化后的最大值                                           |<br>|                     |                        |                                                            |<br>| fullyConnectedLayer | OutputSize             | 输出层大小                                                 |<br>|                     | InputSize              | 输入层大小                                                 |<br>|                     |                        |                                                            |</p>
+</li>
 </ol>
 
                 
@@ -957,5 +702,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

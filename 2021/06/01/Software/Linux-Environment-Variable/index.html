@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="Linux环境变量在&#x2F;.bashrc文件中设置。也可能在&#x2F;.zshrc，也可能在&#x2F;etc&#x2F;profile中。设置的方法是 1export PATH&#x3D;“$PATH:&#x2F;yourpath&#x2F;” 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格">
+    <meta name="description" content="Linux环境变量在~&#x2F;.bashrc文件中设置。也可能在~&#x2F;.zshrc，也可能在&#x2F;etc&#x2F;profile中。设置的方法是 1export PATH&#x3D;“$PATH:&#x2F;yourpath&#x2F;” 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 环境变量设置">
 <meta property="og:url" content="http://zijunwan.github.io/2021/06/01/Software/Linux-Environment-Variable/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="Linux环境变量在&#x2F;.bashrc文件中设置。也可能在&#x2F;.zshrc，也可能在&#x2F;etc&#x2F;profile中。设置的方法是 1export PATH&#x3D;“$PATH:&#x2F;yourpath&#x2F;” 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格">
+<meta property="og:description" content="Linux环境变量在~&#x2F;.bashrc文件中设置。也可能在~&#x2F;.zshrc，也可能在&#x2F;etc&#x2F;profile中。设置的方法是 1export PATH&#x3D;“$PATH:&#x2F;yourpath&#x2F;” 一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-01T03:02:23.000Z">
 <meta property="article:modified_time" content="2024-12-15T11:42:02.954Z">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          192 字
+          194 字
         
       </span>
     
@@ -290,7 +290,7 @@
             
               <div class="markdown-body">
                 
-                <p>Linux环境变量在<sub>/.bashrc文件中设置。也可能在</sub>/.zshrc，也可能在/etc/profile中。设置的方法是</p>
+                <p>Linux环境变量在~/.bashrc文件中设置。也可能在~/.zshrc，也可能在/etc/profile中。设置的方法是</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">export PATH=“$PATH:/yourpath/”<br></code></pre></td></tr></tbody></table></figure>
 <p>一般是放在所有环境变量最后的。也可以放在最前面。我安装texlive的时候，放在最前面的写法没有反应。放在最后面能正常运行pdflatex等命令。然后就是路径一定要用双引号扩起来，冒号和路径之间不能有空格</p>
 
@@ -695,5 +695,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="使用ssh连接服务器时，如果本地长时间没有操作，ssh会断开连接。这样会带来很多麻烦。首先是需要重新输入密码再连接，当然如果服务器有public key，这个过程可以省略。然后是ssh断开前的终端会自动关闭，这样如果是在跑代码的话，程序就中断了。为了解决这个问题，可以使用tmux，一个终端的多窗口管理工具。 tmux的作用很简单，就是新建终端，这个终端会一直保持在后台，即是ssh连接断开，终端也会">
+    <meta name="description" content="使用ssh连接服务器时，如果本地长时间没有操作，ssh会断开连接。这样会带来很多麻烦。首先是需要重新输入密码再连接，当然如果服务器有public key，这个过程可以省略。然后是ssh断开前的终端会自动关闭，这样如果是在跑代码的话，程序就中断了。为了解决这个问题，可以使用tmux，一个终端的多窗口管理工具。tmux的作用很简单，就是新建终端，这个终端会一直保持在后台，即是ssh连接断开，终端也会继">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tmux常用命令">
 <meta property="og:url" content="http://zijunwan.github.io/2022/01/07/Software/tmux-command/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="使用ssh连接服务器时，如果本地长时间没有操作，ssh会断开连接。这样会带来很多麻烦。首先是需要重新输入密码再连接，当然如果服务器有public key，这个过程可以省略。然后是ssh断开前的终端会自动关闭，这样如果是在跑代码的话，程序就中断了。为了解决这个问题，可以使用tmux，一个终端的多窗口管理工具。 tmux的作用很简单，就是新建终端，这个终端会一直保持在后台，即是ssh连接断开，终端也会">
+<meta property="og:description" content="使用ssh连接服务器时，如果本地长时间没有操作，ssh会断开连接。这样会带来很多麻烦。首先是需要重新输入密码再连接，当然如果服务器有public key，这个过程可以省略。然后是ssh断开前的终端会自动关闭，这样如果是在跑代码的话，程序就中断了。为了解决这个问题，可以使用tmux，一个终端的多窗口管理工具。tmux的作用很简单，就是新建终端，这个终端会一直保持在后台，即是ssh连接断开，终端也会继">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-07T02:24:53.000Z">
 <meta property="article:modified_time" content="2024-12-15T11:42:29.788Z">
@@ -290,7 +290,7 @@
             
               <div class="markdown-body">
                 
-                <p>使用ssh连接服务器时，如果本地长时间没有操作，ssh会断开连接。这样会带来很多麻烦。首先是需要重新输入密码再连接，当然如果服务器有public key，这个过程可以省略。然后是ssh断开前的终端会自动关闭，这样如果是在跑代码的话，程序就中断了。为了解决这个问题，可以使用tmux，一个终端的多窗口管理工具。 tmux的作用很简单，就是新建终端，这个终端会一直保持在后台，即是ssh连接断开，终端也会继续运行。所以也就避免了上述的第二个问题。对于第一个问题，tmux在网络正常的情况下，是一直连接的。并不会出现ssh这种长时间不操作就断开的情况。tmux的主要用法如下：</p>
+                <p>使用ssh连接服务器时，如果本地长时间没有操作，ssh会断开连接。这样会带来很多麻烦。首先是需要重新输入密码再连接，当然如果服务器有public key，这个过程可以省略。然后是ssh断开前的终端会自动关闭，这样如果是在跑代码的话，程序就中断了。为了解决这个问题，可以使用tmux，一个终端的多窗口管理工具。<br>tmux的作用很简单，就是新建终端，这个终端会一直保持在后台，即是ssh连接断开，终端也会继续运行。所以也就避免了上述的第二个问题。对于第一个问题，tmux在网络正常的情况下，是一直连接的。并不会出现ssh这种长时间不操作就断开的情况。tmux的主要用法如下：</p>
 <ul>
 <li>创建终端，这一步要在服务器上进行，在哪儿进行就是在哪台机器上新建终端，所以一般都是在服务器</li>
 </ul>
@@ -307,7 +307,7 @@
 <li>分离终端，如果需要关闭某一个终端，可以使用这一命令。值得注意的是，此命令只会关闭终端显示，但是仍旧会在后台运行</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">tmux detach<br>tmux detach -P -s &lt;session name&gt;<br></code></pre></td></tr></tbody></table></figure>
-<p>这一命令可以带参数，可以不带参数。如果不带参数，在哪个tmux终端窗口运行就detach哪个；如果带参数"s“，可以指定要detach的窗口。如果带参数"P"，那么会断开对应窗口的ssh连接，但是终端还是在后台运行。</p>
+<p>这一命令可以带参数，可以不带参数。如果不带参数，在哪个tmux终端窗口运行就detach哪个；如果带参数”s“，可以指定要detach的窗口。如果带参数”P”，那么会断开对应窗口的ssh连接，但是终端还是在后台运行。</p>
 <ul>
 <li>切换终端</li>
 </ul>
@@ -720,5 +720,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

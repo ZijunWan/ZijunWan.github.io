@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="显示文件夹中的文件结构，并生成txt文件或md文件。 用法如下： 1234tree [drive:][path] [&#x2F;F] [&#x2F;A] &gt;[PRN][&#x2F;F]: 显示目录下的文件名[&#x2F;A]: 使用ASCII码字符[PRN]: 存储生成的文件结构的txt或md文件">
+    <meta name="description" content="显示文件夹中的文件结构，并生成txt文件或md文件。用法如下： 1234tree [drive:][path] [&#x2F;F] [&#x2F;A] &gt;[PRN][&#x2F;F]: 显示目录下的文件名[&#x2F;A]: 使用ASCII码字符[PRN]: 存储生成的文件结构的txt或md文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="powershell命令：tree">
 <meta property="og:url" content="http://zijunwan.github.io/2021/06/10/Software/powershell-commands-tree/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="显示文件夹中的文件结构，并生成txt文件或md文件。 用法如下： 1234tree [drive:][path] [&#x2F;F] [&#x2F;A] &gt;[PRN][&#x2F;F]: 显示目录下的文件名[&#x2F;A]: 使用ASCII码字符[PRN]: 存储生成的文件结构的txt或md文件">
+<meta property="og:description" content="显示文件夹中的文件结构，并生成txt文件或md文件。用法如下： 1234tree [drive:][path] [&#x2F;F] [&#x2F;A] &gt;[PRN][&#x2F;F]: 显示目录下的文件名[&#x2F;A]: 使用ASCII码字符[PRN]: 存储生成的文件结构的txt或md文件">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-10T15:16:00.000Z">
 <meta property="article:modified_time" content="2024-12-15T11:42:09.019Z">
@@ -290,9 +290,8 @@
             
               <div class="markdown-body">
                 
-                <p>显示文件夹中的文件结构，并生成txt文件或md文件。 用法如下：</p>
+                <p>显示文件夹中的文件结构，并生成txt文件或md文件。<br>用法如下：</p>
 <figure class="highlight powershell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell">tree [<span class="hljs-type">drive</span>:][<span class="hljs-type">path</span>] [/<span class="hljs-type">F</span>] [/<span class="hljs-type">A</span>] &gt;[<span class="hljs-type">PRN</span>]<br>[/<span class="hljs-type">F</span>]: 显示目录下的文件名<br>[/<span class="hljs-type">A</span>]: 使用ASCII码字符<br>[<span class="hljs-type">PRN</span>]: 存储生成的文件结构的txt或<span class="hljs-built_in">md</span>文件<br></code></pre></td></tr></tbody></table></figure>
-
                 
               </div>
             
@@ -694,5 +693,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

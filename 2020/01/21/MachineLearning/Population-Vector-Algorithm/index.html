@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="算法推导：  信号预处理 这里的算法推导主要针对神经元集群解码，因为PVA的主要应用还是在神经元解码中 首先，采集到的spike信号是以发放次数的方式存储的，这里需要先转换成发放率的形式，即： \[fr[n]&#x3D;\frac{spk[n]}{\Delta t} \tag{1}\] 其中，\(fr[n]\)表示\(n\)时刻神经元的发放率，\(\Delta t\)表示一个bin的长度，通常的取值为20m">
+    <meta name="description" content="算法推导： 信号预处理 这里的算法推导主要针对神经元集群解码，因为PVA的主要应用还是在神经元解码中 首先，采集到的spike信号是以发放次数的方式存储的，这里需要先转换成发放率的形式，即： fr[n]&#x3D;\frac{spk[n]}{\Delta t} \tag{1}  其中，$fr[n]$表示$n$时刻神经元的发放率，$\Delta t$表示一个bin的长度，通常的取值为20ms，30ms，50m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Population Vector Algorithm">
 <meta property="og:url" content="http://zijunwan.github.io/2020/01/21/MachineLearning/Population-Vector-Algorithm/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="算法推导：  信号预处理 这里的算法推导主要针对神经元集群解码，因为PVA的主要应用还是在神经元解码中 首先，采集到的spike信号是以发放次数的方式存储的，这里需要先转换成发放率的形式，即： \[fr[n]&#x3D;\frac{spk[n]}{\Delta t} \tag{1}\] 其中，\(fr[n]\)表示\(n\)时刻神经元的发放率，\(\Delta t\)表示一个bin的长度，通常的取值为20m">
+<meta property="og:description" content="算法推导： 信号预处理 这里的算法推导主要针对神经元集群解码，因为PVA的主要应用还是在神经元解码中 首先，采集到的spike信号是以发放次数的方式存储的，这里需要先转换成发放率的形式，即： fr[n]&#x3D;\frac{spk[n]}{\Delta t} \tag{1}  其中，$fr[n]$表示$n$时刻神经元的发放率，$\Delta t$表示一个bin的长度，通常的取值为20ms，30ms，50m">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-21T06:09:04.000Z">
 <meta property="article:modified_time" content="2024-12-15T10:49:02.539Z">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.7k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          16 分钟
+          15 分钟
         
       </span>
     
@@ -290,28 +290,22 @@
             
               <div class="markdown-body">
                 
-                <h2 id="算法推导">算法推导：</h2>
-<ol type="1">
-<li><p>信号预处理 这里的算法推导主要针对神经元集群解码，因为PVA的主要应用还是在神经元解码中 首先，采集到的spike信号是以发放次数的方式存储的，这里需要先转换成发放率的形式，即： <span class="math display">\[fr[n]=\frac{spk[n]}{\Delta t} \tag{1}\]</span></p></li>
-<li><p>其中，<span class="math inline">\(fr[n]\)</span>表示<span class="math inline">\(n\)</span>时刻神经元的发放率，<span class="math inline">\(\Delta t\)</span>表示一个bin的长度，通常的取值为20ms，30ms，50ms，1000ms等。<span class="math inline">\(spk[n]\)</span>表示神经元在第<span class="math inline">\(n\)</span>个bin中发放的次数。 然后，对发放率做一个FIR滤波，主要目的是平滑发放率曲线，计算公式如下：</p></li>
+                <h2 id="算法推导："><a href="#算法推导：" class="headerlink" title="算法推导："></a>算法推导：</h2><ol>
+<li><p>信号预处理 这里的算法推导主要针对神经元集群解码，因为PVA的主要应用还是在神经元解码中 首先，采集到的spike信号是以发放次数的方式存储的，这里需要先转换成发放率的形式，即： <script type="math/tex">fr[n]=\frac{spk[n]}{\Delta t} \tag{1}</script></p>
+</li>
+<li><p>其中，$fr[n]$表示$n$时刻神经元的发放率，$\Delta t$表示一个bin的长度，通常的取值为20ms，30ms，50ms，1000ms等。$spk[n]$表示神经元在第$n$个bin中发放的次数。 然后，对发放率做一个FIR滤波，主要目的是平滑发放率曲线，计算公式如下：</p>
+</li>
 </ol>
-<p><span class="math display">\[s[n]=\sum_{i=1}^{W-1}{fr[n-i]h[i]} \tag{2}\]</span></p>
-<p>其中，<span class="math inline">\(h[i]\)</span>表示滤波器的卷积函数，可以根据需求选取，<span class="math inline">\(W\)</span>表示滤波器的阶数，可以根据实际需要选择。</p>
-<p>PVA算法原理 PVA算法的提出，主要是根据实验中观察到的现象。在猴子将手臂移动向不同的方向时，不同的神经元发放的率产生了变化，我们由此假设，神经元的发放率跟运动方向是有关系的，所以我们想到，用余弦曲线的方式，去拟合神经元的发放率与运动方向之间的关系。首先，我们假设每个神经元都有一个自己的偏好方向<span class="math inline">\(\theta_{PD}\)</span>，假设此时，猴子手臂的运动方向为<span class="math inline">\(\theta\)</span>，那么此时神经元的发放率为： <span class="math display">\[f=m*cos(\theta-\theta_{PD})+b_0 \tag{3}\]</span></p>
-<p>其中，<span class="math inline">\(m\)</span>为表征神经元活泼性的参数，即有的神经元可能表征的偏好方向一样，但是在偏好方向上的发放率变化是不一样的。<span class="math inline">\(b_0\)</span>表示神经元的基础发放率，即在静息状态下的基础发放率。<span class="math inline">\(f\)</span>表示的是神经元在猴子手臂朝向<span class="math inline">\(\theta\)</span>方向运动时的发放率，注意这里是发放率不是spike count，虽然两者可以通过bin转换，但是公式推导的时候两者还是不一样的。 公式<span class="math inline">\((3)\)</span>表示了单个神经元的发放与运动的关系。猴子大脑M1区域的神经元是很多的，对不同的方向肯定有不同的偏好性。那么如何处理这种不一致性呢，我们的方法是用矢量求和的形式，得出一个此时最可能的运动方向。即：</p>
-<p><span class="math display">\[\vec{u}=\frac{1}{N}  \sum_{i=1}^{n}{m*cos{\theta_{PD}}} \tag{4}\]</span></p>
-<p>这里<span class="math inline">\(\vec{u}\)</span>表示神经元此时解码出来的运动方向，这里也能部分表征运动速度，但是速度的大小也与实际的运动距离有关，所以，运动速度的计算如下：</p>
-<p><span class="math display">\[v=k*\vec{u}+\sigma \tag{5}\]</span></p>
-<p>这里<span class="math inline">\(k\)</span>表示实际速度与计算得出的速度的比例，<span class="math inline">\(\sigma\)</span>表示实际速度与解码得到的速度之间的误差，以上就是PVA算法的主要原理 3. 参数计算 那么，现在的问题在于，如何计算PVA算法中的几个参数，这里我们用最小二乘法的方式，求最小误差情况下的参数<span class="math inline">\(b_0,m,\theta_{PD}\)</span>，我们将公式<span class="math inline">\((3)\)</span>换一种写法，即：</p>
-<p><span class="math display">\[f = b_0 + b_1 * cos \theta + b_2 * sin \theta \tag{6}\]</span></p>
-<p>再考虑<span class="math inline">\(cos{\theta}\)</span>和<span class="math inline">\(sin{\theta}\)</span>这两个量，对应在速度中，可以表示为归一化过后的<span class="math inline">\(v_x\)</span>和<span class="math inline">\(v_y\)</span>，只要在<span class="math inline">\([-1,1]\)</span>这个区间内所以，将公式<span class="math inline">\((6)\)</span>写成：</p>
-<p><span class="math display">\[f = b_0 + b_1 * v_x + b_2 * v_y \tag{7}\]</span></p>
-<p>用最小二乘法计算，误差为：</p>
-<p><span class="math display">\[\epsilon = \sum_{ i=1 }^{n}{(b_0 + b_1 * v_x + b_2 * v_y - f)^2} \tag{8}\]</span></p>
-<p>最终计算结果根据要推导一下，这里先暂时不写，回去再补充 所以，极值在偏导数为<span class="math inline">\(0\)</span>的地方取得，即： <span class="math display">\[\frac{\partial{\epsilon}}{\partial{b_0}}=0 \tag{9}\]</span> <span class="math display">\[\frac{\partial{\epsilon}}{\partial{b_1}}=0 \tag{10}\]</span> <span class="math display">\[\frac{\partial{\epsilon}}{\partial{b_2}}=0 \tag{11}\]</span></p>
-<p>解上述方程，可以得到<span class="math inline">\(b_0,b_1,b_2\)</span>的值，即：</p>
-<p><span class="math display">\[\beta=(A^T*A)^{-1}A^TB \tag{12}\]</span></p>
-<p>其中，<span class="math inline">\(\beta=(b_0,b_1,b_2)\)</span>，<span class="math inline">\(A\)</span>为运动信息矩阵，<span class="math inline">\(B\)</span>为神经信号矩阵。</p>
+<script type="math/tex; mode=display">s[n]=\sum_{i=1}^{W-1}{fr[n-i]h[i]} \tag{2}</script><p>其中，$h[i]$表示滤波器的卷积函数，可以根据需求选取，$W$表示滤波器的阶数，可以根据实际需要选择。</p>
+<p>PVA算法原理 PVA算法的提出，主要是根据实验中观察到的现象。在猴子将手臂移动向不同的方向时，不同的神经元发放的率产生了变化，我们由此假设，神经元的发放率跟运动方向是有关系的，所以我们想到，用余弦曲线的方式，去拟合神经元的发放率与运动方向之间的关系。首先，我们假设每个神经元都有一个自己的偏好方向$\theta<em>{PD}$，假设此时，猴子手臂的运动方向为$\theta$，那么此时神经元的发放率为： $$f=m*cos(\theta-\theta</em>{PD})+b_0 \tag{3}$$ </p>
+<p>其中，$m$为表征神经元活泼性的参数，即有的神经元可能表征的偏好方向一样，但是在偏好方向上的发放率变化是不一样的。$b_0$表示神经元的基础发放率，即在静息状态下的基础发放率。$f$表示的是神经元在猴子手臂朝向$\theta$方向运动时的发放率，注意这里是发放率不是spike count，虽然两者可以通过bin转换，但是公式推导的时候两者还是不一样的。 公式$(3)$表示了单个神经元的发放与运动的关系。猴子大脑M1区域的神经元是很多的，对不同的方向肯定有不同的偏好性。那么如何处理这种不一致性呢，我们的方法是用矢量求和的形式，得出一个此时最可能的运动方向。即： </p>
+<script type="math/tex; mode=display">\vec{u}=\frac{1}{N}  \sum_{i=1}^{n}{m*cos{\theta_{PD}}} \tag{4}</script><p>这里$\vec{u}$表示神经元此时解码出来的运动方向，这里也能部分表征运动速度，但是速度的大小也与实际的运动距离有关，所以，运动速度的计算如下：</p>
+<script type="math/tex; mode=display">v=k*\vec{u}+\sigma \tag{5}</script><p>这里$k$表示实际速度与计算得出的速度的比例，$\sigma$表示实际速度与解码得到的速度之间的误差，以上就是PVA算法的主要原理 3. 参数计算 那么，现在的问题在于，如何计算PVA算法中的几个参数，这里我们用最小二乘法的方式，求最小误差情况下的参数$b<em>0,m,\theta</em>{PD}$，我们将公式$(3)$换一种写法，即： </p>
+<script type="math/tex; mode=display">f = b_0 + b_1 * cos \theta + b_2 * sin \theta \tag{6}</script><p>再考虑$cos{\theta}$和$sin{\theta}$这两个量，对应在速度中，可以表示为归一化过后的$v_x$和$v_y$，只要在$[-1,1]$这个区间内所以，将公式$(6)$写成： </p>
+<script type="math/tex; mode=display">f = b_0 + b_1 * v_x + b_2 * v_y \tag{7}</script><p>用最小二乘法计算，误差为： </p>
+<script type="math/tex; mode=display">\epsilon = \sum_{ i=1 }^{n}{(b_0 + b_1 * v_x + b_2 * v_y - f)^2} \tag{8}</script><p>最终计算结果根据要推导一下，这里先暂时不写，回去再补充 所以，极值在偏导数为$0$的地方取得，即： <script type="math/tex">\frac{\partial{\epsilon}}{\partial{b_0}}=0 \tag{9}</script> <script type="math/tex">\frac{\partial{\epsilon}}{\partial{b_1}}=0 \tag{10}</script> <script type="math/tex">\frac{\partial{\epsilon}}{\partial{b_2}}=0 \tag{11}</script> </p>
+<p>解上述方程，可以得到$b_0,b_1,b_2$的值，即：</p>
+<script type="math/tex; mode=display">\beta=(A^T*A)^{-1}A^TB \tag{12}</script><p>其中，$\beta=(b_0,b_1,b_2)$，$A$为运动信息矩阵，$B$为神经信号矩阵。  </p>
 
                 
               </div>
@@ -714,5 +708,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

@@ -16,12 +16,12 @@
   <meta name="author" content="Zijun Wan">
   <meta name="keywords" content="Neural Network, Computer Science">
   
-    <meta name="description" content="我们知道，统计学上方差的计算公式如下： \[ \sigma^2&#x3D;\frac{\sum_{i&#x3D;1}^{n}(x_i-\mu)}{n}\] 这是统计学中方差的定义，已知条件有总体的均值\(\mu\)，以及总体个数\(n\)，公式的另一种写法为： \[\sigma^2&#x3D;E[(x-\mu)^2]&#x3D;\sum{(x-\mu)^2}p(x)\] 其中\(p(x)\)是\(x\)出现的概率，所以这个公式只对于离散">
+    <meta name="description" content="我们知道，统计学上方差的计算公式如下： \sigma^2&#x3D;\frac{\sum_{i&#x3D;1}^{n}(x_i-\mu)}{n}这是统计学中方差的定义，已知条件有总体的均值$\mu$，以及总体个数$n$，公式的另一种写法为： \sigma^2&#x3D;E[(x-\mu)^2]&#x3D;\sum{(x-\mu)^2}p(x)  其中$p(x)$是$x$出现的概率，所以这个公式只对于离散变量有效。 那么，如果总体量很大，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="样本方差和统计方差">
 <meta property="og:url" content="http://zijunwan.github.io/2020/01/21/Algorithm/Two-Types-of-Variance/index.html">
 <meta property="og:site_name" content="Frank Wan&#39;s Blog">
-<meta property="og:description" content="我们知道，统计学上方差的计算公式如下： \[ \sigma^2&#x3D;\frac{\sum_{i&#x3D;1}^{n}(x_i-\mu)}{n}\] 这是统计学中方差的定义，已知条件有总体的均值\(\mu\)，以及总体个数\(n\)，公式的另一种写法为： \[\sigma^2&#x3D;E[(x-\mu)^2]&#x3D;\sum{(x-\mu)^2}p(x)\] 其中\(p(x)\)是\(x\)出现的概率，所以这个公式只对于离散">
+<meta property="og:description" content="我们知道，统计学上方差的计算公式如下： \sigma^2&#x3D;\frac{\sum_{i&#x3D;1}^{n}(x_i-\mu)}{n}这是统计学中方差的定义，已知条件有总体的均值$\mu$，以及总体个数$n$，公式的另一种写法为： \sigma^2&#x3D;E[(x-\mu)^2]&#x3D;\sum{(x-\mu)^2}p(x)  其中$p(x)$是$x$出现的概率，所以这个公式只对于离散变量有效。 那么，如果总体量很大，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-21T06:09:44.000Z">
 <meta property="article:modified_time" content="2024-12-15T10:45:12.969Z">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.7k 字
         
       </span>
     
@@ -291,28 +291,20 @@
               <div class="markdown-body">
                 
                 <p>我们知道，统计学上方差的计算公式如下：</p>
-<p><span class="math display">\[ \sigma^2=\frac{\sum_{i=1}^{n}(x_i-\mu)}{n}\]</span></p>
-<p>这是统计学中方差的定义，已知条件有总体的均值<span class="math inline">\(\mu\)</span>，以及总体个数<span class="math inline">\(n\)</span>，公式的另一种写法为： <span class="math display">\[\sigma^2=E[(x-\mu)^2]=\sum{(x-\mu)^2}p(x)\]</span></p>
-<p>其中<span class="math inline">\(p(x)\)</span>是<span class="math inline">\(x\)</span>出现的概率，所以这个公式只对于离散变量有效。 那么，如果总体量很大，不能做到全部采样，那么就需要用样本来估计总体，假设从总体为<span class="math inline">\(N\)</span>的总数中抽取<span class="math inline">\(n\)</span>个样本，其中<span class="math inline">\((N&gt;&gt;n)\)</span>，采样值为<span class="math inline">\(x_1,x_2,...,x_n\)</span> 样本均值为：</p>
-<p><span class="math display">\[\bar{x}=\frac{\sum_{i=1}^{n}{x_i}}{n}\]</span></p>
-<p>样本的方差为：</p>
-<p><span class="math display">\[ S^2=\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}\]</span></p>
-<p>但是样本的方差和总体的方差是有差别的，计算样本方差的期望值，来估计样本方差和实际方差<span class="math inline">\(\sigma^2\)</span>之间差了多少：</p>
-<p><span class="math display">\[ E[S^2]=E[\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}]\]</span></p>
-<p><span class="math display">\[=E[\frac{1}{n}\sum_{i=1}^{n}{((x_i-\mu)-(\bar{x}-\mu))^2}]\]</span></p>
-<p><span class="math display">\[=E[\frac{1}{n}\sum_{i=1}^{n}{((x_i-\mu)^2-2(x_i-\mu)(\bar{x}-\mu)+(\bar{x}-\mu)^2)}]\]</span></p>
-<p><span class="math display">\[=E[\frac{1}{n}\sum_{i=1}^{n}{(x_i-\mu)^2}-\frac{2}{n}(\bar{x}-\mu)\sum_{i=1}^{n}{(x_i-\mu)}+(\bar{x}-\mu)^2]\]</span></p>
-<p>其中</p>
-<p><span class="math inline">\(\sum_{i=1}^{n}{(x_i-\mu)}\)</span> <span class="math inline">\(=\sum_{i=1}^{n}{x_i}-\sum_{i=1}^{n}{\mu}\)</span> <span class="math inline">\(=n(\bar{x}-\mu)\)</span></p>
+<script type="math/tex; mode=display">\sigma^2=\frac{\sum_{i=1}^{n}(x_i-\mu)}{n}</script><p>这是统计学中方差的定义，已知条件有总体的均值$\mu$，以及总体个数$n$，公式的另一种写法为： <script type="math/tex">\sigma^2=E[(x-\mu)^2]=\sum{(x-\mu)^2}p(x)</script> </p>
+<p>其中$p(x)$是$x$出现的概率，所以这个公式只对于离散变量有效。 那么，如果总体量很大，不能做到全部采样，那么就需要用样本来估计总体，假设从总体为$N$的总数中抽取$n$个样本，其中$(N&gt;&gt;n)$，采样值为$x_1,x_2,…,x_n$ 样本均值为：</p>
+<script type="math/tex; mode=display">\bar{x}=\frac{\sum_{i=1}^{n}{x_i}}{n}</script><p>样本的方差为：</p>
+<script type="math/tex; mode=display">S^2=\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}</script><p>但是样本的方差和总体的方差是有差别的，计算样本方差的期望值，来估计样本方差和实际方差$\sigma^2$之间差了多少：</p>
+<script type="math/tex; mode=display">E[S^2]=E[\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}]</script><script type="math/tex; mode=display">=E[\frac{1}{n}\sum_{i=1}^{n}{((x_i-\mu)-(\bar{x}-\mu))^2}]</script><script type="math/tex; mode=display">=E[\frac{1}{n}\sum_{i=1}^{n}{((x_i-\mu)^2-2(x_i-\mu)(\bar{x}-\mu)+(\bar{x}-\mu)^2)}]</script><script type="math/tex; mode=display">=E[\frac{1}{n}\sum_{i=1}^{n}{(x_i-\mu)^2}-\frac{2}{n}(\bar{x}-\mu)\sum_{i=1}^{n}{(x_i-\mu)}+(\bar{x}-\mu)^2]</script><p>其中</p>
+<p> $\sum<em>{i=1}^{n}{(x_i-\mu)}$ $=\sum</em>{i=1}^{n}{x<em>i}-\sum</em>{i=1}^{n}{\mu}$ $=n(\bar{x}-\mu)$ </p>
 <p>所以</p>
-<p><span class="math inline">\(=E[\frac{1}{n}\sum_{i=1}^{n}{(x_i-\mu)^2}-\frac{2}{n}(\bar{x}-\mu)\sum_{i=1}^{n}{(x_i-\mu)}+(\bar{x}-\mu)^2]\)</span> <span class="math inline">\(=E[\frac{1}{n}\sum_{i=1}^{n}{(x_i-\mu)^2}-2(\bar{x}-\mu)^2+(\bar{x}-\mu)^2]\)</span> <span class="math inline">\(=\sigma^2-E[(\bar{x}-\mu)^2]\)</span></p>
-<p>（这里<span class="math inline">\(\sigma^2\)</span>是因为样本方差的期望值是总体方差）</p>
-<p><span class="math inline">\(E[(\bar{x}-\mu)^2]\)</span> <span class="math inline">\(=E(\bar{x}-E[\bar{x}])^2\)</span> <span class="math inline">\(=var(\bar{x})\)</span> <span class="math inline">\(=\frac{1}{n^2}var(\sum_{i=1}^{n}{x_i})\)</span> <span class="math inline">\(=\frac{1}{n^2}\sum_{i=1}^{n}{var(x_i)}\)</span> <span class="math inline">\(=\frac{n\sigma^2}{n^2}\)</span> <span class="math inline">\(=\frac{\sigma^2}{n}\)</span></p>
+<p>$=E[\frac{1}{n}\sum<em>{i=1}^{n}{(x_i-\mu)^2}-\frac{2}{n}(\bar{x}-\mu)\sum</em>{i=1}^{n}{(x<em>i-\mu)}+(\bar{x}-\mu)^2]$ $=E[\frac{1}{n}\sum</em>{i=1}^{n}{(x_i-\mu)^2}-2(\bar{x}-\mu)^2+(\bar{x}-\mu)^2]$ $=\sigma^2-E[(\bar{x}-\mu)^2]$ </p>
+<p>（这里$\sigma^2$是因为样本方差的期望值是总体方差）</p>
+<p>$E[(\bar{x}-\mu)^2]$ $=E(\bar{x}-E[\bar{x}])^2$ $=var(\bar{x})$ $=\frac{1}{n^2}var(\sum<em>{i=1}^{n}{x_i})$ $=\frac{1}{n^2}\sum</em>{i=1}^{n}{var(x_i)}$ $=\frac{n\sigma^2}{n^2}$ $=\frac{\sigma^2}{n}$ </p>
 <p>根据上面推导的式子，有以下计算：</p>
-<p><span class="math inline">\(\sigma^2-E[(\bar{x}-\mu)^2]\)</span> <span class="math inline">\(=\sigma^2-\frac{\sigma^2}{n}\)</span> <span class="math inline">\(=\frac{n-1}{n}\sigma^2\)</span></p>
-<p>也就是说，样本估计的方差是总体方差的<span class="math inline">\(\frac{n-1}{n}\)</span>倍，即所谓的有偏估计。要转换成无偏估计，只需要乘以倍数就可以了</p>
-<p><span class="math display">\[\frac{n}{n-1}S^2=\frac{n}{n-1}\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}=\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n-1}\]</span></p>
-<p>这即是所谓的无偏估计。 当然，还有一种比较直接的解释，由于是求统计样本中的方差，所以在求解统计样本均值时，已经用掉了一个自由度的值，所以求方差时，其实有用的值会少一个。例如在只有一个样本时，这时求方差是没有意义的。不过在概率论中，求此时的方差是有意义的，因为已经知道了总体的概率分布，所以即使只有一个样本，总体的分布是不变的。其中区别就在于统计样本只是用于估计。</p>
+<p> $\sigma^2-E[(\bar{x}-\mu)^2]$ $=\sigma^2-\frac{\sigma^2}{n}$ $=\frac{n-1}{n}\sigma^2$ </p>
+<p>也就是说，样本估计的方差是总体方差的$\frac{n-1}{n}$倍，即所谓的有偏估计。要转换成无偏估计，只需要乘以倍数就可以了 </p>
+<script type="math/tex; mode=display">\frac{n}{n-1}S^2=\frac{n}{n-1}\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n}=\frac{\sum_{i=1}^{n}(x_i-\bar{x})}{n-1}</script><p> 这即是所谓的无偏估计。 当然，还有一种比较直接的解释，由于是求统计样本中的方差，所以在求解统计样本均值时，已经用掉了一个自由度的值，所以求方差时，其实有用的值会少一个。例如在只有一个样本时，这时求方差是没有意义的。不过在概率论中，求此时的方差是有意义的，因为已经知道了总体的概率分布，所以即使只有一个样本，总体的分布是不变的。其中区别就在于统计样本只是用于估计。 </p>
 
                 
               </div>
@@ -715,5 +707,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
